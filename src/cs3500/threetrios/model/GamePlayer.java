@@ -1,8 +1,5 @@
 package cs3500.threetrios.model;
 
-/**
- *
- */
-public interface IThreeTriosModel {
+public interface GamePlayer {
   void do_something();
 }
