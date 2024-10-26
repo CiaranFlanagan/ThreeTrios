@@ -2,36 +2,45 @@ package cs3500.threetrios.model;
 
 import java.util.List;
 
-/**
- * Represents a player in the game.
- */
-public interface GamePlayer {
+public class TTPlayer implements GamePlayer {
   /**
    * Gets the name of the player.
    *
    * @return the player's name
    */
-  String getName();
+  @Override
+  public String getName() {
+    return null;
+  }
 
   /**
    * Gets the player's hand of cards.
    *
    * @return the player's hand
    */
-  List<Card> getHand();
+  @Override
+  public List<Card> getHand() {
+    return null;
+  }
 
   /**
    * Removes a card from the player's hand.
    *
    * @param card the card to remove
    */
-  void removeCard(Card card);
+  @Override
+  public void removeCard(Card card) {
+
+  }
 
   /**
    * Adds a card to the player's hand.
    *
    * @param card the card to add
    */
-  void addCard(Card card);
-}
+  @Override
+  public void addCard(Card card) {
 
+  }
+  //need to implement
+}
