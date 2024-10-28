@@ -1,8 +1,10 @@
 package cs3500.threetrios.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class TTGrid implements BoardGrid{
+public class TTGrid implements BoardGrid {
 
   private final int rows;
   private final int cols;
@@ -57,6 +59,7 @@ public class TTGrid implements BoardGrid{
       }
     }
   }
+
   private boolean isValidPosition(int row, int col) {
     return row >= 0 && row < rows && col >= 0 && col < cols;
   }
@@ -67,7 +70,7 @@ public class TTGrid implements BoardGrid{
    */
   @Override
   public int getRows() {
-    return 0;
+    return rows;
   }
 
   /**
@@ -75,7 +78,7 @@ public class TTGrid implements BoardGrid{
    */
   @Override
   public int getColumns() {
-    return 0;
+    return cols;
   }
 
   /**
@@ -85,7 +88,7 @@ public class TTGrid implements BoardGrid{
    */
   @Override
   public BoardCell getCell(int row, int col) {
-    return null;
+    return cells[row][col];
   }
 
   /**
@@ -93,6 +96,10 @@ public class TTGrid implements BoardGrid{
    */
   @Override
   public List<BoardCell> getAllCells() {
-    return null;
+    List<BoardCell> allCells = new ArrayList<>();
+    for (int row = 0; row < rows; row++) {
+      Collections.addAll(allCells, cells[row]);
+    }
+    return Collections.unmodifiableList(allCells);
   }
 }
