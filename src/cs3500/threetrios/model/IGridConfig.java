@@ -1,4 +1,4 @@
 package cs3500.threetrios.model;
 
-public interface GridCofig {
+public interface IGridConfig {
 }

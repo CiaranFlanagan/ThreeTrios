@@ -1,11 +1,13 @@
 package cs3500.threetrios.model;
 
+import cs3500.threetrios.model.done.TTCard;
+
 import java.util.List;
 
 /**
  * Represents the game model.
  */
-public interface GameModel {
+public interface IModel {
   /**
    * Starts the game with the given players, grid, and cards.
    *
@@ -14,7 +16,7 @@ public interface GameModel {
    * @param grid    the game grid
    * @param cards   the list of cards to deal
    */
-  void startGame(GamePlayer player1, GamePlayer player2, BoardGrid grid, List<Card> cards);
+  void startGame(IPlayer player1, IPlayer player2, GridBoard grid, List<TTCard> cards);
 
   /**
    * Places a card on the grid for the given player.
@@ -24,14 +26,14 @@ public interface GameModel {
    * @param row    the row index
    * @param col    the column index
    */
-  void placeCard(GamePlayer player, Card card, int row, int col);
+  void placeCard(IPlayer player, TTCard card, int row, int col);
 
   /**
    * Gets the current player.
    *
    * @return the current player
    */
-  GamePlayer getCurrentPlayer();
+  IPlayer getCurrentPlayer();
 
   /**
    * Advances to the next player's turn.
@@ -50,13 +52,7 @@ public interface GameModel {
    *
    * @return the winning player, or null if it's a tie
    */
-  GamePlayer getWinner();
+  IPlayer getWinner();
 
-  /**
-   * Renders the current game state as a string.
-   *
-   * @return the game state string
-   */
-  String renderGameState();
 }
 

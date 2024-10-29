@@ -1,11 +1,13 @@
 package cs3500.threetrios.model;
 
+import cs3500.threetrios.model.done.TTCard;
+
 import java.util.List;
 
 /**
  * Represents a player in the game.
  */
-public interface GamePlayer {
+public interface IPlayer {
   /**
    * Gets the name of the player.
    *
@@ -18,20 +20,20 @@ public interface GamePlayer {
    *
    * @return the player's hand
    */
-  List<Card> getHand();
+  List<TTCard> getHand();
 
   /**
    * Removes a card from the player's hand.
    *
    * @param card the card to remove
    */
-  void removeCard(Card card);
+  void removeCard(TTCard card);
 
   /**
    * Adds a card to the player's hand.
    *
    * @param card the card to add
    */
-  void addCard(Card card);
+  void addCard(TTCard card);
 }
 

@@ -1,0 +1,1 @@
+- attack value is enum ??

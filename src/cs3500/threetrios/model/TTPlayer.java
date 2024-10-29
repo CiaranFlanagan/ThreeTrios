@@ -1,11 +1,13 @@
 package cs3500.threetrios.model;
 
+import cs3500.threetrios.model.done.TTCard;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class TTPlayer implements GamePlayer {
+public class TTPlayer implements IPlayer {
   private final String name;
-  private final List<Card> hand;
+  private final List<TTCard> hand;
 
   /**
    * Constructs a Player with the given name.
@@ -37,8 +39,8 @@ public class TTPlayer implements GamePlayer {
    * @return the player's hand
    */
   @Override
-  public List<Card> getHand() {
-    return hand;
+  public List<TTCard> getHand() {
+    return new ArrayList<>(hand);
   }
 
   /**
@@ -47,7 +49,7 @@ public class TTPlayer implements GamePlayer {
    * @param card the card to remove
    */
   @Override
-  public void removeCard(Card card) {
+  public void removeCard(TTCard card) {
     if (!hand.remove(card)) {
       throw new IllegalArgumentException("Card not found in player's hand");
     }
@@ -59,7 +61,7 @@ public class TTPlayer implements GamePlayer {
    * @param card the card to add
    */
   @Override
-  public void addCard(Card card) {
+  public void addCard(TTCard card) {
     if (card == null) {
       throw new IllegalArgumentException("Card cannot be null");
     }
