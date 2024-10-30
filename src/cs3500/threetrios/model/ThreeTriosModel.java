@@ -25,6 +25,14 @@ public class ThreeTriosModel implements IModel {
     this.random = r;
   }
 
+  /**
+   * constructor.
+   * @return - new TTM
+   */
+  public static ThreeTriosModel create() {
+    return new ThreeTriosModel();
+  }
+
   @Override
   public void startGame(Grid grid, List<Card> cards, BattlePhaseReferee referee) {
     if (gameStarted) {

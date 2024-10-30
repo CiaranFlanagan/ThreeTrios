@@ -49,7 +49,11 @@ public class Grid {
   }
 
   // to place [card] at [row], [col] on this
-  AGridCell placeCardOn(int row, int col, Card card) {
+  // index at 0
+  public AGridCell placeCardOn(int row, int col, Card card) {
+    if (row < 0 || col < 0) {
+      throw new IllegalArgumentException("Rows and Cols must be positive integers");
+    }
     AGridCell relevantCell = grid[row][col];
     relevantCell.placeCard(card);
     return relevantCell;
@@ -91,6 +95,12 @@ public class Grid {
    * @return - the grid of this.
    */
   public AGridCell[][] arrayRepr() {
-    return this.grid;
+    AGridCell[][] copy = new AGridCell[grid.length][grid[0].length];
+    for (int curRow = 0; curRow < grid.length; curRow += 1) {
+      for (int curCol = 0; curCol < grid[0].length; curCol += 1) {
+        copy[curRow][curCol] = grid[curRow][curCol];
+      }
+    }
+    return copy;
   }
 }
