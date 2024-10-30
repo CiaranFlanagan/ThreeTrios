@@ -4,8 +4,6 @@ import cs3500.threetrios.model.AttackValue;
 import cs3500.threetrios.model.CardinalDirection;
 import cs3500.threetrios.model.Card;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,21 +18,15 @@ import java.util.Scanner;
 public class CardConfig {
 
   /**
-   * to convert a file to a list of cards.
-   * @param file - the file to convert
+   * to take a scanner and create a list of cards
+   * @param sc - the scanner
    * @return a list of cards
    */
-  public static List<Card> fileToTTCardList(File file) {
-    if (file == null) {
-      throw new IllegalArgumentException("null file");
+  public static List<Card> scannerToCardList(Scanner sc) {
+    if (sc == null) {
+      throw new IllegalArgumentException("null scanner");
     }
     FileReader fr;
-    try {
-      fr = new FileReader(file);
-    } catch (FileNotFoundException ex) {
-      throw new IllegalArgumentException("file not found: " + file.toPath());
-    }
-    Scanner sc = new Scanner(fr);
     List<Card> cards = new ArrayList<>();
     try {
       while (sc.hasNext()) {

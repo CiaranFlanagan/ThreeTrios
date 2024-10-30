@@ -17,7 +17,7 @@ import java.util.List;
 public class TestCardConfig {
   @Test
   public void test1() {
-    List<Card> cards = CardConfig.fileToTTCardList(TestFiles.CC_SMALL);
+    List<Card> cards = CardConfig.scannerToCardList(TestFiles.CC_SMALL);
     System.out.println(cards);
     //<TTCard: bob 1 2 3 A>, <TTCard: kc A 4 7 9>, <TTCard: ciaran 1 2 3 4>
     String expected = LineWriter.create().endWith("[<TTCard: bob 1 2 3 A>, <TTCard: kc A 4 7 9>," +

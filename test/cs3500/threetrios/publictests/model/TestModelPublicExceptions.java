@@ -1,5 +1,6 @@
 package cs3500.threetrios.publictests.model;
 
+import cs3500.threetrios.TestFiles;
 import cs3500.threetrios.controller.CardConfig;
 import cs3500.threetrios.controller.GridConfig;
 import cs3500.threetrios.model.BattlePhaseReferee;
@@ -7,11 +8,14 @@ import cs3500.threetrios.model.Card;
 import cs3500.threetrios.model.DefaultReferee;
 import cs3500.threetrios.model.Grid;
 import cs3500.threetrios.model.ThreeTriosModel;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Scanner;
 
 public class TestModelPublicExceptions {
   // test public beahvior
@@ -26,13 +30,17 @@ public class TestModelPublicExceptions {
   public void setUp() {
     model = new ThreeTriosModel();
     referee = new DefaultReferee();
+    try {
+      gridNoHoles = GridConfig.scannerToGrid(new Scanner(TestFiles.GRID_NO_HOLES));
+      //gridConnectedHoles = GridConfig.scannerToGrid(null);
+      // gridDisconnectedHoles = GridConfig.scannerToGrid(fillInHere));
 
-    gridNoHoles = GridConfig.fileToGridBoard(new File("./test/grid_no_holes.txt"));
-    gridConnectedHoles = GridConfig.fileToGridBoard(new File("./test/grid_connected_holes.txt"));
-    gridDisconnectedHoles = GridConfig.fileToGridBoard(new File("./test/grid_disconnected_holes.txt"));
+      cardsSmall = CardConfig.scannerToCardList(new Scanner(TestFiles.CC_SMALL));
+      cardsLarge = CardConfig.scannerToCardList(new Scanner(TestFiles.CC_LARGE));
+    } catch (FileNotFoundException ex) {
+      Assert.fail("file not found");
+    }
 
-    cardsSmall = CardConfig.fileToTTCardList(new File("./test/cards_small.txt"));
-    cardsLarge = CardConfig.fileToTTCardList(new File("./test/cards_large.txt"));
   }
 
 

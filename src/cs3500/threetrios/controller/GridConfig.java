@@ -5,9 +5,6 @@ import cs3500.threetrios.model.CardCell;
 import cs3500.threetrios.model.Grid;
 import cs3500.threetrios.model.HoleCell;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -16,21 +13,14 @@ import java.util.Scanner;
  */
 public class GridConfig {
   /**
-   * to convert a file to a GridBoard.
-   * @param f - the file
-   * @return - a gridboard
+   * take a scanner and make a grid.
+   * @param sc - the scanner
+   * @return - a grid
    */
-  public static Grid fileToGridBoard(File f) {
-    if (f == null) {
-      throw new IllegalArgumentException("null file");
+  public static Grid scannerToGrid(Scanner sc) {
+    if (sc == null) {
+      throw new IllegalArgumentException("null scanner");
     }
-    FileReader fr;
-    try {
-      fr = new FileReader(f);
-    } catch (FileNotFoundException ex) {
-      throw new IllegalArgumentException("file not found: " + f.toPath());
-    }
-    Scanner sc = new Scanner(fr);
     try {
       AGridCell[][] arr = null;
       while (sc.hasNext()) {

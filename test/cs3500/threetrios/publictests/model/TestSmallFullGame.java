@@ -31,8 +31,8 @@ public class TestSmallFullGame {
 
   @Test
   public void P1Start() {
-    model.startGame(GridConfig.fileToGridBoard(GRID_NO_HOLES),
-            CardConfig.fileToTTCardList(CC_SMALL), referee);
+    model.startGame(GridConfig.scannerToGrid(GRID_NO_HOLES),
+            CardConfig.scannerToCardList(CC_SMALL), referee);
     // check coach red is actually a red coach
     red = model.getCurrentCoach();
     Assert.assertEquals(red.getColor(), Coach.Color.Red);

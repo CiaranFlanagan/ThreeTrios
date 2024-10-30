@@ -13,31 +13,7 @@ import cs3500.threetrios.controller.GridConfig;
  * Tests for the ThreeTriosModel class.
  */
 public class TestModel {
-  private Grid gridNoHoles;
-  private Grid gridConnectedHoles;
-  private Grid gridDisconnectedHoles;
-  private List<Card> cardsSmall;
-  private List<Card> cardsLarge;
-  private ThreeTriosModel model;
-  private BattlePhaseReferee referee;
-  @Before
-  public void setUp() {
-    model = new ThreeTriosModel();
-    referee = new DefaultReferee();
-
-    gridNoHoles = GridConfig.fileToGridBoard(new File("./test/grid_no_holes.txt"));
-    gridConnectedHoles = GridConfig.fileToGridBoard(new File("./test/grid_connected_holes.txt"));
-    gridDisconnectedHoles = GridConfig.fileToGridBoard(new File("./test/grid_disconnected_holes.txt"));
-
-    cardsSmall = CardConfig.fileToTTCardList(new File("./test/cards_small.txt"));
-    cardsLarge = CardConfig.fileToTTCardList(new File("./test/cards_large.txt"));
-  }
-
-
-
-  // only test methods that are not public, so protected or package private
-
-
+// only test methods that are not public, so protected or package private
 
 }
 
