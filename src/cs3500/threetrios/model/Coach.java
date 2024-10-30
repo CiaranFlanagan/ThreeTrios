@@ -3,23 +3,43 @@ package cs3500.threetrios.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.*;
+
 /**
  * Represents a player in the game.
  */
 public class Coach {
-  private final String name;
+
+  private final Color color;
+
+  public enum Color {
+    Red, Blue;
+
+    @Override
+    public String toString() {
+      switch (this) {
+        case Red:
+          return "Red";
+        case Blue:
+          return "Blue";
+        default:
+          throw new IllegalArgumentException("Invalid color");
+      }
+    }
+  }
+
   private final List<Card> hand;
 
   /**
-   * Constructs a coach with the given name.
+   * Constructs a coach with the given color.
    *
-   * @param name the player's name
+   * @param color the player's color
    */
-  public Coach(String name) {
-    if (name == null || name.isEmpty()) {
-      throw new IllegalArgumentException("Player name cannot be null or empty");
+  public Coach(Color color) {
+    if (color == null) {
+      throw new IllegalArgumentException("color cannot be null or empty");
     }
-    this.name = name;
+    this.color = color;
     this.hand = new ArrayList<>();
   }
 
@@ -29,8 +49,8 @@ public class Coach {
    *
    * @return the player's name
    */
-  public String getName() {
-    return name;
+  public Color getColor() {
+    return this.color;
   }
 
   /**
@@ -75,6 +95,6 @@ public class Coach {
 
   @Override
   public String toString() {
-    return this.name;
+    return this.color.toString();
   }
 }

@@ -36,7 +36,7 @@ public class TextView implements ThreeTriosView {
   public String renderGame() {
     StringBuilder sb = new StringBuilder();
     Coach curCoach = model.getCurrentCoach();
-    sb.append("Player: ").append(curCoach.getName().toUpperCase()).append("\n");
+    sb.append("Player: ").append(curCoach.toString().toUpperCase()).append("\n");
     Grid grid = model.getGrid();
     for (AGridCell[] row : grid.getGrid()) {
       for (AGridCell cell : row) {
@@ -48,7 +48,7 @@ public class TextView implements ThreeTriosView {
         } else {
           //changed get card from protected to public
           Card card = cell.getCard();
-          String coachInitial = card.getCoach().getName().substring(0, 1).toUpperCase();
+          String coachInitial = card.getCoach().toString().substring(0, 1).toUpperCase();
           sb.append(coachInitial).append(" ");
         }
       }

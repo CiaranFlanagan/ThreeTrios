@@ -28,9 +28,8 @@ public class TestReferee {
     cardCell1 = new CardCell();
     cardCell2 = new CardCell();
     cardCell3 = new CardCell();
-    kc = new Coach("kc");
-    ciaran = new Coach("ciaran");
-    bob = new Coach("bob");
+    kc = new Coach(Coach.Color.Red);
+    ciaran = new Coach(Coach.Color.Blue);
     card1 = Utils.makeCard("c1 1 2 3 4");
     card2 = Utils.makeCard("c2 5 6 7 8");
     card3 = Utils.makeCard("c3 A A A A");
@@ -88,15 +87,15 @@ public class TestReferee {
 
     card1.setCoach(kc); // this should change after battle
     card2.setCoach(ciaran);
-    card3.setCoach(bob);
+    card3.setCoach(kc);
     cardCell1.link(cardCell2, CardinalDirection.SOUTH);
     cardCell2.link(cardCell3, CardinalDirection.EAST);
     cardCell1.placeCard(card1);
     cardCell2.placeCard(card2);
     cardCell3.placeCard(card3);
     ref.refereeBattlePhase(cardCell3);
-    Assert.assertSame(bob, card3.getCoach());
-    Assert.assertSame(bob, card2.getCoach());
-    Assert.assertSame(bob, card1.getCoach());
+    Assert.assertSame(kc, card3.getCoach());
+    Assert.assertSame(kc, card2.getCoach());
+    Assert.assertSame(kc, card1.getCoach());
   }
 }

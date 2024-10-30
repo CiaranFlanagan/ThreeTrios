@@ -30,6 +30,7 @@ public abstract class AGridCell {
 
   /**
    * To get the neighbor to the [N/S/E/W].
+   *
    * @param direction - the cardinal direction to consider
    * @return - the neighbor (if any) in [direction]
    */
@@ -38,7 +39,16 @@ public abstract class AGridCell {
   }
 
   /**
+   * To evaluate if this cell can have a card.
+   * @return - if this cell can have a card
+   */
+  public boolean canHaveCard() {
+    return false;
+  }
+
+  /**
    * Whether this cell has a card.
+   *
    * @return - whether this cell has a card
    */
   public boolean hasCard() {
@@ -47,6 +57,7 @@ public abstract class AGridCell {
 
   /**
    * To return the card held in this cell.
+   *
    * @return - the card held in this cell.
    */
   public Card getCard() {
@@ -55,6 +66,7 @@ public abstract class AGridCell {
 
   /**
    * To place the card on this cell.
+   *
    * @param card - the card to place
    */
   protected void placeCard(Card card) {

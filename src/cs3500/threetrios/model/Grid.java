@@ -4,7 +4,8 @@ package cs3500.threetrios.model;
  * to represent the grid-shaped board of the game three-trios.
  */
 public class Grid {
-  private final AGridCell[][] grid; // at least 2x2
+  private final AGridCell[][] grid; // first index is rows, second is columns, obvious index at 0
+  private final int numHoles;
 
   /**
    * Constructs a Grid.
@@ -15,6 +16,15 @@ public class Grid {
       throw new IllegalArgumentException("Rows and Cols must be positive integers");
     }
     this.grid = grid;
+    int numHoles = 0;
+    for (int row = 0; row < grid.length; row++) {
+      for (int col = 0; col < grid[0].length; col++) {
+        if (!grid[row][col].canHaveCard()) {
+          numHoles += 1;
+        }
+      }
+    }
+    this.numHoles = numHoles;
     linkRows();
     linkCols();
   }
@@ -61,7 +71,7 @@ public class Grid {
    * Whether all cells in this grid are filled with cards.
    * @return - whether all card cells in this grid are filled with cards
    */
-  public boolean allCellsFilled() {
+  public boolean full() {
     for (AGridCell[] row : grid) {
       for (AGridCell cell : row) {
         if (!cell.hasCard()) {
@@ -72,52 +82,8 @@ public class Grid {
     return true;
   }
 
-  /**
-   * The total number of red cards in this grid.
-   * @return - the total number of red cards in this grid.
-   */
-  public int totalRedCards() {
-    int redCount = 0;
-    for (AGridCell[] row : grid) {
-      for (AGridCell cell: row) {
-        if (cell.hasCard() && cell.getCard().getCoach().getName().equals("red")) {
-          redCount += 1;
-        }
-      }
-    }
-    return redCount;
-  }
-
-  /**
-   * The total number of blue cards in this grid.
-   * @return - the total number of blue cards in this grid.
-   */
-  public int totalBlueCards() {
-    int blueCount = 0;
-    for (AGridCell[] row : grid) {
-      for (AGridCell cell : row) {
-        if (cell.hasCard() && cell.getCard().getCoach().getName().equals("blue")) {
-          blueCount += 1;
-        }
-      }
-    }
-    return blueCount;
-  }
-
-  /**
-   * The total number of cards in this grid.
-   * @return - the total number of card cells in this grid.
-   */
-  public int getTotalCardCells() {
-    int cellCount = 0;
-    for (AGridCell[] row : grid) {
-      for (AGridCell cell : row) {
-        if (!cell.hasCard()) {
-          cellCount += 1;
-        }
-      }
-    }
-    return cellCount;
+  public int getNumHoles() {
+    return this.numHoles;
   }
 
   /**

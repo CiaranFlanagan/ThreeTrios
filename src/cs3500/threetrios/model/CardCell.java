@@ -15,6 +15,11 @@ public class CardCell extends AGridCell {
   }
 
   @Override
+  public boolean canHaveCard() {
+    return true;
+  }
+
+  @Override
   public boolean hasCard() {
     return this.card != null;
   }

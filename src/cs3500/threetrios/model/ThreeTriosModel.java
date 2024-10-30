@@ -12,7 +12,6 @@ public class ThreeTriosModel implements IModel {
   private Coach coachBlue;
   private Coach currentCoach;
   private boolean gameStarted;
-  private boolean gameOver;
   private BattlePhaseReferee referee;
   private Grid grid;
 
@@ -21,22 +20,21 @@ public class ThreeTriosModel implements IModel {
     if (gameStarted) {
       throw new IllegalStateException("Game has already started");
     }
-    if (grid == null || cards == null) {
+    if (grid == null || cards == null || referee == null) {
       throw new IllegalArgumentException("Arguments cannot be null");
     }
 
     this.referee = referee;
     this.grid = grid;
-    this.coachRed = new Coach("red");
-    this.coachBlue = new Coach("blue");
+    this.coachRed = new Coach(Coach.Color.Red); // we'll pass in the names later
+    this.coachBlue = new Coach(Coach.Color.Blue);
     this.currentCoach = coachRed;
     this.gameStarted = true;
-    this.gameOver = false;
     dealCards(cards);
   }
 
   private void dealCards(List<Card> cards) {
-    int totalCardCells = grid.getTotalCardCells();
+    int totalCardCells = grid.getGrid().length - grid.getNumHoles();
     int requiredCards = totalCardCells + 1;
     if (cards.size() < requiredCards) {
       throw new IllegalArgumentException("Number of cards must be at least N + 1, where N is the " +
@@ -68,7 +66,7 @@ public class ThreeTriosModel implements IModel {
     if (!gameStarted) {
       throw new IllegalStateException("Game has not started yet");
     }
-    if (gameOver) {
+    if (isGameOver()) {
       throw new IllegalStateException("Game is over");
     }
     Coach curCoach = getCurrentCoach();
@@ -109,7 +107,7 @@ public class ThreeTriosModel implements IModel {
   public boolean isGameOver() {
     //The game ends when all empty card cells are filled.
     //hands don't have to be empty for the grid to be filled
-    return grid.allCellsFilled();
+    return grid.full();
   }
 
   /**
@@ -119,7 +117,7 @@ public class ThreeTriosModel implements IModel {
    */
   @Override
   public Coach getWinner() {
-    if (!gameOver) {
+    if (!isGameOver()) {
       throw new IllegalStateException("Game is not over yet");
     }
     //The winner is determined by counting the number of cards each player owns both on the grid and
@@ -127,19 +125,31 @@ public class ThreeTriosModel implements IModel {
     return whoHasMoreTotalCards();
   }
 
+  /**
+   *
+   * @return - coach with more total cards
+   * @throws IllegalStateException if grid is not full, or if cards coach is null
+   */
   private Coach whoHasMoreTotalCards() {
-    if (grid.totalRedCards() + this.coachRed.getHand().size() > grid.totalBlueCards() +
-            this.coachBlue.getHand().size()) {
-      return coachRed;
-    } else if (grid.totalRedCards() + this.coachRed.getHand().size() < grid.totalBlueCards() +
-            this.coachBlue.getHand().size()) {
-      return coachBlue;
-    } else {
-      return null;
+    int coachRedTotal = coachRed.getHand().size();
+    int coachBlueTotal = coachBlue.getHand().size();
+    for (AGridCell[] row : grid.getGrid()) {
+      for (AGridCell cell : row) {
+        if (cell.hasCard()) {
+          if (cell.getCard().getCoach() == coachRed) {
+            coachRedTotal += 1;
+          } else if (cell.getCard().getCoach() == coachBlue){
+            coachBlueTotal += 1;
+          } else {
+            throw new IllegalStateException("card should have a coach if this board is full");
+          }
+        }
+      }
     }
+    return coachRedTotal > coachBlueTotal ? coachRed : coachBlue; // ternary operator
   }
 
-  @Override
+
   public Grid getGrid() {
     return grid;
   }
