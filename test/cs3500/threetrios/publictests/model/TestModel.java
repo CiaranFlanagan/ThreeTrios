@@ -1,18 +1,25 @@
-package cs3500.threetrios.model;
+package cs3500.threetrios.publictests.model;
 
+import cs3500.threetrios.controller.CardConfig;
+import cs3500.threetrios.controller.GridConfig;
+import cs3500.threetrios.model.AGridCell;
+import cs3500.threetrios.model.BattlePhaseReferee;
+import cs3500.threetrios.model.Card;
+import cs3500.threetrios.model.CardinalDirection;
+import cs3500.threetrios.model.Coach;
+import cs3500.threetrios.model.DefaultReferee;
+import cs3500.threetrios.model.Grid;
+import cs3500.threetrios.model.ThreeTriosModel;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.OrderWith;
 
 import java.io.File;
 import java.util.List;
 
-import cs3500.threetrios.controller.CardConfig;
-import cs3500.threetrios.controller.GridConfig;
-
-/**
- * Tests for the ThreeTriosModel class.
- */
 public class TestModel {
+  // test public beahvior
   private Grid gridNoHoles;
   private Grid gridConnectedHoles;
   private Grid gridDisconnectedHoles;
@@ -34,10 +41,22 @@ public class TestModel {
   }
 
 
+  // test startgame
+  @Test(expected = IllegalArgumentException.class)
+  public void testStartGameAlreadyStarted() {
+    model.startGame(gridNoHoles, cardsSmall, referee);
+    model.startGame(gridNoHoles, cardsSmall, referee);
+  }
+  // place card
 
-  // only test methods that are not public, so protected or package private
+  // getcurCoach
 
+  // nextTurn()
 
+  // isgameover
+
+  // get winner
+
+  // get grid
 
 }
-

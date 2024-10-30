@@ -1,4 +1,4 @@
-package cs3500.threetrios.test.controller;
+package cs3500.threetrios.publictests.controller;
 
 import cs3500.threetrios.controller.CardConfig;
 import cs3500.threetrios.model.Card;
@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import cs3500.threetrios.TestFiles;
-import cs3500.threetrios.model.LineWriter;
+import cs3500.threetrios.utils.LineWriter;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import java.util.List;
 public class TestCardConfig {
   @Test
   public void test1() {
-    List<Card> cards = CardConfig.fileToTTCardList(TestFiles.CARDCONFIG1);
+    List<Card> cards = CardConfig.fileToTTCardList(TestFiles.CC_SMALL);
     System.out.println(cards);
     //<TTCard: bob 1 2 3 A>, <TTCard: kc A 4 7 9>, <TTCard: ciaran 1 2 3 4>
     String expected = LineWriter.create().endWith("[<TTCard: bob 1 2 3 A>, <TTCard: kc A 4 7 9>," +

@@ -38,7 +38,7 @@ public interface IModel {
   /**
    * Advances to the next coach's turn.
    */
-  void nextTurn();
+  void nextCoachTurn();
 
   /**
    * Checks if the game is over.

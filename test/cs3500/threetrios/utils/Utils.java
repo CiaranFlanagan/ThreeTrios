@@ -1,5 +1,8 @@
-package cs3500.threetrios.model;
+package cs3500.threetrios.utils;
 
+import cs3500.threetrios.model.AttackValue;
+import cs3500.threetrios.model.Card;
+import cs3500.threetrios.model.CardinalDirection;
 import org.junit.Assert;
 import org.junit.Test;
 

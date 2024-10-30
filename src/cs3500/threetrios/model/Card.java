@@ -10,7 +10,7 @@ public final class Card {
 
   private final String name;
   private final Map<CardinalDirection, AttackValue> attackValues;
-  private Coach owner;
+  private Coach coach;
 
   /**
    * to construct a card with [name] and [attackValues].
@@ -85,7 +85,7 @@ public final class Card {
    * @return - the current coach of this card.
    */
   public Coach getCoach() {
-    return this.owner;
+    return this.coach;
   }
 
   /**
@@ -93,7 +93,7 @@ public final class Card {
    * @param newCoach - the new coach of this
    */
   void setCoach(Coach newCoach) {
-    this.owner = newCoach;
+    this.coach = newCoach;
   }
 
   @Override
