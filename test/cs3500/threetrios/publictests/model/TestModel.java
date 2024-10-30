@@ -47,6 +47,7 @@ public class TestModel {
     model.startGame(gridNoHoles, cardsSmall, referee);
     model.startGame(gridNoHoles, cardsSmall, referee);
   }
+
   // place card
 
   // getcurCoach
