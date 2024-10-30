@@ -15,7 +15,7 @@ public interface IModel {
    * @param row    the row index
    * @param col    the column index
    */
-  void startGame(Coach coach, Card card, int row, int col);
+  void startGame(Grid grid, List<Card> cards, BattlePhaseReferee referee);
 
   /**
    * Places a card on the grid for the given coach.

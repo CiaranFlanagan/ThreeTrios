@@ -48,4 +48,39 @@ public class Grid {
     }
     return out;
   }
+
+  public boolean allCellsFilled() {
+    for (AGridCell[] row : grid) {
+      for (AGridCell cell : row) {
+        if (!cell.hasCard()) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  public int totalRedCards() {
+    int redCount = 0;
+    for (AGridCell[] row : grid) {
+      for (AGridCell cell: row) {
+        if (cell.hasCard() && cell.getCard().getCoach().getName().equals("red")) {
+          redCount += 1;
+        }
+      }
+    }
+    return redCount;
+  }
+
+  public int totalBlueCards() {
+    int blueCount = 0;
+    for (AGridCell[] row : grid) {
+      for (AGridCell cell : row) {
+        if (cell.hasCard() && cell.getCard().getCoach().getName().equals("blue")) {
+          blueCount += 1;
+        }
+      }
+    }
+    return blueCount;
+  }
 }

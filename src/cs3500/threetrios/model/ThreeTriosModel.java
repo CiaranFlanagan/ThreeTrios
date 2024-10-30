@@ -10,29 +10,30 @@ import java.util.List;
 public class ThreeTriosModel implements IModel {
   private Coach coachRed;
   private Coach coachBlue;
+  private Coach currentCoach;
   private boolean gameStarted;
   private boolean gameOver;
   private BattlePhaseReferee referee;
-  private Coach currentCoach;
   private Grid grid;
-  private List<Card> cards;
 
   @Override
-  public void startGame(Coach coach, Card card, int row, int col) {
+  public void startGame(Grid grid, List<Card> cards, BattlePhaseReferee referee) {
     if (gameStarted) {
       throw new IllegalStateException("Game has already started");
     }
-    if (coachRed == null || coachBlue == null || grid == null || cards == null) {
+    if (grid == null || cards == null) {
       throw new IllegalArgumentException("Arguments cannot be null");
     }
-    this.coachRed = coachRed;
-    this.coachBlue = coachBlue;
+    this.referee = referee;
+    this.grid = grid;
+    this.coachRed = new Coach("red");
+    this.coachBlue = new Coach("blue");
     this.currentCoach = coachRed;
     this.gameStarted = true;
     this.gameOver = false;
     dealCards(cards);
   }
-//helper
+  //helper
   private void dealCards(List<Card> cards) {
     List<Card> copy = new ArrayList<>(cards);
     if (cards.size() % 2 != 0) {
@@ -99,11 +100,9 @@ public class ThreeTriosModel implements IModel {
    */
   @Override
   public boolean isGameOver() {
-    if (coachRed.getHand().isEmpty() && coachBlue.getHand().isEmpty()) {
-      return true;
-    } else {
-      return false;
-    }
+    //The game ends when all empty card cells are filled.
+    //hands don't have to be empty for the grid to be filled
+    return grid.allCellsFilled();
   }
 
   /**
@@ -113,6 +112,20 @@ public class ThreeTriosModel implements IModel {
    */
   @Override
   public Coach getWinner() {
-    return null;
+    //The winner is determined by counting the number of cards each player owns both on the grid and
+    // in their hands.
+    return whoHasMoreTotalCards();
+  }
+
+  private Coach whoHasMoreTotalCards() {
+    if (grid.totalRedCards() + this.coachRed.getHand().size() > grid.totalBlueCards() +
+            this.coachBlue.getHand().size()) {
+      return coachRed;
+    } else if (grid.totalRedCards() + this.coachRed.getHand().size() < grid.totalBlueCards() +
+            this.coachBlue.getHand().size()) {
+      return coachBlue;
+    } else {
+      return null;
+    }
   }
 }
