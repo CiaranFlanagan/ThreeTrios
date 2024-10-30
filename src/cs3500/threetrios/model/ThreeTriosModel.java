@@ -3,6 +3,7 @@ package cs3500.threetrios.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 /**
  * to represent a model of the three trios game.
@@ -14,6 +15,15 @@ public class ThreeTriosModel implements IModel {
   private boolean gameStarted;
   private BattlePhaseReferee referee;
   private Grid grid;
+  private Random random;
+
+  public ThreeTriosModel() {
+
+  }
+
+  public ThreeTriosModel(Random r) {
+    this.random = r;
+  }
 
   @Override
   public void startGame(Grid grid, List<Card> cards, BattlePhaseReferee referee) {
@@ -33,8 +43,9 @@ public class ThreeTriosModel implements IModel {
     dealCards(cards);
   }
 
+  // red gets card first
   private void dealCards(List<Card> cards) {
-    int totalCardCells = grid.getGrid().length - grid.getNumHoles();
+    int totalCardCells = grid.arrayRepr().length - grid.getNumHoles();
     int requiredCards = totalCardCells + 1;
     if (cards.size() < requiredCards) {
       throw new IllegalArgumentException("Number of cards must be at least N + 1, where N is the " +
@@ -44,7 +55,9 @@ public class ThreeTriosModel implements IModel {
     if (cards.size() % 2 != 0) {
       throw new IllegalArgumentException("Number of cards must be even");
     }
-    Collections.shuffle(copy);
+    if (random != null) {
+      Collections.shuffle(copy);
+    }
     for (int i = 0; i < copy.size(); i += 2) {
       Card curRedCard = copy.get(i);
       curRedCard.setCoach(coachRed);
@@ -69,11 +82,11 @@ public class ThreeTriosModel implements IModel {
     if (isGameOver()) {
       throw new IllegalStateException("Game is over");
     }
-    Coach curCoach = getCurrentCoach();
-    Card curCard = curCoach.removeCardFromHand(idx);
+    Card curCard = currentCoach.removeCardFromHand(idx);
     AGridCell relevantCell = grid.placeCardOn(row, col, curCard);
+
+    System.out.println("relevant cell" + relevantCell.getCard());
     referee.refereeBattlePhase(relevantCell);
-    nextTurn();
   }
 
   /**
@@ -90,7 +103,7 @@ public class ThreeTriosModel implements IModel {
    * Advances to the next coach's turn.
    */
   @Override
-  public void nextTurn() {
+  public void nextCoachTurn() {
     if (this.currentCoach == coachRed) {
       this.currentCoach = coachBlue;
     } else {
@@ -107,7 +120,7 @@ public class ThreeTriosModel implements IModel {
   public boolean isGameOver() {
     //The game ends when all empty card cells are filled.
     //hands don't have to be empty for the grid to be filled
-    return grid.full();
+    return grid.isFull();
   }
 
   /**
@@ -133,7 +146,7 @@ public class ThreeTriosModel implements IModel {
   private Coach whoHasMoreTotalCards() {
     int coachRedTotal = coachRed.getHand().size();
     int coachBlueTotal = coachBlue.getHand().size();
-    for (AGridCell[] row : grid.getGrid()) {
+    for (AGridCell[] row : grid.arrayRepr()) {
       for (AGridCell cell : row) {
         if (cell.hasCard()) {
           if (cell.getCard().getCoach() == coachRed) {

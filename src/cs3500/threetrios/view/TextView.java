@@ -38,7 +38,7 @@ public class TextView implements ThreeTriosView {
     Coach curCoach = model.getCurrentCoach();
     sb.append("Player: ").append(curCoach.toString().toUpperCase()).append("\n");
     Grid grid = model.getGrid();
-    for (AGridCell[] row : grid.getGrid()) {
+    for (AGridCell[] row : grid.arrayRepr()) {
       for (AGridCell cell : row) {
         if (cell instanceof HoleCell) {
           sb.append(" ");

@@ -1,4 +1,4 @@
-package cs3500.threetrios.model;
+package cs3500.threetrios.utils;
 
 import org.junit.Assert;
 import org.junit.Before;

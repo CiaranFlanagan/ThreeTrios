@@ -33,11 +33,11 @@ public class TestModel {
     cardsLarge = CardConfig.fileToTTCardList(new File("./test/cards_large.txt"));
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void testStartGameAlreadyStarted() {
-    model.startGame(gridNoHoles, cardsSmall, referee);
-    model.startGame(gridNoHoles, cardsSmall, referee);
-  }
+
+
+  // only test methods that are not public, so protected or package private
+
+
 
 }
 

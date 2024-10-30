@@ -1,5 +1,6 @@
 package cs3500.threetrios.model;
 
+import cs3500.threetrios.utils.LineWriter;
 import org.junit.Assert;
 import org.junit.Test;
 

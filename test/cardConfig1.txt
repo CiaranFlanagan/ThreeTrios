@@ -1,3 +1,0 @@
-bob    1 2 3 A
-kc     A 4 7 9
-ciaran 1 2 3 4

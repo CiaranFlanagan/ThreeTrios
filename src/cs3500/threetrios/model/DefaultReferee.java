@@ -19,14 +19,20 @@ public class DefaultReferee implements BattlePhaseReferee {
       if (getCellNeighborToThe(direction, us) == null) {
         continue;
       }
+
       Card ourCard = getCellCard(us);
       Coach ourCoach = getCardCoach(ourCard);
       AGridCell them = getCellNeighborToThe(direction, us);
       Card theirCard;
+
       if (doesCellHaveCard(them)) {
         theirCard = getCellCard(them);
+        System.out.println("we get here");
+        System.out.println("us" + ourCard);
+        System.out.println(direction);
+        System.out.println("them" + theirCard);
       } else {
-        return;
+        continue;
       }
       Coach theirCoach = getCardCoach(theirCard);
       if (ourCoach != theirCoach && ourCard.beats(theirCard, direction)) {

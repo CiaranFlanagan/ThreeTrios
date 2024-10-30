@@ -71,7 +71,7 @@ public class Grid {
    * Whether all cells in this grid are filled with cards.
    * @return - whether all card cells in this grid are filled with cards
    */
-  public boolean full() {
+  public boolean isFull() {
     for (AGridCell[] row : grid) {
       for (AGridCell cell : row) {
         if (!cell.hasCard()) {
@@ -90,7 +90,7 @@ public class Grid {
    * The grid of this.
    * @return - the grid of this.
    */
-  public AGridCell[][] getGrid() {
+  public AGridCell[][] arrayRepr() {
     return this.grid;
   }
 }
