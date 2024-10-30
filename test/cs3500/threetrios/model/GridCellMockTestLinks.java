@@ -1,7 +1,7 @@
 package cs3500.threetrios.model;
 
-class BoardCellMockTestLinks extends ABoardCell {
-  BoardCellMockTestLinks() {
+class GridCellMockTestLinks extends AGridCell {
+  GridCellMockTestLinks() {
 
   }
 
