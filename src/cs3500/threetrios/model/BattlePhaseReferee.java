@@ -1,11 +1,12 @@
 package cs3500.threetrios.model;
 
 public interface BattlePhaseReferee {
-  void refereeBattle(ABoardCell ab);
+  void refereeBattlePhase(ABoardCell ab);
 
   default ABoardCell getCellNeighborToThe(CardinalDirection direction, ABoardCell ab) {
     return ab.getNeighborToThe(direction);
   }
+
   default boolean doesCellHaveCard(ABoardCell ab) {
     return ab.hasCard();
   }

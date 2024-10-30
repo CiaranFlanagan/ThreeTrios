@@ -10,7 +10,7 @@ public class TestReferee {
     HoleCell holecard1 = new HoleCell();
     HoleCell holecard2 = new HoleCell();
     holecard1.link(holecard2, CardinalDirection.NORTH);
-    new DefaultReferee().refereeBattle(holecard1);
+    new DefaultReferee().refereeBattlePhase(holecard1);
   }
 
   @Test(expected = IllegalStateException.class)
@@ -18,7 +18,7 @@ public class TestReferee {
     HoleCell holecard1 = new HoleCell();
     CardCell cardcell1 = new CardCell();
     holecard1.link(cardcell1, CardinalDirection.NORTH);
-    new DefaultReferee().refereeBattle(holecard1);
+    new DefaultReferee().refereeBattlePhase(holecard1);
   }
 
   @Test
@@ -27,7 +27,7 @@ public class TestReferee {
     CardCell cellcard1 = new CardCell();
     holecard1.link(cellcard1, CardinalDirection.NORTH);
     try {
-      new DefaultReferee().refereeBattle(cellcard1);
+      new DefaultReferee().refereeBattlePhase(cellcard1);
     } catch (Exception ex) {
       System.out.println(ex.getMessage());
       Assert.fail("should have no effect but should not throw");
@@ -48,7 +48,7 @@ public class TestReferee {
     cardCell1.link(cardCell2, CardinalDirection.NORTH);
     cardCell1.placeCard(card1);
     cardCell2.placeCard(card2);
-    new DefaultReferee().refereeBattle(cardCell2);
+    new DefaultReferee().refereeBattlePhase(cardCell2);
     Assert.assertSame(ciaran, card1.getCoach());
 
 

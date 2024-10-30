@@ -10,6 +10,11 @@ class BoardCellMockTestLinks extends ABoardCell {
     return false;
   }
 
+  @Override
+  protected void acceptBattlePhase(BattlePhaseReferee battlePhase) {
+    throw new IllegalStateException("not impl");
+  }
+
   public boolean hasNeighborIn(CardinalDirection dir) {
     return getNeighborToThe(dir) != null;
   }

@@ -26,10 +26,11 @@ public class CardCell extends ABoardCell {
     }
   }
 
-  @Override
+
   protected void acceptBattlePhase(BattlePhaseReferee battlePhase) {
-    battlePhase.refereeBattle(this);
+    battlePhase.refereeBattlePhase(this);
   }
+
 
   @Override
   protected String renderTextConstructor() {

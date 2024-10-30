@@ -13,8 +13,9 @@ public abstract class ABoardCell {
   /**
    * to link [this] board cell to [other] in direction [dir]
    * EFFECT: also links [other] to [this] in the opposite direction of [dir]
+   *
    * @param other - the other board cell
-   * @param dir - the direction [this] links to [other]
+   * @param dir   - the direction [this] links to [other]
    */
   protected final void link(ABoardCell other, CardinalDirection dir) {
     this.neighbors.put(dir, other);
@@ -38,9 +39,7 @@ public abstract class ABoardCell {
     throw new IllegalStateException("Can't place card on hole cell");
   }
 
-  protected void acceptBattlePhase(BattlePhaseReferee battlePhase) {
-    throw new IllegalArgumentException("not implemented");
-  }
+  protected abstract void acceptBattlePhase(BattlePhaseReferee battlePhase);
 
   protected String renderTextConstructor() {
     throw new IllegalStateException("not implemented");
