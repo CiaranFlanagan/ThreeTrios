@@ -1,13 +1,17 @@
 package cs3500.threetrios.model;
 
+/**
+ * to represent the default referee or rules enforcer for the game of three trios.
+ */
 public class DefaultReferee implements BattlePhaseReferee {
 
   @Override
-  public void refereeBattle(ABoardCell ab) {
-    ab.acceptBattlePhase(this);
+  public void refereeBattlePhase(AGridCell us) {
+    us.acceptBattlePhase(this);
   }
 
-  public void refereeBattle(CardCell us) {
+  @Override
+  public void refereeBattlePhase(CardCell us) {
     if (!doesCellHaveCard(us)) {
       return;
     }
@@ -16,47 +20,28 @@ public class DefaultReferee implements BattlePhaseReferee {
         continue;
       }
       Card ourCard = getCellCard(us);
-      ABoardCell them = getCellNeighborToThe(direction, us);
+      Coach ourCoach = getCardCoach(ourCard);
+      AGridCell them = getCellNeighborToThe(direction, us);
       Card theirCard;
       if (doesCellHaveCard(them)) {
         theirCard = getCellCard(them);
       } else {
         return;
       }
-      System.out.println("we have a fight with: " + theirCard);
-      if (getCardCoach(ourCard) != getCardCoach(theirCard)) {
-        System.out.println("we dispatch correctly");
-        System.out.println(them instanceof CardCell);
-        refereeBattleCascadeOnLose(them, us, direction.opposite());
-        return;
+      Coach theirCoach = getCardCoach(theirCard);
+      if (ourCoach != theirCoach && ourCard.beats(theirCard, direction)) {
+        theirCard.setCoach(ourCoach);
+        refereeBattlePhase(them);
       }
     }
   }
 
-  private void refereeBattleCascadeOnLose(ABoardCell us, CardCell them,
-                                          CardinalDirection direction) {
-    throw new IllegalArgumentException("not implemented");
+  @Override
+  public void refereeBattlePhase(HoleCell us) {
+    throw new IllegalStateException("should not be here");
   }
-
-  private void refereeBattleCascadeOnLose(CardCell us, CardCell them,
-                                          CardinalDirection direction) {
-    System.out.println("we get here2");
-    if (!doesCellHaveCard(us)) {
-      return;
-    }
-    Card ourCard = getCellCard(us);
-    Card theirCard = getCellCard(them);
-    if (theirCard.beats(ourCard, direction)) {
-      Coach theirCoach = getCardCoach(theirCard);
-      setCardCoach(ourCard, theirCoach);
-      refereeBattle(us);
-    }
-  }
-
-  public void refereeBattle(HoleCell ab) {
-    throw new IllegalStateException("Hole cells should not be the ones who instigate battle" +
-            "in default referee's game");
-  }
-
 }
+
+
+
 

@@ -1,8 +1,7 @@
 package cs3500.threetrios.model;
 
 /**
- * Represents the possible attack values for a card. Construct once, immutable after construction.
- * unique keys and values that map to each other
+ * to represent an attack value of a card in a game of three trios.
  */
 public enum AttackValue {
   ONE,
@@ -16,6 +15,12 @@ public enum AttackValue {
   NINE,
   A;
 
+  /**
+   * to produce an attack value from a string, useful for IO.
+   * @param s - the string.
+   * @return - an attack value corresponding to the string.
+   * @throws IllegalArgumentException - when input does not correspond to an AttackValue
+   */
   public static AttackValue fromString(String s) {
     switch (s) {
       case "1": return ONE;
@@ -32,6 +37,10 @@ public enum AttackValue {
     }
   }
 
+  /**
+   * to convert an attack value to an integer
+   * @return - an integer corresponding the magnitude of attack value.
+   */
   public int fromAttackValue() {
     switch (this) {
       case ONE: return 1;
@@ -44,14 +53,20 @@ public enum AttackValue {
       case EIGHT: return 8;
       case NINE: return 9;
       case A: return 10;
-      default: throw new IllegalArgumentException("not valid attack");
+      default: throw new IllegalArgumentException("invalid attack");
     }
   }
 
+  /**
+   * to evaluate whether this has a greater numeric attack value than other
+   * @param other - ther other attack value to compare to
+   * @return - whether this has a greater numeric attack value than other
+   */
   public boolean beats(AttackValue other) {
     return this.fromAttackValue() > other.fromAttackValue();
   }
 
+  @Override
   public String toString() {
     if (this == A) {
       return "A";

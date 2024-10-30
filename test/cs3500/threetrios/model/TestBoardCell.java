@@ -6,14 +6,14 @@ import org.junit.Test;
 public class TestBoardCell {
   @Test
   public void testLink1() {
-    BoardCellMockTestLinks s = new BoardCellMockTestLinks();
-    BoardCellMockTestLinks n = new BoardCellMockTestLinks();
+    GridCellMockTestLinks s = new GridCellMockTestLinks();
+    GridCellMockTestLinks n = new GridCellMockTestLinks();
     s.link(n, CardinalDirection.NORTH);
     Assert.assertTrue(s.hasNeighborIn(CardinalDirection.NORTH));
     Assert.assertTrue(n.hasNeighborIn(CardinalDirection.SOUTH));
 
-    BoardCellMockTestLinks e = new BoardCellMockTestLinks();
-    BoardCellMockTestLinks w = new BoardCellMockTestLinks();
+    GridCellMockTestLinks e = new GridCellMockTestLinks();
+    GridCellMockTestLinks w = new GridCellMockTestLinks();
     e.link(w, CardinalDirection.WEST);
     Assert.assertTrue(e.hasNeighborIn(CardinalDirection.WEST));
     Assert.assertTrue(w.hasNeighborIn(CardinalDirection.EAST));
