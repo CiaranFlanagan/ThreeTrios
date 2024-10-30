@@ -1,19 +1,20 @@
-package cs3500.threetrios.model.done;
+package cs3500.threetrios.model;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class TTCard {
+public final class Card {
 
   private final String name;
   private final Map<CardinalDirection, AttackValue> attackValues;
+  private Coach owner;
 
   /**
    *
    * @param name - name of this card
    * @param attackValues - attack value in each direction
    */
-  public TTCard(String name, Map<CardinalDirection, AttackValue> attackValues) {
+  public Card(String name, Map<CardinalDirection, AttackValue> attackValues) {
     if (name == null) {
       throw new IllegalArgumentException("card name cannot be null");
     }
@@ -38,10 +39,21 @@ public class TTCard {
     return av.toString();
   }
 
+  void setAttackValueInDirection(AttackValue av, CardinalDirection direction) {
+    attackValues.put(direction, av);
+  }
+
   // info needed to battle
-  public boolean beats(TTCard other, CardinalDirection direction) {
-    return attackValues.get(direction).fromAttackValue()
-            > other.attackValues.get(direction.opposite()).fromAttackValue();
+  public boolean beats(Card other, CardinalDirection direction) {
+    return getAttackValue(direction).beats(other.getAttackValue(direction.opposite()));
+  }
+
+  public Coach getCoach() {
+    return this.owner;
+  }
+
+  void setCoach(Coach newOwner) {
+    this.owner = newOwner;
   }
 
   @Override

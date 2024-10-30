@@ -1,19 +1,13 @@
-package cs3500.threetrios.model;
+package cs3500.threetrios.controller;
 
-import cs3500.threetrios.model.done.ABoardCell;
-import cs3500.threetrios.model.done.AttackValue;
-import cs3500.threetrios.model.done.CardCell;
-import cs3500.threetrios.model.done.CardinalDirection;
-import cs3500.threetrios.model.done.HoleCell;
-import cs3500.threetrios.model.done.TTCard;
+import cs3500.threetrios.model.ABoardCell;
+import cs3500.threetrios.model.CardCell;
+import cs3500.threetrios.model.GridBoard;
+import cs3500.threetrios.model.HoleCell;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 

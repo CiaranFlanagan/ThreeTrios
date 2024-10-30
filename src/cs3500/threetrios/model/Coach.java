@@ -1,20 +1,18 @@
 package cs3500.threetrios.model;
 
-import cs3500.threetrios.model.done.TTCard;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class TTPlayer implements IPlayer {
+public class Coach {
   private final String name;
-  private final List<TTCard> hand;
+  private final List<Card> hand;
 
   /**
    * Constructs a Player with the given name.
    *
    * @param name the player's name
    */
-  public TTPlayer(String name) {
+  public Coach(String name) {
     if (name == null || name.isEmpty()) {
       throw new IllegalArgumentException("Player name cannot be null or empty");
     }
@@ -28,7 +26,6 @@ public class TTPlayer implements IPlayer {
    *
    * @return the player's name
    */
-  @Override
   public String getName() {
     return name;
   }
@@ -38,8 +35,7 @@ public class TTPlayer implements IPlayer {
    *
    * @return the player's hand
    */
-  @Override
-  public List<TTCard> getHand() {
+  public List<Card> getHand() {
     return new ArrayList<>(hand);
   }
 
@@ -48,11 +44,20 @@ public class TTPlayer implements IPlayer {
    *
    * @param card the card to remove
    */
-  @Override
-  public void removeCard(TTCard card) {
+  public void removeCard(Card card) {
     if (!hand.remove(card)) {
       throw new IllegalArgumentException("Card not found in player's hand");
     }
+  }
+
+  /**
+   * Initializes a player with given [hand].
+   *
+   * @param name - the name of the player
+   * @param hand - the hand of cards
+   */
+  public void init(String name, List<Card> hand) {
+
   }
 
   /**
@@ -60,11 +65,15 @@ public class TTPlayer implements IPlayer {
    *
    * @param card the card to add
    */
-  @Override
-  public void addCard(TTCard card) {
+  public void addCard(Card card) {
     if (card == null) {
       throw new IllegalArgumentException("Card cannot be null");
     }
     hand.add(card);
+  }
+
+  @Override
+  public String toString() {
+    return this.name;
   }
 }

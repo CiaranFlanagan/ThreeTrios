@@ -1,4 +1,4 @@
-package cs3500.threetrios.model.done;
+package cs3500.threetrios.model;
 
 /**
  * Represents the possible attack values for a card. Construct once, immutable after construction.
@@ -48,12 +48,15 @@ public enum AttackValue {
     }
   }
 
+  public boolean beats(AttackValue other) {
+    return this.fromAttackValue() > other.fromAttackValue();
+  }
+
   public String toString() {
     if (this == A) {
       return "A";
     }
     return String.valueOf(fromAttackValue());
   }
-
 
 }

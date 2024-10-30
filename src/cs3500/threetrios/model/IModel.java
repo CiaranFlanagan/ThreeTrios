@@ -1,6 +1,6 @@
 package cs3500.threetrios.model;
 
-import cs3500.threetrios.model.done.TTCard;
+import cs3500.threetrios.player.IPlayer;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public interface IModel {
    * @param grid    the game grid
    * @param cards   the list of cards to deal
    */
-  void startGame(IPlayer player1, IPlayer player2, GridBoard grid, List<TTCard> cards);
+  void startGame(IPlayer player1, IPlayer player2, GridBoard grid, List<Card> cards);
 
   /**
    * Places a card on the grid for the given player.
@@ -26,7 +26,7 @@ public interface IModel {
    * @param row    the row index
    * @param col    the column index
    */
-  void placeCard(IPlayer player, TTCard card, int row, int col);
+  void placeCard(IPlayer player, Card card, int row, int col);
 
   /**
    * Gets the current player.

@@ -1,8 +1,8 @@
-package cs3500.threetrios.model;
+package cs3500.threetrios.controller;
 
-import cs3500.threetrios.model.done.AttackValue;
-import cs3500.threetrios.model.done.CardinalDirection;
-import cs3500.threetrios.model.done.TTCard;
+import cs3500.threetrios.model.AttackValue;
+import cs3500.threetrios.model.CardinalDirection;
+import cs3500.threetrios.model.Card;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,18 +16,18 @@ import java.util.Scanner;
 
 public class CardConfig {
 
-  public static List<TTCard> fileToTTCardList(File f) {
-    if (f == null) {
+  public static List<Card> fileToTTCardList(File file) {
+    if (file == null) {
       throw new IllegalArgumentException("null file");
     }
     FileReader fr;
     try {
-      fr = new FileReader(f);
+      fr = new FileReader(file);
     } catch (FileNotFoundException ex) {
-      throw new IllegalArgumentException("file not found: " + f.toPath());
+      throw new IllegalArgumentException("file not found: " + file.toPath());
     }
     Scanner sc = new Scanner(fr);
-    List<TTCard> cards = new ArrayList<>();
+    List<Card> cards = new ArrayList<>();
     try {
       while (sc.hasNext()) {
         String name = sc.next();
@@ -36,7 +36,7 @@ public class CardConfig {
         directionToAttackValues.put(CardinalDirection.SOUTH, AttackValue.fromString(sc.next()));
         directionToAttackValues.put(CardinalDirection.EAST, AttackValue.fromString(sc.next()));
         directionToAttackValues.put(CardinalDirection.WEST, AttackValue.fromString(sc.next()));
-        cards.add(new TTCard(name, directionToAttackValues));
+        cards.add(new Card(name, directionToAttackValues));
       }
     } catch (NoSuchElementException ex) {
       throw new IllegalArgumentException("scanner error");

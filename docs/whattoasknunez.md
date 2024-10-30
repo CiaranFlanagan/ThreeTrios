@@ -1,1 +1,4 @@
 - attack value is enum ??
+- ABoardCell vs IBoardCell
+- the package private test classes
+- 
