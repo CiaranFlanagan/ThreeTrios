@@ -1,6 +1,5 @@
 package cs3500.threetrios.model;
 
-import cs3500.threetrios.player.IPlayer;
 
 import java.util.List;
 
@@ -9,34 +8,35 @@ import java.util.List;
  */
 public interface IModel {
   /**
-   * Starts the game with the given players, grid, and cards.
+   * Starts the game with the given card index, grid col, and grid row.
    *
-   * @param player1 the first player
-   * @param player2 the second player
-   * @param grid    the game grid
-   * @param cards   the list of cards to deal
-   */
-  void startGame(IPlayer player1, IPlayer player2, GridBoard grid, List<Card> cards);
-
-  /**
-   * Places a card on the grid for the given player.
-   *
-   * @param player the player making the move
+   * @param coach the coach making the move
    * @param card   the card to place
    * @param row    the row index
    * @param col    the column index
    */
-  void placeCard(IPlayer player, Card card, int row, int col);
+  void startGame(Coach coach, Card card, int row, int col);
 
   /**
-   * Gets the current player.
+   * Places a card on the grid for the given coach.
    *
-   * @return the current player
+   * @param idx represents the card index
+   * @param row represents the row
+   * @param col represents the col
+   *
+
    */
-  IPlayer getCurrentPlayer();
+  void placeCard(int idx, int row, int col);
 
   /**
-   * Advances to the next player's turn.
+   * Gets the current coach.
+   *
+   * @return the current coach
+   */
+  Coach getCurrentCoach();
+
+  /**
+   * Advances to the next coach's turn.
    */
   void nextTurn();
 
@@ -50,9 +50,9 @@ public interface IModel {
   /**
    * Gets the winner of the game.
    *
-   * @return the winning player, or null if it's a tie
+   * @return the winning coach, or null if it's a tie
    */
-  IPlayer getWinner();
+  Coach getWinner();
 
 }
 
