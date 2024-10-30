@@ -2,23 +2,18 @@ package cs3500.threetrios.publictests.model;
 
 import cs3500.threetrios.controller.CardConfig;
 import cs3500.threetrios.controller.GridConfig;
-import cs3500.threetrios.model.AGridCell;
 import cs3500.threetrios.model.BattlePhaseReferee;
 import cs3500.threetrios.model.Card;
-import cs3500.threetrios.model.CardinalDirection;
-import cs3500.threetrios.model.Coach;
 import cs3500.threetrios.model.DefaultReferee;
 import cs3500.threetrios.model.Grid;
 import cs3500.threetrios.model.ThreeTriosModel;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.OrderWith;
 
 import java.io.File;
 import java.util.List;
 
-public class TestModel {
+public class TestModelPublicExceptions {
   // test public beahvior
   private Grid gridNoHoles;
   private Grid gridConnectedHoles;

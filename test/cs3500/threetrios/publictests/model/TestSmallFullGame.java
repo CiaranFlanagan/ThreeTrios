@@ -24,9 +24,7 @@ public class TestSmallFullGame {
   private static BattlePhaseReferee referee = new DefaultReferee();
   private static Coach red;
   private static Coach blue;
-  private static AGridCell[][] state1;
-  private static AGridCell[][] state2;
-  private static AGridCell[][] state3;
+  private static AGridCell[][] state;
   private static Card left;
   // using alphabetical ordering to sequence
 
@@ -35,7 +33,6 @@ public class TestSmallFullGame {
   public void P1Start() {
     model.startGame(GridConfig.fileToGridBoard(GRID_NO_HOLES),
             CardConfig.fileToTTCardList(CC_SMALL), referee);
-    System.out.println(model);
     // check coach red is actually a red coach
     red = model.getCurrentCoach();
     Assert.assertEquals(red.getColor(), Coach.Color.Red);
@@ -43,11 +40,9 @@ public class TestSmallFullGame {
 
   @Test
   public void P2FirstPlacedCard() {
-    System.out.println(model);
     model.placeCard(0, 0, 0); // red plays  R _ _
-    System.out.println(model);
-    state1 = model.getGrid().arrayRepr();
-    left = state1[0][0].getCard(); // this is actual pointer not a copy
+    state = model.getGrid().arrayRepr();
+    left = state[0][0].getCard(); // this is actual pointer not a copy
     // left has av's of 1
     Assert.assertEquals(left.getCoach().getColor(), Coach.Color.Red);
     // makes sure that if a card is placed with no battle, it stays same color
@@ -62,10 +57,10 @@ public class TestSmallFullGame {
     Assert.assertEquals(blue.getColor(), Coach.Color.Blue);
     // make sure that we switch coaches properly
     model.placeCard(0, 0,  1); // blue plays so now board is ? B _
-    state2 = model.getGrid().arrayRepr();
-    Assert.assertEquals(state2[0][1].getCard().getCoach(), blue);
+    state = model.getGrid().arrayRepr();
+    Assert.assertEquals(state[0][1].getCard().getCoach(), blue);
     // left vs mid = 3 < 9 so left loses
-    Assert.assertEquals(left.getCoach(), blue); // this works
+    Assert.assertEquals(left.getCoach(), blue); // WE FLIPPED THE CARD!
 
 
   }
@@ -74,11 +69,11 @@ public class TestSmallFullGame {
   public void P4LastPlacedCard() {
     model.nextCoachTurn();
     model.placeCard(0, 0, 2); // red plays ? ? R
-    state3 = model.getGrid().arrayRepr();
+    state = model.getGrid().arrayRepr();
     // right has av's of A
 
     // should beat mid and cascade!
-    for (AGridCell c : state3[0]) {
+    for (AGridCell c : state[0]) {
       Assert.assertTrue(c.hasCard());
       Assert.assertEquals(red, c.getCard().getCoach());
     }

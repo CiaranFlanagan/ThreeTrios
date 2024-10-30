@@ -13,3 +13,4 @@ the default methods
 
 - what is the examples class from HW1?
 that was examplar. is that same as test class with only public methods?
+

@@ -1,5 +1,6 @@
 package cs3500.threetrios.view;
 
+import java.io.IOException;
 import java.util.Map;
 
 import cs3500.threetrios.model.AGridCell;
@@ -16,6 +17,7 @@ import cs3500.threetrios.model.IModel;
  */
 public class TextView implements ThreeTriosView {
   private final IModel model;
+  private Appendable log;
 
   /**
    * Constructs a textual view of the game.
@@ -29,11 +31,35 @@ public class TextView implements ThreeTriosView {
   }
 
   /**
+   * Constructs a textual view of the game.
+   * @param model the model
+   */
+  public TextView(IModel model, Appendable appendable) {
+    if (model == null) {
+      throw new IllegalArgumentException("Model cannot be null");
+    }
+    this.model = model;
+    this.log = appendable;
+  }
+
+  @Override
+  public void render() {
+    String renderedString = renderString();
+    try {
+      if (log != null) {
+        log.append(renderedString);
+      }
+    } catch (IOException ex) {
+      throw new IllegalStateException("bad appendable");
+    }
+    System.out.println(renderedString);
+  }
+
+  /**
    * Renders the game as a string.
    * @return the game as a string
    */
-  @Override
-  public String renderGame() {
+  private String renderString() {
     StringBuilder sb = new StringBuilder();
     Coach curCoach = model.getCurrentCoach();
     sb.append("Player: ").append(curCoach.toString().toUpperCase()).append("\n");
