@@ -1,10 +1,5 @@
-package cs3500.threetrios.test;
+package cs3500.threetrios.model;
 
-import cs3500.threetrios.model.GridBoard;
-import cs3500.threetrios.model.done.ABoardCell;
-import cs3500.threetrios.model.done.CardCell;
-import cs3500.threetrios.model.done.CardinalDirection;
-import cs3500.threetrios.model.done.HoleCell;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -30,11 +25,11 @@ public class TestGridBoard {
 
   @Test
   public void test3() {
-    LinkMock[][] grid = new LinkMock[2][2];
-    grid[0][0] = new LinkMock();
-    grid[0][1] = new LinkMock();
-    grid[1][0] = new LinkMock();
-    grid[1][1] = new LinkMock();
+    BoardCellMockTestLinks[][] grid = new BoardCellMockTestLinks[2][2];
+    grid[0][0] = new BoardCellMockTestLinks();
+    grid[0][1] = new BoardCellMockTestLinks();
+    grid[1][0] = new BoardCellMockTestLinks();
+    grid[1][1] = new BoardCellMockTestLinks();
     GridBoard gb = new GridBoard(grid); // after construction, they should be linked
     Assert.assertTrue(grid[0][0].hasNeighborIn(CardinalDirection.EAST));
     Assert.assertTrue(grid[0][0].hasNeighborIn(CardinalDirection.SOUTH));
