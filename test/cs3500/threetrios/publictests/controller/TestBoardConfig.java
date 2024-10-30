@@ -1,6 +1,6 @@
 package cs3500.threetrios.publictests.controller;
 
-import cs3500.threetrios.TestFiles;
+import cs3500.threetrios.controller.TestFiles;
 import cs3500.threetrios.controller.GridConfig;
 import cs3500.threetrios.utils.LineWriter;
 

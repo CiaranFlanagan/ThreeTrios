@@ -6,6 +6,8 @@ import cs3500.threetrios.model.CardinalDirection;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -31,6 +33,14 @@ public class Utils {
     return new Card(name, map);
   }
 
+  public static Scanner safeFileToScanner(File f) {
+    try {
+      return new Scanner(f);
+    } catch (FileNotFoundException ex) {
+      throw new RuntimeException("file not found, check TestFiles");
+    }
+  }
+
   @Test
   public void testMakeCard() {
     Assert.assertEquals(makeCard("kc 1 2 3 4").toString(),
@@ -41,4 +51,6 @@ public class Utils {
   public void testMakeBadCard() {
     makeCard("kc 1 2 3 Z");
   }
+
+
 }

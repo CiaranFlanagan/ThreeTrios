@@ -31,8 +31,12 @@ public class TestSmallFullGame {
 
   @Test
   public void P1Start() {
-    model.startGame(GridConfig.scannerToGrid(GRID_NO_HOLES),
-            CardConfig.scannerToCardList(CC_SMALL), referee);
+    try {
+      model.startGame(GridConfig.scannerToGrid(new Scanner(GRID_NO_HOLES)),
+              CardConfig.scannerToCardList(new Scanner(CC_SMALL)), referee);
+    } catch (Exception e) {
+      Assert.fail("file not found");
+    }
     // check coach red is actually a red coach
     red = model.getCurrentCoach();
     Assert.assertEquals(red.getColor(), Coach.Color.Red);

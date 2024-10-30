@@ -1,6 +1,6 @@
 package cs3500.threetrios.publictests.model;
 
-import cs3500.threetrios.TestFiles;
+import cs3500.threetrios.controller.TestFiles;
 import cs3500.threetrios.controller.CardConfig;
 import cs3500.threetrios.controller.GridConfig;
 import cs3500.threetrios.model.BattlePhaseReferee;
@@ -12,7 +12,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
