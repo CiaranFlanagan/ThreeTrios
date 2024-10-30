@@ -1,5 +1,4 @@
-- are default methods on interfaces fine
-  because we don't want anyone with a
+- are default methods on interfaces fine. reasoning:
   grid cells have behavior
   they are value classes but still
   we only want referee's to
