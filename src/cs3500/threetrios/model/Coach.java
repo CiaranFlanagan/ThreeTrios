@@ -3,6 +3,9 @@ package cs3500.threetrios.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a player in the game.
+ */
 public class Coach {
   private final String name;
   private final List<Card> hand;

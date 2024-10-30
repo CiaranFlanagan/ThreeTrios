@@ -10,23 +10,23 @@ import java.util.List;
 public interface IPlayer {
   /**
    * returns the name of the player.
-   * @throws IllegalStateException if not initialized
    * @return the player's name
+   * @throws IllegalStateException if not initialized
    */
   String getName();
 
 
   /**
    * returns the player's hand of cards.
-   * @throws IllegalStateException if not initialized
    * @return the player's hand
+   * @throws IllegalStateException if not initialized
    */
   List<Card> getHand();
 
   /**
    * removes a card from the player's hand.
-   * @throws IllegalStateException if not initialized
    * @param card the card to remove
+   * @throws IllegalStateException if not initialized
    */
   void removeCard(Card card);
 

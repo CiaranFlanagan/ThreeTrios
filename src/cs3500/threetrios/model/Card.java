@@ -13,7 +13,7 @@ public final class Card {
   private Coach owner;
 
   /**
-   *
+   * to construct a card with [name] and [attackValues].
    * @param name - name of this card
    * @param attackValues - attack value in each direction
    */
@@ -43,7 +43,7 @@ public final class Card {
   }
 
   /**
-   * to return the attack value of this card in [direction]
+   * to return the attack value of this card in [direction].
    * @param direction - the direction to check
    * @return - the attack value in [direction]
    */
@@ -52,7 +52,15 @@ public final class Card {
   }
 
   /**
-   * to set the attack value in [direction] to [av]
+   * to return the attack values of this card.
+   * @return - the attack values of this card.
+   */
+  public Map<CardinalDirection, AttackValue> getAttackValues() {
+    return this.attackValues;
+  }
+
+  /**
+   * to set the attack value in [direction] to [av].
    * @param av - the attack value to add
    * @param direction - the direction to update
    */
@@ -63,10 +71,10 @@ public final class Card {
   // info needed to battle
 
   /**
-   * to evaluate if this card beats [other] in [direction]
+   * to evaluate if this card beats [other] in [direction].
    * @param other - the card to compare with
    * @param direction - the direction where this battles other
-   * @return
+   * @return the result of the battle.
    */
   public boolean beats(Card other, CardinalDirection direction) {
     return getAttackValue(direction).beats(other.getAttackValue(direction.opposite()));

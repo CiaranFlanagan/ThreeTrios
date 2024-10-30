@@ -10,16 +10,17 @@ public class CardCell extends AGridCell {
    * constructor.
    */
   public CardCell() {
-
+    super();
+    this.card = null;
   }
 
   @Override
-  protected boolean hasCard() {
+  public boolean hasCard() {
     return this.card != null;
   }
 
   @Override
-  protected Card getCard() {
+  public Card getCard() {
     return this.card;
   }
 

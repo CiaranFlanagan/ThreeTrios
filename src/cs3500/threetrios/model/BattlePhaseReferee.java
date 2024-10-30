@@ -1,29 +1,29 @@
 package cs3500.threetrios.model;
 
 /**
- * to represent a referee enforcing the rules of battle phases in a game of three trios.
+ * To represent a referee enforcing the rules of battle phases in a game of three trios.
  */
 public interface BattlePhaseReferee {
   /**
-   * to referee a's battle phase
+   * To referee a's battle phase.
    * @param a - a board cell
    */
   void refereeBattlePhase(AGridCell a);
 
   /**
-   * to referee a's battle phase
+   * To referee a's battle phase.
    * @param c - a card cell
    */
   void refereeBattlePhase(CardCell c);
 
   /**
-   * to referee h's battle phase
+   * To referee h's battle phase.
    * @param h - a hole cell
    */
   void refereeBattlePhase(HoleCell h);
 
   /**
-   * to return the [ab]'s neighbor to the [direction]
+   * To return the [ab]'s neighbor to the [direction].
    * @param direction - the direction to consider
    * @param ab - the board cell to consider
    * @return - the neighbor
@@ -33,7 +33,7 @@ public interface BattlePhaseReferee {
   }
 
   /**
-   * to evaluate whether [ab] has a card
+   * To evaluate whether [ab] has a card.
    * @param ab - the board cell to consider
    * @return - if ab has a card
    */
@@ -42,7 +42,7 @@ public interface BattlePhaseReferee {
   }
 
   /**
-   * to return the card in the [ab]
+   * To return the card in the [ab].
    * @param ab - the board cell
    * @return - the card in [ab]
    */
@@ -51,7 +51,7 @@ public interface BattlePhaseReferee {
   }
 
   /**
-   * to set the attack value of [card] in direction [cd] to [av]
+   * To set the attack value of [card] in direction [cd] to [av].
    * @param card - the card to mutate
    * @param av - the attack value to set card's to
    * @param cd - the direction in which to set it
@@ -61,7 +61,7 @@ public interface BattlePhaseReferee {
   }
 
   /**
-   * to return the coach of the given card
+   * To return the coach of the given card.
    * @param card - the card to read
    * @return - the coach of card
    */
@@ -70,7 +70,7 @@ public interface BattlePhaseReferee {
   }
 
   /**
-   * to set the coach of the card to [newCoach]
+   * To set the coach of the card to [newCoach].
    * @param card - the card to mutate
    * @param newCoach - the value to pass as the new coach
    */

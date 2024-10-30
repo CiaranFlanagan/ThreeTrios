@@ -1,7 +1,7 @@
 package cs3500.threetrios.model;
 
 /**
- * to represent a cardinal direction
+ * to represent a cardinal direction.
  */
 public enum CardinalDirection {
   NORTH, SOUTH, EAST, WEST;

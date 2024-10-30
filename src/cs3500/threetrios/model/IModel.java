@@ -10,10 +10,10 @@ public interface IModel {
   /**
    * Starts the game with the given card index, grid col, and grid row.
    *
-   * @param coach the coach making the move
-   * @param card   the card to place
-   * @param row    the row index
-   * @param col    the column index
+   * @param grid the grid
+   * @param cards the cards
+   * @param referee the referee
+   * @throws IllegalArgumentException if the grid is null
    */
   void startGame(Grid grid, List<Card> cards, BattlePhaseReferee referee);
 
@@ -53,6 +53,8 @@ public interface IModel {
    * @return the winning coach, or null if it's a tie
    */
   Coach getWinner();
+
+  Grid getGrid();
 
 }
 

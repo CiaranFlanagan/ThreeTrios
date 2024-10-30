@@ -10,15 +10,15 @@ public abstract class AGridCell {
   private final Map<CardinalDirection, AGridCell> neighbors;
 
   /**
-   * constructor.
+   * Constructs an AGridCell.
    */
   public AGridCell() {
     this.neighbors = new EnumMap<>(CardinalDirection.class);
   }
 
   /**
-   * to link [this] board cell to [other] in direction [dir]
-   * EFFECT: also links [other] to [this] in the opposite direction of [dir]
+   * To link [this] board cell to [other] in direction [dir].
+   * EFFECT: also links [other] to [this] in the opposite direction of [dir].
    *
    * @param other - the other board cell
    * @param dir   - the direction [this] links to [other]
@@ -29,7 +29,7 @@ public abstract class AGridCell {
   }
 
   /**
-   * to get the neighbor to the [N/S/E/W].
+   * To get the neighbor to the [N/S/E/W].
    * @param direction - the cardinal direction to consider
    * @return - the neighbor (if any) in [direction]
    */
@@ -38,23 +38,23 @@ public abstract class AGridCell {
   }
 
   /**
-   * whether this cell has a card.
+   * Whether this cell has a card.
    * @return - whether this cell has a card
    */
-  protected boolean hasCard() {
+  public boolean hasCard() {
     return false;
   }
 
   /**
-   * to return the card held in this cell.
+   * To return the card held in this cell.
    * @return - the card held in this cell.
    */
-  protected Card getCard() {
+  public Card getCard() {
     throw new IllegalStateException("Can't get card from hole cell");
   }
 
   /**
-   * to place the card on this cell.
+   * To place the card on this cell.
    * @param card - the card to place
    */
   protected void placeCard(Card card) {
@@ -62,7 +62,8 @@ public abstract class AGridCell {
   }
 
   /**
-   * to accept a battle phase officiated by [ref]
+   * To accept a battle phase officiated by [ref].
+   *
    * @param ref - the ref that controls the rules and what happens during this battle phase
    */
   protected abstract void acceptBattlePhase(BattlePhaseReferee ref);

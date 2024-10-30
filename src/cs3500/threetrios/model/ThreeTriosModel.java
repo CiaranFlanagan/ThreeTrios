@@ -33,8 +33,14 @@ public class ThreeTriosModel implements IModel {
     this.gameOver = false;
     dealCards(cards);
   }
-  //helper
+
   private void dealCards(List<Card> cards) {
+    int totalCardCells = grid.getTotalCardCells();
+    int requiredCards = totalCardCells + 1;
+    if (cards.size() != requiredCards) {
+      throw new IllegalArgumentException("Number of cards must be exactly N + 1, where N is the " +
+              "number of card cells on the grid");
+    }
     List<Card> copy = new ArrayList<>(cards);
     if (cards.size() % 2 != 0) {
       throw new IllegalArgumentException("Number of cards must be even");
@@ -112,6 +118,9 @@ public class ThreeTriosModel implements IModel {
    */
   @Override
   public Coach getWinner() {
+    if (!gameOver) {
+      throw new IllegalStateException("Game is not over yet");
+    }
     //The winner is determined by counting the number of cards each player owns both on the grid and
     // in their hands.
     return whoHasMoreTotalCards();
@@ -127,5 +136,10 @@ public class ThreeTriosModel implements IModel {
     } else {
       return null;
     }
+  }
+
+  @Override
+  public Grid getGrid() {
+    return grid;
   }
 }

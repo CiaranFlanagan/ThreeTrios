@@ -1,7 +1,7 @@
 package cs3500.threetrios.model;
 
 /**
- * to represent an attack value of a card in a game of three trios.
+ * To represent an attack value of a card in a game of three trios.
  */
 public enum AttackValue {
   ONE,
@@ -38,7 +38,7 @@ public enum AttackValue {
   }
 
   /**
-   * to convert an attack value to an integer
+   * To convert an attack value to an integer.
    * @return - an integer corresponding the magnitude of attack value.
    */
   public int fromAttackValue() {
@@ -58,8 +58,8 @@ public enum AttackValue {
   }
 
   /**
-   * to evaluate whether this has a greater numeric attack value than other
-   * @param other - ther other attack value to compare to
+   * To evaluate whether this has a greater numeric attack value than other.
+   * @param other - there other attack value to compare to
    * @return - whether this has a greater numeric attack value than other
    */
   public boolean beats(AttackValue other) {

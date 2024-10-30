@@ -1,10 +1,15 @@
 package cs3500.threetrios.model;
 
 /**
- * to represent the grid-shaped board of the game three-trios
+ * to represent the grid-shaped board of the game three-trios.
  */
 public class Grid {
   private final AGridCell[][] grid; // at least 2x2
+
+  /**
+   * Constructs a Grid.
+   * @param grid - the grid to construct
+   */
   public Grid(AGridCell[][] grid) {
     this.grid = grid;
     linkRows();
@@ -49,6 +54,10 @@ public class Grid {
     return out;
   }
 
+  /**
+   * Whether all cells in this grid are filled with cards.
+   * @return - whether all card cells in this grid are filled with cards
+   */
   public boolean allCellsFilled() {
     for (AGridCell[] row : grid) {
       for (AGridCell cell : row) {
@@ -60,6 +69,10 @@ public class Grid {
     return true;
   }
 
+  /**
+   * The total number of red cards in this grid.
+   * @return - the total number of red cards in this grid.
+   */
   public int totalRedCards() {
     int redCount = 0;
     for (AGridCell[] row : grid) {
@@ -72,6 +85,10 @@ public class Grid {
     return redCount;
   }
 
+  /**
+   * The total number of blue cards in this grid.
+   * @return - the total number of blue cards in this grid.
+   */
   public int totalBlueCards() {
     int blueCount = 0;
     for (AGridCell[] row : grid) {
@@ -82,5 +99,29 @@ public class Grid {
       }
     }
     return blueCount;
+  }
+
+  /**
+   * The total number of cards in this grid.
+   * @return - the total number of card cells in this grid.
+   */
+  public int getTotalCardCells() {
+    int cellCount = 0;
+    for (AGridCell[] row : grid) {
+      for (AGridCell cell : row) {
+        if (!cell.hasCard()) {
+          cellCount += 1;
+        }
+      }
+    }
+    return cellCount;
+  }
+
+  /**
+   * The grid of this.
+   * @return - the grid of this.
+   */
+  public AGridCell[][] getGrid() {
+    return this.grid;
   }
 }

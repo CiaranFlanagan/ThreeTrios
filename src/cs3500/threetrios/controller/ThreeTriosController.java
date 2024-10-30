@@ -1,7 +1,7 @@
 package cs3500.threetrios.controller;
 
 /**
- * to control the game of three trios and handle IO
+ * To control the flow of the game and handle input and output.
  */
 public interface ThreeTriosController {
 
