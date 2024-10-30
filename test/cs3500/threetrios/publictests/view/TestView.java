@@ -5,6 +5,7 @@ import cs3500.threetrios.controller.GridConfig;
 import cs3500.threetrios.model.BattlePhaseReferee;
 import cs3500.threetrios.model.DefaultReferee;
 import cs3500.threetrios.model.ThreeTriosModel;
+import cs3500.threetrios.utils.LineWriter;
 import cs3500.threetrios.view.TextView;
 import cs3500.threetrios.view.ThreeTriosView;
 import org.junit.Assert;
@@ -46,5 +47,9 @@ public class TestView {
     }
     view = new TextView(model);
     view.render();
+
+   String cards = new LineWriter().create().toString();
+   CardConfig.scannerToCardList(new Scanner(cards));
+
   }
 }
