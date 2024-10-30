@@ -39,6 +39,7 @@ public class TestView {
     view.render();
   }
 
+
   @Test
   public void test2() {
     model = new ThreeTriosModel();
@@ -61,6 +62,6 @@ public class TestView {
     Grid g = GridConfig.scannerToGrid(new Scanner("1 3\nXXX"));
     System.out.println(g);
     LineWriter lw =LineWriter.create().line("kc 1 2 3 4").endWith("ci 4 5 6 7");
-    List<Card> loc = CardConfig.scannerToCardList(new Scanner(lw.toString()))
+    List<Card> loc = CardConfig.scannerToCardList(new Scanner(lw.toString()));
   }
 }

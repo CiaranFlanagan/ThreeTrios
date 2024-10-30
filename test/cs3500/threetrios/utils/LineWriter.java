@@ -9,7 +9,7 @@ import java.io.FileWriter;
 public class LineWriter {
   StringBuilder sb;
 
-  private LineWriter() {
+  public LineWriter() {
     sb = new StringBuilder();
   }
   public static LineWriter create() {

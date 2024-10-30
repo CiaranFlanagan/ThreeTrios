@@ -68,7 +68,7 @@ public class Coach {
    * @return the card that was removed
    */
   public Card removeCardFromHand(int idx) {
-    if (idx >= hand.size()) {
+    if (idx >= hand.size() || idx < 0) {
       throw new IllegalArgumentException("Bad index");
     }
     return hand.remove(idx);

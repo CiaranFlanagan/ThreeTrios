@@ -84,7 +84,6 @@ public class ThreeTriosModel implements IModel {
     }
     Card curCard = currentCoach.removeCardFromHand(idx);
     AGridCell relevantCell = grid.placeCardOn(row, col, curCard);
-
     System.out.println("relevant cell" + relevantCell.getCard());
     referee.refereeBattlePhase(relevantCell);
   }
@@ -118,6 +117,9 @@ public class ThreeTriosModel implements IModel {
    */
   @Override
   public boolean isGameOver() {
+    if (!gameStarted) {
+      throw new IllegalStateException("Game has not started yet");
+    }
     //The game ends when all empty card cells are filled.
     //hands don't have to be empty for the grid to be filled
     return grid.isFull();

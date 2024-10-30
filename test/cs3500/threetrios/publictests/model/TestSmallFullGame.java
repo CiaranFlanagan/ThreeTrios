@@ -1,3 +1,5 @@
+
+
 package cs3500.threetrios.publictests.model;
 
 import cs3500.threetrios.controller.CardConfig;
@@ -8,13 +10,15 @@ import cs3500.threetrios.model.Card;
 import cs3500.threetrios.model.Coach;
 import cs3500.threetrios.model.DefaultReferee;
 import cs3500.threetrios.model.ThreeTriosModel;
+import cs3500.threetrios.utils.Utils;
+
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import static cs3500.threetrios.TestFiles.CC_SMALL;
-import static cs3500.threetrios.TestFiles.GRID_NO_HOLES;
+import static cs3500.threetrios.controller.TestFiles.CC_SMALL;
+import static cs3500.threetrios.controller.TestFiles.GRID_NO_HOLES;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -31,12 +35,8 @@ public class TestSmallFullGame {
 
   @Test
   public void P1Start() {
-    try {
-      model.startGame(GridConfig.scannerToGrid(new Scanner(GRID_NO_HOLES)),
-              CardConfig.scannerToCardList(new Scanner(CC_SMALL)), referee);
-    } catch (Exception e) {
-      Assert.fail("file not found");
-    }
+      model.startGame(GridConfig.scannerToGrid(Utils.safeFileToScanner(GRID_NO_HOLES)),
+              CardConfig.scannerToCardList(Utils.safeFileToScanner(CC_SMALL)), referee);
     // check coach red is actually a red coach
     red = model.getCurrentCoach();
     Assert.assertEquals(red.getColor(), Coach.Color.Red);
