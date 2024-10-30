@@ -4,6 +4,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Tests for the Referee class.
+ */
 public class TestReferee {
   private AGridCell holecard1;
   private AGridCell holecard2;

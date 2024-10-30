@@ -44,8 +44,8 @@ public class Coach {
 
   /**
    *
-   * @param idx
-   * @return
+   * @param idx - the index of the card to remove
+   * @return the card that was removed
    */
   public Card removeCardFromHand(int idx) {
     if (idx >= hand.size()) {
@@ -60,9 +60,6 @@ public class Coach {
    * @param name - the name of the player
    * @param hand - the hand of cards
    */
-  public void init(String name, List<Card> hand) {
-
-  }
 
   /**
    * Adds a card to the coach's hand.

@@ -1,4 +1,4 @@
-3 3
-CCC
-CCC
-CCC
+4 4
+CCCC
+CCCC
+CCCC

@@ -9,6 +9,9 @@ import java.util.List;
 import cs3500.threetrios.controller.CardConfig;
 import cs3500.threetrios.controller.GridConfig;
 
+/**
+ * Tests for the ThreeTriosModel class.
+ */
 public class TestModel {
   private Grid gridNoHoles;
   private Grid gridConnectedHoles;

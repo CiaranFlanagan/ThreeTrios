@@ -1,9 +1,7 @@
 package cs3500.threetrios.model;
 
 class GridCellMockTestLinks extends AGridCell {
-  GridCellMockTestLinks() {
 
-  }
 
   @Override
   public boolean hasCard() {

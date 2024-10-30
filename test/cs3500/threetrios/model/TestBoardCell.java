@@ -3,6 +3,9 @@ package cs3500.threetrios.model;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * Tests for the BoardCell class.
+ */
 public class TestBoardCell {
   @Test
   public void testLink1() {

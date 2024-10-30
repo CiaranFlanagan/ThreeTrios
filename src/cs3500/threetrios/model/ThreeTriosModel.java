@@ -24,6 +24,7 @@ public class ThreeTriosModel implements IModel {
     if (grid == null || cards == null) {
       throw new IllegalArgumentException("Arguments cannot be null");
     }
+
     this.referee = referee;
     this.grid = grid;
     this.coachRed = new Coach("red");
@@ -37,8 +38,8 @@ public class ThreeTriosModel implements IModel {
   private void dealCards(List<Card> cards) {
     int totalCardCells = grid.getTotalCardCells();
     int requiredCards = totalCardCells + 1;
-    if (cards.size() != requiredCards) {
-      throw new IllegalArgumentException("Number of cards must be exactly N + 1, where N is the " +
+    if (cards.size() < requiredCards) {
+      throw new IllegalArgumentException("Number of cards must be at least N + 1, where N is the " +
               "number of card cells on the grid");
     }
     List<Card> copy = new ArrayList<>(cards);

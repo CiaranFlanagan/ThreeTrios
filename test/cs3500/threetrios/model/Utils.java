@@ -7,7 +7,16 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * Utility class for testing.
+ */
 public class Utils {
+  /**
+   * Makes a card from a string.
+   *
+   * @param nameAndAttackValuesWithSpaces the string to parse
+   * @return the card
+   */
   public static Card makeCard(String nameAndAttackValuesWithSpaces) {
     Scanner sc = new Scanner(nameAndAttackValuesWithSpaces);
     Map<CardinalDirection, AttackValue> map = new EnumMap<>(CardinalDirection.class);
@@ -21,11 +30,12 @@ public class Utils {
 
   @Test
   public void testMakeCard() {
-    Assert.assertEquals(makeCard("kc 1 2 3 4").toString(), "<TTCard: kc 1 2 3 4>");
+    Assert.assertEquals(makeCard("kc 1 2 3 4").toString(),
+            "<TTCard: kc 1 2 3 4>");
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testMakeBadCard() {
-   makeCard("kc 1 2 3 Z");
+    makeCard("kc 1 2 3 Z");
   }
 }

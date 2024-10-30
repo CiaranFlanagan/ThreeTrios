@@ -11,6 +11,9 @@ public class Grid {
    * @param grid - the grid to construct
    */
   public Grid(AGridCell[][] grid) {
+    if (grid.length < 1 || grid[0].length < 1) {
+      throw new IllegalArgumentException("Rows and Cols must be positive integers");
+    }
     this.grid = grid;
     linkRows();
     linkCols();
@@ -51,7 +54,7 @@ public class Grid {
       }
       out += "\n";
     }
-    return out;
+    return out.stripTrailing();
   }
 
   /**

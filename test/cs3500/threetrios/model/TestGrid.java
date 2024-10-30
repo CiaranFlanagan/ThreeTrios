@@ -3,6 +3,9 @@ package cs3500.threetrios.model;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * Tests for the Grid class.
+ */
 public class TestGrid {
   @Test
   public void test1() {
@@ -12,7 +15,8 @@ public class TestGrid {
     grid[1][0] = new HoleCell();
     grid[1][1] = new HoleCell();
     Grid gb = new Grid(grid);
-    System.out.println(gb);
+    String expected = LineWriter.create().line("2 2").line("XC").endWith("XX").toString();
+    Assert.assertEquals(expected, gb.toString());
   }
 
   @Test
@@ -20,7 +24,8 @@ public class TestGrid {
     AGridCell[][] bcs = new AGridCell[1][1];
     bcs[0][0] = new HoleCell();
     Grid gb = new Grid(bcs);
-    System.out.println(gb);
+    String expected = LineWriter.create().line("1 1").endWith("X").toString();
+    Assert.assertEquals(expected, gb.toString());
   }
 
   @Test

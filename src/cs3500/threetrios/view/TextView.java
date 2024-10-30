@@ -19,7 +19,7 @@ public class TextView implements ThreeTriosView {
 
   /**
    * Constructs a textual view of the game.
-   * @param model
+   * @param model the model
    */
   public TextView(IModel model) {
     if (model == null) {
