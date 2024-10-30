@@ -1,38 +1,47 @@
 package cs3500.threetrios.model;
 
+/**
+ * to represent the default referee or rules enforcer for the game of three trios.
+ */
 public class DefaultReferee implements BattlePhaseReferee {
 
   @Override
-  public void refereeBattlePhase(ABoardCell us) {
-    {
-      if (!doesCellHaveCard(us)) {
+  public void refereeBattlePhase(AGridCell us) {
+    us.acceptBattlePhase(this);
+  }
+
+  @Override
+  public void refereeBattlePhase(CardCell us) {
+    if (!doesCellHaveCard(us)) {
+      return;
+    }
+    for (CardinalDirection direction : CardinalDirection.values()) {
+      if (getCellNeighborToThe(direction, us) == null) {
+        continue;
+      }
+      Card ourCard = getCellCard(us);
+      Coach ourCoach = getCardCoach(ourCard);
+      AGridCell them = getCellNeighborToThe(direction, us);
+      Card theirCard;
+      if (doesCellHaveCard(them)) {
+        theirCard = getCellCard(them);
+      } else {
         return;
       }
-      for (CardinalDirection direction : CardinalDirection.values()) {
-        if (getCellNeighborToThe(direction, us) == null) {
-          continue;
-        }
-        Card ourCard = getCellCard(us);
-        Coach ourCoach = getCardCoach(ourCard);
-        ABoardCell them = getCellNeighborToThe(direction, us);
-        Card theirCard;
-        if (doesCellHaveCard(them)) {
-          theirCard = getCellCard(them);
-        } else {
-          return;
-        }
-        Coach theirCoach = getCardCoach(theirCard);
-        if (ourCoach != theirCoach) {
-          if (ourCard.beats(theirCard, direction)) {
-            theirCard.setCoach(ourCoach);
-            them.acceptBattlePhase(this);
-          }
-        }
+      Coach theirCoach = getCardCoach(theirCard);
+      if (ourCoach != theirCoach && ourCard.beats(theirCard, direction)) {
+        theirCard.setCoach(ourCoach);
+        refereeBattlePhase(them);
       }
     }
   }
 
-
-
+  @Override
+  public void refereeBattlePhase(HoleCell us) {
+    throw new IllegalStateException("should not be here");
+  }
 }
+
+
+
 

@@ -8,7 +8,7 @@ public class Coach {
   private final List<Card> hand;
 
   /**
-   * Constructs a Player with the given name.
+   * Constructs a coach with the given name.
    *
    * @param name the player's name
    */
@@ -22,7 +22,7 @@ public class Coach {
 
 
   /**
-   * Gets the name of the player.
+   * Gets the name of the coach.
    *
    * @return the player's name
    */
@@ -31,7 +31,7 @@ public class Coach {
   }
 
   /**
-   * Gets the player's hand of cards.
+   * Gets the coach's hand of cards.
    *
    * @return the player's hand
    */
@@ -40,18 +40,19 @@ public class Coach {
   }
 
   /**
-   * Removes a card from the player's hand.
    *
-   * @param card the card to remove
+   * @param idx
+   * @return
    */
-  public void removeCard(Card card) {
-    if (!hand.remove(card)) {
-      throw new IllegalArgumentException("Card not found in player's hand");
+  public Card removeCardFromHand(int idx) {
+    if (idx >= hand.size()) {
+      throw new IllegalArgumentException("Bad index");
     }
+    return hand.remove(idx);
   }
 
   /**
-   * Initializes a player with given [hand].
+   * Initializes a coach with given [hand].
    *
    * @param name - the name of the player
    * @param hand - the hand of cards
@@ -61,7 +62,7 @@ public class Coach {
   }
 
   /**
-   * Adds a card to the player's hand.
+   * Adds a card to the coach's hand.
    *
    * @param card the card to add
    */

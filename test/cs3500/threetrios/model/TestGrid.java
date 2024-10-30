@@ -3,34 +3,34 @@ package cs3500.threetrios.model;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class TestGridBoard {
+public class TestGrid {
   @Test
   public void test1() {
-    ABoardCell[][] grid = new ABoardCell[2][2];
+    AGridCell[][] grid = new AGridCell[2][2];
     grid[0][0] = new HoleCell();
     grid[0][1] = new CardCell();
     grid[1][0] = new HoleCell();
     grid[1][1] = new HoleCell();
-    GridBoard gb = new GridBoard(grid);
+    Grid gb = new Grid(grid);
     System.out.println(gb);
   }
 
   @Test
   public void test2() {
-    ABoardCell[][] bcs = new ABoardCell[1][1];
+    AGridCell[][] bcs = new AGridCell[1][1];
     bcs[0][0] = new HoleCell();
-    GridBoard gb = new GridBoard(bcs);
+    Grid gb = new Grid(bcs);
     System.out.println(gb);
   }
 
   @Test
   public void test3() {
-    BoardCellMockTestLinks[][] grid = new BoardCellMockTestLinks[2][2];
-    grid[0][0] = new BoardCellMockTestLinks();
-    grid[0][1] = new BoardCellMockTestLinks();
-    grid[1][0] = new BoardCellMockTestLinks();
-    grid[1][1] = new BoardCellMockTestLinks();
-    GridBoard gb = new GridBoard(grid); // after construction, they should be linked
+    GridCellMockTestLinks[][] grid = new GridCellMockTestLinks[2][2];
+    grid[0][0] = new GridCellMockTestLinks();
+    grid[0][1] = new GridCellMockTestLinks();
+    grid[1][0] = new GridCellMockTestLinks();
+    grid[1][1] = new GridCellMockTestLinks();
+    Grid gb = new Grid(grid); // after construction, they should be linked
     Assert.assertTrue(grid[0][0].hasNeighborIn(CardinalDirection.EAST));
     Assert.assertTrue(grid[0][0].hasNeighborIn(CardinalDirection.SOUTH));
     Assert.assertTrue(grid[0][1].hasNeighborIn(CardinalDirection.WEST));

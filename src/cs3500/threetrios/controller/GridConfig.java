@@ -1,8 +1,8 @@
 package cs3500.threetrios.controller;
 
-import cs3500.threetrios.model.ABoardCell;
+import cs3500.threetrios.model.AGridCell;
 import cs3500.threetrios.model.CardCell;
-import cs3500.threetrios.model.GridBoard;
+import cs3500.threetrios.model.Grid;
 import cs3500.threetrios.model.HoleCell;
 
 import java.io.File;
@@ -11,8 +11,16 @@ import java.io.FileReader;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * To convert a file to a GridBoard.
+ */
 public class GridConfig {
-  public static GridBoard fileToGridBoard(File f) {
+  /**
+   * to convert a file to a GridBoard.
+   * @param f - the file
+   * @return - a gridboard
+   */
+  public static Grid fileToGridBoard(File f) {
     if (f == null) {
       throw new IllegalArgumentException("null file");
     }
@@ -24,12 +32,12 @@ public class GridConfig {
     }
     Scanner sc = new Scanner(fr);
     try {
-      ABoardCell[][] arr = null;
+      AGridCell[][] arr = null;
       while (sc.hasNext()) {
         int numRows = sc.nextInt();
         int numCols = sc.nextInt();
         Scanner getLine = new Scanner(sc.nextLine());
-        arr = new ABoardCell[numRows][numCols];
+        arr = new AGridCell[numRows][numCols];
         for (int curRow = 0; curRow < numRows; curRow++) {
           String rowString = sc.next();
           for (int curCol = 0; curCol < numCols; curCol++) {
@@ -37,13 +45,18 @@ public class GridConfig {
           }
         }
       }
-      return new GridBoard(arr);
+      return new Grid(arr);
     } catch (NoSuchElementException ex) {
       throw new IllegalArgumentException("scanner error");
     }
   }
 
-  private static ABoardCell stringToBoardCell(String s) {
+  /**
+   * to convert a string to a board cell.
+   * @param s - the string
+   * @return - a board cell
+   */
+  private static AGridCell stringToBoardCell(String s) {
     if (s.equals("C")) {
       return new CardCell();
     } else if (s.equals("X")) {

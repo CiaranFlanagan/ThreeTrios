@@ -14,8 +14,16 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * To convert a file to a list of cards.
+ */
 public class CardConfig {
 
+  /**
+   * to convert a file to a list of cards.
+   * @param file - the file to convert
+   * @return a list of cards
+   */
   public static List<Card> fileToTTCardList(File file) {
     if (file == null) {
       throw new IllegalArgumentException("null file");
