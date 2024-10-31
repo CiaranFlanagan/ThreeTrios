@@ -84,11 +84,14 @@ public class ViewTextBase implements View {
     for (Card card : curCoach.getHand()) {
       sb.append(card.getName()).append(" ");
       Map<CardinalDirection, AttackValue> attackValues = card.getAttackValues();
-      for (CardinalDirection dir : CardinalDirection.values()) {
-        sb.append(attackValues.get(dir)).append(" ");
+      for (int i = 0; i < CardinalDirection.values().length; i++) {
+        sb.append(attackValues.get(CardinalDirection.values()[i]));
+        if (i != CardinalDirection.values().length - 1) {
+          sb.append(" ");
+        }
       }
       sb.append("\n");
     }
-    return sb.toString();
+    return sb.toString().stripTrailing();
   }
 }

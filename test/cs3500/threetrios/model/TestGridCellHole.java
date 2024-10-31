@@ -3,20 +3,16 @@ package cs3500.threetrios.model;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestGridCellCard {
-  private GridCellAbstract cell1;
-  private GridCellAbstract cell2;
+public class TestGridCellHole {
+
   @Before
   public void setUp() {
-    GridCellAbstract[][] grid = new GridCellAbstract[2][2];
-    GridCellAbstract cell1 = grid[0][0];
-    GridCellAbstract cell2 = grid[0][1];
-    cell1.link(cell2, CardinalDirection.EAST);
+    GridCellAbstract cell1 = new GridCellHole();
   }
 
   @Test
   public void testHasNeighborToThe() {
-    cell1.hasNeighborToThe(CardinalDirection.EAST);
+
   }
 
   @Test
@@ -38,5 +34,4 @@ public class TestGridCellCard {
   public void testGetHard() {
 
   }
-
 }

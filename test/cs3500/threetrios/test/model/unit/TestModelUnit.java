@@ -117,4 +117,9 @@ public class TestModelUnit {
     model.getWinner();
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testStartGameNotEnoughCards() {
+    model.startGame(gridNoHoles, cardsSmall.subList(0, 1), referee);
+  }
+
 }

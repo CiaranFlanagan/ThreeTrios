@@ -45,6 +45,12 @@ public final class ModelBase implements Model {
     if (grid == null || cards == null || referee == null) {
       throw new IllegalArgumentException("Arguments cannot be null");
     }
+    int totalCardCells = grid.readOnly2dCellArray().length - grid.getNumHoles();
+    int requiredCards = totalCardCells + 1;
+    if (cards.size() < requiredCards) {
+      throw new IllegalArgumentException("Number of cards must be at least N + 1, where N is the " +
+              "number of card cells on the grid");
+    }
     this.referee = referee;
     this.grid = grid;
     this.currentCoach = coachRed;
@@ -54,12 +60,6 @@ public final class ModelBase implements Model {
 
   // red gets card first
   private void dealCards(List<Card> cards) {
-    int totalCardCells = grid.readOnly2dCellArray().length - grid.getNumHoles();
-    int requiredCards = totalCardCells + 1;
-    if (cards.size() < requiredCards) {
-      throw new IllegalArgumentException("Number of cards must be at least N + 1, where N is the " +
-              "number of card cells on the grid");
-    }
     List<Card> copy = new ArrayList<>(cards);
     if (cards.size() % 2 != 0) {
       throw new IllegalArgumentException("Number of cards must be even");

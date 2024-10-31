@@ -16,10 +16,10 @@ public class TestFiles {
           "grid_no_holes.txt");
   public static File GRID_CONNECTED_HOLES = new File(
           "./test/cs3500/threetrios/controller/" +
-          "grid_connected_holes.txt");
+          "grid_connected.txt");
   public static File GRID_DISC_HOLES = new File(
           "./test/cs3500/threetrios/controller/" +
-                  "grid_disc_holes.txt");
+                  "grid_disconnected.txt");
   public static File CC_SMALL = new File("./test/cs3500/threetrios/controller/" +
           "cards_small.txt");
   public static File CC_LARGE = new File(
