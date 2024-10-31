@@ -10,6 +10,7 @@ import cs3500.threetrios.model.ThreeTriosModel;
 import cs3500.threetrios.utils.LineWriter;
 import cs3500.threetrios.view.TextView;
 import cs3500.threetrios.view.ThreeTriosView;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -20,6 +21,9 @@ import java.util.Scanner;
 import static cs3500.threetrios.controller.TestFiles.CC_SMALL;
 import static cs3500.threetrios.controller.TestFiles.GRID_NO_HOLES;
 
+/**
+ * Tests for the view.
+ */
 public class TestView {
   private ThreeTriosView view;
   private ThreeTriosModel model;
@@ -52,16 +56,15 @@ public class TestView {
     view = new TextView(model);
     view.render();
 
-   String cards = LineWriter.create().toString();
-   CardConfig.scannerToCardList(new Scanner(cards));
-
+    String cards = LineWriter.create().toString();
+    CardConfig.scannerToCardList(new Scanner(cards));
   }
 
   // i want to test some model XXX
-  public void test7(){
+  public void test7() {
     Grid g = GridConfig.scannerToGrid(new Scanner("1 3\nXXX"));
     System.out.println(g);
-    LineWriter lw =LineWriter.create().line("kc 1 2 3 4").endWith("ci 4 5 6 7");
+    LineWriter lw = LineWriter.create().line("kc 1 2 3 4").endWith("ci 4 5 6 7");
     List<Card> loc = CardConfig.scannerToCardList(new Scanner(lw.toString()));
   }
 }

@@ -9,8 +9,6 @@ import org.junit.Test;
  * Tests for the Referee class.
  */
 public class TestReferee {
-  private AGridCell holecard1;
-  private AGridCell holecard2;
   private AGridCell cardCell1;
   private AGridCell cardCell2;
   private AGridCell cardCell3;
@@ -24,8 +22,8 @@ public class TestReferee {
 
   @Before
   public void setup() {
-    holecard1 = new HoleCell();
-    holecard2 = new HoleCell();
+    AGridCell holecard1 = new HoleCell();
+    AGridCell holecard2 = new HoleCell();
     cardCell1 = new CardCell();
     cardCell2 = new CardCell();
     cardCell3 = new CardCell();

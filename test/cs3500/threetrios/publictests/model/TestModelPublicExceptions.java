@@ -10,7 +10,6 @@ import cs3500.threetrios.model.CardCell;
 import cs3500.threetrios.model.DefaultReferee;
 import cs3500.threetrios.model.Grid;
 import cs3500.threetrios.model.ThreeTriosModel;
-import cs3500.threetrios.utils.Utils;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,8 +19,9 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
 
-import static cs3500.threetrios.controller.TestFiles.GRID_NO_HOLES;
-
+/**
+ * Tests for the game play and flow of the model.
+ */
 public class TestModelPublicExceptions {
   // test public beahvior
   private Grid gridNoHoles;
@@ -31,6 +31,7 @@ public class TestModelPublicExceptions {
   private List<Card> cardsLarge;
   private ThreeTriosModel model;
   private BattlePhaseReferee referee;
+
   @Before
   public void setUp() {
     model = new ThreeTriosModel();
@@ -78,7 +79,7 @@ public class TestModelPublicExceptions {
   @Test(expected = IllegalStateException.class)
   public void testPlaceCardAfterGameOver() {
     AGridCell cc = new CardCell();
-    AGridCell ccArray[] = {cc};
+    AGridCell[] ccArray = {cc};
     AGridCell[][] singleCell = {ccArray};
     Grid grid = new Grid(singleCell);
     model.startGame(grid, cardsSmall, referee);

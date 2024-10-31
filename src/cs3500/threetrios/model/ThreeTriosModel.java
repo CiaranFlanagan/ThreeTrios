@@ -18,7 +18,7 @@ public class ThreeTriosModel implements IModel {
   private Random random;
 
   public ThreeTriosModel() {
-
+    //default constructor.
   }
 
   public ThreeTriosModel(Random r) {
@@ -149,7 +149,7 @@ public class ThreeTriosModel implements IModel {
   }
 
   /**
-   *
+   * Determines the coach with more total cards.
    * @return - coach with more total cards
    * @throws IllegalStateException if grid is not full, or if cards coach is null
    */
@@ -161,7 +161,7 @@ public class ThreeTriosModel implements IModel {
         if (cell.hasCard()) {
           if (cell.getCard().getCoach() == coachRed) {
             coachRedTotal += 1;
-          } else if (cell.getCard().getCoach() == coachBlue){
+          } else if (cell.getCard().getCoach() == coachBlue) {
             coachBlueTotal += 1;
           } else {
             throw new IllegalStateException("card should have a coach if this board is full");
@@ -173,6 +173,11 @@ public class ThreeTriosModel implements IModel {
   }
 
 
+  /**
+   * Gets the grid of the game.
+   *
+   * @return the grid of the game
+   */
   public Grid getGrid() {
     return grid;
   }

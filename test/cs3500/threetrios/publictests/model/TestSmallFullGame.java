@@ -21,6 +21,9 @@ import static cs3500.threetrios.controller.TestFiles.CC_SMALL;
 import static cs3500.threetrios.controller.TestFiles.GRID_NO_HOLES;
 
 
+/**
+ * Tests for the game play and flow of the model.
+ */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestSmallFullGame {
   // test public beahvior
@@ -35,8 +38,8 @@ public class TestSmallFullGame {
 
   @Test
   public void P1Start() {
-      model.startGame(GridConfig.scannerToGrid(Utils.safeFileToScanner(GRID_NO_HOLES)),
-              CardConfig.scannerToCardList(Utils.safeFileToScanner(CC_SMALL)), referee);
+    model.startGame(GridConfig.scannerToGrid(Utils.safeFileToScanner(GRID_NO_HOLES)),
+            CardConfig.scannerToCardList(Utils.safeFileToScanner(CC_SMALL)), referee);
     // check coach red is actually a red coach
     red = model.getCurrentCoach();
     Assert.assertEquals(red.getColor(), Coach.Color.Red);
@@ -60,7 +63,7 @@ public class TestSmallFullGame {
     blue = model.getCurrentCoach();
     Assert.assertEquals(blue.getColor(), Coach.Color.Blue);
     // make sure that we switch coaches properly
-    model.placeCard(0, 0,  1); // blue plays so now board is ? B _
+    model.placeCard(0, 0, 1); // blue plays so now board is ? B _
     state = model.getGrid().arrayRepr();
     Assert.assertEquals(state[0][1].getCard().getCoach(), blue);
     // left vs mid = 3 < 9 so left loses

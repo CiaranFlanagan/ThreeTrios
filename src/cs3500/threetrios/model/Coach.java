@@ -3,8 +3,6 @@ package cs3500.threetrios.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
-
 /**
  * Represents a player in the game.
  */
@@ -12,6 +10,9 @@ public class Coach {
 
   private final Color color;
 
+  /**
+   * Represents the color of a player.
+   */
   public enum Color {
     Red, Blue;
 
@@ -63,7 +64,7 @@ public class Coach {
   }
 
   /**
-   *
+   * Removes a card from the coach's hand.
    * @param idx - the index of the card to remove
    * @return the card that was removed
    */
@@ -73,13 +74,6 @@ public class Coach {
     }
     return hand.remove(idx);
   }
-
-  /**
-   * Initializes a coach with given [hand].
-   *
-   * @param name - the name of the player
-   * @param hand - the hand of cards
-   */
 
   /**
    * Adds a card to the coach's hand.

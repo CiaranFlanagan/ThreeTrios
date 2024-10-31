@@ -86,6 +86,10 @@ public class Grid {
     return true;
   }
 
+  /**
+   * The number of holes in this.
+   * @return - the number of holes in this
+   */
   public int getNumHoles() {
     return this.numHoles;
   }

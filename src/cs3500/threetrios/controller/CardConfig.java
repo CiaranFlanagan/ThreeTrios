@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class CardConfig {
 
   /**
-   * to take a scanner and create a list of cards
+   * to take a scanner and create a list of cards.
    * @param sc - the scanner
    * @return a list of cards
    */

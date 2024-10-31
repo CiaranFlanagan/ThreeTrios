@@ -1,13 +1,5 @@
 package cs3500.threetrios.model;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import java.io.File;
-import java.util.List;
-
-import cs3500.threetrios.controller.CardConfig;
-import cs3500.threetrios.controller.GridConfig;
 
 /**
  * Tests for the ThreeTriosModel class.

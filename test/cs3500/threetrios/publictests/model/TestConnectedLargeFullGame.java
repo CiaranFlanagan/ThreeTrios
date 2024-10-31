@@ -53,6 +53,6 @@ public class TestConnectedLargeFullGame {
    * P2FirstPlacedCard: Red places the first card on the grid.
    * Verifies that the card is placed correctly without any battles occurring.
    */
-  @Test
+
 
 }

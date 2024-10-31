@@ -20,7 +20,8 @@ public class TestBoardConfig {
       System.out.println(GridConfig.scannerToGrid(new Scanner(TestFiles.GRID_ASSN_HARD)));
       String expected = LineWriter.create().line("5 7").line("CCXXXXC").line("CXCXXXC")
               .line("CXXCXXC").line("CXXXCXC").line("CXXXXCC").endWith("CXXXXCC").toString();
-      Assert.assertEquals(expected, GridConfig.scannerToGrid(new Scanner(TestFiles.GRID_ASSN_HARD)));
+      Assert.assertEquals(expected,
+              GridConfig.scannerToGrid(new Scanner(TestFiles.GRID_ASSN_HARD)));
     } catch (FileNotFoundException ex) {
       Assert.fail("file not found");
     }

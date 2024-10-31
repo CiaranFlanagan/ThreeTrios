@@ -1,8 +1,5 @@
 package cs3500.threetrios.utils;
 
-import java.io.File;
-import java.io.FileWriter;
-
 /**
  * Represents a player in the game.
  */
@@ -12,6 +9,7 @@ public class LineWriter {
   public LineWriter() {
     sb = new StringBuilder();
   }
+
   public static LineWriter create() {
     return new LineWriter();
   }

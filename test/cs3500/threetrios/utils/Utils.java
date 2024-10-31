@@ -33,6 +33,12 @@ public class Utils {
     return new Card(name, map);
   }
 
+  /**
+   * Converts a file to a scanner.
+   *
+   * @param f the file
+   * @return the scanner
+   */
   public static Scanner safeFileToScanner(File f) {
     try {
       return new Scanner(f);
