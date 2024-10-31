@@ -7,7 +7,7 @@ import org.junit.Test;
 import cs3500.threetrios.controller.ConfigCard;
 import cs3500.threetrios.controller.ConfigGrid;
 import cs3500.threetrios.model.GridCellAbstract;
-import cs3500.threetrios.model.IReferee;
+import cs3500.threetrios.model.Referee;
 import cs3500.threetrios.model.Card;
 import cs3500.threetrios.model.Coach;
 import cs3500.threetrios.model.RefereeDefault;
@@ -18,7 +18,7 @@ import static cs3500.threetrios.controller.TestFiles.GRID_CONNECTED_HOLES;
 
 public class TestFullGameConnected {
   private static ModelBase model = new ModelBase();
-  private static IReferee referee = new RefereeDefault();
+  private static Referee referee = new RefereeDefault();
   private static Coach red;
   private static Coach blue;
   private static GridCellAbstract[][] state;

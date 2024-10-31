@@ -13,9 +13,8 @@ public interface Model {
    * @param grid the grid
    * @param cards the cards
    * @param referee the referee
-   * @throws IllegalArgumentException if the grid is null
    */
-  void startGame(Grid grid, List<Card> cards, IReferee referee);
+  void startGame(Grid grid, List<Card> cards, Referee referee);
 
   /**
    * Places a card on the grid for the given coach.
@@ -24,7 +23,6 @@ public interface Model {
    * @param row represents the row
    * @param col represents the col
    *
-
    */
   void placeCard(int idx, int row, int col);
 
@@ -54,6 +52,10 @@ public interface Model {
    */
   Coach getWinner();
 
+  /**
+   * Returns the grid
+   * @return
+   */
   Grid getGrid();
 
 }

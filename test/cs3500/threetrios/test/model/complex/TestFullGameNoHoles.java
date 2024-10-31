@@ -5,7 +5,7 @@ package cs3500.threetrios.test.model.complex;
 import cs3500.threetrios.controller.ConfigCard;
 import cs3500.threetrios.controller.ConfigGrid;
 import cs3500.threetrios.controller.TestFiles;
-import cs3500.threetrios.model.IReferee;
+import cs3500.threetrios.model.Referee;
 import cs3500.threetrios.model.Card;
 import cs3500.threetrios.model.Coach;
 import cs3500.threetrios.model.RefereeDefault;
@@ -28,7 +28,7 @@ import static cs3500.threetrios.controller.TestFiles.GRID_NO_HOLES;
 public class TestFullGameNoHoles {
   // test public beahvior
   private static ModelBase model = new ModelBase();
-  private static IReferee referee = new RefereeDefault();
+  private static Referee referee = new RefereeDefault();
   private static Coach red;
   private static Coach blue;
   private static GridCellReadOnly[][] state;

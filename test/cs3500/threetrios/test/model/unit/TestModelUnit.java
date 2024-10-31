@@ -4,7 +4,7 @@ import cs3500.threetrios.controller.TestFiles;
 import cs3500.threetrios.controller.ConfigCard;
 import cs3500.threetrios.controller.ConfigGrid;
 import cs3500.threetrios.model.GridCellAbstract;
-import cs3500.threetrios.model.IReferee;
+import cs3500.threetrios.model.Referee;
 import cs3500.threetrios.model.Card;
 import cs3500.threetrios.model.GridCellCard;
 import cs3500.threetrios.model.RefereeDefault;
@@ -30,7 +30,7 @@ public class TestModelUnit {
   private List<Card> cardsSmall;
   private List<Card> cardsLarge;
   private ModelBase model;
-  private IReferee referee;
+  private Referee referee;
 
   @Before
   public void setUp() {

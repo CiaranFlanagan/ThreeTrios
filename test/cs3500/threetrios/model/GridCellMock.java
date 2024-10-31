@@ -9,7 +9,7 @@ class GridCellMock extends GridCellAbstract {
   }
 
   @Override
-  protected void acceptBattlePhase(IReferee battlePhase) {
+  protected void acceptBattlePhase(Referee battlePhase) {
     throw new IllegalStateException("not impl");
   }
 

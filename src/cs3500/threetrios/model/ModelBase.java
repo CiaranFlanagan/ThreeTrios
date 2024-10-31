@@ -7,25 +7,27 @@ import java.util.Random;
 
 /**
  * to represent a model of the three trios game.
- * INVARIANT: getCurrentCoach().toString() will always be one of: "Red" or "Blue"
+ * INVARIANT: getCurrentCoach().toString() will always be one of: "Red" or "Blue".
  */
-public final class ModelBase implements Model {
-  private Coach coachRed;
-  private Coach coachBlue;
-  private Coach currentCoach;
+public final class ModelBase extends ModelAbstract {
   private boolean gameStarted;
-  private IReferee referee;
-  private Grid grid;
+  private Referee referee;
   private Random random;
 
+  /**
+   * constructor.
+   */
   public ModelBase() {
-    //default constructor.
-    this.coachRed = new Coach(Coach.Color.Red); // we'll pass in the names later
-    this.coachBlue = new Coach(Coach.Color.Blue);
+    super();
+    // default constructor
   }
 
+  /**
+   * constructor.
+   * @param r - a random to help randomize dealing cards.
+   */
   public ModelBase(Random r) {
-    this();
+    super();
     this.random = r;
   }
 
@@ -38,22 +40,23 @@ public final class ModelBase implements Model {
   }
 
   @Override
-  public void startGame(Grid grid, List<Card> cards, IReferee referee) {
+  public void startGame(Grid grid, List<Card> cards, Referee referee) {
     if (gameStarted) {
       throw new IllegalStateException("Game has already started");
     }
     if (grid == null || cards == null || referee == null) {
       throw new IllegalArgumentException("Arguments cannot be null");
     }
-    int totalCardCells = grid.readOnly2dCellArray().length - grid.getNumHoles();
+    int totalCardCells =
+            grid.readOnly2dCellArray().length * grid.readOnly2dCellArray()[0].length
+                    - grid.getNumHoles();
     int requiredCards = totalCardCells + 1;
     if (cards.size() < requiredCards) {
       throw new IllegalArgumentException("Number of cards must be at least N + 1, where N is the " +
               "number of card cells on the grid");
     }
+    super.updateGrid(grid);
     this.referee = referee;
-    this.grid = grid;
-    this.currentCoach = coachRed;
     this.gameStarted = true;
     dealCards(cards);
   }
@@ -67,13 +70,14 @@ public final class ModelBase implements Model {
     if (random != null) {
       Collections.shuffle(copy);
     }
+
     for (int i = 0; i < copy.size(); i += 2) {
       Card curRedCard = copy.get(i);
       curRedCard.setCoach(coachRed);
       Card curBlueCard = copy.get(i + 1);
       curBlueCard.setCoach(coachBlue);
-      coachRed.addCard(curRedCard);
-      coachBlue.addCard(curBlueCard);
+      addCardTo(coachRed, curRedCard);
+      addCardTo(coachBlue, curBlueCard);
     }
   }
 
@@ -92,8 +96,7 @@ public final class ModelBase implements Model {
       throw new IllegalStateException("Game is over");
     }
     Card curCard = currentCoach.removeCardFromHand(idx);
-    GridCellAbstract relevantCell = grid.placeCardOn(row, col, curCard);
-    System.out.println("relevant cell" + relevantCell.getCard());
+    GridCellAbstract relevantCell = setGridCardAt(row, col, curCard);
     referee.refereeBattlePhase(relevantCell);
   }
 
@@ -114,8 +117,10 @@ public final class ModelBase implements Model {
   public void nextCoachTurn() {
     if (this.currentCoach == coachRed) {
       this.currentCoach = coachBlue;
-    } else {
+    } else if (this.currentCoach == coachBlue){
       this.currentCoach = coachRed;
+    } else {
+      throw new IllegalStateException("model mishandled coaches");
     }
   }
 
@@ -171,15 +176,5 @@ public final class ModelBase implements Model {
       }
     }
     return coachRedTotal > coachBlueTotal ? coachRed : coachBlue; // ternary operator
-  }
-
-
-  /**
-   * Gets the grid of the game.
-   *
-   * @return the grid of the game
-   */
-  public Grid getGrid() {
-    return grid;
   }
 }

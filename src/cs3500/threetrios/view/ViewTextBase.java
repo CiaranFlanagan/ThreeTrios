@@ -63,8 +63,8 @@ public class ViewTextBase implements View {
     StringBuilder sb = new StringBuilder();
     Coach curCoach = model.getCurrentCoach();
     sb.append("Player: ").append(curCoach.toString().toUpperCase()).append("\n");
-    Grid grid = model.getGrid();
-    for (GridCellReadOnly[] row : grid.readOnly2dCellArray()) {
+    GridCellReadOnly[][] grid = model.getGrid().readOnly2dCellArray();
+    for (GridCellReadOnly[] row : grid) {
       for (GridCellReadOnly cell : row) {
         if (cell instanceof GridCellHole) {
           sb.append(" ");

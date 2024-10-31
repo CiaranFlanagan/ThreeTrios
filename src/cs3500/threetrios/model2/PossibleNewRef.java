@@ -3,16 +3,16 @@ package cs3500.threetrios.model2;
 import cs3500.threetrios.model.Card;
 import cs3500.threetrios.model.Coach;
 import cs3500.threetrios.model.GridCellAbstract;
-import cs3500.threetrios.model.IReferee;
 import cs3500.threetrios.model.GridCellCard;
 import cs3500.threetrios.model.GridCellHole;
+import cs3500.threetrios.model.RefereeAbstract;
 
 /**
  * Represents a possible new referee to make new rules.
  * The point of this class is to show that because of the default methods, this class
  * has the tools it needs to be extensible.
  */
-public class PossibleNewRef implements IReferee {
+public class PossibleNewRef extends RefereeAbstract {
   /**
    * To referee a's battle phase.
    *
@@ -44,4 +44,6 @@ public class PossibleNewRef implements IReferee {
   public void refereeBattlePhase(GridCellHole h) {
 
   }
+
 }
+

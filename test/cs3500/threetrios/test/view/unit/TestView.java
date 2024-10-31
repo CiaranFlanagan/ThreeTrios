@@ -3,7 +3,7 @@ package cs3500.threetrios.test.view.unit;
 import cs3500.threetrios.controller.ConfigCard;
 import cs3500.threetrios.controller.ConfigGrid;
 import cs3500.threetrios.controller.TestFiles;
-import cs3500.threetrios.model.IReferee;
+import cs3500.threetrios.model.Referee;
 import cs3500.threetrios.model.RefereeDefault;
 import cs3500.threetrios.model.Grid;
 import cs3500.threetrios.model.Card;
@@ -33,7 +33,7 @@ public class TestView {
   private ModelBase model;
 
   private StringBuilder log;
-  private final IReferee ref = new RefereeDefault();
+  private final Referee ref = new RefereeDefault();
 
   @Before
   public void setUp() {

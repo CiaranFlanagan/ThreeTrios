@@ -4,11 +4,13 @@ package cs3500.threetrios.model;
  * to represent the grid-shaped board of the game three-trios.
  */
 public final class Grid {
-  private final GridCellAbstract[][] grid; // first index is rows, second is columns, obvious index at 0
+  private final GridCellAbstract[][] grid; // first index is rows, second is columns, obvious
+  // index at 0
   private final int numHoles;
 
   /**
    * Constructs a Grid.
+   *
    * @param grid - the grid to construct
    */
   public Grid(GridCellAbstract[][] grid) {
@@ -50,7 +52,7 @@ public final class Grid {
 
   // to place [card] at [row], [col] on this
   // index at 0
-  public GridCellAbstract placeCardOn(int row, int col, Card card) {
+  GridCellAbstract placeCardOn(int row, int col, Card card) {
     if (row < 0 || col < 0) {
       throw new IllegalArgumentException("Rows and Cols must be positive integers");
     }
@@ -73,6 +75,7 @@ public final class Grid {
 
   /**
    * Whether all cells in this grid are filled with cards.
+   *
    * @return - whether all card cells in this grid are filled with cards
    */
   public boolean isFull() {
@@ -88,6 +91,7 @@ public final class Grid {
 
   /**
    * The number of holes in this.
+   *
    * @return - the number of holes in this
    */
   public int getNumHoles() {
@@ -96,6 +100,7 @@ public final class Grid {
 
   /**
    * The grid of cards with no cards represented as null.
+   *
    * @return - the grid of this.
    * @implNote - possible effect can still occur to cells if casting is used, hack with caution.
    */

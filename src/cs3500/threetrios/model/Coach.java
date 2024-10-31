@@ -68,7 +68,7 @@ public final class Coach {
    * @param idx - the index of the card to remove
    * @return the card that was removed
    */
-  public Card removeCardFromHand(int idx) {
+  Card removeCardFromHand(int idx) {
     if (idx >= hand.size() || idx < 0) {
       throw new IllegalArgumentException("Bad index");
     }
@@ -80,7 +80,7 @@ public final class Coach {
    *
    * @param card the card to add
    */
-  public void addCard(Card card) {
+  void addCard(Card card) {
     if (card == null) {
       throw new IllegalArgumentException("Card cannot be null");
     }
