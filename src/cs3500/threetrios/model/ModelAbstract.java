@@ -1,7 +1,7 @@
 package cs3500.threetrios.model;
 
 /*
-INVARIANT: getCurrentCoach().toString() will always be one of: "Red" or "Blue".
+To abstract and bundle grid and coach mutation from models.
  */
 public abstract class ModelAbstract implements Model {
   protected Grid grid;

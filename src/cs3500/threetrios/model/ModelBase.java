@@ -7,7 +7,7 @@ import java.util.Random;
 
 /**
  * to represent a model of the three trios game.
- * INVARIANT: getCurrentCoach().toString() will always be one of: "Red" or "Blue".
+ * Invariant: getCurrentCoach() is never null.
  */
 public final class ModelBase extends ModelAbstract {
   private boolean gameStarted;
@@ -81,13 +81,7 @@ public final class ModelBase extends ModelAbstract {
     }
   }
 
-  /**
-   * Places a card on the grid for the given coach.
-   *
-   * @param idx   index of current coach's hand
-   * @param row   the row index
-   * @param col   the column index
-   */
+  @Override
   public void placeCard(int idx, int row, int col) {
     if (!gameStarted) {
       throw new IllegalStateException("Game has not started yet");
@@ -98,23 +92,16 @@ public final class ModelBase extends ModelAbstract {
     Card curCard = currentCoach.removeCardFromHand(idx);
     GridCellAbstract relevantCell = setGridCardAt(row, col, curCard);
     referee.refereeBattlePhase(relevantCell);
+    nextCoachTurn();
   }
 
-  /**
-   * Gets the current coach.
-   *
-   * @return the current coach
-   */
   @Override
   public Coach getCurrentCoach() {
     return this.currentCoach;
   }
 
-  /**
-   * Advances to the next coach's turn.
-   */
-  @Override
-  public void nextCoachTurn() {
+
+  private void nextCoachTurn() {
     if (this.currentCoach == coachRed) {
       this.currentCoach = coachBlue;
     } else if (this.currentCoach == coachBlue){
@@ -124,11 +111,7 @@ public final class ModelBase extends ModelAbstract {
     }
   }
 
-  /**
-   * Checks if the game is over.
-   *
-   * @return true if the game is over, false otherwise
-   */
+
   @Override
   public boolean isGameOver() {
     if (!gameStarted) {
@@ -139,11 +122,6 @@ public final class ModelBase extends ModelAbstract {
     return grid.isFull();
   }
 
-  /**
-   * Gets the winner of the game.
-   *
-   * @return the winning coach, or null if it's a tie
-   */
   @Override
   public Coach getWinner() {
     if (!isGameOver()) {

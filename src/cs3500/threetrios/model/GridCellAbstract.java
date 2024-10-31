@@ -32,6 +32,7 @@ public abstract class GridCellAbstract implements GridCellReadOnly {
   public boolean hasNeighborToThe(CardinalDirection direction) {
     return this.neighbors.get(direction) != null;
   }
+
   /**
    * To get the neighbor to the [N/S/E/W].
    *

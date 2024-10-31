@@ -21,6 +21,7 @@ public class ViewTextBase implements View {
 
   /**
    * Constructs a textual view of the game.
+   *
    * @param model the model
    */
   public ViewTextBase(Model model) {
@@ -32,6 +33,7 @@ public class ViewTextBase implements View {
 
   /**
    * Constructs a textual view of the game.
+   *
    * @param model the model
    */
   public ViewTextBase(Model model, Appendable appendable) {
@@ -57,6 +59,7 @@ public class ViewTextBase implements View {
 
   /**
    * Renders the game as a string.
+   *
    * @return the game as a string
    */
   private String renderString() {
@@ -82,15 +85,11 @@ public class ViewTextBase implements View {
     }
     sb.append("Hand:\n");
     for (Card card : curCoach.getHand()) {
-      sb.append(card.getName()).append(" ");
-      Map<CardinalDirection, AttackValue> attackValues = card.getAttackValues();
-      for (int i = 0; i < CardinalDirection.values().length; i++) {
-        sb.append(attackValues.get(CardinalDirection.values()[i]));
-        if (i != CardinalDirection.values().length - 1) {
-          sb.append(" ");
-        }
+      String cardString = card.getName();
+      for (CardinalDirection direction : CardinalDirection.values()) {
+        cardString += " " + card.getAttackValue(direction).toString();
       }
-      sb.append("\n");
+      sb.append(cardString + "\n");
     }
     return sb.toString().stripTrailing();
   }

@@ -1,8 +1,8 @@
 package cs3500.threetrios.model;
 
 /**
- * To export methods pertaining to the mutation of Cards. Necessary for certain implementations of
- * Three trios.
+ * To abstract and bundle side effect of cards for Referee's. Necessary for certain
+ * implementations of Three trios.
  */
 public abstract class RefereeAbstract implements Referee {
   /**

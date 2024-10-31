@@ -59,7 +59,6 @@ public class TestFullGameNoHoles {
 
   @Test
   public void P3SecondPlacedCard() {
-    model.nextCoachTurn();
     blue = model.getCurrentCoach();
     Assert.assertEquals(blue.getColor(), Coach.Color.Blue);
     // make sure that we switch coaches properly
@@ -74,7 +73,6 @@ public class TestFullGameNoHoles {
 
   @Test
   public void P4LastPlacedCard() {
-    model.nextCoachTurn();
     model.placeCard(0, 0, 2); // red plays ? ? R
     state = model.getGrid().readOnly2dCellArray();
     // right has av's of A
