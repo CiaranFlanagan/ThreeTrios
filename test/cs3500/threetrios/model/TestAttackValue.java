@@ -12,25 +12,25 @@ public class TestAttackValue {
    */
   @Test
   public void TestFromString_ValidInputs() {
-    Assert.assertEquals("fromString(\"1\") should return ONE",
+    Assert.assertEquals("1 => ONE",
             AttackValue.ONE, AttackValue.fromString("1"));
-    Assert.assertEquals("fromString(\"2\") should return TWO",
+    Assert.assertEquals("2 => TWO",
             AttackValue.TWO, AttackValue.fromString("2"));
-    Assert.assertEquals("fromString(\"3\") should return THREE",
+    Assert.assertEquals("3 => THREE",
             AttackValue.THREE, AttackValue.fromString("3"));
-    Assert.assertEquals("fromString(\"4\") should return FOUR",
+    Assert.assertEquals("4 => FOUR",
             AttackValue.FOUR, AttackValue.fromString("4"));
-    Assert.assertEquals("fromString(\"5\") should return FIVE",
+    Assert.assertEquals("5 => FIVE",
             AttackValue.FIVE, AttackValue.fromString("5"));
-    Assert.assertEquals("fromString(\"6\") should return SIX",
+    Assert.assertEquals("6 => SIX",
             AttackValue.SIX, AttackValue.fromString("6"));
-    Assert.assertEquals("fromString(\"7\") should return SEVEN",
+    Assert.assertEquals("7 => SEVEN",
             AttackValue.SEVEN, AttackValue.fromString("7"));
-    Assert.assertEquals("fromString(\"8\") should return EIGHT",
+    Assert.assertEquals("8 => EIGHT",
             AttackValue.EIGHT, AttackValue.fromString("8"));
-    Assert.assertEquals("fromString(\"9\") should return NINE",
+    Assert.assertEquals("9 => NINE",
             AttackValue.NINE, AttackValue.fromString("9"));
-    Assert.assertEquals("fromString(\"A\") should return A",
+    Assert.assertEquals("10 => A",
             AttackValue.A, AttackValue.fromString("A"));
   }
 

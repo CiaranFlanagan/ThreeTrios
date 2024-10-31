@@ -15,7 +15,7 @@ import java.util.Scanner;
 /**
  * To convert a file to a list of cards.
  */
-public class CardConfig {
+public class ConfigCard {
 
   /**
    * to take a scanner and create a list of cards.

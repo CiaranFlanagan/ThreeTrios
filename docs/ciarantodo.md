@@ -1,5 +1,0 @@
-- ### Todo
-  - TextView
-  - Testing public methods
-  - finish implementation of model
-  - style

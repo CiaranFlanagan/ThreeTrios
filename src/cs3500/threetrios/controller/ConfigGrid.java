@@ -1,9 +1,9 @@
 package cs3500.threetrios.controller;
 
-import cs3500.threetrios.model.AGridCell;
-import cs3500.threetrios.model.CardCell;
+import cs3500.threetrios.model.GridCellAbstract;
+import cs3500.threetrios.model.GridCellCard;
 import cs3500.threetrios.model.Grid;
-import cs3500.threetrios.model.HoleCell;
+import cs3500.threetrios.model.GridCellHole;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -11,7 +11,7 @@ import java.util.Scanner;
 /**
  * To convert a file to a GridBoard.
  */
-public class GridConfig {
+public class ConfigGrid {
   /**
    * take a scanner and make a grid.
    * @param sc - the scanner
@@ -22,12 +22,12 @@ public class GridConfig {
       throw new IllegalArgumentException("null scanner");
     }
     try {
-      AGridCell[][] arr = null;
+      GridCellAbstract[][] arr = null;
       while (sc.hasNext()) {
         int numRows = sc.nextInt();
         int numCols = sc.nextInt();
         Scanner getLine = new Scanner(sc.nextLine());
-        arr = new AGridCell[numRows][numCols];
+        arr = new GridCellAbstract[numRows][numCols];
         for (int curRow = 0; curRow < numRows; curRow++) {
           String rowString = sc.next();
           for (int curCol = 0; curCol < numCols; curCol++) {
@@ -46,11 +46,11 @@ public class GridConfig {
    * @param s - the string
    * @return - a board cell
    */
-  private static AGridCell stringToBoardCell(String s) {
+  private static GridCellAbstract stringToBoardCell(String s) {
     if (s.equals("C")) {
-      return new CardCell();
+      return new GridCellCard();
     } else if (s.equals("X")) {
-      return new HoleCell();
+      return new GridCellHole();
     } else {
       throw new IllegalArgumentException("must be C or X; given: " + s);
     }

@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Represents the game model.
  */
-public interface IModel {
+public interface Model {
   /**
    * Starts the game with the given card index, grid col, and grid row.
    *
@@ -15,7 +15,7 @@ public interface IModel {
    * @param referee the referee
    * @throws IllegalArgumentException if the grid is null
    */
-  void startGame(Grid grid, List<Card> cards, BattlePhaseReferee referee);
+  void startGame(Grid grid, List<Card> cards, IReferee referee);
 
   /**
    * Places a card on the grid for the given coach.

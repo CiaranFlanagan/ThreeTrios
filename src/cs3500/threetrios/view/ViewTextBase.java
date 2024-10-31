@@ -3,27 +3,27 @@ package cs3500.threetrios.view;
 import java.io.IOException;
 import java.util.Map;
 
-import cs3500.threetrios.model.AGridCell;
 import cs3500.threetrios.model.AttackValue;
 import cs3500.threetrios.model.Card;
 import cs3500.threetrios.model.CardinalDirection;
 import cs3500.threetrios.model.Coach;
 import cs3500.threetrios.model.Grid;
-import cs3500.threetrios.model.HoleCell;
-import cs3500.threetrios.model.IModel;
+import cs3500.threetrios.model.GridCellHole;
+import cs3500.threetrios.model.GridCellReadOnly;
+import cs3500.threetrios.model.Model;
 
 /**
  * Represents a textual view of the game.
  */
-public class TextView implements ThreeTriosView {
-  private final IModel model;
+public class ViewTextBase implements View {
+  private final Model model;
   private Appendable log;
 
   /**
    * Constructs a textual view of the game.
    * @param model the model
    */
-  public TextView(IModel model) {
+  public ViewTextBase(Model model) {
     if (model == null) {
       throw new IllegalArgumentException("Model cannot be null");
     }
@@ -34,7 +34,7 @@ public class TextView implements ThreeTriosView {
    * Constructs a textual view of the game.
    * @param model the model
    */
-  public TextView(IModel model, Appendable appendable) {
+  public ViewTextBase(Model model, Appendable appendable) {
     if (model == null) {
       throw new IllegalArgumentException("Model cannot be null");
     }
@@ -64,9 +64,9 @@ public class TextView implements ThreeTriosView {
     Coach curCoach = model.getCurrentCoach();
     sb.append("Player: ").append(curCoach.toString().toUpperCase()).append("\n");
     Grid grid = model.getGrid();
-    for (AGridCell[] row : grid.arrayRepr()) {
-      for (AGridCell cell : row) {
-        if (cell instanceof HoleCell) {
+    for (GridCellReadOnly[] row : grid.readOnly2dCellArray()) {
+      for (GridCellReadOnly cell : row) {
+        if (cell instanceof GridCellHole) {
           sb.append(" ");
           //changed has card from protected to public
         } else if (!cell.hasCard()) {

@@ -1,8 +1,7 @@
-package cs3500.threetrios.publictests.controller;
+package cs3500.threetrios.test.controller.unit;
 
-import cs3500.threetrios.controller.CardConfig;
+import cs3500.threetrios.controller.ConfigCard;
 import cs3500.threetrios.model.Card;
-import cs3500.threetrios.utils.Utils;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,11 +16,13 @@ import java.util.List;
 public class TestCardConfig {
   @Test
   public void test1() {
-    List<Card> cards = CardConfig.scannerToCardList(Utils.safeFileToScanner(TestFiles.CC_SMALL))  ;
+    List<Card> cards = ConfigCard.scannerToCardList(TestFiles.safeFileToScanner(TestFiles.CC_SMALL))  ;
     System.out.println(cards);
     //<TTCard: bob 1 2 3 A>, <TTCard: kc A 4 7 9>, <TTCard: ciaran 1 2 3 4>
-    String expected = LineWriter.create().endWith("[<TTCard: bob 1 2 3 A>, <TTCard: kc A 4 7 9>," +
-            " <TTCard: ciaran 1 2 3 4>]").toString();
+    String expected = LineWriter.create().endWith("[<TTCard: bob 1 1 1 1>, " +
+            "<TTCard: kc 5 5 5 5>," +
+            " <TTCard: zeke A A A A>, " +
+    "<TTCard: ciaran 1 1 1 1>]").toString();
     Assert.assertEquals(expected, cards.toString());
   }
 

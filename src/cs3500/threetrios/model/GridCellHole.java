@@ -3,12 +3,12 @@ package cs3500.threetrios.model;
 /**
  * to represent a cell that can hold no cards in three trios.
  */
-public class HoleCell extends AGridCell {
+public class GridCellHole extends GridCellAbstract {
 
   /**
    * constructor.
    */
-  public HoleCell() {
+  public GridCellHole() {
     super();
   }
 
@@ -20,7 +20,7 @@ public class HoleCell extends AGridCell {
 
 
   @Override
-  protected void acceptBattlePhase(BattlePhaseReferee battlePhase) {
+  protected void acceptBattlePhase(IReferee battlePhase) {
     battlePhase.refereeBattlePhase(this);
   }
 }

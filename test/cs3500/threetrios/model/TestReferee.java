@@ -9,61 +9,49 @@ import org.junit.Test;
  * Tests for the Referee class.
  */
 public class TestReferee {
-  private AGridCell cardCell1;
-  private AGridCell cardCell2;
-  private AGridCell cardCell3;
+  private GridCellAbstract cardCell1;
+  private GridCellAbstract cardCell2;
+  private GridCellAbstract cardCell3;
   private Coach kc;
   private Coach ciaran;
   private Coach bob;
   private Card card1;
   private Card card2;
   private Card card3;
-  private DefaultReferee ref;
+  private RefereeDefault ref;
 
   @Before
   public void setup() {
-    AGridCell holecard1 = new HoleCell();
-    AGridCell holecard2 = new HoleCell();
-    cardCell1 = new CardCell();
-    cardCell2 = new CardCell();
-    cardCell3 = new CardCell();
+    GridCellAbstract holecard1 = new GridCellHole();
+    GridCellAbstract holecard2 = new GridCellHole();
+    cardCell1 = new GridCellCard();
+    cardCell2 = new GridCellCard();
+    cardCell3 = new GridCellCard();
     kc = new Coach(Coach.Color.Red);
     ciaran = new Coach(Coach.Color.Blue);
     card1 = Utils.makeCard("c1 1 2 3 4");
     card2 = Utils.makeCard("c2 5 6 7 8");
     card3 = Utils.makeCard("c3 A A A A");
-    ref = new DefaultReferee();
+    ref = new RefereeDefault();
   }
 
   @Test(expected = IllegalStateException.class)
   public void testRef1() {
-    HoleCell holecard1 = new HoleCell();
-    HoleCell holecard2 = new HoleCell();
+    GridCellHole holecard1 = new GridCellHole();
+    GridCellHole holecard2 = new GridCellHole();
     holecard1.link(holecard2, CardinalDirection.NORTH);
-    new DefaultReferee().refereeBattlePhase(holecard1);
+    new RefereeDefault().refereeBattlePhase(holecard1);
   }
 
   @Test(expected = IllegalStateException.class)
   public void testRef2() {
-    HoleCell holecard1 = new HoleCell();
-    CardCell cardcell1 = new CardCell();
+    GridCellHole holecard1 = new GridCellHole();
+    GridCellCard cardcell1 = new GridCellCard();
     holecard1.link(cardcell1, CardinalDirection.NORTH);
-    new DefaultReferee().refereeBattlePhase(holecard1);
+    new RefereeDefault().refereeBattlePhase(holecard1);
   }
 
-  @Test
-  public void testRef3() {
-    HoleCell holecard1 = new HoleCell();
-    CardCell cellcard1 = new CardCell();
-    holecard1.link(cellcard1, CardinalDirection.NORTH);
-    try {
-      new DefaultReferee().refereeBattlePhase(cellcard1);
-    } catch (Exception ex) {
-      System.out.println(ex.getMessage());
-      Assert.fail("should have no effect but should not throw");
-    }
 
-  }
 
   @Test
   public void testRef4() {

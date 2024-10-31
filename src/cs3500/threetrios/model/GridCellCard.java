@@ -1,15 +1,15 @@
 package cs3500.threetrios.model;
 
 /**
- * to represent a cell that can hold a card on a grid in three trios.
+ * To represent a cell that can hold a card on a grid in three trios.
  */
-public class CardCell extends AGridCell {
+public class GridCellCard extends GridCellAbstract {
   private Card card;
 
   /**
    * constructor.
    */
-  public CardCell() {
+  public GridCellCard() {
     super();
     this.card = null;
   }
@@ -39,7 +39,7 @@ public class CardCell extends AGridCell {
   }
 
   @Override
-  protected void acceptBattlePhase(BattlePhaseReferee battlePhase) {
+  protected void acceptBattlePhase(IReferee battlePhase) {
     battlePhase.refereeBattlePhase(this);
   }
 

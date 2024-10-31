@@ -1,6 +1,6 @@
 package cs3500.threetrios.model;
 
-class GridCellMockTestLinks extends AGridCell {
+class GridCellMock extends GridCellAbstract {
 
 
   @Override
@@ -9,7 +9,7 @@ class GridCellMockTestLinks extends AGridCell {
   }
 
   @Override
-  protected void acceptBattlePhase(BattlePhaseReferee battlePhase) {
+  protected void acceptBattlePhase(IReferee battlePhase) {
     throw new IllegalStateException("not impl");
   }
 

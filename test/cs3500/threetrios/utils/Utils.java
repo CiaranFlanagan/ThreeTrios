@@ -6,8 +6,6 @@ import cs3500.threetrios.model.CardinalDirection;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -31,20 +29,6 @@ public class Utils {
     map.put(CardinalDirection.EAST, AttackValue.fromString(sc.next()));
     map.put(CardinalDirection.WEST, AttackValue.fromString(sc.next()));
     return new Card(name, map);
-  }
-
-  /**
-   * Converts a file to a scanner.
-   *
-   * @param f the file
-   * @return the scanner
-   */
-  public static Scanner safeFileToScanner(File f) {
-    try {
-      return new Scanner(f);
-    } catch (FileNotFoundException ex) {
-      throw new RuntimeException("file not found, check TestFiles");
-    }
   }
 
   @Test

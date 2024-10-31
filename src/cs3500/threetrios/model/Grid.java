@@ -4,14 +4,14 @@ package cs3500.threetrios.model;
  * to represent the grid-shaped board of the game three-trios.
  */
 public class Grid {
-  private final AGridCell[][] grid; // first index is rows, second is columns, obvious index at 0
+  private final GridCellAbstract[][] grid; // first index is rows, second is columns, obvious index at 0
   private final int numHoles;
 
   /**
    * Constructs a Grid.
    * @param grid - the grid to construct
    */
-  public Grid(AGridCell[][] grid) {
+  public Grid(GridCellAbstract[][] grid) {
     if (grid.length < 1 || grid[0].length < 1) {
       throw new IllegalArgumentException("Rows and Cols must be positive integers");
     }
@@ -31,7 +31,7 @@ public class Grid {
 
   // to link the cells in each row horizontally
   private void linkRows() {
-    for (AGridCell[] row : grid) {
+    for (GridCellAbstract[] row : grid) {
       for (int curCol = 1; curCol < grid[0].length; curCol++) {
         row[curCol].link(row[curCol - 1], CardinalDirection.WEST);
       }
@@ -50,11 +50,11 @@ public class Grid {
 
   // to place [card] at [row], [col] on this
   // index at 0
-  public AGridCell placeCardOn(int row, int col, Card card) {
+  public GridCellAbstract placeCardOn(int row, int col, Card card) {
     if (row < 0 || col < 0) {
       throw new IllegalArgumentException("Rows and Cols must be positive integers");
     }
-    AGridCell relevantCell = grid[row][col];
+    GridCellAbstract relevantCell = grid[row][col];
     relevantCell.placeCard(card);
     return relevantCell;
   }
@@ -62,8 +62,8 @@ public class Grid {
   @Override
   public String toString() {
     String out = grid.length + " " + grid[0].length + "\n";
-    for (AGridCell[] row : grid) {
-      for (AGridCell cell : row) {
+    for (GridCellAbstract[] row : grid) {
+      for (GridCellAbstract cell : row) {
         out += cell.renderTextConstructor();
       }
       out += "\n";
@@ -76,8 +76,8 @@ public class Grid {
    * @return - whether all card cells in this grid are filled with cards
    */
   public boolean isFull() {
-    for (AGridCell[] row : grid) {
-      for (AGridCell cell : row) {
+    for (GridCellAbstract[] row : grid) {
+      for (GridCellAbstract cell : row) {
         if (!cell.hasCard()) {
           return false;
         }
@@ -95,16 +95,11 @@ public class Grid {
   }
 
   /**
-   * The grid of this.
+   * The grid of cards with no cards represented as null.
    * @return - the grid of this.
+   * @implNote - possible effect can still occur to cells if casting is used, hack with caution.
    */
-  public AGridCell[][] arrayRepr() {
-    AGridCell[][] copy = new AGridCell[grid.length][grid[0].length];
-    for (int curRow = 0; curRow < grid.length; curRow += 1) {
-      for (int curCol = 0; curCol < grid[0].length; curCol += 1) {
-        copy[curRow][curCol] = grid[curRow][curCol];
-      }
-    }
-    return copy;
+  public GridCellReadOnly[][] readOnly2dCellArray() {
+    return this.grid;
   }
 }

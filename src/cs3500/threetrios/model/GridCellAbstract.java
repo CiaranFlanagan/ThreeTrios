@@ -6,13 +6,13 @@ import java.util.Map;
 /**
  * To represent a cell on a grid on a game of three trios.
  */
-public abstract class AGridCell {
-  private final Map<CardinalDirection, AGridCell> neighbors;
+public abstract class GridCellAbstract implements GridCellReadOnly {
+  private final Map<CardinalDirection, GridCellAbstract> neighbors;
 
   /**
    * Constructs an AGridCell.
    */
-  public AGridCell() {
+  public GridCellAbstract() {
     this.neighbors = new EnumMap<>(CardinalDirection.class);
   }
 
@@ -23,18 +23,22 @@ public abstract class AGridCell {
    * @param other - the other board cell
    * @param dir   - the direction [this] links to [other]
    */
-  protected final void link(AGridCell other, CardinalDirection dir) {
+  protected final void link(GridCellAbstract other, CardinalDirection dir) {
     this.neighbors.put(dir, other);
     other.neighbors.put(dir.opposite(), this);
   }
 
+
+  public boolean hasNeighborToThe(CardinalDirection direction) {
+    return this.neighbors.get(direction) != null;
+  }
   /**
    * To get the neighbor to the [N/S/E/W].
    *
    * @param direction - the cardinal direction to consider
    * @return - the neighbor (if any) in [direction]
    */
-  AGridCell getNeighborToThe(CardinalDirection direction) {
+  public GridCellAbstract getNeighborToThe(CardinalDirection direction) {
     return this.neighbors.get(direction);
   }
 
@@ -61,16 +65,17 @@ public abstract class AGridCell {
    * @return - the card held in this cell.
    */
   public Card getCard() {
-    throw new IllegalStateException("Can't get card from hole cell");
+    throw new IllegalStateException("Can't get card from this cell");
   }
 
   /**
    * To place the card on this cell.
    *
    * @param card - the card to place
+   * @throws IllegalStateException if canHaveCard() is false
    */
   protected void placeCard(Card card) {
-    throw new IllegalStateException("Can't place card on hole cell");
+    throw new IllegalStateException("Can't place card on this cell");
   }
 
   /**
@@ -78,7 +83,7 @@ public abstract class AGridCell {
    *
    * @param ref - the ref that controls the rules and what happens during this battle phase
    */
-  protected abstract void acceptBattlePhase(BattlePhaseReferee ref);
+  protected abstract void acceptBattlePhase(IReferee ref);
 
   protected String renderTextConstructor() {
     throw new IllegalStateException("not implemented");

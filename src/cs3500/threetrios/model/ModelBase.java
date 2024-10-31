@@ -7,21 +7,25 @@ import java.util.Random;
 
 /**
  * to represent a model of the three trios game.
+ * INVARIANT: getCurrentCoach().toString() will always be one of: "Red" or "Blue"
  */
-public class ThreeTriosModel implements IModel {
+public class ModelBase implements Model {
   private Coach coachRed;
   private Coach coachBlue;
   private Coach currentCoach;
   private boolean gameStarted;
-  private BattlePhaseReferee referee;
+  private IReferee referee;
   private Grid grid;
   private Random random;
 
-  public ThreeTriosModel() {
+  public ModelBase() {
     //default constructor.
+    this.coachRed = new Coach(Coach.Color.Red); // we'll pass in the names later
+    this.coachBlue = new Coach(Coach.Color.Blue);
   }
 
-  public ThreeTriosModel(Random r) {
+  public ModelBase(Random r) {
+    this();
     this.random = r;
   }
 
@@ -29,23 +33,20 @@ public class ThreeTriosModel implements IModel {
    * constructor.
    * @return - new TTM
    */
-  public static ThreeTriosModel create() {
-    return new ThreeTriosModel();
+  public static ModelBase create() {
+    return new ModelBase();
   }
 
   @Override
-  public void startGame(Grid grid, List<Card> cards, BattlePhaseReferee referee) {
+  public void startGame(Grid grid, List<Card> cards, IReferee referee) {
     if (gameStarted) {
       throw new IllegalStateException("Game has already started");
     }
     if (grid == null || cards == null || referee == null) {
       throw new IllegalArgumentException("Arguments cannot be null");
     }
-
     this.referee = referee;
     this.grid = grid;
-    this.coachRed = new Coach(Coach.Color.Red); // we'll pass in the names later
-    this.coachBlue = new Coach(Coach.Color.Blue);
     this.currentCoach = coachRed;
     this.gameStarted = true;
     dealCards(cards);
@@ -53,7 +54,7 @@ public class ThreeTriosModel implements IModel {
 
   // red gets card first
   private void dealCards(List<Card> cards) {
-    int totalCardCells = grid.arrayRepr().length - grid.getNumHoles();
+    int totalCardCells = grid.readOnly2dCellArray().length - grid.getNumHoles();
     int requiredCards = totalCardCells + 1;
     if (cards.size() < requiredCards) {
       throw new IllegalArgumentException("Number of cards must be at least N + 1, where N is the " +
@@ -91,7 +92,7 @@ public class ThreeTriosModel implements IModel {
       throw new IllegalStateException("Game is over");
     }
     Card curCard = currentCoach.removeCardFromHand(idx);
-    AGridCell relevantCell = grid.placeCardOn(row, col, curCard);
+    GridCellAbstract relevantCell = grid.placeCardOn(row, col, curCard);
     System.out.println("relevant cell" + relevantCell.getCard());
     referee.refereeBattlePhase(relevantCell);
   }
@@ -156,8 +157,8 @@ public class ThreeTriosModel implements IModel {
   private Coach whoHasMoreTotalCards() {
     int coachRedTotal = coachRed.getHand().size();
     int coachBlueTotal = coachBlue.getHand().size();
-    for (AGridCell[] row : grid.arrayRepr()) {
-      for (AGridCell cell : row) {
+    for (GridCellReadOnly[] row : grid.readOnly2dCellArray()) {
+      for (GridCellReadOnly cell : row) {
         if (cell.hasCard()) {
           if (cell.getCard().getCoach() == coachRed) {
             coachRedTotal += 1;

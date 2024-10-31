@@ -1,27 +1,27 @@
-package cs3500.threetrios.publictests.model;
+package cs3500.threetrios.test.model.complex;
 
+import cs3500.threetrios.controller.TestFiles;
 import org.junit.Assert;
 import org.junit.Test;
 
-import cs3500.threetrios.controller.CardConfig;
-import cs3500.threetrios.controller.GridConfig;
-import cs3500.threetrios.model.AGridCell;
-import cs3500.threetrios.model.BattlePhaseReferee;
+import cs3500.threetrios.controller.ConfigCard;
+import cs3500.threetrios.controller.ConfigGrid;
+import cs3500.threetrios.model.GridCellAbstract;
+import cs3500.threetrios.model.IReferee;
 import cs3500.threetrios.model.Card;
 import cs3500.threetrios.model.Coach;
-import cs3500.threetrios.model.DefaultReferee;
-import cs3500.threetrios.model.ThreeTriosModel;
-import cs3500.threetrios.utils.Utils;
+import cs3500.threetrios.model.RefereeDefault;
+import cs3500.threetrios.model.ModelBase;
 
 import static cs3500.threetrios.controller.TestFiles.CC_LARGE;
 import static cs3500.threetrios.controller.TestFiles.GRID_CONNECTED_HOLES;
 
-public class TestConnectedLargeFullGame {
-  private static ThreeTriosModel model = new ThreeTriosModel();
-  private static BattlePhaseReferee referee = new DefaultReferee();
+public class TestFullGameConnected {
+  private static ModelBase model = new ModelBase();
+  private static IReferee referee = new RefereeDefault();
   private static Coach red;
   private static Coach blue;
-  private static AGridCell[][] state;
+  private static GridCellAbstract[][] state;
   private static Card cardPlaced;
 
   /**
@@ -31,8 +31,8 @@ public class TestConnectedLargeFullGame {
   @Test
   public void P1Start() {
     model.startGame(
-            GridConfig.scannerToGrid(Utils.safeFileToScanner(GRID_CONNECTED_HOLES)),
-            CardConfig.scannerToCardList(Utils.safeFileToScanner(CC_LARGE)),
+            ConfigGrid.scannerToGrid(TestFiles.safeFileToScanner(GRID_CONNECTED_HOLES)),
+            ConfigCard.scannerToCardList(TestFiles.safeFileToScanner(CC_LARGE)),
             referee);
     red = model.getCurrentCoach();
     Assert.assertEquals("The current coach should be Red.", Coach.Color.Red, red.getColor());

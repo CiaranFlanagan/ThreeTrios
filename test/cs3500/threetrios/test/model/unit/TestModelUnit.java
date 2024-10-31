@@ -1,15 +1,15 @@
-package cs3500.threetrios.publictests.model;
+package cs3500.threetrios.test.model.unit;
 
 import cs3500.threetrios.controller.TestFiles;
-import cs3500.threetrios.controller.CardConfig;
-import cs3500.threetrios.controller.GridConfig;
-import cs3500.threetrios.model.AGridCell;
-import cs3500.threetrios.model.BattlePhaseReferee;
+import cs3500.threetrios.controller.ConfigCard;
+import cs3500.threetrios.controller.ConfigGrid;
+import cs3500.threetrios.model.GridCellAbstract;
+import cs3500.threetrios.model.IReferee;
 import cs3500.threetrios.model.Card;
-import cs3500.threetrios.model.CardCell;
-import cs3500.threetrios.model.DefaultReferee;
+import cs3500.threetrios.model.GridCellCard;
+import cs3500.threetrios.model.RefereeDefault;
 import cs3500.threetrios.model.Grid;
-import cs3500.threetrios.model.ThreeTriosModel;
+import cs3500.threetrios.model.ModelBase;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,27 +22,27 @@ import java.util.Scanner;
 /**
  * Tests for the game play and flow of the model.
  */
-public class TestModelPublicExceptions {
+public class TestModelUnit {
   // test public beahvior
   private Grid gridNoHoles;
   private Grid gridConnectedHoles;
   private Grid gridDisconnectedHoles;
   private List<Card> cardsSmall;
   private List<Card> cardsLarge;
-  private ThreeTriosModel model;
-  private BattlePhaseReferee referee;
+  private ModelBase model;
+  private IReferee referee;
 
   @Before
   public void setUp() {
-    model = new ThreeTriosModel();
-    referee = new DefaultReferee();
+    model = new ModelBase();
+    referee = new RefereeDefault();
     try {
-      gridNoHoles = GridConfig.scannerToGrid(new Scanner(TestFiles.GRID_NO_HOLES));
+      gridNoHoles = ConfigGrid.scannerToGrid(new Scanner(TestFiles.GRID_NO_HOLES));
       //gridConnectedHoles = GridConfig.scannerToGrid(null);
       // gridDisconnectedHoles = GridConfig.scannerToGrid(fillInHere));
 
-      cardsSmall = CardConfig.scannerToCardList(new Scanner(TestFiles.CC_SMALL));
-      cardsLarge = CardConfig.scannerToCardList(new Scanner(TestFiles.CC_LARGE));
+      cardsSmall = ConfigCard.scannerToCardList(new Scanner(TestFiles.CC_SMALL));
+      cardsLarge = ConfigCard.scannerToCardList(new Scanner(TestFiles.CC_LARGE));
     } catch (FileNotFoundException ex) {
       Assert.fail("file not found");
     }
@@ -78,9 +78,9 @@ public class TestModelPublicExceptions {
 
   @Test(expected = IllegalStateException.class)
   public void testPlaceCardAfterGameOver() {
-    AGridCell cc = new CardCell();
-    AGridCell[] ccArray = {cc};
-    AGridCell[][] singleCell = {ccArray};
+    GridCellAbstract cc = new GridCellCard();
+    GridCellAbstract[] ccArray = {cc};
+    GridCellAbstract[][] singleCell = {ccArray};
     Grid grid = new Grid(singleCell);
     model.startGame(grid, cardsSmall, referee);
     model.placeCard(0, 0, 0);
