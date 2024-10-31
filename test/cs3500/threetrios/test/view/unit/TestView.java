@@ -20,6 +20,7 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
 
+import static cs3500.threetrios.controller.TestFiles.CC_LARGE;
 import static cs3500.threetrios.controller.TestFiles.CC_SMALL;
 import static cs3500.threetrios.controller.TestFiles.GRID_CONNECTED_HOLES;
 import static cs3500.threetrios.controller.TestFiles.GRID_DISC_HOLES;
@@ -90,30 +91,43 @@ public class TestView {
             .line("bob 1 1 1 1").endWith("zeke A A A A").toString(), log.toString());
   }
 
-  //THIS SHOULD THROW AN EXCEPTION: NOT ENOUGH CARDS TO SART THE GAME
   @Test
   public void testGridConnectedView() {
     model.startGame(ConfigGrid.scannerToGrid(TestFiles.safeFileToScanner(GRID_CONNECTED_HOLES)),
-            ConfigCard.scannerToCardList(TestFiles.safeFileToScanner(CC_SMALL)), ref);
+            ConfigCard.scannerToCardList(TestFiles.safeFileToScanner(CC_LARGE)), ref);
     view = new ViewTextBase(model, log);
     view.render();
     LineWriter lw = new LineWriter();
     Assert.assertEquals(lw.create().line("Player: RED").line("_____").line("_   _").line("_____").
-            line("_   _").line("_____").line("Hand:").line("bob 1 1 1 1")
-            .endWith("zeke A A A A").toString(), log.toString());
+            line("_   _").line("_____").line("Hand:").line("Card1 1 1 1 1").line("Card3 3 3 3 3")
+            .line("Card5 5 5 5 5").line("Card7 7 7 7 7").line("Card9 9 9 9 9")
+            .line("Card11 1 1 1 1").line("Card13 3 3 3 3").line("Card15 5 5 5 5")
+            .line("Card17 7 7 7 7").endWith("Card19 9 9 9 9").toString(), log.toString());
   }
-
-  //THIS SHOULD THROW AN EXCEPTION: NOT ENOUGH CARDS TO START THE GAME
+/*
+Card1 1 1 1 1
+Card3 3 3 3 3
+Card5 5 5 5 5
+Card7 7 7 7 7
+Card9 9 9 9 9
+Card11 1 1 1 1
+Card13 3 3 3 3
+Card15 5 5 5 5
+Card17 7 7 7 7
+Card19 9 9 9 9
+ */
   @Test
   public void testGridDisconnectedView() {
     model.startGame(ConfigGrid.scannerToGrid(TestFiles.safeFileToScanner(GRID_DISC_HOLES)),
-            ConfigCard.scannerToCardList(TestFiles.safeFileToScanner(CC_SMALL)), ref);
+            ConfigCard.scannerToCardList(TestFiles.safeFileToScanner(CC_LARGE)), ref);
     view = new ViewTextBase(model, log);
     view.render();
     LineWriter lw = new LineWriter();
-    Assert.assertEquals(lw.create().line("Player: RED").line("__ ").line(" __").line("__ ").
-            line(" __").line("Hand:").line("bob 1 1 1 1")
-            .endWith("zeke A A A A").toString(), log.toString());
+    Assert.assertEquals(lw.create().line("Player: RED").line("___").line("   ").line("___").
+            line("_  ").line("Hand:").line("Card1 1 1 1 1").line("Card3 3 3 3 3")
+            .line("Card5 5 5 5 5").line("Card7 7 7 7 7").line("Card9 9 9 9 9")
+            .line("Card11 1 1 1 1").line("Card13 3 3 3 3").line("Card15 5 5 5 5")
+            .line("Card17 7 7 7 7").endWith("Card19 9 9 9 9").toString(), log.toString());
   }
 
 }
