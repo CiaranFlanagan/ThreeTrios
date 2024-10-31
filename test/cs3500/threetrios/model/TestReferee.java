@@ -1,5 +1,12 @@
 package cs3500.threetrios.model;
 
+import cs3500.threetrios.model.Card;
+import cs3500.threetrios.model.CardinalDirection;
+import cs3500.threetrios.model.Coach;
+import cs3500.threetrios.model.GridCellAbstract;
+import cs3500.threetrios.model.GridCellCard;
+import cs3500.threetrios.model.GridCellHole;
+import cs3500.threetrios.model.RefereeDefault;
 import cs3500.threetrios.utils.Utils;
 import org.junit.Assert;
 import org.junit.Before;

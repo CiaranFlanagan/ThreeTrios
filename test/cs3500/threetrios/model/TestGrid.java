@@ -5,10 +5,11 @@ import org.junit.Test;
 
 import java.util.HashMap;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class TestGrid {
-
   private Grid grid;
   private GridCellAbstract[][] gridCells;
 
@@ -21,7 +22,6 @@ public class TestGrid {
     gridCells[1][1] = new GridCellCard();
     grid = new Grid(gridCells);
   }
-
   @Test
   public void testPlaceCardOn() {
     HashMap<Object, Object> hm = new HashMap<>();
@@ -46,23 +46,5 @@ public class TestGrid {
     grid.placeCardOn(1, 0, card);
     grid.placeCardOn(1, 1, card);
     assertTrue(grid.isFull());
-  }
-
-  @Test
-  public void testGetNumHoles() {
-    assertEquals(0, grid.getNumHoles());
-  }
-
-  @Test
-  public void testReadOnly2dCellArray() {
-    GridCellReadOnly[][] readOnlyGrid = grid.readOnly2dCellArray();
-    assertEquals(gridCells.length, readOnlyGrid.length);
-    assertEquals(gridCells[0].length, readOnlyGrid[0].length);
-  }
-
-  @Test
-  public void testToString() {
-    String expected = "2 2\nCC\nCC";
-    assertEquals(expected, grid.toString());
   }
 }

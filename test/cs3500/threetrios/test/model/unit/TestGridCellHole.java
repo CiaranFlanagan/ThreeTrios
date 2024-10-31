@@ -1,7 +1,10 @@
-package cs3500.threetrios.model;
+package cs3500.threetrios.test.model.unit;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import cs3500.threetrios.model.GridCellAbstract;
+import cs3500.threetrios.model.GridCellHole;
 
 public class TestGridCellHole {
 

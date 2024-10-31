@@ -1,7 +1,9 @@
-package cs3500.threetrios.model;
+package cs3500.threetrios.test.model.unit;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import cs3500.threetrios.model.AttackValue;
 
 /**
  * Tests for the AttackValue enum.
