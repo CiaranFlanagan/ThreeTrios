@@ -1,4 +1,4 @@
-package cs3500.threetrios.test.model.complex;
+package cs3500.threetrios.test.model.sequence;
 
 /**
  * Tests for the model.

@@ -1,6 +1,6 @@
 
 
-package cs3500.threetrios.test.model.complex;
+package cs3500.threetrios.test.model.sequence;
 
 import cs3500.threetrios.controller.ConfigCard;
 import cs3500.threetrios.controller.ConfigGrid;
