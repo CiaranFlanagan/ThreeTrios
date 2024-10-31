@@ -1,7 +1,6 @@
 # Table Of Contents
 
 <!-- TOC -->
-
 * [Table Of Contents](#table-of-contents)
 * [Introduction](#introduction)
     * [Info](#info)
@@ -14,10 +13,10 @@
     * [Controller](#controller)
     * [Player](#player)
 * [Diving Into Components](#diving-into-components)
-    * [In the model...](#in-the-model)
-        * [In the view...](#in-the-view)
-* [Notes on Side Effect and Visibility](#notes-on-side-effect-and-visibility)
-
+  * [In the model...](#in-the-model)
+    * [In the view...](#in-the-view)
+* [Notes on Extension](#notes-on-extension)
+    * [Extension without exposed mutation](#extension-without-exposed-mutation)
 <!-- TOC -->
 
 Introduction
@@ -163,22 +162,65 @@ cardName2 5 6 7 8
 
 This section is primarily a way for us, the developers, to convey abstract _design decisions_
 regarding our view for extension of this code The thorough explanation is to help provide a
-_why_ for the nuances present throughout.
+_why_ for the subtle decisions we made.
 
-First, consider the following table summing up the concrete classes in the model
+First, consider the following table of the concrete classes in the model
+
+- Note: mutable meaning there is a method that an object exposes that has side effect in the scope.
 
 | Class              | Visibility | Extensibility | mutable in package | mutable outside package? |
 |--------------------|------------|---------------|--------------------|--------------------------|
-| Attack Value       | public     | final(enum)   | no                 | no                       |
-| Card               | public     | final         | yes                |                          |
-| Cardinal Direction | public     | final         |                    |                          |
-| Coach              | public     | final         |                    |                          |
-| Grid               | public     | final         | yes                | yes                      |
-| GridCellAbstract   | public     |               |                    |                          |
-| GridCellCard       |            |               |                    |                          |
-| GridCellHole       |            |               |                    |                          |
-| Model Base         |            |               |                    |                          |
-| RefereeDefault     |            |               |                    |                          |
+| Attack Value       | public     | final         | no                 | no                       |
+| Card               | public     | final         | yes                | no                       |
+| Cardinal Direction | public     | final         | no                 | no                       |
+| Coach              | public     | final         | yes                | no                       |
+| Grid               | public     | final         | yes                | no                       |
+| GridCellCard       | public     | final         | yes                | no                       |
+| GridCellHole       | public     | final         | yes                | no                       |
+| Model Base         | public     | final         | yes                | yes                      |
+| RefereeDefault     | public     | final         | no                 | no                       |
 
+Note how every single class is final. Let's analyze each type of class and why we prohibit
+extension. We have four types of classes. Enumerations, structures, wrappers, and
+complex implementation
 
+- Enumerations (Attack Value, Cardinal Direction)
+    - implicitly not extensible
+- Structure classes (Card, Coach, GridCellCard, GridCellHole)
+    - All the behavior they have is reading fields and updating fields, and comparing them with
+      each other.
+    - These behaviors are not special enough to warrant different implementations.
+    - We will depend on these as a base to build our model on.
+- Wrapper classes (Grid)
+    - All Grid represents is a 2d array that we can read and write from.
+        - There is a caveat, which is that there grid sets up its cells' adjacency maps on
+          construction. However, because this class is only unique on construction, there is nothing
+          else to extend.
+- Complex Implementations (Model, Referee)
+    - Consider the model. It exposes two dependencies, Grid and Coach. These are in the abstract
+      class. Any inheritor has the freedom to work with these classes. A reason for wanting a flat
+      structure instead of a tree is that we don't need to up-cast, and instead just use super.
+      Also, we don't really want to pollute the project with variations of tiny little rules. This
+      version of the game is strict on these rules, like the odd-number of card cells, red goes
+      first, etc... If a game extended ModelBase and changed it to allow even numbers of cards, we
+      don't consider it a ModelBase anymore. Compose, so the is-a relationship is not compromised
+      of its integrity.
+    - Similarly, referees impose a strict set of rules, and are visitors. They are made to have a
+      flat structure versus a tree, and especially with only three methods to implement, two that
+      you basically get for free, it is quite easy to just make new children of RefereeAbstract
+      than go and pollute the RefereeDefault semantics.
 
+### Extension without exposed mutation
+- Above, the restrictions are focused on access modifiers. However, extensibility is about more
+than that. What does a model outside the package or a referee outside the package get to know
+about some of its dependencies, like Coach or AGridCell respectively. Doesn't it need to be
+able to mutate? 
+- The table above suggests that they are effectively immutable outside the package.
+However that's not the entire story, as the abstract classes solve these issues with specific 
+  protected methods that export important side effect on the respective dependencies. 
+- That way, only models or referees can 
+mutate their dependencies, and nothing can be done in main, by the controller, or by the view. 
+The model has dependencies that it exposes only for other components to see. It handles 
+extension and mutation in a protected manner.
+- TLDR: The model component is made specifically to close off extension and mutation in every 
+  single avenue, except that which preservers the integrity of a ThreeTrios model.

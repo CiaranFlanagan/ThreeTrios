@@ -17,11 +17,11 @@ public interface Model {
   void startGame(Grid grid, List<Card> cards, Referee referee);
 
   /**
-   * Places a card on the grid for the given coach.
+   * Places a card from the current coach on the grid.
    *
    * @param idx represents the card index
-   * @param row represents the row
-   * @param col represents the col
+   * @param row represents the row (0 index)
+   * @param col represents the col (0 index)
    *
    */
   void placeCard(int idx, int row, int col);
@@ -32,11 +32,6 @@ public interface Model {
    * @return the current coach
    */
   Coach getCurrentCoach();
-
-  /**
-   * Advances to the next coach's turn.
-   */
-  void nextCoachTurn();
 
   /**
    * Checks if the game is over.

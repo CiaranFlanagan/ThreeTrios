@@ -41,7 +41,6 @@ public class TestFullGameConnected {
     Assert.assertEquals("Red should have 10 cards in hand.", 10, red.getHand().size());
 
     // Switch to Blue and verify
-    model.nextCoachTurn();
     blue = model.getCurrentCoach();
     Assert.assertEquals("The current coach should now be Blue.", Coach.Color.Blue, blue.getColor());
 

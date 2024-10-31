@@ -44,7 +44,6 @@ public final class Coach {
     this.hand = new ArrayList<>();
   }
 
-
   /**
    * Gets the name of the coach.
    *
