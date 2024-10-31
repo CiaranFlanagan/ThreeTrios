@@ -32,7 +32,7 @@ public final class Card {
   }
 
 
-  // info needed to render the card later
+  // info needed to render the card
 
   /**
    * to return the name of the card.
@@ -52,23 +52,12 @@ public final class Card {
   }
 
   /**
-   * to return the attack values of this card.
-   * @return - the attack values of this card.
+   * to return the coach of this card.
+   * @return - the current coach of this card.
    */
-  public Map<CardinalDirection, AttackValue> getAttackValues() {
-    return this.attackValues;
+  public Coach getCoach() {
+    return this.coach;
   }
-
-  /**
-   * to set the attack value in [direction] to [av].
-   * @param av - the attack value to add
-   * @param direction - the direction to update
-   */
-  void setAttackValueInDirection(AttackValue av, CardinalDirection direction) {
-    attackValues.put(direction, av);
-  }
-
-  // info needed to battle
 
   /**
    * to evaluate if this card beats [other] in [direction].
@@ -80,12 +69,26 @@ public final class Card {
     return getAttackValue(direction).beats(other.getAttackValue(direction.opposite()));
   }
 
+
+
+  @Override
+  public String toString() {
+    String s = "<TTCard: " + name;
+    for (CardinalDirection c : CardinalDirection.values()) {
+      s += " " + attackValues.get(c).toString();
+    }
+    return s + ">";
+  }
+
+  // package private to prevent excess side-effect
+
   /**
-   * to return the coach of this card.
-   * @return - the current coach of this card.
+   * to set the attack value in [direction] to [av].
+   * @param av - the attack value to add
+   * @param direction - the direction to update
    */
-  public Coach getCoach() {
-    return this.coach;
+  void setAttackValueInDirection(AttackValue av, CardinalDirection direction) {
+    attackValues.put(direction, av);
   }
 
   /**
@@ -96,12 +99,7 @@ public final class Card {
     this.coach = newCoach;
   }
 
-  @Override
-  public String toString() {
-    String s = "<TTCard: " + name;
-    for (CardinalDirection c : CardinalDirection.values()) {
-      s += " " + attackValues.get(c).toString();
-    }
-    return s + ">";
-  }
+
+
+
 }
