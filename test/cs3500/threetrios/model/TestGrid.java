@@ -1,49 +1,68 @@
 package cs3500.threetrios.model;
 
-import cs3500.threetrios.utils.LineWriter;
-import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
-/**
- * Tests for the Grid class.
- */
+import java.util.HashMap;
+
+import static org.junit.Assert.*;
+
 public class TestGrid {
-  @Test
-  public void test1() {
-    GridCellAbstract[][] grid = new GridCellAbstract[2][2];
-    grid[0][0] = new GridCellHole();
-    grid[0][1] = new GridCellCard();
-    grid[1][0] = new GridCellHole();
-    grid[1][1] = new GridCellHole();
-    Grid gb = new Grid(grid);
-    String expected = LineWriter.create().line("2 2").line("XC").endWith("XX").toString();
-    Assert.assertEquals(expected, gb.toString());
+
+  private Grid grid;
+  private GridCellAbstract[][] gridCells;
+
+  @Before
+  public void setUp() {
+    gridCells = new GridCellAbstract[2][2];
+    gridCells[0][0] = new GridCellCard();
+    gridCells[0][1] = new GridCellCard();
+    gridCells[1][0] = new GridCellCard();
+    gridCells[1][1] = new GridCellCard();
+    grid = new Grid(gridCells);
   }
 
   @Test
-  public void test2() {
-    GridCellAbstract[][] bcs = new GridCellAbstract[1][1];
-    bcs[0][0] = new GridCellHole();
-    Grid gb = new Grid(bcs);
-    String expected = LineWriter.create().line("1 1").endWith("X").toString();
-    Assert.assertEquals(expected, gb.toString());
+  public void testPlaceCardOn() {
+    HashMap<Object, Object> hm = new HashMap<>();
+    Card card = new Card("TestCard", new HashMap<>());
+    GridCellAbstract cell = grid.placeCardOn(0, 0, card);
+    assertTrue(cell.hasCard());
+    assertEquals(card, cell.getCard());
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testPlaceCardOnInvalidPosition() {
+    Card card = new Card("TestCard", new HashMap<>());
+    grid.placeCardOn(-1, 0, card);
   }
 
   @Test
-  public void test3() {
-    GridCellMock[][] grid = new GridCellMock[2][2];
-    grid[0][0] = new GridCellMock();
-    grid[0][1] = new GridCellMock();
-    grid[1][0] = new GridCellMock();
-    grid[1][1] = new GridCellMock();
-    Grid gb = new Grid(grid); // after construction, they should be linked
-    Assert.assertTrue(grid[0][0].hasNeighborIn(CardinalDirection.EAST));
-    Assert.assertTrue(grid[0][0].hasNeighborIn(CardinalDirection.SOUTH));
-    Assert.assertTrue(grid[0][1].hasNeighborIn(CardinalDirection.WEST));
-    Assert.assertTrue(grid[0][1].hasNeighborIn(CardinalDirection.SOUTH));
-    Assert.assertTrue(grid[1][0].hasNeighborIn(CardinalDirection.EAST));
-    Assert.assertTrue(grid[1][0].hasNeighborIn(CardinalDirection.NORTH));
-    Assert.assertTrue(grid[1][1].hasNeighborIn(CardinalDirection.WEST));
-    Assert.assertTrue(grid[1][1].hasNeighborIn(CardinalDirection.NORTH));
+  public void testIsFull() {
+    assertFalse(grid.isFull());
+    Card card = new Card("TestCard", new HashMap<>());
+    grid.placeCardOn(0, 0, card);
+    grid.placeCardOn(0, 1, card);
+    grid.placeCardOn(1, 0, card);
+    grid.placeCardOn(1, 1, card);
+    assertTrue(grid.isFull());
+  }
+
+  @Test
+  public void testGetNumHoles() {
+    assertEquals(0, grid.getNumHoles());
+  }
+
+  @Test
+  public void testReadOnly2dCellArray() {
+    GridCellReadOnly[][] readOnlyGrid = grid.readOnly2dCellArray();
+    assertEquals(gridCells.length, readOnlyGrid.length);
+    assertEquals(gridCells[0].length, readOnlyGrid[0].length);
+  }
+
+  @Test
+  public void testToString() {
+    String expected = "2 2\nCC\nCC";
+    assertEquals(expected, grid.toString());
   }
 }

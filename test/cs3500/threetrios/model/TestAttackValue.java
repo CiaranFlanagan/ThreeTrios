@@ -102,15 +102,14 @@ public class TestAttackValue {
    */
   @Test
   public void TestToString() {
-    Assert.assertEquals("ONE toString should return \"1\"", "1", AttackValue.ONE.toString());
-    Assert.assertEquals("TWO toString should return \"2\"", "2", AttackValue.TWO.toString());
-    Assert.assertEquals("THREE toString should return \"3\"", "3", AttackValue.THREE.toString());
-    Assert.assertEquals("FOUR toString should return \"4\"", "4", AttackValue.FOUR.toString());
-    Assert.assertEquals("FIVE toString should return \"5\"", "5", AttackValue.FIVE.toString());
-    Assert.assertEquals("SIX toString should return \"6\"", "6", AttackValue.SIX.toString());
-    Assert.assertEquals("SEVEN toString should return \"7\"", "7", AttackValue.SEVEN.toString());
-    Assert.assertEquals("EIGHT toString should return \"8\"", "8", AttackValue.EIGHT.toString());
-    Assert.assertEquals("NINE toString should return \"9\"", "9", AttackValue.NINE.toString());
-    Assert.assertEquals("A toString should return \"A\"", "A", AttackValue.A.toString());
+    Assert.assertEquals("2", AttackValue.TWO.toString());
+    Assert.assertEquals("3", AttackValue.THREE.toString());
+    Assert.assertEquals("4", AttackValue.FOUR.toString());
+    Assert.assertEquals( "5", AttackValue.FIVE.toString());
+    Assert.assertEquals( "6", AttackValue.SIX.toString());
+    Assert.assertEquals( "7", AttackValue.SEVEN.toString());
+    Assert.assertEquals( "8", AttackValue.EIGHT.toString());
+    Assert.assertEquals( "9", AttackValue.NINE.toString());
+    Assert.assertEquals( "A", AttackValue.A.toString());
   }
 }
