@@ -9,7 +9,7 @@ import java.util.Random;
  * to represent a model of the three trios game.
  * INVARIANT: getCurrentCoach().toString() will always be one of: "Red" or "Blue"
  */
-public class ModelBase implements Model {
+public final class ModelBase implements Model {
   private Coach coachRed;
   private Coach coachBlue;
   private Coach currentCoach;

@@ -9,12 +9,14 @@ import org.junit.Test;
  * Tests for the Referee class.
  */
 public class TestReferee {
+
+  private GridCellHole holeCell1;
+  private GridCellHole holeCell2;
   private GridCellAbstract cardCell1;
   private GridCellAbstract cardCell2;
   private GridCellAbstract cardCell3;
   private Coach kc;
   private Coach ciaran;
-  private Coach bob;
   private Card card1;
   private Card card2;
   private Card card3;
@@ -22,8 +24,8 @@ public class TestReferee {
 
   @Before
   public void setup() {
-    GridCellAbstract holecard1 = new GridCellHole();
-    GridCellAbstract holecard2 = new GridCellHole();
+    holeCell1 = new GridCellHole();
+    holeCell2 = new GridCellHole();
     cardCell1 = new GridCellCard();
     cardCell2 = new GridCellCard();
     cardCell3 = new GridCellCard();
@@ -37,21 +39,26 @@ public class TestReferee {
 
   @Test(expected = IllegalStateException.class)
   public void testRef1() {
-    GridCellHole holecard1 = new GridCellHole();
-    GridCellHole holecard2 = new GridCellHole();
-    holecard1.link(holecard2, CardinalDirection.NORTH);
-    new RefereeDefault().refereeBattlePhase(holecard1);
+
+    holeCell1.link(holeCell1, CardinalDirection.NORTH);
+   ref.refereeBattlePhase(holeCell1);
   }
 
   @Test(expected = IllegalStateException.class)
   public void testRef2() {
-    GridCellHole holecard1 = new GridCellHole();
-    GridCellCard cardcell1 = new GridCellCard();
-    holecard1.link(cardcell1, CardinalDirection.NORTH);
-    new RefereeDefault().refereeBattlePhase(holecard1);
+    holeCell2.link(cardCell1, CardinalDirection.NORTH);
+    ref.refereeBattlePhase(holeCell2);
   }
 
-
+  @Test
+  public void testRef3() {
+    holeCell2.link(cardCell2, CardinalDirection.EAST);
+    cardCell2.placeCard(card1);
+    card1.setCoach(kc);
+    ref.refereeBattlePhase(cardCell2);
+    Assert.assertEquals(holeCell2.canHaveCard(), false);
+    Assert.assertEquals(cardCell2.getCard().getCoach(), kc);
+  }
 
   @Test
   public void testRef4() {
@@ -85,4 +92,5 @@ public class TestReferee {
     Assert.assertSame(kc, card2.getCoach());
     Assert.assertSame(kc, card1.getCoach());
   }
+
 }

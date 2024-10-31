@@ -3,7 +3,7 @@ package cs3500.threetrios.model;
 /**
  * to represent the default referee or rules enforcer for the game of three trios.
  */
-public class RefereeDefault implements IReferee {
+public final class RefereeDefault implements IReferee {
 
   @Override
   public void refereeBattlePhase(GridCellAbstract us) {

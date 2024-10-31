@@ -3,7 +3,7 @@ package cs3500.threetrios.model;
 /**
  * To represent a cell that can hold a card on a grid in three trios.
  */
-public class GridCellCard extends GridCellAbstract {
+public final class GridCellCard extends GridCellAbstract {
   private Card card;
 
   /**

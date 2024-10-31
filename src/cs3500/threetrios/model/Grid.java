@@ -3,7 +3,7 @@ package cs3500.threetrios.model;
 /**
  * to represent the grid-shaped board of the game three-trios.
  */
-public class Grid {
+public final class Grid {
   private final GridCellAbstract[][] grid; // first index is rows, second is columns, obvious index at 0
   private final int numHoles;
 

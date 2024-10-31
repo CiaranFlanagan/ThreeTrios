@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Represents a player in the game.
  */
-public class Coach {
+public final class Coach {
 
   private final Color color;
 
