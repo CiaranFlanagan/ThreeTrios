@@ -100,4 +100,19 @@ public class TestReferee {
     Assert.assertSame(kc, card1.getCoach());
   }
 
+  @Test
+  public void testRef6() {
+    // no hacks
+    holeCell1.link(cardCell1, CardinalDirection.WEST);
+    holeCell1.link(cardCell2, CardinalDirection.EAST);
+    cardCell1.placeCard(card1);
+    cardCell2.placeCard(card2);
+    card1.setCoach(kc);
+    card2.setCoach(ciaran);
+    ref.refereeBattlePhase(cardCell2);
+    // card 2 would usually beat card1 but they should be different colors because of hole
+    Assert.assertNotEquals(card1.getCoach(), card2.getCoach());
+
+  }
+
 }

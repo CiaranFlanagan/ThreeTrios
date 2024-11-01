@@ -58,20 +58,17 @@ public final class ModelBase extends ModelAbstract {
     super.updateGrid(grid);
     this.referee = referee;
     this.gameStarted = true;
-    dealCards(cards);
+    dealCards(cards, totalCardCells + 1);
   }
 
   // red gets card first
-  private void dealCards(List<Card> cards) {
+  private void dealCards(List<Card> cards, int total) {
     List<Card> copy = new ArrayList<>(cards);
-    if (cards.size() % 2 != 0) {
-      throw new IllegalArgumentException("Number of cards must be even");
-    }
     if (random != null) {
       Collections.shuffle(copy);
     }
 
-    for (int i = 0; i < copy.size(); i += 2) {
+    for (int i = 0; i < total; i += 2) {
       Card curRedCard = copy.get(i);
       curRedCard.setCoach(coachRed);
       Card curBlueCard = copy.get(i + 1);

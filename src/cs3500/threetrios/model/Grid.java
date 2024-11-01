@@ -9,11 +9,14 @@ public final class Grid {
   private final int numHoles;
 
   /**
-   * Constructs a Grid.
-   *
+   * Constructs a Grids
    * @param grid - the grid to construct
+   * @throws- if grid is null.
    */
   public Grid(GridCellAbstract[][] grid) {
+    if (grid == null) {
+      throw new IllegalArgumentException();
+    }
     if (grid.length < 1 || grid[0].length < 1) {
       throw new IllegalArgumentException("Rows and Cols must be positive integers");
     }

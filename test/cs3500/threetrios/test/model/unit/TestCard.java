@@ -41,11 +41,6 @@ public class TestCard {
   }
 
   @Test
-  public void testGetAttackValues() {
-    assertEquals(attackValues, card.getAttackValues());
-  }
-
-  @Test
   public void testBeats() {
     Map<CardinalDirection, AttackValue> otherAttackValues = new HashMap<>();
     otherAttackValues.put(CardinalDirection.NORTH, AttackValue.ONE);

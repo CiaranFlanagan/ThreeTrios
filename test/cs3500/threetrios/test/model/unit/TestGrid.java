@@ -28,6 +28,11 @@ public class TestGrid {
     grid = new Grid(gridCells);
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testNullGrid() {
+    grid = new Grid(null);
+  }
+
   @Test
   public void testGetNumHoles() {
     assertEquals(0, grid.getNumHoles());

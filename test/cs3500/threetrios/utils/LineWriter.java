@@ -19,6 +19,15 @@ public class LineWriter {
     return this;
   }
 
+  public LineWriter line(String line, int x) {
+    for (int i = 0; i < x; i++) {
+      sb.append(line).append("\n");
+    }
+    return this;
+  }
+
+
+
   public LineWriter endWith(String s) {
     sb.append(s);
     return this;
