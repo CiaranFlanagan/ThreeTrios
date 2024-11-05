@@ -27,7 +27,7 @@ public class Stats {
   }
 
   /**
-   * number of wins of a player
+   * number of wins of a player.
    * @return - number of wins of a player
    */
   public int numWins() {
@@ -35,7 +35,7 @@ public class Stats {
   }
 
   /**
-   * number of losses of a player
+   * number of losses of a player.
    * @return - number of losses of a player
    */
   public int numLosses() {

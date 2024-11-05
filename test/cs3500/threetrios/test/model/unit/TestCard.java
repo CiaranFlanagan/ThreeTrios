@@ -8,10 +8,12 @@ import java.util.Map;
 import cs3500.threetrios.model.AttackValue;
 import cs3500.threetrios.model.Card;
 import cs3500.threetrios.model.CardinalDirection;
-import cs3500.threetrios.model.Coach;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import static org.junit.Assert.*;
-
+/**
+ * Tests for protected and package private methods in the model.
+ */
 public class TestCard {
 
   private Card card;
@@ -59,5 +61,20 @@ public class TestCard {
   public void testToString() {
     String expected = "<TTCard: TestCard 5 3 4 2>";
     assertEquals(expected, card.toString());
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testNullName() {
+    new Card(null, attackValues);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testNullAttackValues() {
+    new Card("TestCard", null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testEmptyName() {
+    new Card("", attackValues);
   }
 }

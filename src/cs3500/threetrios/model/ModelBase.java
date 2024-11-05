@@ -101,7 +101,7 @@ public final class ModelBase extends ModelAbstract {
   private void nextCoachTurn() {
     if (this.currentCoach == coachRed) {
       this.currentCoach = coachBlue;
-    } else if (this.currentCoach == coachBlue){
+    } else if (this.currentCoach == coachBlue) {
       this.currentCoach = coachRed;
     } else {
       throw new IllegalStateException("model mishandled coaches");

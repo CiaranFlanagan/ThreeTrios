@@ -4,16 +4,20 @@ import org.junit.Before;
 import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
-import static org.junit.Assert.*;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+/**
+ * Tests for protected and package private methods in the model.
+ */
 public class TestCard {
 
   private Card card;
-  private Map<CardinalDirection, AttackValue> attackValues;
 
   @Before
   public void setUp() {
-    attackValues = new HashMap<>();
+    Map<CardinalDirection, AttackValue> attackValues = new HashMap<>();
     attackValues.put(CardinalDirection.NORTH, AttackValue.FIVE);
     attackValues.put(CardinalDirection.SOUTH, AttackValue.THREE);
     attackValues.put(CardinalDirection.EAST, AttackValue.FOUR);
@@ -58,8 +62,15 @@ public class TestCard {
   }
 
   @Test
-  public void testToString() {
-    String expected = "<TTCard: TestCard 5 3 4 2>";
-    assertEquals(expected, card.toString());
+  public void testSetAttackValueInDirection() {
+    card.setAttackValueInDirection(AttackValue.ONE, CardinalDirection.NORTH);
+    assertEquals(AttackValue.ONE, card.getAttackValue(CardinalDirection.NORTH));
+  }
+
+  @Test
+  public void testSetCoach() {
+    Coach coach = new Coach(Coach.Color.Red);
+    card.setCoach(coach);
+    assertEquals(coach, card.getCoach());
   }
 }

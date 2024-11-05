@@ -7,6 +7,9 @@ import org.junit.Test;
 import cs3500.threetrios.model.GridCellAbstract;
 import cs3500.threetrios.model.GridCellHole;
 
+/**
+ * Tests for the GridCellHole class.
+ */
 public class TestGridCellHole {
   private GridCellAbstract cell1;
 

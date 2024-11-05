@@ -1,7 +1,7 @@
 package cs3500.threetrios.model;
 
-/*
-To abstract and bundle grid and coach mutation from models.
+/**
+ * To abstract and bundle grid and coach mutation from models.
  */
 public abstract class ModelAbstract implements Model {
   protected Grid grid;

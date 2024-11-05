@@ -2,17 +2,16 @@ package cs3500.threetrios.test.model.unit;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.HashMap;
-
-import cs3500.threetrios.model.Card;
 import cs3500.threetrios.model.Grid;
 import cs3500.threetrios.model.GridCellAbstract;
 import cs3500.threetrios.model.GridCellCard;
 import cs3500.threetrios.model.GridCellReadOnly;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests for the Grid class.
+ */
 public class TestGrid {
 
   private Grid grid;
@@ -50,4 +49,18 @@ public class TestGrid {
     String expected = "2 2\nCC\nCC";
     assertEquals(expected, grid.toString());
   }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testConstructorNullGrid() {
+    Grid grid = new Grid(null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testConstructorInvalidGrid() {
+    GridCellAbstract[][] invalidGrid = new GridCellAbstract[0][0];
+    Grid grid = new Grid(invalidGrid);
+  }
+
+
+
 }

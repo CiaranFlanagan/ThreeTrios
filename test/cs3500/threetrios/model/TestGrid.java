@@ -9,19 +9,22 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Tests for the Grid class.
+ */
 public class TestGrid {
   private Grid grid;
-  private GridCellAbstract[][] gridCells;
 
   @Before
   public void setUp() {
-    gridCells = new GridCellAbstract[2][2];
+    GridCellAbstract[][] gridCells = new GridCellAbstract[2][2];
     gridCells[0][0] = new GridCellCard();
     gridCells[0][1] = new GridCellCard();
     gridCells[1][0] = new GridCellCard();
     gridCells[1][1] = new GridCellCard();
     grid = new Grid(gridCells);
   }
+
   @Test
   public void testPlaceCardOn() {
     HashMap<Object, Object> hm = new HashMap<>();
@@ -32,9 +35,27 @@ public class TestGrid {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testPlaceCardOnInvalidPosition() {
+  public void testPlaceCardOnInvalidPositionSmallRow() {
     Card card = new Card("TestCard", new HashMap<>());
     grid.placeCardOn(-1, 0, card);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testPlaceCardOnInvalidPositionLargeRow() {
+    Card card = new Card("TestCard", new HashMap<>());
+    grid.placeCardOn(2, 0, card);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testPlaceCardOnInvalidPositionSmallCol() {
+    Card card = new Card("TestCard", new HashMap<>());
+    grid.placeCardOn(0, -1, card);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testPlaceCardOnInvalidPositionLargeCol() {
+    Card card = new Card("TestCard", new HashMap<>());
+    grid.placeCardOn(0, 2, card);
   }
 
   @Test

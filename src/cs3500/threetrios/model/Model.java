@@ -48,8 +48,8 @@ public interface Model {
   Coach getWinner();
 
   /**
-   * Returns the grid
-   * @return
+   * Returns the grid.
+   * @return the grid
    */
   Grid getGrid();
 

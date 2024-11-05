@@ -12,6 +12,9 @@ import cs3500.threetrios.model.Card;
 import cs3500.threetrios.model.CardinalDirection;
 import cs3500.threetrios.model.Coach;
 
+/**
+ * Tests for the Coach class.
+ */
 public class TestCoach {
 
   @Before
@@ -41,6 +44,8 @@ public class TestCoach {
     Coach.Color colorBlue = Coach.Color.Blue;
     Coach coachRed = new Coach(colorRed);
     Coach coachBlue = new Coach(colorBlue);
+    Assert.assertEquals(coachRed.getColor(), colorRed);
+    Assert.assertEquals(coachBlue.getColor(), colorBlue);
   }
 
   @Test
@@ -62,4 +67,10 @@ public class TestCoach {
     Assert.assertEquals(coachRed.getHand(), new ArrayList<Card>());
     Assert.assertEquals(coachBlue.getHand(), new ArrayList<Card>());
   }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void TestCoachConstructorNull() {
+    Coach coach = new Coach(null);
+  }
+
 }

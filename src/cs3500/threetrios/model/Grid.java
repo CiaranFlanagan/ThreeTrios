@@ -9,7 +9,7 @@ public final class Grid {
   private final int numHoles;
 
   /**
-   * Constructs a Grids
+   * Constructs a Grids.
    * @param grid - the grid to construct
    * @throws- if grid is null.
    */
@@ -56,7 +56,7 @@ public final class Grid {
   // to place [card] at [row], [col] on this
   // index at 0
   GridCellAbstract placeCardOn(int row, int col, Card card) {
-    if (row < 0 || col < 0) {
+    if (row < 0 || col < 0 || row >= grid.length || col >= grid[0].length) {
       throw new IllegalArgumentException("Rows and Cols must be positive integers");
     }
     GridCellAbstract relevantCell = grid[row][col];

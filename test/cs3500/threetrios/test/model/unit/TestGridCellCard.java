@@ -3,12 +3,12 @@ package cs3500.threetrios.test.model.unit;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import cs3500.threetrios.model.CardinalDirection;
 import cs3500.threetrios.model.GridCellAbstract;
 import cs3500.threetrios.model.GridCellCard;
-import cs3500.threetrios.model.GridCellHole;
 
+/**
+ * Tests for the GridCellCard class.
+ */
 public class TestGridCellCard {
   private GridCellAbstract cell1;
 
@@ -26,5 +26,11 @@ public class TestGridCellCard {
   public void testHasCard() {
     Assert.assertFalse(cell1.hasCard());
   }
+
+  @Test
+  public void testGetCard() {
+    Assert.assertNull(cell1.getCard());
+  }
+
 
 }

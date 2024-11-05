@@ -16,7 +16,7 @@ public final class RefereeDefault implements Referee {
       return;
     }
     for (CardinalDirection direction : CardinalDirection.values()) {
-     // if doesn't have neighbor, skip
+      // if doesn't have neighbor, skip
       if (!us.hasNeighborToThe(direction)) {
         continue;
       }

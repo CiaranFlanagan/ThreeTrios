@@ -6,11 +6,15 @@ import org.junit.Test;
 
 import java.util.HashMap;
 
+/**
+ * Tests for the GridCellCard class.
+ */
 public class TestGridCellHole {
   private GridCellAbstract cell1;
   private GridCellAbstract cell2;
   private GridCellAbstract cell3;
   private GridCellAbstract cell4;
+
   @Before
   public void setUp() {
     cell1 = new GridCellHole();

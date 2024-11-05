@@ -32,7 +32,7 @@ public class PossibleNewRef extends RefereeAbstract {
    */
   @Override
   public void refereeBattlePhase(GridCellCard c) {
-
+    // This is for a future implementation of the model.
   }
 
   /**
@@ -42,7 +42,7 @@ public class PossibleNewRef extends RefereeAbstract {
    */
   @Override
   public void refereeBattlePhase(GridCellHole h) {
-
+    // This is for a future implementation of the model.
   }
 
 }
