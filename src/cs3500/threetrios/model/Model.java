@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Represents the game model.
  */
-public interface Model {
+public interface Model extends ReadOnlyThreeTriosModel{
   /**
    * Starts the game with the given card index, grid col, and grid row.
    *
@@ -25,33 +25,6 @@ public interface Model {
    *
    */
   void placeCard(int idx, int row, int col);
-
-  /**
-   * Gets the current coach.
-   *
-   * @return the current coach
-   */
-  Coach getCurrentCoach();
-
-  /**
-   * Checks if the game is over.
-   *
-   * @return true if the game is over, false otherwise
-   */
-  boolean isGameOver();
-
-  /**
-   * Gets the winner of the game.
-   *
-   * @return the winning coach, or null if it's a tie
-   */
-  Coach getWinner();
-
-  /**
-   * Returns the grid.
-   * @return the grid
-   */
-  Grid getGrid();
 
 }
 
