@@ -8,6 +8,15 @@ public interface ReadOnlyThreeTriosModel {
    */
   Coach getCurrentCoach();
 
+
+  /**
+   * Checks if the game is over.
+   *
+   * @return true if the game is over, false otherwise
+   */
+  boolean isGameStarted();
+
+
   /**
    * Checks if the game is over.
    *
@@ -27,4 +36,6 @@ public interface ReadOnlyThreeTriosModel {
    * @return the grid
    */
   Grid getGrid();
+
+
 }

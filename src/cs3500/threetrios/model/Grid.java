@@ -1,5 +1,9 @@
 package cs3500.threetrios.model;
 
+import java.lang.reflect.Array;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
 /**
  * to represent the grid-shaped board of the game three-trios.
  */
@@ -109,5 +113,19 @@ public final class Grid {
    */
   public GridCellReadOnly[][] readOnly2dCellArray() {
     return this.grid;
+  }
+
+  public Supplier<Grid> supply() {
+    Supplier<GridCellAbstract[][]> a = () ->
+    {
+      GridCellAbstract[][] grid = new GridCellAbstract[this.grid.length][this.grid[0].length];
+      for (int row = 0; row < grid.length; row++) {
+        for (int col = 0; col < grid[0].length; col++) {
+          //grid[row][col] = this.grid[row][col]
+        }
+      }
+      return null;
+    };
+    return null;
   }
 }

@@ -10,7 +10,7 @@ public final class Card {
 
   private final String name;
   private final Map<CardinalDirection, AttackValue> attackValues;
-  private Coach coach;
+  private Coach.Color coachColor;
 
   /**
    * to construct a card with [name] and [attackValues].
@@ -55,8 +55,8 @@ public final class Card {
    * to return the coach of this card.
    * @return - the current coach of this card.
    */
-  public Coach getCoach() {
-    return this.coach;
+  public Coach.Color getCoachColor() {
+    return this.coachColor;
   }
 
   /**
@@ -95,8 +95,8 @@ public final class Card {
    * to update the coach to [newCoach].
    * @param newCoach - the new coach of this
    */
-  void setCoach(Coach newCoach) {
-    this.coach = newCoach;
+  void setCoachColor(Coach.Color newCoach) {
+    this.coachColor = newCoach;
   }
 
 

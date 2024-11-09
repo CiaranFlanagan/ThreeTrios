@@ -84,9 +84,10 @@ public abstract class GridCellAbstract implements GridCellReadOnly {
    *
    * @param ref - the ref that controls the rules and what happens during this battle phase
    */
-  protected abstract void acceptBattlePhase(Referee ref);
+  public abstract void acceptBattlePhase(Referee ref);
 
   protected String renderTextConstructor() {
     throw new IllegalStateException("not implemented");
   }
+
 }

@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Represents the game model.
  */
-public interface Model extends ReadOnlyThreeTriosModel{
+public interface Model extends ReadOnlyThreeTriosModel {
   /**
    * Starts the game with the given card index, grid col, and grid row.
    *
@@ -17,14 +17,15 @@ public interface Model extends ReadOnlyThreeTriosModel{
   void startGame(Grid grid, List<Card> cards, Referee referee);
 
   /**
-   * Places a card from the current coach on the grid.
    *
-   * @param idx represents the card index
-   * @param row represents the row (0 index)
-   * @param col represents the col (0 index)
-   *
+   * @param idx index of move
+   * @param row row on grid
+   * @param col col on grid
+   * @throws IllegalStateException if game is not started/game over
+   * @throws IllegalArgumentException if invalid move
+   * @implNote 0 indexing
    */
-  void placeCard(int idx, int row, int col);
+  void placeCard(int idx, int row, int col) throws IllegalStateException, IllegalArgumentException;
 
 }
 

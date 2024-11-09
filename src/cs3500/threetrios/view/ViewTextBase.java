@@ -74,7 +74,7 @@ public class ViewTextBase implements View {
         } else {
           //changed get card from protected to public
           Card card = cell.getCard();
-          String coachInitial = card.getCoach().toString().substring(0, 1).toUpperCase();
+          String coachInitial = card.getCoachColor().toString().substring(0, 1).toUpperCase();
           sb.append(coachInitial).append(" ");
         }
       }

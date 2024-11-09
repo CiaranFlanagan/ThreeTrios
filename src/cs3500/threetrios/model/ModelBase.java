@@ -70,9 +70,9 @@ public final class ModelBase extends ModelAbstract {
 
     for (int i = 0; i < total; i += 2) {
       Card curRedCard = copy.get(i);
-      curRedCard.setCoach(coachRed);
+      curRedCard.setCoachColor(coachRed.getColor());
       Card curBlueCard = copy.get(i + 1);
-      curBlueCard.setCoach(coachBlue);
+      curBlueCard.setCoachColor(coachBlue.getColor());
       addCardTo(coachRed, curRedCard);
       addCardTo(coachBlue, curBlueCard);
     }
@@ -95,6 +95,16 @@ public final class ModelBase extends ModelAbstract {
   @Override
   public Coach getCurrentCoach() {
     return this.currentCoach;
+  }
+
+  /**
+   * Checks if the game is over.
+   *
+   * @return true if the game is over, false otherwise
+   */
+  @Override
+  public boolean isGameStarted() {
+    return gameStarted;
   }
 
 
@@ -140,9 +150,9 @@ public final class ModelBase extends ModelAbstract {
     for (GridCellReadOnly[] row : grid.readOnly2dCellArray()) {
       for (GridCellReadOnly cell : row) {
         if (cell.hasCard()) {
-          if (cell.getCard().getCoach() == coachRed) {
+          if (cell.getCard().getCoachColor() == Coach.Color.Red) {
             coachRedTotal += 1;
-          } else if (cell.getCard().getCoach() == coachBlue) {
+          } else if (cell.getCard().getCoachColor() == Coach.Color.Blue) {
             coachBlueTotal += 1;
           } else {
             throw new IllegalStateException("card should have a coach if this board is full");

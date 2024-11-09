@@ -57,8 +57,8 @@ public class TestCard {
   @Test
   public void testGetCoach() {
     Coach coach = new Coach(Coach.Color.Red);
-    card.setCoach(coach);
-    assertEquals(coach, card.getCoach());
+    card.setCoachColor(coach.getColor());
+    assertEquals(coach.getColor(), card.getCoachColor());
   }
 
   @Test
@@ -68,9 +68,9 @@ public class TestCard {
   }
 
   @Test
-  public void testSetCoach() {
+  public void testSetCoachColor() {
     Coach coach = new Coach(Coach.Color.Red);
-    card.setCoach(coach);
-    assertEquals(coach, card.getCoach());
+    card.setCoachColor(coach.getColor());
+    assertEquals(coach.getColor(), card.getCoachColor());
   }
 }

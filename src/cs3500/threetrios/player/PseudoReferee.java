@@ -1,9 +1,22 @@
-package cs3500.threetrios.model;
+package cs3500.threetrios.player;
 
-/**
- * to represent the default referee or rules enforcer for the game of three trios.
- */
-public final class RefereeDefault implements Referee {
+import cs3500.threetrios.model.Card;
+import cs3500.threetrios.model.CardinalDirection;
+import cs3500.threetrios.model.Coach;
+import cs3500.threetrios.model.GridCellAbstract;
+import cs3500.threetrios.model.GridCellCard;
+import cs3500.threetrios.model.GridCellHole;
+import cs3500.threetrios.model.Referee;
+
+public class PseudoReferee implements Referee {
+  private int[] count;
+
+  public PseudoReferee(int[] count) {
+    if (count == null) {
+      throw new IllegalArgumentException();
+    }
+    this.count = count;
+  }
 
   @Override
   public void refereeBattlePhase(GridCellAbstract us) {
@@ -37,8 +50,8 @@ public final class RefereeDefault implements Referee {
       System.out.println(theirCard);
       System.out.println(ourCard.beats(theirCard, direction));
       if (ourCoach != theirCoach && ourCard.beats(theirCard, direction)) {
-        theirCard.setCoachColor(ourCoach);
-        System.out.println("aah");
+        //theirCard.setCoachColor(ourCoach);
+        count[0] = count[0] + 1;
         refereeBattlePhase(them);
       }
     }
@@ -46,10 +59,7 @@ public final class RefereeDefault implements Referee {
 
   @Override
   public void refereeBattlePhase(GridCellHole us) {
-    throw new IllegalStateException("should not directly call a hole cell to battle");
+
   }
+
 }
-
-
-
-

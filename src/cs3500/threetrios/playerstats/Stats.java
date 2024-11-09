@@ -1,4 +1,6 @@
-package cs3500.threetrios.player;
+package cs3500.threetrios.playerstats;
+
+import cs3500.threetrios.player.Player;
 
 import java.util.HashMap;
 import java.util.Map;

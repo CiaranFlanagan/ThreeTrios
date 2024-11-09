@@ -1,11 +1,14 @@
 package cs3500.threetrios.player;
 
+import cs3500.threetrios.model.Model;
+
 import java.io.Serializable;
+import java.util.function.Consumer;
 
 /**
  * Represents a player in the game.
  */
-public interface Player extends Serializable {
+public interface Player {
   /**
    * returns the name of the player.
    * @return the player's name
@@ -18,6 +21,8 @@ public interface Player extends Serializable {
    * @return - an integer measure of skill.
    */
   Difficulty difficulty();
+
+  Consumer<Model> nextMove();
 
 }
 

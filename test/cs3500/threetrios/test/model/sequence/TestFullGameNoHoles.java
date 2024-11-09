@@ -51,7 +51,7 @@ public class TestFullGameNoHoles {
     state = model.getGrid().readOnly2dCellArray();
     left = state[0][0].getCard(); // this is actual pointer not a copy
     // left has av's of 1
-    Assert.assertEquals(left.getCoach().getColor(), Coach.Color.Red);
+    Assert.assertEquals(left.getCoachColor(), Coach.Color.Red);
     // makes sure that if a card is placed with no battle, it stays same color
 
 
@@ -64,9 +64,9 @@ public class TestFullGameNoHoles {
     // make sure that we switch coaches properly
     model.placeCard(0, 0, 1); // blue plays so now board is ? B _
     state = model.getGrid().readOnly2dCellArray();
-    Assert.assertEquals(state[0][1].getCard().getCoach(), blue);
+    Assert.assertEquals(state[0][1].getCard().getCoachColor(), blue);
     // left vs mid = 3 < 9 so left loses
-    Assert.assertEquals(left.getCoach(), blue); // WE FLIPPED THE CARD!
+    Assert.assertEquals(left.getCoachColor(), blue); // WE FLIPPED THE CARD!
 
 
   }
@@ -80,7 +80,7 @@ public class TestFullGameNoHoles {
     // should beat mid and cascade!
     for (GridCellReadOnly c : state[0]) {
       Assert.assertTrue(c.hasCard());
-      Assert.assertEquals(red, c.getCard().getCoach());
+      Assert.assertEquals(red.getColor(), c.getCard().getCoachColor());
     }
   }
 

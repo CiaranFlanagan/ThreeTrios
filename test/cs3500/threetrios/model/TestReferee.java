@@ -55,22 +55,22 @@ public class TestReferee {
   public void testRef3() {
     holeCell2.link(cardCell2, CardinalDirection.EAST);
     cardCell2.placeCard(card1);
-    card1.setCoach(kc);
+    card1.setCoachColor(kc.getColor());
     ref.refereeBattlePhase(cardCell2);
     Assert.assertEquals(holeCell2.canHaveCard(), false);
-    Assert.assertEquals(cardCell2.getCard().getCoach(), kc);
+    Assert.assertEquals(cardCell2.getCard().getCoachColor(), kc.getColor());
   }
 
   @Test
   public void testRef4() {
-    card1.setCoach(kc); // this should change after battle
-    card2.setCoach(ciaran);
+    card1.setCoachColor(kc.getColor()); // this should change after battle
+    card2.setCoachColor(ciaran.getColor());
     cardCell1.link(cardCell2, CardinalDirection.NORTH);
     cardCell1.placeCard(card1);
     cardCell2.placeCard(card2);
     ref.refereeBattlePhase(cardCell2);
-    Assert.assertSame(ciaran, card2.getCoach());
-    Assert.assertSame(ciaran, card1.getCoach());
+    Assert.assertSame(ciaran.getColor(), card2.getCoachColor());
+    Assert.assertSame(ciaran.getColor(), card1.getCoachColor());
   }
 
   @Test
@@ -80,18 +80,18 @@ public class TestReferee {
     //  |
     //  C2 - C3
 
-    card1.setCoach(kc); // this should change after battle
-    card2.setCoach(ciaran);
-    card3.setCoach(kc);
+    card1.setCoachColor(kc.getColor()); // this should change after battle
+    card2.setCoachColor(ciaran.getColor());
+    card3.setCoachColor(kc.getColor());
     cardCell1.link(cardCell2, CardinalDirection.SOUTH);
     cardCell2.link(cardCell3, CardinalDirection.EAST);
     cardCell1.placeCard(card1);
     cardCell2.placeCard(card2);
     cardCell3.placeCard(card3);
     ref.refereeBattlePhase(cardCell3);
-    Assert.assertSame(kc, card3.getCoach());
-    Assert.assertSame(kc, card2.getCoach());
-    Assert.assertSame(kc, card1.getCoach());
+    Assert.assertSame(kc.getColor(), card3.getCoachColor());
+    Assert.assertSame(kc.getColor(), card2.getCoachColor());
+    Assert.assertSame(kc.getColor(), card1.getCoachColor());
   }
 
   @Test
@@ -101,11 +101,11 @@ public class TestReferee {
     holeCell1.link(cardCell2, CardinalDirection.EAST);
     cardCell1.placeCard(card1);
     cardCell2.placeCard(card2);
-    card1.setCoach(kc);
-    card2.setCoach(ciaran);
+    card1.setCoachColor(kc.getColor());
+    card2.setCoachColor(ciaran.getColor());
     ref.refereeBattlePhase(cardCell2);
     // card 2 would usually beat card1 but they should be different colors because of hole
-    Assert.assertNotEquals(card1.getCoach(), card2.getCoach());
+    Assert.assertNotEquals(card1.getCoachColor(), card2.getCoachColor());
 
   }
 

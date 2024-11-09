@@ -90,16 +90,16 @@ public class TestFullGameConnected {
     model.placeCard(0, 4, 0);
     model.placeCard(0, 3, 0);
     model.placeCard(0, 3, 0);
-    Assert.assertEquals(Coach.Color.Blue, cardAt(0, 4));
-    Assert.assertEquals(Coach.Color.Blue, cardAt(1, 4));
-    Assert.assertEquals(Coach.Color.Blue, cardAt(2, 3));
-    Assert.assertEquals(Coach.Color.Blue, cardAt(3, 4));
-    Assert.assertEquals(Coach.Color.Blue, cardAt(4, 4));
-    Assert.assertEquals(Coach.Color.Blue, cardAt(2, 2));
-    Assert.assertEquals(Coach.Color.Blue, cardAt(2, 3));
-    Assert.assertEquals(Coach.Color.Blue, cardAt(1, 0));
-    Assert.assertEquals(Coach.Color.Blue, cardAt(2, 0));
-    Assert.assertEquals(Coach.Color.Blue, cardAt(3, 0));
+    Assert.assertEquals(Coach.Color.Blue, cardAt(0, 4).getCoachColor());
+    Assert.assertEquals(Coach.Color.Blue, cardAt(1, 4).getCoachColor());
+    Assert.assertEquals(Coach.Color.Blue, cardAt(2, 3).getCoachColor());
+    Assert.assertEquals(Coach.Color.Blue, cardAt(3, 4).getCoachColor());
+    Assert.assertEquals(Coach.Color.Blue, cardAt(4, 4).getCoachColor());
+    Assert.assertEquals(Coach.Color.Blue, cardAt(2, 2).getCoachColor());
+    Assert.assertEquals(Coach.Color.Blue, cardAt(2, 3).getCoachColor());
+    Assert.assertEquals(Coach.Color.Blue, cardAt(1, 0).getCoachColor());
+    Assert.assertEquals(Coach.Color.Blue, cardAt(2, 0).getCoachColor());
+    Assert.assertEquals(Coach.Color.Blue, cardAt(3, 0).getCoachColor());
   }
 
   /**
@@ -119,6 +119,6 @@ public class TestFullGameConnected {
   }
 
   private Coach.Color colorAt(int row, int col) {
-    return model.getGrid().readOnly2dCellArray()[row][col].getCard().getCoach().getColor();
+    return model.getGrid().readOnly2dCellArray()[row][col].getCard().getCoachColor();
   }
 }

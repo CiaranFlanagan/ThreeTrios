@@ -1,5 +1,10 @@
 package cs3500.threetrios.model;
 
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.function.Consumer;
+
 /**
  * To abstract and bundle grid and coach mutation from models.
  */
@@ -8,6 +13,7 @@ public abstract class ModelAbstract implements Model {
   protected Coach coachRed;
   protected Coach coachBlue;
   protected Coach currentCoach;
+  protected List<Consumer<ModelAbstract>> moves;
 
   protected ModelAbstract() {
     this.coachRed = new Coach(Coach.Color.Red);

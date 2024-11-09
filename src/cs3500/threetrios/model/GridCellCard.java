@@ -39,7 +39,7 @@ public final class GridCellCard extends GridCellAbstract {
   }
 
   @Override
-  protected void acceptBattlePhase(Referee battlePhase) {
+  public void acceptBattlePhase(Referee battlePhase) {
     battlePhase.refereeBattlePhase(this);
   }
 
