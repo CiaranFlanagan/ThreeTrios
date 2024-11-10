@@ -2,37 +2,50 @@ package cs3500.threetrios.player;
 
 import cs3500.threetrios.model.Model;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/**
- * Strategy 1 - the strategy that finds the move that flips the most cards.
- */
-public class MostFlips extends StrategyAbstract<MostFlips> {
+public class MostFlips extends StrategyAbstract {
+  public MostFlips(Supplier<Model> modelSupplier) {
+    super(modelSupplier);
+  }
 
   /**
-   * @param modelSupplier - a supplier of a model, assumes not null
-   * @return -
+   * to find all possible moves
+   *
+   * @return
    */
   @Override
-  public int effectiveness(Supplier<Model> modelSupplier) {
+  protected List<Consumer<Model>> allConsideredMoves() {
     Model model = modelSupplier.get();
-    if (validMove(this, model)) {
-      // TODO
-      return 0;
-    } else {
-      return -1;
+    int numRows = model.getGrid().readOnly2dCellArray().length;
+    int numColumns = model.getGrid().readOnly2dCellArray()[0].length;
+    int sizeOfHand = model.getCurrentCoach().getHand().size();
+    List<Consumer<Model>> acc = new ArrayList<>();
+    for (int curRow = 0; curRow < numRows; curRow += 1) {
+      for (int curCol = 0; curCol < numColumns; curCol += 1) {
+        for (int curPlaceInHand = 0; curPlaceInHand < sizeOfHand; curPlaceInHand += 1) {
+          int finalCurPlaceInHand = curPlaceInHand;
+          int finalCurRow = curRow;
+          int finalCurCol = curCol;
+          acc.add((m) -> m.placeCard(finalCurPlaceInHand, finalCurRow, finalCurCol));
+        }
+      }
     }
+    return acc;
   }
 
   /**
-   * @param modelSupplier - a supplier of a model
-   * @return - the best move if it exists
+   * find effectiveness by comparing the model's state from this.modelSupplier
+   * and the state after applying the move
+   *
+   * @param move - a consumer of the model
+   * @return - an int rating of the effectiveness
    */
   @Override
-  public Optional<Consumer<Model>> computeBestNextMove(Supplier<Model> modelSupplier) {
-    return Optional.empty();
+  protected int effectiveness(Consumer<Model> move) {
+    return 0;
   }
-
 }

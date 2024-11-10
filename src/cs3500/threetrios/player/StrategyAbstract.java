@@ -3,42 +3,40 @@ package cs3500.threetrios.player;
 import cs3500.threetrios.model.Model;
 
 import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.BinaryOperator;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public abstract class StrategyAbstract<S extends Strategy<S>> implements Strategy<S> {
-  protected int idx;
-  protected int row;
-  protected int col;
+public abstract class StrategyAbstract {
+  protected Supplier<Model> modelSupplier;
+
+  public StrategyAbstract(Supplier<Model> modelSupplier) {
+    this.modelSupplier = modelSupplier;
+  }
 
   /**
-   * to find the strategy that is more effective, either this or that.
-   * @param that - the sibling strategy we are comparing with.
-   * @param modelSupplier - the supplier of the model.
-   * @return - the more effective strategy.
+   * to find all possible moves
+   * @return
    */
-  public final S betterOf(S that, Supplier<Model> modelSupplier) {
-    Comparator<S> comp = Comparator.comparingInt((s) -> s.effectiveness(modelSupplier));
-    BinaryOperator<S> better = BinaryOperator.maxBy(comp);
-    return better.apply((S) this, that);
-  }
+  protected abstract List<Consumer<Model>> allConsideredMoves();
+
   /**
-   * Performs this move on the given argument.
-   *
-   * @param model the input argument
+   * find effectiveness by comparing the model's state from this.modelSupplier
+   * and the state after applying the move
+   * @param move - a consumer of the model
+   * @return - an int rating of the effectiveness
    */
-  @Override
-  public final void accept(Model model) {
-    model.placeCard(idx, row, col);
+  protected abstract int effectiveness(Consumer<Model> move);
+
+  /**
+   * to find the best move by reducing all possible moves, choosing the most effective
+   * via this.effectiveness
+   * @return - the best move, if it exists
+   */
+  protected final Optional<Consumer<Model>> bestMove() {
+    return allConsideredMoves().stream()
+            .reduce(BinaryOperator.maxBy(Comparator.comparingInt(this::effectiveness)));
   }
-
-  protected final int validMoveOr(S s, Model model, int orElse) {
-    try {
-      s.accept(model);
-    } catch (Throwable ignored) {
-
-    }
-    return orElse;
-  }
-
 }

@@ -2,7 +2,6 @@ package cs3500.threetrios.player;
 
 import cs3500.threetrios.model.Model;
 
-import java.io.Serializable;
 import java.util.function.Consumer;
 
 /**
