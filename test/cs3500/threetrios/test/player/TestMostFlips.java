@@ -9,13 +9,13 @@ import cs3500.threetrios.model.Model;
 import cs3500.threetrios.model.ModelBase;
 import cs3500.threetrios.model.RefereeDefault;
 import cs3500.threetrios.player.MostFlips;
+import cs3500.threetrios.player.Move;
 import cs3500.threetrios.utils.LineWriter;
 import org.junit.Assert;
 import org.junit.Test;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class TestMostFlips {
@@ -64,7 +64,7 @@ public class TestMostFlips {
 
     // move 1
     MostFlips mostFlips = new MostFlips(modelSupplier);
-    Optional<Consumer<Model>> move1 = mostFlips.bestMove();
+    Optional<Move> move1 = mostFlips.bestMove();
     Supplier<Model> modelSupplier1 = () -> {
       Model m = modelSupplier.get();
       move1.get().accept(m);
@@ -78,7 +78,7 @@ public class TestMostFlips {
 
     // move 2
     mostFlips = new MostFlips(modelSupplier1);
-    Optional<Consumer<Model>> move2 = mostFlips.bestMove();
+    Optional<Move> move2 = mostFlips.bestMove();
     Supplier<Model> modelSupplier2 = () -> {
       Model m = modelSupplier1.get();
       move2.get().accept(m);
@@ -94,7 +94,7 @@ public class TestMostFlips {
 
     // move 3
     mostFlips = new MostFlips(modelSupplier2);
-    Optional<Consumer<Model>> move3 = mostFlips.bestMove();
+    Optional<Move> move3 = mostFlips.bestMove();
     Supplier<Model> modelSupplier3 = () -> {
       Model m = modelSupplier2.get();
       move3.get().accept(m);
