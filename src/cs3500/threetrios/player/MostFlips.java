@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class MostFlips extends StrategyAbstract {
@@ -26,12 +27,20 @@ public class MostFlips extends StrategyAbstract {
     int numRows = model.getGrid().readOnly2dCellArray().length;
     int numColumns = model.getGrid().readOnly2dCellArray()[0].length;
     int sizeOfHand = model.getCurrentCoach().getHand().size();
-    List<Consumer<Model>> acc = new ArrayList<>();
+    List<Consumer<Model>> acc0 = new ArrayList<>();
     IntStream.range(0, numRows).forEach(
             (row) -> IntStream.range(0, numColumns).forEach(
                     (col) -> IntStream.range(0, sizeOfHand).forEach(
-                            (id) -> acc.add((m) -> m.placeCard(id, row, col)))));
-    return acc;
+                            (id) -> acc0.add((m) -> m.placeCard(id, row, col)))));
+    return acc0.stream().filter((m) ->
+                                {
+                                  try {
+                                    m.accept(modelSupplier.get());
+                                    return true;
+                                  } catch (Exception e) {
+                                    return false;
+                                  }
+                                }).collect(Collectors.toList());
   }
 
   /**
@@ -50,13 +59,9 @@ public class MostFlips extends StrategyAbstract {
             .stream().map((c) -> c.hasCard() && c.getCard().getCoachColor() != color ? 1 : 0)
             .reduce(0, Integer::sum);
     int before = numBadGuys.apply(model);
-    try {
-      move.accept(model);
-      int after = numBadGuys.apply(model);
-      return before - after;
-    } catch (IllegalStateException ex) {
-      return -1;
-    }
-     // we want to see how many bad guys we flipped, so that's before - after
+    move.accept(model);
+    int after = numBadGuys.apply(model);
+    return before - after;
+    // we want to see how many bad guys we flipped, so that's before - after
   }
 }
