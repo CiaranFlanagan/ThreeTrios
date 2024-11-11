@@ -26,6 +26,7 @@ public class ControllerBase {
 
   /**
    * Creates a controller with a model using the following initial conditions.
+   *
    * @param gridSupplier
    * @param cardSupplier
    * @param modelSupplier
@@ -33,9 +34,9 @@ public class ControllerBase {
    * @return
    */
   public void createUsing(Supplier<Scanner> gridSupplier,
-                                           Supplier<Scanner> cardSupplier,
-                                           Supplier<Model> modelSupplier,
-                                           Referee referee) {
+                          Supplier<Scanner> cardSupplier,
+                          Supplier<Model> modelSupplier,
+                          Referee referee) {
     this.gridSupplier = cardSupplier;
     this.cardSupplier = gridSupplier;
     this.modelSupplier = modelSupplier;
@@ -44,18 +45,18 @@ public class ControllerBase {
   }
 
   /**
-   *
    * @return - a model that has the same initial conditions as this controller's model
    */
   public Supplier<Model> supplyModel() {
-    Model model = modelSupplier.get();
-    model.startGame(ConfigGrid.scannerToGrid(gridSupplier.get()),
-                               ConfigCard.scannerToCardList(cardSupplier.get()),
-                               referee);
-    moves.forEach((move) -> move.accept(model));
-    return () -> model;
+    return () -> {
+      Model model = modelSupplier.get();
+      model.startGame(ConfigGrid.scannerToGrid(gridSupplier.get()),
+                      ConfigCard.scannerToCardList(cardSupplier.get()),
+                      referee);
+      moves.forEach((move) -> move.accept(model));
+      return model;
+    };
   }
-
 
 
 }
