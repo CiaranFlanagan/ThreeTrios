@@ -8,9 +8,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class MostFlips extends StrategyAbstract {
   public MostFlips(Supplier<Model> modelSupplier) {
@@ -18,7 +16,7 @@ public class MostFlips extends StrategyAbstract {
   }
 
   /**
-   * to find all possible moves
+   * to find all considered moves
    *
    * @return
    */
@@ -48,11 +46,17 @@ public class MostFlips extends StrategyAbstract {
     Model model = modelSupplier.get();
     Coach.Color color = model.getCurrentCoach().getColor();
     Function<Model, Integer> numBadGuys = (m) -> modelToCellList(model)
-            .stream().map((c) -> (c.getCard().getCoachColor() == color) ? 0 : 1)
+            // if card is same color as curCoach then add 0 to acc else add 1 to acc
+            .stream().map((c) -> c.hasCard() && c.getCard().getCoachColor() != color ? 1 : 0)
             .reduce(0, Integer::sum);
     int before = numBadGuys.apply(model);
-    move.accept(model);
-    int after = numBadGuys.apply(model);
-    return before - after;
+    try {
+      move.accept(model);
+      int after = numBadGuys.apply(model);
+      return before - after;
+    } catch (IllegalStateException ex) {
+      return -1;
+    }
+     // we want to see how many bad guys we flipped, so that's before - after
   }
 }

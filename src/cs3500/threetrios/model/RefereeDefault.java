@@ -33,12 +33,8 @@ public final class RefereeDefault implements Referee {
       }
 
       Coach.Color theirCoach = theirCard.getCoachColor();
-      System.out.println(ourCard);
-      System.out.println(theirCard);
-      System.out.println(ourCard.beats(theirCard, direction));
       if (ourCoach != theirCoach && ourCard.beats(theirCard, direction)) {
         theirCard.setCoachColor(ourCoach);
-        System.out.println("aah");
         refereeBattlePhase(them);
       }
     }

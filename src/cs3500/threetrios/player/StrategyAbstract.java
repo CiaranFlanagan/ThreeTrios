@@ -41,7 +41,7 @@ public abstract class StrategyAbstract {
    *
    * @return - the best move, if it exists
    */
-  protected final Optional<Consumer<Model>> bestMove() {
+  public final Optional<Consumer<Model>> bestMove() {
     return allConsideredMoves().stream()
             .reduce(BinaryOperator.maxBy(Comparator.comparingInt(this::effectiveness)));
   }

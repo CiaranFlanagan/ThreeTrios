@@ -73,11 +73,11 @@ public final class Card {
 
   @Override
   public String toString() {
-    String s = "<TTCard: " + name;
+    String s = name;
     for (CardinalDirection c : CardinalDirection.values()) {
       s += " " + attackValues.get(c).toString();
     }
-    return s + ">";
+    return s;
   }
 
   // package private to prevent excess side-effect

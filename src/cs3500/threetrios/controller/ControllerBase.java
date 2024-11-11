@@ -1,47 +1,41 @@
 package cs3500.threetrios.controller;
 
-import com.sun.jdi.ArrayType;
+import cs3500.threetrios.model.Card;
+import cs3500.threetrios.model.Grid;
 import cs3500.threetrios.model.Model;
 import cs3500.threetrios.model.Referee;
 import cs3500.threetrios.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class ControllerBase {
+public class ControllerBase implements Controller {
   private Model model;
   private View view;
   private Supplier<Model> modelSupplier;
-  private Supplier<Scanner> gridSupplier;
-  private Supplier<Scanner> cardSupplier;
-  private Referee referee;
+  private Supplier<Grid> gridSupplier;
+  private Supplier<List<Card>> cardsSupplier;
+  private Supplier<Referee> refereeSupplier;
   private final List<Consumer<Model>> moves;
 
   private ControllerBase() {
     this.moves = new ArrayList<>();
   }
 
-  /**
-   * Creates a controller with a model using the following initial conditions.
-   *
-   * @param gridSupplier
-   * @param cardSupplier
-   * @param modelSupplier
-   * @param referee
-   * @return
-   */
-  public void createUsing(Supplier<Scanner> gridSupplier,
-                          Supplier<Scanner> cardSupplier,
+  @Override
+  public void createUsing(Supplier<Grid> gridSupplier,
+                          Supplier<List<Card>> cardsSupplier,
                           Supplier<Model> modelSupplier,
-                          Referee referee) {
-    this.gridSupplier = cardSupplier;
-    this.cardSupplier = gridSupplier;
+                          Supplier<Referee> refereeSupplier,
+                          View view) {
+    this.gridSupplier = gridSupplier;
+    this.cardsSupplier = cardsSupplier;
     this.modelSupplier = modelSupplier;
+    this.refereeSupplier = refereeSupplier;
     this.model = supplyModel().get();
-    this.referee = referee;
+    this.view = view;
   }
 
   /**
@@ -49,14 +43,13 @@ public class ControllerBase {
    */
   public Supplier<Model> supplyModel() {
     return () -> {
-      Model model = modelSupplier.get();
-      model.startGame(ConfigGrid.scannerToGrid(gridSupplier.get()),
-                      ConfigCard.scannerToCardList(cardSupplier.get()),
-                      referee);
+      final Model model = modelSupplier.get();
+      model.startGame(gridSupplier.get(),
+                      cardsSupplier.get(),
+                      refereeSupplier.get());
       moves.forEach((move) -> move.accept(model));
       return model;
     };
   }
-
 
 }
