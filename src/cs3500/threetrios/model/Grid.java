@@ -1,11 +1,10 @@
 package cs3500.threetrios.model;
 
-import java.lang.reflect.Array;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
- * to represent the grid-shaped board of the game three-trios.
+ * Represents the grid-shaped board for the game Three Trios.
+ * The grid is made up of cells, some of which can hold cards and others which may represent holes.
  */
 public final class Grid {
   private final GridCellAbstract[][] grid; // first index is rows, second is columns, obvious
@@ -13,9 +12,11 @@ public final class Grid {
   private final int numHoles;
 
   /**
-   * Constructs a Grids.
-   * @param grid - the grid to construct
-   * @throws- if grid is null.
+   * Constructs a Grid with a given 2D array of GridCellAbstract objects.
+   * Calculates the number of holes (cells that cannot hold cards) on the grid.
+   *
+   * @param grid the grid to initialize
+   * @throws IllegalArgumentException if the grid is null or has non-positive dimensions
    */
   public Grid(GridCellAbstract[][] grid) {
     if (grid == null) {
@@ -115,6 +116,12 @@ public final class Grid {
     return this.grid;
   }
 
+  /**
+   * Provides a Supplier for a new Grid instance, replicating the current grid’s configuration.
+   * Cells in the replicated grid are based on the structure of this grid.
+   *
+   * @return a Supplier that provides a new Grid instance with similar configuration
+   */
   public Supplier<Grid> supply() {
     Supplier<GridCellAbstract[][]> a = () ->
     {

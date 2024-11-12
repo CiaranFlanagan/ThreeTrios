@@ -1,5 +1,10 @@
 package cs3500.threetrios.model;
 
+/**
+ * Represents a read-only view of the Three Trios game model.
+ * This interface provides methods to retrieve the current state of the game
+ * without modifying it, allowing safe access to the game's status, participants, and grid.
+ */
 public interface ReadOnlyThreeTriosModel {
   /**
    * Gets the current coach.

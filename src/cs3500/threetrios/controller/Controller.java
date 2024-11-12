@@ -5,9 +5,7 @@ import cs3500.threetrios.model.Grid;
 import cs3500.threetrios.model.Model;
 import cs3500.threetrios.model.Referee;
 import cs3500.threetrios.view.View;
-
 import java.util.List;
-import java.util.Scanner;
 import java.util.function.Supplier;
 
 /**
@@ -23,7 +21,6 @@ public interface Controller {
    * @param modelSupplier   - supplier of a model
    * @param refereeSupplier - supplier of a referee
    * @param view            - the view
-   * @return
    */
   void createUsing(Supplier<Grid> gridSupplier,
                    Supplier<List<Card>> cardsSupplier,

@@ -6,6 +6,12 @@ import cs3500.threetrios.model.Model;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+/**
+ * The MostFlips strategy aims to maximize the number of opponent's cards flipped
+ * by placing a card in the most advantageous position on the grid.
+ * This strategy calculates the effectiveness of a move based on the difference in opponent's cards
+ * before and after a move is made, selecting moves that yield the highest number of flips.
+ */
 public class MostFlips extends StrategyAbstract {
 
   public MostFlips(Supplier<Model> modelSupplier) {
@@ -13,9 +19,8 @@ public class MostFlips extends StrategyAbstract {
   }
 
   /**
-   * find effectiveness by comparing the model's state from this.modelSupplier
+   * Find effectiveness by comparing the model's state from this.modelSupplier
    * and the state after applying the move
-   *
    * @param move - a consumer of the model
    * @return - an int rating of the effectiveness
    */
