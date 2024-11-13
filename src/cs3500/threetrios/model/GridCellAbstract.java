@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * To represent a cell on a grid on a game of three trios.
  */
-public abstract class GridCellAbstract implements GridCellReadOnly {
+abstract class GridCellAbstract implements GridCellVisitable {
   private final Map<CardinalDirection, GridCellAbstract> neighbors;
 
   /**

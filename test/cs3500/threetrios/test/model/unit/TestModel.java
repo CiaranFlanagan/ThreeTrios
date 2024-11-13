@@ -3,10 +3,9 @@ package cs3500.threetrios.test.model.unit;
 import cs3500.threetrios.controller.TestFiles;
 import cs3500.threetrios.controller.ConfigCard;
 import cs3500.threetrios.controller.ConfigGrid;
-import cs3500.threetrios.model.GridCellAbstract;
+import cs3500.threetrios.model.CellType;
 import cs3500.threetrios.model.Referee;
 import cs3500.threetrios.model.Card;
-import cs3500.threetrios.model.GridCellCard;
 import cs3500.threetrios.model.RefereeDefault;
 import cs3500.threetrios.model.Grid;
 import cs3500.threetrios.model.ModelBase;
@@ -77,10 +76,8 @@ public class TestModel {
 
   @Test(expected = IllegalStateException.class)
   public void testPlaceCardAfterGameOver() {
-    GridCellAbstract cc = new GridCellCard();
-    GridCellAbstract[] ccArray = {cc};
-    GridCellAbstract[][] singleCell = {ccArray};
-    Grid grid = new Grid(singleCell);
+    CellType[][] onebyone = new CellType[][]{{CellType.CARD}};
+    Grid grid = new Grid(onebyone);
     model.startGame(grid, cardsSmall, referee);
     model.placeCard(0, 0, 0);
     model.placeCard(0, 0, 0);
@@ -113,7 +110,7 @@ public class TestModel {
   //getWinner
   @Test(expected = IllegalStateException.class)
   public void testGetWinnerBeforeGameIsOver() {
-    model.getWinner();
+    model.winner();
   }
 
   @Test(expected = IllegalArgumentException.class)

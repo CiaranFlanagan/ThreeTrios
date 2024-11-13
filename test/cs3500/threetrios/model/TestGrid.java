@@ -17,12 +17,12 @@ public class TestGrid {
 
   @Before
   public void setUp() {
-    GridCellAbstract[][] gridCells = new GridCellAbstract[2][2];
-    gridCells[0][0] = new GridCellCard();
-    gridCells[0][1] = new GridCellCard();
-    gridCells[1][0] = new GridCellCard();
-    gridCells[1][1] = new GridCellCard();
-    grid = new Grid(gridCells);
+    CellType[][] twobytwoallcards = new CellType[2][2];
+    twobytwoallcards[0][0] = CellType.CARD;
+    twobytwoallcards[0][1] = CellType.CARD;
+    twobytwoallcards[1][0] = CellType.CARD;
+    twobytwoallcards[1][1] = CellType.CARD;
+    grid = new Grid(twobytwoallcards);
   }
 
   @Test

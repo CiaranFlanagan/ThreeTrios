@@ -48,14 +48,14 @@ public final class ModelBase extends ModelAbstract {
       throw new IllegalArgumentException("Arguments cannot be null");
     }
     int totalCardCells =
-            grid.readOnly2dCellArray().length * grid.readOnly2dCellArray()[0].length
+            grid.readOnlyArray2D().length * grid.readOnlyArray2D()[0].length
                     - grid.getNumHoles();
     int requiredCards = totalCardCells + 1;
     if (cards.size() < requiredCards) {
       throw new IllegalArgumentException("Number of cards must be at least N + 1, where N is the " +
               "number of card cells on the grid");
     }
-    super.updateGrid(grid);
+    this.grid = grid;
     this.referee = referee;
     this.gameStarted = true;
     dealCards(cards, totalCardCells + 1);
@@ -70,11 +70,11 @@ public final class ModelBase extends ModelAbstract {
 
     for (int i = 0; i < total; i += 2) {
       Card curRedCard = copy.get(i);
-      curRedCard.setCoachColor(coachRed.getColor());
+      curRedCard.setCoach(Coach.RED);
       Card curBlueCard = copy.get(i + 1);
-      curBlueCard.setCoachColor(coachBlue.getColor());
-      addCardTo(coachRed, curRedCard);
-      addCardTo(coachBlue, curBlueCard);
+      curBlueCard.setCoach(Coach.BLUE);
+      coachesHands.get(Coach.RED).add(curRedCard);
+      coachesHands.get(Coach.BLUE).add(curBlueCard);
     }
   }
 
@@ -86,14 +86,14 @@ public final class ModelBase extends ModelAbstract {
     if (isGameOver()) {
       throw new IllegalStateException("Game is over");
     }
-    Card curCard = currentCoach.removeCardFromHand(idx);
+    Card curCard = coachesHands.get(currentCoach).remove(idx);
     GridCellAbstract relevantCell = setGridCardAt(row, col, curCard);
     referee.refereeBattlePhase(relevantCell);
     nextCoachTurn();
   }
 
   @Override
-  public Coach getCurrentCoach() {
+  public Coach curCoach() {
     return this.currentCoach;
   }
 
@@ -109,13 +109,7 @@ public final class ModelBase extends ModelAbstract {
 
 
   private void nextCoachTurn() {
-    if (this.currentCoach == coachRed) {
-      this.currentCoach = coachBlue;
-    } else if (this.currentCoach == coachBlue) {
-      this.currentCoach = coachRed;
-    } else {
-      throw new IllegalStateException("model mishandled coaches");
-    }
+    currentCoach = currentCoach.opponent();
   }
 
 
@@ -130,7 +124,7 @@ public final class ModelBase extends ModelAbstract {
   }
 
   @Override
-  public Coach getWinner() {
+  public Coach winner() {
     if (!isGameOver()) {
       throw new IllegalStateException("Game is not over yet");
     }
@@ -145,14 +139,14 @@ public final class ModelBase extends ModelAbstract {
    * @throws IllegalStateException if grid is not full, or if cards coach is null
    */
   private Coach whoHasMoreTotalCards() {
-    int coachRedTotal = coachRed.getHand().size();
-    int coachBlueTotal = coachBlue.getHand().size();
-    for (GridCellReadOnly[] row : grid.readOnly2dCellArray()) {
+    int coachRedTotal = this.coachesHands.get(Coach.RED).size();
+    int coachBlueTotal = this.coachesHands.get(Coach.BLUE).size();
+    for (GridCellReadOnly[] row : grid.readOnlyArray2D()) {
       for (GridCellReadOnly cell : row) {
         if (cell.hasCard()) {
-          if (cell.getCard().getCoachColor() == Coach.Color.Red) {
+          if (cell.getCard().getCoach() == Coach.RED) {
             coachRedTotal += 1;
-          } else if (cell.getCard().getCoachColor() == Coach.Color.Blue) {
+          } else if (cell.getCard().getCoach() == Coach.BLUE) {
             coachBlueTotal += 1;
           } else {
             throw new IllegalStateException("card should have a coach if this board is full");
@@ -160,6 +154,6 @@ public final class ModelBase extends ModelAbstract {
         }
       }
     }
-    return coachRedTotal > coachBlueTotal ? coachRed : coachBlue; // ternary operator
+    return coachRedTotal > coachBlueTotal ? Coach.RED : Coach.BLUE; // ternary operator
   }
 }

@@ -1,9 +1,8 @@
 package cs3500.threetrios.controller;
 
-import cs3500.threetrios.model.GridCellAbstract;
-import cs3500.threetrios.model.GridCellCard;
+import cs3500.threetrios.model.CellType;
 import cs3500.threetrios.model.Grid;
-import cs3500.threetrios.model.GridCellHole;
+import cs3500.threetrios.model.GridCellVisitable;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -22,12 +21,12 @@ public class ConfigGrid {
       throw new IllegalArgumentException("null scanner");
     }
     try {
-      GridCellAbstract[][] arr = null;
+      CellType[][] arr = null;
       while (sc.hasNext()) {
         int numRows = sc.nextInt();
         int numCols = sc.nextInt();
         Scanner getLine = new Scanner(sc.nextLine());
-        arr = new GridCellAbstract[numRows][numCols];
+        arr = new CellType[numRows][numCols];
         for (int curRow = 0; curRow < numRows; curRow++) {
           String rowString = sc.next();
           for (int curCol = 0; curCol < numCols; curCol++) {
@@ -46,11 +45,11 @@ public class ConfigGrid {
    * @param s - the string
    * @return - a board cell
    */
-  private static GridCellAbstract stringToBoardCell(String s) {
+  private static CellType stringToBoardCell(String s) {
     if (s.equals("C")) {
-      return new GridCellCard();
+      return CellType.CARD;
     } else if (s.equals("X")) {
-      return new GridCellHole();
+      return CellType.HOLE;
     } else {
       throw new IllegalArgumentException("must be C or X; given: " + s);
     }

@@ -1,5 +1,6 @@
 package cs3500.threetrios.model;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +11,7 @@ public final class Card {
 
   private final String name;
   private final Map<CardinalDirection, AttackValue> attackValues;
-  private Coach.Color coachColor;
+  private Coach coachColor;
 
   /**
    * to construct a card with [name] and [attackValues].
@@ -55,7 +56,7 @@ public final class Card {
    * to return the coach of this card.
    * @return - the current coach of this card.
    */
-  public Coach.Color getCoachColor() {
+  public Coach getCoach() {
     return this.coachColor;
   }
 
@@ -68,8 +69,6 @@ public final class Card {
   public boolean beats(Card other, CardinalDirection direction) {
     return getAttackValue(direction).beats(other.getAttackValue(direction.opposite()));
   }
-
-
 
   @Override
   public String toString() {
@@ -95,11 +94,14 @@ public final class Card {
    * to update the coach to [newCoach].
    * @param newCoach - the new coach of this
    */
-  void setCoachColor(Coach.Color newCoach) {
+  void setCoach(Coach newCoach) {
     this.coachColor = newCoach;
   }
 
-
-
+  Card copy() {
+    Card card = new Card(name, Collections.unmodifiableMap(attackValues));
+    card.setCoach(this.coachColor);
+    return card;
+  }
 
 }

@@ -12,7 +12,8 @@ import java.util.function.Supplier;
 
 public class Utils {
   public static void printGrid(Supplier<Grid> gridSupplier) {
-    Arrays.stream(gridSupplier.get().readOnly2dCellArray())
+
+    Arrays.stream(gridSupplier.get().readOnlyArray2D())
             .forEach((row) -> {
               Arrays.stream(row)
                       .forEach((cell) -> {
@@ -30,7 +31,7 @@ public class Utils {
   }
 
   public static Optional<Card> cardAt(Model model, int row, int col) {
-    GridCellReadOnly cell = model.getGrid().readOnly2dCellArray()[row][col];
+    GridCellReadOnly cell = model.curGrid().readOnlyArray2D()[row][col];
     if (cell.hasCard()) {
       return Optional.of(cell.getCard());
     } else {

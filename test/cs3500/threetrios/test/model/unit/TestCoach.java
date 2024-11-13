@@ -1,5 +1,6 @@
 package cs3500.threetrios.test.model.unit;
 
+import cs3500.threetrios.model.Coach;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +11,6 @@ import java.util.HashMap;
 import cs3500.threetrios.model.AttackValue;
 import cs3500.threetrios.model.Card;
 import cs3500.threetrios.model.CardinalDirection;
-import cs3500.threetrios.model.Coach;
 
 /**
  * Tests for the Coach class.
@@ -19,8 +19,8 @@ public class TestCoach {
 
   @Before
   public void setUp() {
-    Coach.Color colorRed = Coach.Color.Red;
-    Coach.Color colorBlue = Coach.Color.Blue;
+    Coach colorRed = Coach.RED;
+    Coach colorBlue = Coach.BLUE;
     HashMap<CardinalDirection, AttackValue> attackValues = new HashMap<>();
     attackValues.put(CardinalDirection.NORTH, AttackValue.FIVE);
     attackValues.put(CardinalDirection.SOUTH, AttackValue.THREE);
@@ -31,8 +31,8 @@ public class TestCoach {
 
   @Test
   public void TestColorToString() {
-    Coach.Color colorRed = Coach.Color.Red;
-    Coach.Color colorBlue = Coach.Color.Blue;
+    Coach colorRed = Coach.RED;
+    Coach colorBlue = Coach.BLUE;
     Assert.assertEquals(colorRed.toString(), "Red");
     Assert.assertEquals(colorBlue.toString(), "Blue");
   }
@@ -40,8 +40,8 @@ public class TestCoach {
 
   @Test
   public void TestCoachConstructor() {
-    Coach.Color colorRed = Coach.Color.Red;
-    Coach.Color colorBlue = Coach.Color.Blue;
+    Coach colorRed = Coach.RED;
+    Coach colorBlue = Coach.BLUE;
     Coach coachRed = new Coach(colorRed);
     Coach coachBlue = new Coach(colorBlue);
     Assert.assertEquals(coachRed.getColor(), colorRed);
@@ -50,8 +50,8 @@ public class TestCoach {
 
   @Test
   public void TestGetColor() {
-    Coach.Color colorRed = Coach.Color.Red;
-    Coach.Color colorBlue = Coach.Color.Blue;
+    Coach colorRed = Coach.RED;
+    Coach colorBlue = Coach.BLUE;
     Coach coachRed = new Coach(colorRed);
     Coach coachBlue = new Coach(colorBlue);
     Assert.assertEquals(coachRed.getColor(), colorRed);
@@ -60,8 +60,8 @@ public class TestCoach {
 
   @Test
   public void TestGetHand() {
-    Coach.Color colorRed = Coach.Color.Red;
-    Coach.Color colorBlue = Coach.Color.Blue;
+    Coach colorRed = Coach.RED;
+    Coach colorBlue = Coach.BLUE;
     Coach coachRed = new Coach(colorRed);
     Coach coachBlue = new Coach(colorBlue);
     Assert.assertEquals(coachRed.getHand(), new ArrayList<Card>());

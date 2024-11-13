@@ -3,14 +3,13 @@ package cs3500.threetrios.test.model.unit;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import cs3500.threetrios.model.GridCellAbstract;
 import cs3500.threetrios.model.GridCellCard;
 
 /**
  * Tests for the GridCellCard class.
  */
 public class TestGridCellCard {
-  private GridCellAbstract cell1;
+  private GridCellCard cell1;
 
   @Before
   public void setUp() {

@@ -59,7 +59,7 @@ public class TestCard {
 
   @Test
   public void testToString() {
-    String expected = "<TTCard: TestCard 5 3 4 2>";
+    String expected = "TestCard 5 3 4 2";
     assertEquals(expected, card.toString());
   }
 

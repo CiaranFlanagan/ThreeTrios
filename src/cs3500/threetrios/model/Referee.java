@@ -8,7 +8,7 @@ public interface Referee {
    * To referee a's battle phase.
    * @param a - a board cell
    */
-  void refereeBattlePhase(GridCellAbstract a);
+  void refereeBattlePhase(GridCellVisitable a);
 
   /**
    * To referee a's battle phase.

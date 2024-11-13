@@ -11,8 +11,8 @@ import java.util.HashMap;
 public class TestCoach {
   @Test
   public void TestRemoveCardFromHand() {
-    Coach.Color colorRed = Coach.Color.Red;
-    Coach.Color colorBlue = Coach.Color.Blue;
+    Coach colorRed = Coach.RED;
+    Coach colorBlue = Coach.BLUE;
     Coach coachRed = new Coach(colorRed);
     Coach coachBlue = new Coach(colorBlue);
     Card card1 = new Card("TestCard1", new HashMap<>());
@@ -28,7 +28,7 @@ public class TestCoach {
 
   @Test(expected = IllegalArgumentException.class)
   public void TestRemoveCardFromHandException() {
-    Coach.Color colorRed = Coach.Color.Red;
+    Coach colorRed = Coach.RED;
     Coach coachRed = new Coach(colorRed);
     Card card1 = new Card("TestCard1", new HashMap<>());
     Card card2 = new Card("TestCard2", new HashMap<>());
@@ -42,7 +42,7 @@ public class TestCoach {
 
   @Test
   public void addCard() {
-    Coach.Color colorRed = Coach.Color.Red;
+    Coach colorRed = Coach.RED;
     Coach coachRed = new Coach(colorRed);
     Card card1 = new Card("TestCard1", new HashMap<>());
     Card card2 = new Card("TestCard2", new HashMap<>());

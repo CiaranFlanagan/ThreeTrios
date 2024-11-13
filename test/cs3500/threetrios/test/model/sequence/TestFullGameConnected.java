@@ -1,6 +1,7 @@
 package cs3500.threetrios.test.model.sequence;
 
 import cs3500.threetrios.controller.TestFiles;
+import cs3500.threetrios.model.Coach;
 import cs3500.threetrios.model.GridCellReadOnly;
 import cs3500.threetrios.utils.LineWriter;
 import org.junit.Assert;
@@ -10,7 +11,6 @@ import cs3500.threetrios.controller.ConfigCard;
 import cs3500.threetrios.controller.ConfigGrid;
 import cs3500.threetrios.model.Referee;
 import cs3500.threetrios.model.Card;
-import cs3500.threetrios.model.Coach;
 import cs3500.threetrios.model.RefereeDefault;
 import cs3500.threetrios.model.ModelBase;
 import org.junit.runners.MethodSorters;
@@ -58,9 +58,9 @@ public class TestFullGameConnected {
                             .toString()
             )),
             referee);
-    Coach red = model.getCurrentCoach();
+    Coach red = model.curCoach();
     Assert.assertEquals("The current coach should be Red.",
-            Coach.Color.Red, red.getColor());
+                        Coach.RED, red.getColor());
     // Check that Red has 10 cards
     Assert.assertEquals("Red should have 10 cards in hand.",
             10, red.getHand().size());
@@ -90,16 +90,16 @@ public class TestFullGameConnected {
     model.placeCard(0, 4, 0);
     model.placeCard(0, 3, 0);
     model.placeCard(0, 3, 0);
-    Assert.assertEquals(Coach.Color.Blue, cardAt(0, 4).getCoachColor());
-    Assert.assertEquals(Coach.Color.Blue, cardAt(1, 4).getCoachColor());
-    Assert.assertEquals(Coach.Color.Blue, cardAt(2, 3).getCoachColor());
-    Assert.assertEquals(Coach.Color.Blue, cardAt(3, 4).getCoachColor());
-    Assert.assertEquals(Coach.Color.Blue, cardAt(4, 4).getCoachColor());
-    Assert.assertEquals(Coach.Color.Blue, cardAt(2, 2).getCoachColor());
-    Assert.assertEquals(Coach.Color.Blue, cardAt(2, 3).getCoachColor());
-    Assert.assertEquals(Coach.Color.Blue, cardAt(1, 0).getCoachColor());
-    Assert.assertEquals(Coach.Color.Blue, cardAt(2, 0).getCoachColor());
-    Assert.assertEquals(Coach.Color.Blue, cardAt(3, 0).getCoachColor());
+    Assert.assertEquals(Coach.BLUE, cardAt(0, 4).getCoach());
+    Assert.assertEquals(Coach.BLUE, cardAt(1, 4).getCoach());
+    Assert.assertEquals(Coach.BLUE, cardAt(2, 3).getCoach());
+    Assert.assertEquals(Coach.BLUE, cardAt(3, 4).getCoach());
+    Assert.assertEquals(Coach.BLUE, cardAt(4, 4).getCoach());
+    Assert.assertEquals(Coach.BLUE, cardAt(2, 2).getCoach());
+    Assert.assertEquals(Coach.BLUE, cardAt(2, 3).getCoach());
+    Assert.assertEquals(Coach.BLUE, cardAt(1, 0).getCoach());
+    Assert.assertEquals(Coach.BLUE, cardAt(2, 0).getCoach());
+    Assert.assertEquals(Coach.BLUE, cardAt(3, 0).getCoach());
   }
 
   /**
@@ -108,17 +108,17 @@ public class TestFullGameConnected {
   @Test
   public void P3Dominos() {
     model.placeCard(0, 2, 2);
-    Assert.assertEquals(Coach.Color.Blue, colorAt(1, 0));
-    Assert.assertEquals(Coach.Color.Blue, colorAt(3, 0));
-    Assert.assertEquals(Coach.Color.Blue, colorAt(1, 4));
-    Assert.assertEquals(Coach.Color.Blue, colorAt(3, 4));
+    Assert.assertEquals(Coach.BLUE, colorAt(1, 0));
+    Assert.assertEquals(Coach.BLUE, colorAt(3, 0));
+    Assert.assertEquals(Coach.BLUE, colorAt(1, 4));
+    Assert.assertEquals(Coach.BLUE, colorAt(3, 4));
   }
 
   private Card cardAt(int row, int col) {
-    return model.getGrid().readOnly2dCellArray()[row][col].getCard();
+    return model.curGrid().readOnlyArray2D()[row][col].getCard();
   }
 
-  private Coach.Color colorAt(int row, int col) {
-    return model.getGrid().readOnly2dCellArray()[row][col].getCard().getCoachColor();
+  private Coach colorAt(int row, int col) {
+    return model.curGrid().readOnlyArray2D()[row][col].getCard().getCoach();
   }
 }

@@ -27,23 +27,27 @@ public abstract class StrategyAbstract {
    */
   protected List<Move> allConsideredMoves() {
     Model model = modelSupplier.get();
-    int numRows = model.getGrid().readOnly2dCellArray().length;
-    int numColumns = model.getGrid().readOnly2dCellArray()[0].length;
-    int sizeOfHand = model.getCurrentCoach().getHand().size();
+    int numRows = model.curGrid().readOnlyArray2D().length;
+    int numColumns = model.curGrid().readOnlyArray2D()[0].length;
+    int sizeOfHand = model.curCoachesHands().get(model.curCoach()).size();
     List<Move> acc0 = new ArrayList<>();
     IntStream.range(0, numRows).forEach(
             (row) -> IntStream.range(0, numColumns).forEach(
                     (col) -> IntStream.range(0, sizeOfHand).forEach(
                             (id) -> acc0.add(Move.of(row, col, id)))));
-    return acc0.stream().filter((m) ->
-                                {
-                                  try {
-                                    m.accept(modelSupplier.get());
-                                    return true;
-                                  } catch (Exception e) {
-                                    return false;
-                                  }
-                                }).collect(Collectors.toList());
+    return filterOutIllegalMoves(acc0);
+  }
+
+  protected List<Move> filterOutIllegalMoves(List<Move> moves) {
+    return moves.stream().filter((m) ->
+                                 {
+                                   try {
+                                     m.accept(modelSupplier.get());
+                                     return true;
+                                   } catch (IllegalStateException | IllegalArgumentException e) {
+                                     return false;
+                                   }
+                                 }).collect(Collectors.toList());
   }
 
   /**
@@ -67,7 +71,8 @@ public abstract class StrategyAbstract {
   }
 
   protected final List<GridCellReadOnly> modelToCellList(Model model) {
-    return Arrays.stream(model.getGrid().readOnly2dCellArray()).flatMap(Arrays::stream).collect(
+    return Arrays.stream(model.curGrid().readOnlyArray2D()).flatMap(Arrays::stream).collect(
             Collectors.toList());
   }
+
 }

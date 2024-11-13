@@ -23,7 +23,7 @@ public class TestBoardConfig {
       // XXX
       // CCC
       // CXX
-      GridCellReadOnly[][] cell2darr = grid.readOnly2dCellArray();
+      GridCellReadOnly[][] cell2darr = grid.readOnlyArray2D();
       Assert.assertEquals(cell2darr[0][0].canHaveCard(), true);
       Assert.assertEquals(cell2darr[0][1].canHaveCard(), true);
       Assert.assertEquals(cell2darr[0][2].canHaveCard(), true);
@@ -33,9 +33,9 @@ public class TestBoardConfig {
       Assert.assertEquals(cell2darr[2][0].canHaveCard(), true);
       Assert.assertEquals(cell2darr[2][1].canHaveCard(), true);
       Assert.assertEquals(cell2darr[2][2].canHaveCard(), true);
-      Assert.assertEquals(cell2darr[3][0].canHaveCard(), false);
-      Assert.assertEquals(cell2darr[3][1].canHaveCard(), true);
-      Assert.assertEquals(cell2darr[3][2].canHaveCard(), true);
+      Assert.assertEquals(cell2darr[3][0].canHaveCard(), true);
+      Assert.assertEquals(cell2darr[3][1].canHaveCard(), false);
+      Assert.assertEquals(cell2darr[3][2].canHaveCard(), false);
     } catch (FileNotFoundException ex) {
       Assert.fail(ex.getMessage());
     }

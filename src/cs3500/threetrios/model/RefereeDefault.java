@@ -6,7 +6,7 @@ package cs3500.threetrios.model;
 public final class RefereeDefault implements Referee {
 
   @Override
-  public void refereeBattlePhase(GridCellAbstract us) {
+  public void refereeBattlePhase(GridCellVisitable us) {
     us.acceptBattlePhase(this);
   }
 
@@ -15,6 +15,7 @@ public final class RefereeDefault implements Referee {
     if (!us.canHaveCard()) {
       return;
     }
+
     for (CardinalDirection direction : CardinalDirection.values()) {
       // if doesn't have neighbor, skip
       if (!us.hasNeighborToThe(direction)) {
@@ -22,7 +23,7 @@ public final class RefereeDefault implements Referee {
       }
 
       Card ourCard = us.getCard();
-      Coach.Color ourCoach = ourCard.getCoachColor();
+      Coach ourCoach = ourCard.getCoach();
       GridCellAbstract them = us.getNeighborToThe(direction); // we know this isn't null
       Card theirCard;
 
@@ -32,9 +33,9 @@ public final class RefereeDefault implements Referee {
         continue;
       }
 
-      Coach.Color theirCoach = theirCard.getCoachColor();
+      Coach theirCoach = theirCard.getCoach();
       if (ourCoach != theirCoach && ourCard.beats(theirCard, direction)) {
-        theirCard.setCoachColor(ourCoach);
+        theirCard.setCoach(ourCoach);
         refereeBattlePhase(them);
       }
     }

@@ -7,7 +7,6 @@ import cs3500.threetrios.model.Referee;
 import cs3500.threetrios.view.View;
 
 import java.util.List;
-import java.util.Scanner;
 import java.util.function.Supplier;
 
 /**

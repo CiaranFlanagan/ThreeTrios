@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import cs3500.threetrios.model.Card;
 import cs3500.threetrios.model.CardinalDirection;
-import cs3500.threetrios.model.Coach;
 import cs3500.threetrios.model.GridCellHole;
 import cs3500.threetrios.model.GridCellReadOnly;
 import cs3500.threetrios.model.Model;
@@ -61,9 +60,9 @@ public class ViewTextBase implements View {
    */
   private String renderString() {
     StringBuilder sb = new StringBuilder();
-    Coach curCoach = model.getCurrentCoach();
+    Coach curCoach = model.curCoach();
     sb.append("Player: ").append(curCoach.toString().toUpperCase()).append("\n");
-    GridCellReadOnly[][] grid = model.getGrid().readOnly2dCellArray();
+    GridCellReadOnly[][] grid = model.curGrid().readOnlyArray2D();
     for (GridCellReadOnly[] row : grid) {
       for (GridCellReadOnly cell : row) {
         if (cell instanceof GridCellHole) {
@@ -74,7 +73,7 @@ public class ViewTextBase implements View {
         } else {
           //changed get card from protected to public
           Card card = cell.getCard();
-          String coachInitial = card.getCoachColor().toString().substring(0, 1).toUpperCase();
+          String coachInitial = card.getCoach().toString().substring(0, 1).toUpperCase();
           sb.append(coachInitial).append(" ");
         }
       }

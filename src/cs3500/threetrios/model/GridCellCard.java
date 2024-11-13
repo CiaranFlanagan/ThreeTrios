@@ -26,7 +26,7 @@ public final class GridCellCard extends GridCellAbstract {
 
   @Override
   public Card getCard() {
-    return this.card;
+    return this.card.copy();
   }
 
   @Override

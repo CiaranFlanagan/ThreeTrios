@@ -1,17 +1,17 @@
 package cs3500.threetrios.test.model.unit;
 
+import cs3500.threetrios.model.GridCellReadOnly;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import cs3500.threetrios.model.GridCellAbstract;
 import cs3500.threetrios.model.GridCellHole;
 
 /**
  * Tests for the GridCellHole class.
  */
 public class TestGridCellHole {
-  private GridCellAbstract cell1;
+  private GridCellReadOnly cell1;
 
   @Before
   public void setUp() {

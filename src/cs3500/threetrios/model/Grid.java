@@ -1,77 +1,50 @@
 package cs3500.threetrios.model;
 
-import java.lang.reflect.Array;
-import java.util.function.Function;
-import java.util.function.Supplier;
-
 /**
  * to represent the grid-shaped board of the game three-trios.
  */
 public final class Grid {
-  private final GridCellAbstract[][] grid; // first index is rows, second is columns, obvious
+  private final GridCellAbstract[][] internalArray; // first index is rows, second is columns, obvious
+  private CellType[][] shape;
+  private final int NUM_ROWS;
+  private final int NUM_COLS;
   // index at 0
   private final int numHoles;
 
-  /**
-   * Constructs a Grids.
-   * @param grid - the grid to construct
-   * @throws- if grid is null.
-   */
-  public Grid(GridCellAbstract[][] grid) {
-    if (grid == null) {
+
+  public Grid(CellType[][] shape) {
+    this.shape = shape;
+    if (shape == null) {
       throw new IllegalArgumentException();
     }
-    if (grid.length < 1 || grid[0].length < 1) {
+    if (shape.length < 1 || shape[0].length < 1) {
       throw new IllegalArgumentException("Rows and Cols must be positive integers");
     }
-    this.grid = grid;
+    this.NUM_ROWS = shape.length;
+    this.NUM_COLS = shape[0].length;
     int numHoles = 0;
-    for (int row = 0; row < grid.length; row++) {
-      for (int col = 0; col < grid[0].length; col++) {
-        if (!grid[row][col].canHaveCard()) {
+    GridCellAbstract[][] privGrid = new GridCellAbstract[shape.length][shape[0].length];
+    for (int row = 0; row < NUM_ROWS; row++) {
+      for (int col = 0; col < NUM_COLS; col++) {
+        CellType curCellType = shape[row][col];
+        if (curCellType == CellType.HOLE) {
           numHoles += 1;
+          privGrid[row][col] = new GridCellHole();
+        } else {
+          privGrid[row][col] = new GridCellCard();
         }
       }
     }
     this.numHoles = numHoles;
+    this.internalArray = privGrid;
     linkRows();
     linkCols();
   }
 
-  // to link the cells in each row horizontally
-  private void linkRows() {
-    for (GridCellAbstract[] row : grid) {
-      for (int curCol = 1; curCol < grid[0].length; curCol++) {
-        row[curCol].link(row[curCol - 1], CardinalDirection.WEST);
-      }
-    }
-  }
-
-  // to link the cells in each column vertically
-  private void linkCols() {
-    for (int curRow = 1; curRow < grid.length; curRow++) {
-      for (int curCol = 0; curCol < grid[0].length; curCol++) {
-        grid[curRow][curCol].link(grid[curRow - 1][curCol], CardinalDirection.NORTH);
-      }
-
-    }
-  }
-
-  // to place [card] at [row], [col] on this
-  // index at 0
-  GridCellAbstract placeCardOn(int row, int col, Card card) {
-    if (row < 0 || col < 0 || row >= grid.length || col >= grid[0].length) {
-      throw new IllegalArgumentException("Rows and Cols must be positive integers");
-    }
-    GridCellAbstract relevantCell = grid[row][col];
-    relevantCell.placeCard(card);
-    return relevantCell;
-  }
-
   @Override
   public String toString() {
-    String out = grid.length + " " + grid[0].length + "\n";
-    for (GridCellAbstract[] row : grid) {
+    String out = internalArray.length + " " + internalArray[0].length + "\n";
+    for (GridCellAbstract[] row : (GridCellAbstract[][]) internalArray) {
       for (GridCellAbstract cell : row) {
         out += cell.renderTextConstructor();
       }
@@ -86,8 +59,8 @@ public final class Grid {
    * @return - whether all card cells in this grid are filled with cards
    */
   public boolean isFull() {
-    for (GridCellAbstract[] row : grid) {
-      for (GridCellAbstract cell : row) {
+    for (GridCellReadOnly[] row : internalArray) {
+      for (GridCellReadOnly cell : row) {
         if (!cell.hasCard()) {
           return false;
         }
@@ -111,21 +84,58 @@ public final class Grid {
    * @return - the grid of this.
    * @implNote - possible effect can still occur to cells if casting is used, hack with caution.
    */
-  public GridCellReadOnly[][] readOnly2dCellArray() {
-    return this.grid;
+  public GridCellReadOnly[][] readOnlyArray2D() {
+    GridCellReadOnly[][] readOnlyGrid = new GridCellReadOnly[NUM_ROWS][NUM_COLS];
+    for (int row = 0; row < NUM_ROWS; row += 1) {
+      for (int col = 0; col < NUM_COLS; col += 1) {
+        readOnlyGrid[row][col] = new GridCellReadOnlyImpl(internalArray[row][col]);
+      }
+    }
+    return readOnlyGrid;
   }
 
-  public Supplier<Grid> supply() {
-    Supplier<GridCellAbstract[][]> a = () ->
-    {
-      GridCellAbstract[][] grid = new GridCellAbstract[this.grid.length][this.grid[0].length];
-      for (int row = 0; row < grid.length; row++) {
-        for (int col = 0; col < grid[0].length; col++) {
-          //grid[row][col] = this.grid[row][col]
+  // to link the cells in each row horizontally
+  private void linkRows() {
+    for (GridCellAbstract[] row : internalArray) {
+      for (int curCol = 1; curCol < internalArray[0].length; curCol++) {
+        row[curCol].link(row[curCol - 1], CardinalDirection.WEST);
+      }
+    }
+  }
+
+  // to link the cells in each column vertically
+  private void linkCols() {
+    for (int curRow = 1; curRow < internalArray.length; curRow++) {
+      for (int curCol = 0; curCol < internalArray[0].length; curCol++) {
+        internalArray[curRow][curCol].link(internalArray[curRow - 1][curCol], CardinalDirection.NORTH);
+      }
+
+    }
+  }
+
+  // to place [card] at [row], [col] on this
+  // index at 0
+  GridCellAbstract placeCardOn(int row, int col, Card card) {
+    if (row < 0 || col < 0 || row >= internalArray.length || col >= internalArray[0].length) {
+      throw new IllegalArgumentException("Rows and Cols must be positive integers");
+    }
+    GridCellAbstract relevantCell = internalArray[row][col];
+    relevantCell.placeCard(card);
+    return relevantCell;
+  }
+
+
+  Grid copy() {
+    Grid copy = new Grid(shape);
+    for (int row = 0; row < NUM_ROWS; row += 1) {
+      for (int col = 0; col < NUM_COLS; col += 1) {
+        GridCellAbstract ourCell = internalArray[row][col];
+        if (ourCell.hasCard()) {
+          copy.placeCardOn(row, col, ourCell.getCard().copy());
         }
       }
-      return null;
-    };
-    return null;
+    }
+    return copy;
   }
+
 }

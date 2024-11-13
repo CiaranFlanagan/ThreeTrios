@@ -21,9 +21,7 @@ public abstract class RefereeAbstract implements Referee {
    * @param newCoach - the value to pass as the new coach
    */
   protected void setCardCoach(Card card, Coach newCoach) {
-    card.setCoachColor(newCoach.getColor());
+    card.setCoach(newCoach);
   }
-
-
 
 }

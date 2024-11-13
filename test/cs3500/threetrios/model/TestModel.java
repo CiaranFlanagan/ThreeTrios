@@ -36,7 +36,7 @@ public class TestModel {
     } catch (FileNotFoundException ex) {
       Assert.fail("file not found");
     }
-    coach = new Coach(Coach.Color.Red);
+    coach = new Coach(Coach.RED);
   }
 
   @Test

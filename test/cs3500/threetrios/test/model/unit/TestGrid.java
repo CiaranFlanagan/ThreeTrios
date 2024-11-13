@@ -1,10 +1,9 @@
 package cs3500.threetrios.test.model.unit;
 
+import cs3500.threetrios.model.CellType;
 import org.junit.Before;
 import org.junit.Test;
 import cs3500.threetrios.model.Grid;
-import cs3500.threetrios.model.GridCellAbstract;
-import cs3500.threetrios.model.GridCellCard;
 import cs3500.threetrios.model.GridCellReadOnly;
 
 import static org.junit.Assert.assertEquals;
@@ -15,16 +14,16 @@ import static org.junit.Assert.assertEquals;
 public class TestGrid {
 
   private Grid grid;
-  private GridCellAbstract[][] gridCells;
+  CellType[][] constructorArg;
 
   @Before
   public void setUp() {
-    gridCells = new GridCellAbstract[2][2];
-    gridCells[0][0] = new GridCellCard();
-    gridCells[0][1] = new GridCellCard();
-    gridCells[1][0] = new GridCellCard();
-    gridCells[1][1] = new GridCellCard();
-    grid = new Grid(gridCells);
+    constructorArg = new CellType[2][2];
+    constructorArg[0][0] = CellType.CARD;
+    constructorArg[0][1] = CellType.CARD;
+    constructorArg[1][0] = CellType.CARD;
+    constructorArg[1][1] = CellType.CARD;
+    grid = new Grid(constructorArg);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -38,10 +37,10 @@ public class TestGrid {
   }
 
   @Test
-  public void testReadOnly2dCellArray() {
-    GridCellReadOnly[][] readOnlyGrid = grid.readOnly2dCellArray();
-    assertEquals(gridCells.length, readOnlyGrid.length);
-    assertEquals(gridCells[0].length, readOnlyGrid[0].length);
+  public void testReadOnlyGridArr() {
+    GridCellReadOnly[][] readOnlyGrid = grid.readOnlyArray2D();
+    assertEquals(constructorArg.length, readOnlyGrid.length);
+    assertEquals(constructorArg[0].length, readOnlyGrid[0].length);
   }
 
   @Test
@@ -57,7 +56,7 @@ public class TestGrid {
 
   @Test(expected = IllegalArgumentException.class)
   public void testConstructorInvalidGrid() {
-    GridCellAbstract[][] invalidGrid = new GridCellAbstract[0][0];
+    CellType[][] invalidGrid = new CellType[0][0];
     Grid grid = new Grid(invalidGrid);
   }
 

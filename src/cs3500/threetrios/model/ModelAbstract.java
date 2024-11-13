@@ -1,32 +1,39 @@
 package cs3500.threetrios.model;
 
-import java.util.Collection;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /**
  * To abstract and bundle grid and coach mutation from models.
  */
 public abstract class ModelAbstract implements Model {
   protected Grid grid;
-  protected Coach coachRed;
-  protected Coach coachBlue;
+  protected Map<Coach, List<Card>> coachesHands;
   protected Coach currentCoach;
   protected List<Consumer<ModelAbstract>> moves;
 
   protected ModelAbstract() {
-    this.coachRed = new Coach(Coach.Color.Red);
-    this.coachBlue = new Coach(Coach.Color.Blue);
-    currentCoach = coachRed;
+    Map<Coach, List<Card>> temp = new EnumMap<>(Coach.class);
+    temp.put(Coach.RED, new ArrayList<>());
+    temp.put(Coach.BLUE, new ArrayList<>());
+    // only red and blue, so just get and then update the hand accordingly
+    coachesHands = Collections.unmodifiableMap(temp);
+    currentCoach = Coach.RED;
   }
 
-  protected void addCardTo(Coach coach, Card card) {
-    coach.addCard(card);
-  }
-
-  protected void updateGrid(Grid grid) {
-    this.grid = grid;
+  @Override
+  public Map<Coach, List<Card>> curCoachesHands() {
+    Map<Coach, List<Card>> temp = new EnumMap<>(coachesHands);
+    for (Coach coach : temp.keySet()) {
+      temp.put(coach, Collections.unmodifiableList(
+              coachesHands.get(coach).stream().map(Card::copy).collect(Collectors.toList())));
+    }
+    return temp;
   }
 
   protected GridCellAbstract setGridCardAt(int row, int col, Card card) {
@@ -34,7 +41,8 @@ public abstract class ModelAbstract implements Model {
   }
 
   @Override
-  public Grid getGrid() {
+  public Grid curGrid() {
     return grid;
   }
+
 }

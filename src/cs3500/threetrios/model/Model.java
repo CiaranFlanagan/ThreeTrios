@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Represents the game model.
  */
-public interface Model extends ReadOnlyThreeTriosModel {
+public interface Model extends ModelReadOnly {
   /**
    * Starts the game with the given card index, grid col, and grid row.
    *
