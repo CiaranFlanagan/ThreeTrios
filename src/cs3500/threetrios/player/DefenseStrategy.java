@@ -16,6 +16,14 @@ public class DefenseStrategy extends StrategyAbstract {
     super(modelSupplier);
   }
 
+  /**
+   * Calculates the effectiveness of a move based on the number of exposed sides after placing a
+   * card. The greater the sum of the Attack Values on exposed sides, plus the value of the
+   * unexposed sides, the greater defense a card has.
+   *
+   * @param move the Move being evaluated for its defensive effectiveness
+   * @return an integer score representing the effectiveness of the move
+   */
   public int effectiveness(Move move) {
     // alg is all neighbors that aren't there get an A in the algorithm for free
     GridCellReadOnly cell =

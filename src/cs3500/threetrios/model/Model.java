@@ -17,6 +17,7 @@ public interface Model extends ModelReadOnly {
   void startGame(Grid grid, List<Card> cards, Referee referee);
 
   /**
+   * Places a card on the grid at the specified row and column, from an idx in the coach's hand.
    *
    * @param idx index of move
    * @param row row on grid

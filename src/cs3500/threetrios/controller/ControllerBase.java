@@ -11,15 +11,20 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+/**
+ * ControllerBase serves as the base implementation of the Controller interface for the Three Trios
+ * game. This class is responsible for managing the game state, initializing the model with specific
+ * configurations, and tracking moves to maintain consistency across models.
+ */
 public class ControllerBase implements Controller {
-  private Model model;
-  private View view;
   private Supplier<Model> modelSupplier;
   private Supplier<Grid> gridSupplier;
   private Supplier<List<Card>> cardsSupplier;
   private Supplier<Referee> refereeSupplier;
   private final List<Consumer<Model>> moves;
 
+  //TODO:  A class that has private constructors and does not have any static methods, fields or
+  // inner classes cannot be used.
   private ControllerBase() {
     this.moves = new ArrayList<>();
   }
@@ -34,8 +39,7 @@ public class ControllerBase implements Controller {
     this.cardsSupplier = cardsSupplier;
     this.modelSupplier = modelSupplier;
     this.refereeSupplier = refereeSupplier;
-    this.model = supplyModel().get();
-    this.view = view;
+    Model model = supplyModel().get();
   }
 
   /**

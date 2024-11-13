@@ -13,17 +13,28 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * Abstract base class for game strategies in the Three Trios game.
+ * Provides methods to evaluate possible moves and determine the most effective move based on
+ * specific criteria defined in subclasses.
+ */
 public abstract class StrategyAbstract {
   protected Supplier<Model> modelSupplier;
 
+  /**
+   * Constructs a StrategyAbstract with a supplier for the game model.
+   *
+   * @param modelSupplier a Supplier for the game Model, providing access to the current game state
+   */
   public StrategyAbstract(Supplier<Model> modelSupplier) {
     this.modelSupplier = modelSupplier;
   }
 
   /**
-   * to find all possible moves where you play and it doesn't error
+   * Generates all possible moves for the current player that do not result in errors.
+   * Each move places a card from the player's hand at a specific row and column on the grid.
    *
-   * @return
+   * @return a list of valid Move objects that the current player can make
    */
   protected List<Move> allConsideredMoves() {
     Model model = modelSupplier.get();
