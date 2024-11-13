@@ -79,6 +79,21 @@ public final class Card {
     return s;
   }
 
+  @Override
+  public boolean equals(Object obj) {
+    if (obj instanceof Card) {
+      Card other = (Card) obj;
+      return this.toString().equals(other.toString()) && this.coachColor == other.coachColor;
+    } else {
+      return false;
+    }
+  }
+
+  @Override
+  public int hashCode() {
+    return toString().hashCode();
+  }
+
   // package private to prevent excess side-effect
 
   /**

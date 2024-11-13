@@ -86,6 +86,9 @@ public final class ModelBase extends ModelAbstract {
     if (isGameOver()) {
       throw new IllegalStateException("Game is over");
     }
+    if (idx < 0 || idx >= coachesHands.get(currentCoach).size()) {
+      throw new IllegalArgumentException();
+    }
     Card curCard = coachesHands.get(currentCoach).remove(idx);
     GridCellAbstract relevantCell = setGridCardAt(row, col, curCard);
     referee.refereeBattlePhase(relevantCell);

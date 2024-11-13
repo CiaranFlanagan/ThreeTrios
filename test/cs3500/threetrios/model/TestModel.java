@@ -36,23 +36,8 @@ public class TestModel {
     } catch (FileNotFoundException ex) {
       Assert.fail("file not found");
     }
-    coach = new Coach(Coach.RED);
+    coach = Coach.RED;
   }
 
-  @Test
-  public void testAddCardTo() {
-    Card card = new Card("TestCard", new HashMap<>());
-    model.startGame(gridNoHoles, cardsSmall, referee);
-    model.addCardTo(coach, card);
-    assertEquals(1, coach.getHand().size());
-  }
-
-  @Test
-  public void testUpdateGrid() {
-    Card card = new Card("TestCard", new HashMap<>());
-    model.startGame(gridNoHoles, cardsSmall, referee);
-    model.updateGrid(gridNoHoles);
-    assertEquals(model.grid, gridNoHoles);
-  }
 }
 

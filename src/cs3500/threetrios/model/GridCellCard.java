@@ -26,7 +26,7 @@ public final class GridCellCard extends GridCellAbstract {
 
   @Override
   public Card getCard() {
-    return this.card.copy();
+    return this.card;
   }
 
   @Override
@@ -48,5 +48,7 @@ public final class GridCellCard extends GridCellAbstract {
   protected String renderTextConstructor() {
     return "C";
   }
+
+
 
 }

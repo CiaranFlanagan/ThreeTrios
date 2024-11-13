@@ -60,10 +60,10 @@ public class TestFullGameConnected {
             referee);
     Coach red = model.curCoach();
     Assert.assertEquals("The current coach should be Red.",
-                        Coach.RED, red.getColor());
+                        Coach.RED, red);
     // Check that Red has 10 cards
     Assert.assertEquals("Red should have 10 cards in hand.",
-            10, red.getHand().size());
+            10, model.curCoachesHands().get(red));
   }
 
   /**

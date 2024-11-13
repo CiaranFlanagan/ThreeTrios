@@ -24,4 +24,5 @@ public abstract class RefereeAbstract implements Referee {
     card.setCoach(newCoach);
   }
 
+
 }

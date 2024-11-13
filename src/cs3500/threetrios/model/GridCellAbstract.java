@@ -43,6 +43,7 @@ abstract class GridCellAbstract implements GridCellVisitable {
     return this.neighbors.get(direction);
   }
 
+
   /**
    * To evaluate if this cell can have a card.
    * @return - if this cell can have a card

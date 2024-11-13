@@ -42,7 +42,7 @@ public class TestFullGameNoHoles {
             ConfigCard.scannerToCardList(TestFiles.safeFileToScanner(CC_SMALL)), referee);
     // check coach red is actually a red coach
     red = model.curCoach();
-    Assert.assertEquals(red.getColor(), Coach.RED);
+    Assert.assertEquals(red, Coach.RED);
   }
 
   @Test
@@ -54,19 +54,19 @@ public class TestFullGameNoHoles {
     Assert.assertEquals(left.getCoach(), Coach.RED);
     // makes sure that if a card is placed with no battle, it stays same color
 
-
   }
 
   @Test
   public void P3SecondPlacedCard() {
     blue = model.curCoach();
-    Assert.assertEquals(blue.getColor(), Coach.BLUE);
+    Assert.assertEquals(blue, Coach.BLUE);
     // make sure that we switch coaches properly
     model.placeCard(0, 0, 1); // blue plays so now board is ? B _
     state = model.curGrid().readOnlyArray2D();
-    Assert.assertEquals(state[0][1].getCard().getCoach(), blue.getColor());
+    left = state[0][0].getCard(); // have to do again
+    Assert.assertEquals(state[0][1].getCard().getCoach(), blue);
     // left vs mid = 3 < 9 so left loses
-    Assert.assertEquals(left.getCoach(), blue.getColor()); // WE FLIPPED THE CARD!
+    Assert.assertEquals(left.getCoach(), blue); // WE FLIPPED THE CARD!
 
 
   }
@@ -80,7 +80,7 @@ public class TestFullGameNoHoles {
     // should beat mid and cascade!
     for (GridCellReadOnly c : state[0]) {
       Assert.assertTrue(c.hasCard());
-      Assert.assertEquals(red.getColor(), c.getCard().getCoach());
+      Assert.assertEquals(red, c.getCard().getCoach());
     }
   }
 

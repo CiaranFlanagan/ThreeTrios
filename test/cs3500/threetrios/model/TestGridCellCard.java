@@ -1,5 +1,6 @@
 package cs3500.threetrios.model;
 
+import cs3500.threetrios.utils.Utils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,7 +51,7 @@ public class TestGridCellCard {
   //public but must be tested here because it used protected methods
   @Test
   public void testPlaceCard() {
-    Card c = new Card("Red", new HashMap<>());
+    Card c = Utils.makeCard("b 1 2 3 4");
     cell1.placeCard(c);
     Assert.assertEquals(c, cell1.getCard());
   }

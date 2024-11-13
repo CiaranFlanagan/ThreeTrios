@@ -1,5 +1,6 @@
 package cs3500.threetrios.model;
 
+import cs3500.threetrios.utils.Utils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,10 +29,11 @@ public class TestGrid {
   @Test
   public void testPlaceCardOn() {
     HashMap<Object, Object> hm = new HashMap<>();
-    Card card = new Card("TestCard", new HashMap<>());
+    Card card = Utils.makeCard("a 1 1 1 1");
     GridCellAbstract cell = grid.placeCardOn(0, 0, card);
     assertTrue(cell.hasCard());
-    assertEquals(card, cell.getCard());
+    System.out.println(cell);
+    assertEquals(card.toString(), cell.getCard().toString());
   }
 
   @Test(expected = IllegalArgumentException.class)

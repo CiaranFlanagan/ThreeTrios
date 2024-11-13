@@ -1,9 +1,12 @@
 package cs3500.threetrios.view;
 
 import java.io.IOException;
+import java.io.PrintStream;
+import java.util.List;
 
 import cs3500.threetrios.model.Card;
 import cs3500.threetrios.model.CardinalDirection;
+import cs3500.threetrios.model.Coach;
 import cs3500.threetrios.model.GridCellHole;
 import cs3500.threetrios.model.GridCellReadOnly;
 import cs3500.threetrios.model.Model;
@@ -11,7 +14,7 @@ import cs3500.threetrios.model.Model;
 /**
  * Represents a textual view of the game.
  */
-public class ViewTextBase implements View {
+public class ViewTextBase implements View<PrintStream> {
   private final Model model;
   private Appendable log;
 
@@ -41,7 +44,7 @@ public class ViewTextBase implements View {
   }
 
   @Override
-  public void render() {
+  public void render(PrintStream out) {
     String renderedString = renderString();
     try {
       if (log != null) {
@@ -50,7 +53,7 @@ public class ViewTextBase implements View {
     } catch (IOException ex) {
       throw new IllegalStateException("bad appendable");
     }
-    System.out.println(renderedString);
+    out.println(renderedString);
   }
 
   /**
@@ -61,6 +64,7 @@ public class ViewTextBase implements View {
   private String renderString() {
     StringBuilder sb = new StringBuilder();
     Coach curCoach = model.curCoach();
+    List<Card> curCoachHand = model.curCoachesHands().get(curCoach);
     sb.append("Player: ").append(curCoach.toString().toUpperCase()).append("\n");
     GridCellReadOnly[][] grid = model.curGrid().readOnlyArray2D();
     for (GridCellReadOnly[] row : grid) {
@@ -80,7 +84,7 @@ public class ViewTextBase implements View {
       sb.append("\n");
     }
     sb.append("Hand:\n");
-    for (Card card : curCoach.getHand()) {
+    for (Card card : model.curCoachesHands().get(curCoach)) {
       String cardString = card.getName();
       for (CardinalDirection direction : CardinalDirection.values()) {
         cardString += " " + card.getAttackValue(direction).toString();

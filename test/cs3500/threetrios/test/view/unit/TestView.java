@@ -39,7 +39,7 @@ public class TestView {
     model.startGame(ConfigGrid.scannerToGrid(TestFiles.safeFileToScanner(GRID_NO_HOLES)),
             ConfigCard.scannerToCardList(TestFiles.safeFileToScanner(CC_SMALL)), ref);
     view = new ViewTextBase(model, log);
-    view.render();
+    view.render(System.out);
     LineWriter lw = new LineWriter();
     Assert.assertEquals(lw.create().line("Player: RED").line("___").line("Hand:")
             .line("bob 1 1 1 1").endWith("zeke A A A A").toString(), log.toString());
@@ -50,7 +50,7 @@ public class TestView {
     model.startGame(ConfigGrid.scannerToGrid(TestFiles.safeFileToScanner(GRID_CONNECTED_HOLES)),
             ConfigCard.scannerToCardList(TestFiles.safeFileToScanner(CC_LARGE)), ref);
     view = new ViewTextBase(model, log);
-    view.render();
+    view.render(System.out);
     LineWriter lw = new LineWriter();
     Assert.assertEquals(lw.create().line("Player: RED").line("_____").line("_   _").line("_____").
             line("_   _").line("_____").line("Hand:").line("Card1 1 1 1 1").line("Card3 3 3 3 3")
@@ -64,7 +64,7 @@ public class TestView {
     model.startGame(ConfigGrid.scannerToGrid(TestFiles.safeFileToScanner(GRID_DISC_HOLES)),
             ConfigCard.scannerToCardList(TestFiles.safeFileToScanner(CC_LARGE)), ref);
     view = new ViewTextBase(model, log);
-    view.render();
+    view.render(System.out);
     LineWriter lw = new LineWriter();
     Assert.assertEquals(lw.create().line("Player: RED").line("___").line("   ").line("___").
             line("_  ").line("Hand:").line("Card1 1 1 1 1").line("Card3 3 3 3 3")
