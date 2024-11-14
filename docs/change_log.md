@@ -58,3 +58,5 @@ the model returns structure classes
   - we have to copy grid and cell
   - cell can return a card, we have to copy that too
 
+added a bunch of methods to readonlymodel from assignment
+

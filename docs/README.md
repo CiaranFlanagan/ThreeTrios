@@ -230,9 +230,9 @@ extension and mutation in a protected manner.
   single avenue, except that which preservers the integrity of a ThreeTrios model.
 
 ___
-# Changes for Part 2
+Changes for Part 2
+=
 ***TO DO!!!!***
 
 ### Assignment 2 Extra Credit
 
-Changes for part two
