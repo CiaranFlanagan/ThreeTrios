@@ -1,4 +1,4 @@
-package cs3500.threetrios.playerstats;
+package cs3500.threetrios.model.playerstats;
 
 import cs3500.threetrios.model.player.Player;
 

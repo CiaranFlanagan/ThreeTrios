@@ -44,7 +44,7 @@ public class ViewTextBase implements View<PrintStream> {
   }
 
   @Override
-  public void render(PrintStream out) {
+  public void renderTo(PrintStream out) {
     String renderedString = renderString();
     try {
       if (log != null) {

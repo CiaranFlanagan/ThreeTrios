@@ -8,5 +8,5 @@ public interface View<OD> {
    * to render to some outputDestination destination
    * @param outputDestination - Somewhere that shows
    */
-  void render(OD outputDestination);
+  void renderTo(OD outputDestination);
 }
