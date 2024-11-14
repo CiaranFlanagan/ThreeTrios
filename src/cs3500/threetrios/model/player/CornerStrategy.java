@@ -1,4 +1,4 @@
-package cs3500.threetrios.player;
+package cs3500.threetrios.model.player;
 
 import cs3500.threetrios.model.Model;
 
@@ -8,7 +8,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
-import cs3500.threetrios.model.Model;
 
 /**
  * The CornerStrategy class is a defensive strategy that attempts to place cards in the corners of the game grid.

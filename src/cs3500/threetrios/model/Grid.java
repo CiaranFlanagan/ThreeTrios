@@ -1,16 +1,18 @@
 package cs3500.threetrios.model;
 
+import java.util.Optional;
+
 /**
  * to represent the grid-shaped board of the game three-trios.
  */
 public final class Grid {
-  private final GridCellAbstract[][] internalArray; // first index is rows, second is columns, obvious
+  private final GridCellAbstract[][] internalArray;
+          // first index is rows, second is columns, obvious
   private CellType[][] shape;
   private final int NUM_ROWS;
   private final int NUM_COLS;
   // index at 0
   private final int numHoles;
-
 
   public Grid(CellType[][] shape) {
     this.shape = shape;
@@ -23,7 +25,7 @@ public final class Grid {
     this.NUM_ROWS = shape.length;
     this.NUM_COLS = shape[0].length;
     int numHoles = 0;
-    GridCellAbstract[][] privGrid = new GridCellAbstract[shape.length][shape[0].length];
+    GridCellAbstract[][] privGrid = new GridCellAbstract[NUM_ROWS][NUM_COLS];
     for (int row = 0; row < NUM_ROWS; row++) {
       for (int col = 0; col < NUM_COLS; col++) {
         CellType curCellType = shape[row][col];
@@ -97,7 +99,7 @@ public final class Grid {
   // to link the cells in each row horizontally
   private void linkRows() {
     for (GridCellAbstract[] row : internalArray) {
-      for (int curCol = 1; curCol < internalArray[0].length; curCol++) {
+      for (int curCol = 1; curCol < NUM_COLS; curCol++) {
         row[curCol].link(row[curCol - 1], CardinalDirection.WEST);
       }
     }
@@ -105,11 +107,11 @@ public final class Grid {
 
   // to link the cells in each column vertically
   private void linkCols() {
-    for (int curRow = 1; curRow < internalArray.length; curRow++) {
-      for (int curCol = 0; curCol < internalArray[0].length; curCol++) {
-        internalArray[curRow][curCol].link(internalArray[curRow - 1][curCol], CardinalDirection.NORTH);
+    for (int curRow = 1; curRow < NUM_COLS; curRow++) {
+      for (int curCol = 0; curCol < NUM_ROWS; curCol++) {
+        internalArray[curRow][curCol].link(internalArray[curRow - 1][curCol],
+                                           CardinalDirection.NORTH);
       }
-
     }
   }
 
@@ -123,7 +125,6 @@ public final class Grid {
     relevantCell.placeCard(card);
     return relevantCell;
   }
-
 
   Grid copy() {
     Grid copy = new Grid(shape);

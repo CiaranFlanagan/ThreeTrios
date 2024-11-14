@@ -11,7 +11,6 @@ import java.util.Random;
  */
 public final class ModelBase extends ModelAbstract {
   private boolean gameStarted;
-  private Referee referee;
   private Random random;
 
   /**
@@ -40,11 +39,11 @@ public final class ModelBase extends ModelAbstract {
   }
 
   @Override
-  public void startGame(Grid grid, List<Card> cards, Referee referee) {
+  public void startGame(Grid grid, List<Card> cards, Referee ref) {
     if (gameStarted) {
       throw new IllegalStateException("Game has already started");
     }
-    if (grid == null || cards == null || referee == null) {
+    if (grid == null || cards == null || ref == null) {
       throw new IllegalArgumentException("Arguments cannot be null");
     }
     int totalCardCells =
@@ -56,7 +55,7 @@ public final class ModelBase extends ModelAbstract {
               "number of card cells on the grid");
     }
     this.grid = grid;
-    this.referee = referee;
+    this.ref = ref;
     this.gameStarted = true;
     dealCards(cards, totalCardCells + 1);
   }
@@ -90,8 +89,8 @@ public final class ModelBase extends ModelAbstract {
       throw new IllegalArgumentException();
     }
     Card curCard = coachesHands.get(currentCoach).remove(idx);
-    GridCellAbstract relevantCell = setGridCardAt(row, col, curCard);
-    referee.refereeBattlePhase(relevantCell);
+    GridCellVisitable relevantCell = setGridCardAt(row, col, curCard);
+    ref.refereeBattlePhase(relevantCell);
     nextCoachTurn();
   }
 

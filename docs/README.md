@@ -224,3 +224,5 @@ The model has dependencies that it exposes only for other components to see. It 
 extension and mutation in a protected manner.
 - TLDR: The model component is made specifically to close off extension and mutation in every 
   single avenue, except that which preservers the integrity of a ThreeTrios model.
+
+Changes for part two

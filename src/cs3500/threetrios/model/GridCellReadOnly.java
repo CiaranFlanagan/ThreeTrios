@@ -38,4 +38,5 @@ public interface GridCellReadOnly {
    * @return - the neighbor (if any) in [direction]
    */
   GridCellReadOnly getNeighborToThe(CardinalDirection direction);
+
 }

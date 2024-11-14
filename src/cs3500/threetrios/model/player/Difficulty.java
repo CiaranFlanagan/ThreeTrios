@@ -1,4 +1,4 @@
-package cs3500.threetrios.player;
+package cs3500.threetrios.model.player;
 
 /**
  * to represent the difficulty of a player playing threetrios.

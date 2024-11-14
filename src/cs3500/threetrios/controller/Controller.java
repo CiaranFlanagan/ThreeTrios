@@ -26,5 +26,5 @@ public interface Controller {
                    Supplier<List<Card>> cardsSupplier,
                    Supplier<Model> modelSupplier,
                    Supplier<Referee> refereeSupplier,
-                   View view);
+                   View<?> view);
 }

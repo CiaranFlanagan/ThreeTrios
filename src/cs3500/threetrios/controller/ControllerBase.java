@@ -34,7 +34,7 @@ public class ControllerBase implements Controller {
                           Supplier<List<Card>> cardsSupplier,
                           Supplier<Model> modelSupplier,
                           Supplier<Referee> refereeSupplier,
-                          View view) {
+                          View<?> view) {
     this.gridSupplier = gridSupplier;
     this.cardsSupplier = cardsSupplier;
     this.modelSupplier = modelSupplier;

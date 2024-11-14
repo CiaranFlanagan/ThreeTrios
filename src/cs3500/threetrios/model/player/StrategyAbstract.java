@@ -1,4 +1,4 @@
-package cs3500.threetrios.player;
+package cs3500.threetrios.model.player;
 
 import cs3500.threetrios.model.GridCellReadOnly;
 import cs3500.threetrios.model.Model;

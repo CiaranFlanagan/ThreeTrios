@@ -27,6 +27,7 @@ public interface ModelReadOnly {
 
   /**
    * to return the hand of the given coach.
+   *
    * @return
    */
   Map<Coach, List<Card>> curCoachesHands();
@@ -55,8 +56,12 @@ public interface ModelReadOnly {
 
   /**
    * Returns the current grid at this state.
+   *
    * @return the grid
    */
   Grid curGrid();
 
+  int numFlippedIfPlaced(Card card, int row, int col);
+
+  int score(Coach coach);
 }
