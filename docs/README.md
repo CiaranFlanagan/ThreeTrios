@@ -91,6 +91,7 @@ Key Components
 
 - represents a real, computer player, or AI player.
 - holds statistical data about players' wins and losses.
+- holds game strategies for which a computer player can use 
 
 # Diving Into Components
 
@@ -139,7 +140,7 @@ Dependencies will be italicized.
     - Any RefereeAbstract has ways to mutate Cards. This
       power is given so they can enforce rules how future implementors see fit.
 
-### In the view...
+## In the view...
 
 - The concrete interface just promises to render a view of the game.
 - So far we just have a simple text view implemented. It shows in the following format:
@@ -157,6 +158,9 @@ Hand:
 cardName1 1 2 3 4
 
 cardName2 5 6 7 8
+
+## In the player ...
+- The 
 
 # Notes on Extension
 
@@ -224,5 +228,11 @@ The model has dependencies that it exposes only for other components to see. It 
 extension and mutation in a protected manner.
 - TLDR: The model component is made specifically to close off extension and mutation in every 
   single avenue, except that which preservers the integrity of a ThreeTrios model.
+
+___
+# Changes for Part 2
+***TO DO!!!!***
+
+### Assignment 2 Extra Credit
 
 Changes for part two

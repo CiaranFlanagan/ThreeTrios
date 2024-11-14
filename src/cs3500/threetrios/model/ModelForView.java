@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Optional;
 
 public class ModelForView implements ModelReadOnly {
-  Model delegate;
-  public ModelForView(Model delegate) {
+  ModelForView delegate;
+  public ModelForView(ModelForView delegate) {
     this.delegate = delegate;
   }
 
@@ -40,27 +40,22 @@ public class ModelForView implements ModelReadOnly {
     return delegate.curGrid();
   }
 
-  @Override
   public int numRows() {
     return delegate.numRows();
   }
 
-  @Override
   public int numCols() {
     return delegate.numCols();
   }
 
-  @Override
   public Optional<Card> cardAt(int row, int col) {
     return delegate.cardAt(row, col);
   }
 
-  @Override
   public Optional<Coach> ownerAt(int row, int col) {
     return delegate.ownerAt(row, col);
   }
 
-  @Override
   public boolean canPlayAt(int row, int col) {
     return delegate.canPlayAt(row, col);
   }

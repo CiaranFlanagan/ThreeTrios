@@ -44,17 +44,14 @@ public abstract class ModelAbstract implements Model {
     return grid;
   }
 
-  @Override
   public int numRows() {
     return this.grid.readOnlyArray2D().length;
   }
 
-  @Override
   public int numCols() {
     return this.grid.readOnlyArray2D()[0].length;
   }
 
-  @Override
   public Optional<Card> cardAt(int row, int col) {
     checkRowCol(row, col);
     GridCellReadOnly cell = this.grid.readOnlyArray2D()[row][col];
@@ -64,7 +61,6 @@ public abstract class ModelAbstract implements Model {
     return Optional.empty();
   }
 
-  @Override
   public Optional<Coach> ownerAt(int row, int col) {
     checkRowCol(row, col);
     GridCellReadOnly cell = this.grid.readOnlyArray2D()[row][col];
@@ -74,7 +70,6 @@ public abstract class ModelAbstract implements Model {
     return Optional.empty();
   }
 
-  @Override
   public boolean canPlayAt(int row, int col) {
     checkRowCol(row, col);
     GridCellReadOnly cell = this.grid.readOnlyArray2D()[row][col];
@@ -86,18 +81,22 @@ public abstract class ModelAbstract implements Model {
     checkRowCol(row, col);
     int scoreOfOppBefore = score(currentCoach.opponent());
     Grid copy = grid.copy();
-    GridCellVisitable cellOfInterest = setGridCardAt(row, col, card);
+    GridCellVisitable cellOfInterest = copy.placeCardOn(row, col, card);
     cellOfInterest.acceptBattlePhase(ref);
-    int scoreOfOppAfter = score(currentCoach.opponent());
+    int scoreOfOppAfter = score(currentCoach.opponent(), copy);
     return scoreOfOppBefore - scoreOfOppAfter;
   }
 
   @Override
   public int score(Coach coach) {
-    return (int) Arrays.stream(this.grid.readOnlyArray2D())
-            .flatMap(Arrays::stream)
-            .filter(gc -> gc.canHaveCard() && gc.getCard().getCoach() == coach)
-            .count();
+    return score(coach, grid);
+  }
+
+  private int score(Coach coach, Grid grid) {
+    return (int) Arrays.stream(grid.readOnlyArray2D())
+                       .flatMap(Arrays::stream)
+                       .filter(gc -> gc.hasCard() && gc.getCard().getCoach() == coach)
+                       .count();
   }
 
   protected GridCellVisitable setGridCardAt(int row, int col, Card card) {
@@ -106,7 +105,7 @@ public abstract class ModelAbstract implements Model {
 
   private void checkRowCol(int row, int col) {
     if (row < 0 || col < 0 || row >= this.grid.readOnlyArray2D().length ||
-            col >= this.grid.readOnlyArray2D().length ) {
+            col >= this.grid.readOnlyArray2D()[0].length ) {
       throw new IllegalArgumentException("Row and col must be Natural Number and within the " +
                                                  "range of the grid");
     }

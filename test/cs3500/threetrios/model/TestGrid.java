@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -70,4 +71,20 @@ public class TestGrid {
     grid.placeCardOn(1, 1, card);
     assertTrue(grid.isFull());
   }
+
+  @Test
+  public void testCopy() {
+    Grid grid = this.grid;
+    grid.placeCardOn(0,  0, Utils.makeCard("a 2 1 1 1"));
+    Grid gridCopy = grid.copy();
+    assertEquals(getCard(grid, 0, 0), getCard(gridCopy, 0, 0));
+  }
+
+  private Card getCard(Grid grid, int x, int y) {
+    return grid.readOnlyArray2D()[x][y].getCard();
+  }
+
+
+
+
 }

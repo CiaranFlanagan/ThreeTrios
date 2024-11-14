@@ -28,7 +28,6 @@ public class ViewGUI extends JPanel implements View<JFrame>  {
     outputFrame.setVisible(true);
     outputFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     outputFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
-    outputFrame.add();
   }
 
   private class HandGUI extends JPanel {

@@ -1,5 +1,6 @@
 package cs3500.threetrios.model;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 /**
@@ -107,8 +108,8 @@ public final class Grid {
 
   // to link the cells in each column vertically
   private void linkCols() {
-    for (int curRow = 1; curRow < NUM_COLS; curRow++) {
-      for (int curCol = 0; curCol < NUM_ROWS; curCol++) {
+    for (int curRow = 1; curRow < NUM_ROWS; curRow++) {
+      for (int curCol = 0; curCol < NUM_COLS; curCol++) {
         internalArray[curRow][curCol].link(internalArray[curRow - 1][curCol],
                                            CardinalDirection.NORTH);
       }
@@ -138,5 +139,6 @@ public final class Grid {
     }
     return copy;
   }
+
 
 }
