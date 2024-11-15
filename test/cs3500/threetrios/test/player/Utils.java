@@ -10,20 +10,26 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+/**
+ * Utility class for testing purposes in the Three Trios game. Provides helper methods for
+ * printing the grid structure, displaying a list of cards, and retrieving a card at a specific
+ * grid position.
+ */
 public class Utils {
   public static void printGrid(Supplier<Grid> gridSupplier) {
 
     Arrays.stream(gridSupplier.get().readOnlyArray2D())
-            .forEach((row) -> {
-              Arrays.stream(row)
-                      .forEach((cell) -> {
-                        if (cell.canHaveCard())
-                          System.out.print("C");
-                        else
-                          System.out.println("H");
-                      });
-              System.out.println();
-            });
+          .forEach((row) -> {
+            Arrays.stream(row)
+                  .forEach((cell) -> {
+                    if (cell.canHaveCard()) {
+                      System.out.print("C");
+                    } else {
+                      System.out.print("C");
+                    }
+                  });
+            System.out.println();
+          });
   }
 
   public static void printCards(Supplier<List<Card>> cardsSupplier) {

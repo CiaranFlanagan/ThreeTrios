@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -19,7 +18,6 @@ import cs3500.threetrios.utils.Utils;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertSame;
 
@@ -27,23 +25,21 @@ import static org.junit.Assert.assertSame;
  * Tests for the ThreeTriosModel class.
  */
 public class TestModel {
-  private Coach coach;
   private Grid gridNoHoles;
   private List<Card> cardsSmall;
   private ModelBase model;
-  private Referee referee;
 
   @Before
   public void setUp() {
     model = new ModelBase();
-    referee = new RefereeDefault();
+    Referee referee = new RefereeDefault();
     try {
       gridNoHoles = ConfigGrid.scannerToGrid(new Scanner(TestFiles.GRID_NO_HOLES));
       cardsSmall = ConfigCard.scannerToCardList(new Scanner(TestFiles.CC_SMALL));
     } catch (FileNotFoundException ex) {
       Assert.fail("file not found");
     }
-    coach = Coach.RED;
+    Coach coach = Coach.RED;
     model.startGame(gridNoHoles, cardsSmall, referee);
   }
 
@@ -126,14 +122,6 @@ public class TestModel {
     model.placeCard(0, 0, 1);
     Assert.assertEquals(model.numFlippedIfPlaced(testCard, 0, 0), 1);
   }
-
-  /**
-   * bob    1 1 1 1
-   * kc     5 5 5 5
-   * zeke   A A A A
-   * ciaran 1 1 1 1
-   */
-
 
   @Test
   public void testScore() {

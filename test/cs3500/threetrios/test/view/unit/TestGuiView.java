@@ -6,8 +6,17 @@ import org.junit.Before;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+/**
+ * A test class for the graphical user interface (GUI) view of the Three Trios game, using a
+ * JFrame for rendering. This class extends TestView and provides additional setup and methods
+ * to visually display the game state for testing purposes.
+ */
 public class TestGuiView extends TestView<JFrame> {
   JFrame frame;
+
+  /**
+   * Sets up the test environment by initializing the JFrame used for rendering the GUI view.
+   */
   @Before
   public void setup() {
     super.setup();
