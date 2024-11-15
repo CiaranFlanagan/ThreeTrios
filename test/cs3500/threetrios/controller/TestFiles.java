@@ -18,7 +18,11 @@ public class TestFiles {
   public static File GRID_DISC_HOLES = new File(
           "./test/cs3500/threetrios/controller/" +
                   "grid_disconnected.txt");
-  public static File CC_SMALL = new File("./test/cs3500/threetrios/controller/" +
+  public static File GRID_NO_HOLES_3by3 = new File(
+          "./test/cs3500/threetrios/controller/" +
+                  "grid_no_holes_3by3.txt");
+  public static File CC_SMALL = new File("./test/cs3" +
+                                                 "500/threetrios/controller/" +
           "cards_small.txt");
   public static File CC_LARGE = new File(
           "./test/cs3500/threetrios/controller/cards_large.txt");

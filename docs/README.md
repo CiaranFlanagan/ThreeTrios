@@ -49,7 +49,7 @@ This is the ThreeTrios project. ThreeTrios is a two player card game played on a
 
 Quick Start
 =
-_None as there is no way to play the game interactively YET_
+Go to main and press run! Select and deselect cards.
 
 Getting Around the Project
 =

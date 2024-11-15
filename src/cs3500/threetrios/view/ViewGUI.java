@@ -1,5 +1,6 @@
 package cs3500.threetrios.view;
 
+import cs3500.threetrios.controller.HandleClickForHand;
 import cs3500.threetrios.model.Card;
 import cs3500.threetrios.model.CardinalDirection;
 import cs3500.threetrios.model.Coach;
@@ -65,6 +66,8 @@ public class ViewGUI implements View<JFrame> {
     outputFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     outputFrame.setLayout(null);
     outputFrame.setSize(new Dimension(dims.width * cwidth(), dims.height * cheight()));
+    leftHand.addMouseListener(new HandleClickForHand(leftHand));
+    rightHand.addMouseListener(new HandleClickForHand(rightHand));
 
     outputFrame.add(leftHand);
     outputFrame.add(gridGUI);
@@ -80,9 +83,13 @@ public class ViewGUI implements View<JFrame> {
     rightHand.handleResize();
   }
 
-  protected class HandGUI extends JPanel {
+  public class HandGUI extends JPanel {
     private List<Card> hand;
     private Coach coach;
+
+    protected int xSelect;
+    protected int ySelect;
+    protected boolean selected;
 
     HandGUI(Coach coach) {
       this.coach = coach;
@@ -94,9 +101,14 @@ public class ViewGUI implements View<JFrame> {
     @Override
     protected void paintComponent(Graphics g) {
       super.paintComponent(g);
+      System.out.println("we paint");
       int handCardHeight = dims.height * cheight() / hand.size();
       int[] y = new int[1];
       hand.forEach((c) -> renderCard(g, 0, y[0]++ * handCardHeight, c, handCardHeight));
+      if (selected) {
+        System.out.println("dispatches");
+        renderSelected(g, xSelect, ySelect, handCardHeight);
+      }
     }
 
     private void handleResize() {
@@ -105,10 +117,52 @@ public class ViewGUI implements View<JFrame> {
           cheight() * dims.height);
     }
 
+    public void setXSelect(int x) {
+      xSelect = x;
+    }
+
+    public void setYSelect(int y) {
+      ySelect = y;
+    }
+
+    public void select() {
+      System.out.println("selected");
+      selected = true;
+    }
+    public void deselect() {
+      System.out.println("deselected");
+      selected = false;
+    }
+
+    public boolean selected() {
+      return selected;
+    }
+
+    protected void renderSelected(Graphics g, int x, int y, int cardHeight) {
+      g.setColor(Color.WHITE);
+      int leftcorner = snapToWidth(xSelect);
+      int topCorner = snapToHeight(ySelect, cardHeight);
+      System.out.println("x: " + leftcorner);
+      System.out.println("Y: " + topCorner);
+      System.out.println("modelx: " + (x/cwidth()));
+      System.out.println("modely: " + (y/cardHeight));
+      g.drawRect(leftcorner, topCorner, cwidth(), cardHeight);
+      g.drawRect(leftcorner + 1, topCorner + 1,
+                 cwidth() - 2, cardHeight - 2);
+    }
+
+    protected int snapToWidth(int x) {
+      return (x / cwidth()) * cwidth();
+    }
+
+    protected int snapToHeight(int y, int cardheight) {
+      return (y / cardheight) * cardheight;
+    }
+
   }
 
-  protected class GridGUI extends JPanel {
-    Grid grid;
+  public class GridGUI extends JPanel {
+    protected Grid grid;
 
     GridGUI(Grid grid) {
       this.grid = grid;
@@ -137,10 +191,11 @@ public class ViewGUI implements View<JFrame> {
       g.drawRect(x, y, cwidth(), cheight());
     }
 
-    public void handleResize() {
+    protected void handleResize() {
       this.setBounds(cwidth(), 0, cwidth() * (dims.width - 2),
           cheight() * dims.height);
     }
+
   }
 
   protected void renderCard(Graphics g, int x, int y, Card card, int cardHeight) {
@@ -158,6 +213,8 @@ public class ViewGUI implements View<JFrame> {
     g.drawString(e, x + 3 * cwidth() / 4, y + cardHeight / 2);
     g.drawString(w, x + cwidth() / 8, y + cardHeight / 2);
   }
+
+
 
   protected Color coachToColor(Coach coach) {
     switch (coach) {
@@ -178,6 +235,7 @@ public class ViewGUI implements View<JFrame> {
     }
     return Color.WHITE;
   }
+
 
   protected int cwidth() {
     return frame.getWidth() / dims.width;

@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 /**
@@ -14,9 +15,9 @@ import java.util.function.Predicate;
  * actions when mouse events occur.
  */
 public class MouseHandler extends MouseAdapter {
-  protected Map<Predicate<MouseEvent>, Runnable> map;
+  protected Map<Predicate<MouseEvent>, Consumer<MouseEvent>> map;
 
-  private MouseHandler() {
+  protected MouseHandler() {
     map = new HashMap<>();
   }
   
@@ -24,15 +25,15 @@ public class MouseHandler extends MouseAdapter {
     return new MouseHandler();
   }
   
-  public MouseHandler handle(Predicate<MouseEvent> question, Runnable response) {
+  public MouseHandler handle(Predicate<MouseEvent> question, Consumer<MouseEvent> response) {
     this.map.put(question, response);
     return this;
   }
 
   private void handleMouseEvent(MouseEvent me) {
-    for (Map.Entry<Predicate<MouseEvent>, Runnable> entry : map.entrySet()) {
+    for (Map.Entry<Predicate<MouseEvent>, Consumer<MouseEvent>> entry : map.entrySet()) {
       if (entry.getKey().test(me)) {
-        entry.getValue().run();
+        entry.getValue().accept(me);
       }
     }
   }
