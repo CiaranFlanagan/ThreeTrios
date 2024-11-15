@@ -8,8 +8,10 @@ import cs3500.threetrios.model.Referee;
 import cs3500.threetrios.model.RefereeDefault;
 import cs3500.threetrios.model.ModelBase;
 import cs3500.threetrios.view.View;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
 import static cs3500.threetrios.controller.TestFiles.CC_LARGE;
 import static cs3500.threetrios.controller.TestFiles.CC_SMALL;
 import static cs3500.threetrios.controller.TestFiles.GRID_CONNECTED_HOLES;
