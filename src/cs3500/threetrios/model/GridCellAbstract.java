@@ -46,6 +46,7 @@ abstract class GridCellAbstract implements GridCellVisitable {
 
   /**
    * To evaluate if this cell can have a card.
+   *
    * @return - if this cell can have a card
    */
   public boolean canHaveCard() {

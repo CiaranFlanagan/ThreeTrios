@@ -18,13 +18,13 @@ public class TestCardConfig {
   @Test
   public void test1() {
     List<Card> cards = ConfigCard.scannerToCardList(TestFiles.
-            CC_SMALL);
+                                                            CC_SMALL);
     System.out.println(cards);
     //<TTCard: bob 1 2 3 A>, <TTCard: kc A 4 7 9>, <TTCard: ciaran 1 2 3 4>
     String expected = LineWriter.create().endWith("[bob 1 1 1 1, " +
-            "kc 5 5 5 5, " +
-            "zeke A A A A, " +
-            "ciaran 1 1 1 1]").toString();
+                                                          "kc 5 5 5 5, " +
+                                                          "zeke A A A A, " +
+                                                          "ciaran 1 1 1 1]").toString();
     Assert.assertEquals(expected, cards.toString());
   }
 

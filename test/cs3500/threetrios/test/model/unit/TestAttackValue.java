@@ -15,25 +15,25 @@ public class TestAttackValue {
   @Test
   public void TestFromString_ValidInputs() {
     Assert.assertEquals("1 => ONE",
-            AttackValue.ONE, AttackValue.fromString("1"));
+                        AttackValue.ONE, AttackValue.fromString("1"));
     Assert.assertEquals("2 => TWO",
-            AttackValue.TWO, AttackValue.fromString("2"));
+                        AttackValue.TWO, AttackValue.fromString("2"));
     Assert.assertEquals("3 => THREE",
-            AttackValue.THREE, AttackValue.fromString("3"));
+                        AttackValue.THREE, AttackValue.fromString("3"));
     Assert.assertEquals("4 => FOUR",
-            AttackValue.FOUR, AttackValue.fromString("4"));
+                        AttackValue.FOUR, AttackValue.fromString("4"));
     Assert.assertEquals("5 => FIVE",
-            AttackValue.FIVE, AttackValue.fromString("5"));
+                        AttackValue.FIVE, AttackValue.fromString("5"));
     Assert.assertEquals("6 => SIX",
-            AttackValue.SIX, AttackValue.fromString("6"));
+                        AttackValue.SIX, AttackValue.fromString("6"));
     Assert.assertEquals("7 => SEVEN",
-            AttackValue.SEVEN, AttackValue.fromString("7"));
+                        AttackValue.SEVEN, AttackValue.fromString("7"));
     Assert.assertEquals("8 => EIGHT",
-            AttackValue.EIGHT, AttackValue.fromString("8"));
+                        AttackValue.EIGHT, AttackValue.fromString("8"));
     Assert.assertEquals("9 => NINE",
-            AttackValue.NINE, AttackValue.fromString("9"));
+                        AttackValue.NINE, AttackValue.fromString("9"));
     Assert.assertEquals("10 => A",
-            AttackValue.A, AttackValue.fromString("A"));
+                        AttackValue.A, AttackValue.fromString("A"));
   }
 
   /**
@@ -107,11 +107,11 @@ public class TestAttackValue {
     Assert.assertEquals("2", AttackValue.TWO.toString());
     Assert.assertEquals("3", AttackValue.THREE.toString());
     Assert.assertEquals("4", AttackValue.FOUR.toString());
-    Assert.assertEquals( "5", AttackValue.FIVE.toString());
-    Assert.assertEquals( "6", AttackValue.SIX.toString());
-    Assert.assertEquals( "7", AttackValue.SEVEN.toString());
-    Assert.assertEquals( "8", AttackValue.EIGHT.toString());
-    Assert.assertEquals( "9", AttackValue.NINE.toString());
-    Assert.assertEquals( "A", AttackValue.A.toString());
+    Assert.assertEquals("5", AttackValue.FIVE.toString());
+    Assert.assertEquals("6", AttackValue.SIX.toString());
+    Assert.assertEquals("7", AttackValue.SEVEN.toString());
+    Assert.assertEquals("8", AttackValue.EIGHT.toString());
+    Assert.assertEquals("9", AttackValue.NINE.toString());
+    Assert.assertEquals("A", AttackValue.A.toString());
   }
 }

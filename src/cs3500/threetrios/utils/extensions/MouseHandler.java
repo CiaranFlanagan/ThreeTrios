@@ -20,11 +20,11 @@ public class MouseHandler extends MouseAdapter {
   protected MouseHandler() {
     map = new HashMap<>();
   }
-  
+
   public static MouseHandler create() {
     return new MouseHandler();
   }
-  
+
   public MouseHandler handle(Predicate<MouseEvent> question, Consumer<MouseEvent> response) {
     this.map.put(question, response);
     return this;

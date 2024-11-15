@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class ConfigGrid {
   /**
    * take a scanner and make a grid.
+   *
    * @param sc - the scanner
    * @return - a grid
    */
@@ -41,6 +42,7 @@ public class ConfigGrid {
 
   /**
    * to convert a string to a board cell.
+   *
    * @param s - the string
    * @return - a board cell
    */

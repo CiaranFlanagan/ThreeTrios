@@ -18,7 +18,6 @@ public final class GridCellHole extends GridCellAbstract {
   }
 
 
-
   @Override
   public void acceptBattlePhase(Referee battlePhase) {
     battlePhase.refereeBattlePhase(this);

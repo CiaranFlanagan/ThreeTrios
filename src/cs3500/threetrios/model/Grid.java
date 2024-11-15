@@ -7,10 +7,10 @@ package cs3500.threetrios.model;
  */
 public final class Grid {
   private final GridCellAbstract[][] internalArray;
-  private CellType[][] shape;
   private final int NUM_ROWS;
   private final int NUM_COLS;
   private final int numHoles;
+  private CellType[][] shape;
 
   /**
    * Constructs a Grid with a specified shape. Initializes each cell based on the shape's
@@ -18,7 +18,8 @@ public final class Grid {
    * to contain cards.
    *
    * @param shape the initial configuration of the grid, represented by an array of CellType values
-   * @throws IllegalArgumentException if shape is null, has fewer than 1 row, or fewer than 1 column
+   * @throws IllegalArgumentException if shape is null, has fewer than 1 row, or fewer than 1
+   * column
    */
   public Grid(CellType[][] shape) {
     this.shape = shape;

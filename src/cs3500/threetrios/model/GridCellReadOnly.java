@@ -6,6 +6,7 @@ package cs3500.threetrios.model;
 public interface GridCellReadOnly {
   /**
    * To evaluate if this cell can have a card.
+   *
    * @return - if this cell can have a card
    */
   boolean canHaveCard();
@@ -26,6 +27,7 @@ public interface GridCellReadOnly {
 
   /**
    * evaluates if this cell has a neighbor to the [direction].
+   *
    * @param direction - the direction
    * @return - if cell has a neighbor in direction
    */

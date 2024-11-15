@@ -21,6 +21,7 @@ public class MostFlips extends StrategyAbstract {
   /**
    * Find effectiveness by comparing the model's state from this.modelSupplier
    * and the state after applying the move
+   *
    * @param move - a consumer of the model
    * @return - an int rating of the effectiveness
    */

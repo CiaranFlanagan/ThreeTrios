@@ -22,9 +22,9 @@ import static cs3500.threetrios.controller.TestFiles.GRID_NO_HOLES;
  * Tests for the view.
  */
 public class TestView<OD> {
+  private final Referee ref = new RefereeDefault();
   protected View<OD> view;
   protected Model model;
-  private final Referee ref = new RefereeDefault();
 
   @Before
   public void setup() {

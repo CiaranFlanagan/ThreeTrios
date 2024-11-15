@@ -28,9 +28,12 @@ public enum Coach {
    */
   public Coach opponent() {
     switch (this) {
-      case RED: return BLUE;
-      case BLUE: return RED;
-      default: throw new IllegalStateException();
+      case RED:
+        return BLUE;
+      case BLUE:
+        return RED;
+      default:
+        throw new IllegalStateException();
     }
   }
 }

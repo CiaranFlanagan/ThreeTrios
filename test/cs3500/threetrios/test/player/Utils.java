@@ -26,17 +26,17 @@ public class Utils {
   public static void printGrid(Supplier<Grid> gridSupplier) {
 
     Arrays.stream(gridSupplier.get().readOnlyArray2D())
-          .forEach((row) -> {
-            Arrays.stream(row)
-                  .forEach((cell) -> {
-                    if (cell.canHaveCard()) {
-                      System.out.print("C");
-                    } else {
-                      System.out.print("C");
-                    }
-                  });
-            System.out.println();
-          });
+            .forEach((row) -> {
+              Arrays.stream(row)
+                      .forEach((cell) -> {
+                        if (cell.canHaveCard()) {
+                          System.out.print("C");
+                        } else {
+                          System.out.print("C");
+                        }
+                      });
+              System.out.println();
+            });
   }
 
   /**
@@ -52,8 +52,8 @@ public class Utils {
    * Retrieves the card at a specific position in the grid if a card is present.
    *
    * @param model the Model containing the grid
-   * @param row the row index of the desired position
-   * @param col the column index of the desired position
+   * @param row   the row index of the desired position
+   * @param col   the column index of the desired position
    * @return an Optional containing the Card at the specified position, or empty if no card exists
    */
   public static Optional<Card> cardAt(Model model, int row, int col) {

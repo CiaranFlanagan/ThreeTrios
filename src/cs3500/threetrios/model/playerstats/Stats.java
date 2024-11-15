@@ -18,18 +18,8 @@ public class Stats {
   }
 
   /**
-   * To represent a database that tracks players and their statistics.
-   */
-  public static class DB {
-    private static final Map<Player, Stats> db = new HashMap<>();
-
-    public static void add(Player player) {
-      db.put(player, new Stats());
-    }
-  }
-
-  /**
    * number of wins of a player.
+   *
    * @return - number of wins of a player
    */
   public int numWins() {
@@ -38,6 +28,7 @@ public class Stats {
 
   /**
    * number of losses of a player.
+   *
    * @return - number of losses of a player
    */
   public int numLosses() {
@@ -56,6 +47,17 @@ public class Stats {
    */
   public void incLosses() {
     this.losses++;
+  }
+
+  /**
+   * To represent a database that tracks players and their statistics.
+   */
+  public static class DB {
+    private static final Map<Player, Stats> db = new HashMap<>();
+
+    public static void add(Player player) {
+      db.put(player, new Stats());
+    }
   }
 
 

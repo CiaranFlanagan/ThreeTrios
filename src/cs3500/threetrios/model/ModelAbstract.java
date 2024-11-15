@@ -137,9 +137,9 @@ public abstract class ModelAbstract implements Model {
 
   private int score(Coach coach, Grid grid) {
     return (int) Arrays.stream(grid.readOnlyArray2D())
-                       .flatMap(Arrays::stream)
-                       .filter(gc -> gc.hasCard() && gc.getCard().getCoach() == coach)
-                       .count();
+            .flatMap(Arrays::stream)
+            .filter(gc -> gc.hasCard() && gc.getCard().getCoach() == coach)
+            .count();
   }
 
   protected GridCellVisitable setGridCardAt(int row, int col, Card card) {
@@ -148,7 +148,7 @@ public abstract class ModelAbstract implements Model {
 
   private void checkRowCol(int row, int col) {
     if (row < 0 || col < 0 || row >= this.grid.readOnlyArray2D().length ||
-            col >= this.grid.readOnlyArray2D()[0].length ) {
+            col >= this.grid.readOnlyArray2D()[0].length) {
       throw new IllegalArgumentException("Row and col must be Natural Number and within the " +
                                                  "range of the grid");
     }

@@ -23,6 +23,7 @@ public class ModelBase extends ModelAbstract {
 
   /**
    * constructor.
+   *
    * @param r - a random to help randomize dealing cards.
    */
   public ModelBase(Random r) {
@@ -32,6 +33,7 @@ public class ModelBase extends ModelAbstract {
 
   /**
    * constructor.
+   *
    * @return - new TTM
    */
   public static ModelBase create() {
@@ -51,8 +53,9 @@ public class ModelBase extends ModelAbstract {
                     - grid.getNumHoles();
     int requiredCards = totalCardCells + 1;
     if (cards.size() < requiredCards) {
-      throw new IllegalArgumentException("Number of cards must be at least N + 1, where N is the " +
-              "number of card cells on the grid");
+      throw new IllegalArgumentException(
+              "Number of cards must be at least N + 1, where N is the " +
+                      "number of card cells on the grid");
     }
     this.grid = grid;
     this.ref = ref;
@@ -130,13 +133,15 @@ public class ModelBase extends ModelAbstract {
     if (!isGameOver()) {
       throw new IllegalStateException("Game is not over yet");
     }
-    //The winner is determined by counting the number of cards each player owns both on the grid and
+    //The winner is determined by counting the number of cards each player owns both on the grid
+    // and
     // in their hands.
     return whoHasMoreTotalCards();
   }
 
   /**
    * Determines the coach with more total cards.
+   *
    * @return - coach with more total cards
    * @throws IllegalStateException if grid is not full, or if cards coach is null
    */

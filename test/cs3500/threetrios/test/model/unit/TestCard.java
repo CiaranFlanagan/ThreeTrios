@@ -2,12 +2,14 @@ package cs3500.threetrios.test.model.unit;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import cs3500.threetrios.model.AttackValue;
 import cs3500.threetrios.model.Card;
 import cs3500.threetrios.model.CardinalDirection;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 

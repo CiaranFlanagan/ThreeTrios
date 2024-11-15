@@ -15,7 +15,7 @@ public class TestCardinalDirection {
     CardinalDirection dirNorth = CardinalDirection.NORTH;
     CardinalDirection dirSouth = CardinalDirection.SOUTH;
     CardinalDirection dirEast = CardinalDirection.EAST;
-    CardinalDirection dirWest  = CardinalDirection.WEST;
+    CardinalDirection dirWest = CardinalDirection.WEST;
   }
 
   @Test

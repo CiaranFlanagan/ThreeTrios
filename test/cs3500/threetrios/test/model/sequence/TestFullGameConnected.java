@@ -14,7 +14,9 @@ import cs3500.threetrios.model.Card;
 import cs3500.threetrios.model.RefereeDefault;
 import cs3500.threetrios.model.ModelBase;
 import org.junit.runners.MethodSorters;
+
 import java.util.Scanner;
+
 import static cs3500.threetrios.controller.TestFiles.GRID_CONNECTED_HOLES;
 
 /**
@@ -63,7 +65,7 @@ public class TestFullGameConnected {
                         Coach.RED, red);
     // Check that Red has 10 cards
     Assert.assertEquals("Red should have 10 cards in hand.",
-            10, model.curCoachesHands().get(red));
+                        10, model.curCoachesHands().get(red));
   }
 
   /**

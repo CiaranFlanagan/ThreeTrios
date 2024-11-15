@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 public class Main {
   /**
    * To run the program by just starting a game.
+   *
    * @param args - command line args, which don't get processed currently.
    */
   public static void main(String[] args) {

@@ -1,5 +1,3 @@
-
-
 package cs3500.threetrios.test.model.sequence;
 
 import cs3500.threetrios.controller.ConfigCard;
@@ -39,7 +37,7 @@ public class TestFullGameNoHoles {
   @Test
   public void P1Start() {
     model.startGame(ConfigGrid.scannerToGrid(GRID_NO_HOLES),
-            ConfigCard.scannerToCardList(CC_SMALL), referee);
+                    ConfigCard.scannerToCardList(CC_SMALL), referee);
     // check coach red is actually a red coach
     red = model.curCoach();
     Assert.assertEquals(red, Coach.RED);

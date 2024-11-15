@@ -10,8 +10,8 @@ public interface Model extends ModelReadOnly {
   /**
    * Starts the game with the given card index, grid col, and grid row.
    *
-   * @param grid the grid
-   * @param cards the cards
+   * @param grid    the grid
+   * @param cards   the cards
    * @param referee the referee
    */
   void startGame(Grid grid, List<Card> cards, Referee referee);
@@ -22,7 +22,7 @@ public interface Model extends ModelReadOnly {
    * @param idx index in hand
    * @param row row on grid
    * @param col col on grid
-   * @throws IllegalStateException if game is not started/game over
+   * @throws IllegalStateException    if game is not started/game over
    * @throws IllegalArgumentException if idx out of bounds or row/col out of bounds of grid
    * @implNote 0 indexing
    */

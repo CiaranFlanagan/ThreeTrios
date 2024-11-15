@@ -8,9 +8,6 @@ import cs3500.threetrios.model.GridCellReadOnly;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 /**
  * Tests for the BoardConfig class.
  */

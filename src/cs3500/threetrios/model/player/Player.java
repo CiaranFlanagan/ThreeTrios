@@ -10,6 +10,7 @@ import java.util.function.Consumer;
 public interface Player {
   /**
    * returns the name of the player.
+   *
    * @return the player's name
    * @throws IllegalStateException if not initialized
    */
@@ -17,6 +18,7 @@ public interface Player {
 
   /**
    * gives an integer measurement that describes skill, more is better.
+   *
    * @return - an integer measure of skill.
    */
   Difficulty difficulty();

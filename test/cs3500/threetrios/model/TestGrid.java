@@ -74,7 +74,7 @@ public class TestGrid {
   @Test
   public void testCopy() {
     Grid grid = this.grid;
-    grid.placeCardOn(0,  0, Utils.makeCard("a 2 1 1 1"));
+    grid.placeCardOn(0, 0, Utils.makeCard("a 2 1 1 1"));
     Grid gridCopy = grid.copy();
     assertEquals(getCard(grid, 0, 0), getCard(gridCopy, 0, 0));
   }
@@ -82,8 +82,6 @@ public class TestGrid {
   private Card getCard(Grid grid, int x, int y) {
     return grid.readOnlyArray2D()[x][y].getCard();
   }
-
-
 
 
 }

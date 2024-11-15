@@ -13,8 +13,8 @@ import static org.junit.Assert.assertEquals;
  */
 public class TestGrid {
 
-  private Grid grid;
   CellType[][] constructorArg;
+  private Grid grid;
 
   @Before
   public void setUp() {
@@ -59,7 +59,6 @@ public class TestGrid {
     CellType[][] invalidGrid = new CellType[0][0];
     Grid grid = new Grid(invalidGrid);
   }
-
 
 
 }

@@ -34,7 +34,7 @@ public class Utils {
   @Test
   public void testMakeCard() {
     Assert.assertEquals(makeCard("kc 1 2 3 4").toString(),
-            "kc 1 2 3 4");
+                        "kc 1 2 3 4");
   }
 
   @Test(expected = IllegalArgumentException.class)

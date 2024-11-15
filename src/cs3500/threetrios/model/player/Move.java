@@ -30,8 +30,8 @@ public final class Move implements Consumer<Model> {
   /**
    * Creates a new Move instance with the specified row, column, and hand index.
    *
-   * @param row the row index on the grid
-   * @param col the column index on the grid
+   * @param row     the row index on the grid
+   * @param col     the column index on the grid
    * @param handIdx the index of the card in the player's hand
    * @return a new Move instance representing the specified move
    */

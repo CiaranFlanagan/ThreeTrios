@@ -5,5 +5,6 @@ package cs3500.threetrios.model;
  * in the Three Trios game. Each cell type defines a specific purpose or state for the cell.
  */
 public enum CellType {
-  HOLE, CARD
+  HOLE,
+  CARD
 }

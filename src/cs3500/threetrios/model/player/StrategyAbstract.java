@@ -43,9 +43,9 @@ public abstract class StrategyAbstract {
     int sizeOfHand = model.curCoachesHands().get(model.curCoach()).size();
     List<Move> acc0 = new ArrayList<>();
     IntStream.range(0, numRows).forEach(
-        (row) -> IntStream.range(0, numColumns).forEach(
-          (col) -> IntStream.range(0, sizeOfHand).forEach(
-            (id) -> acc0.add(Move.create(row, col, id)))));
+            (row) -> IntStream.range(0, numColumns).forEach(
+                    (col) -> IntStream.range(0, sizeOfHand).forEach(
+                            (id) -> acc0.add(Move.create(row, col, id)))));
     return filterOutIllegalMoves(acc0);
   }
 
@@ -77,13 +77,13 @@ public abstract class StrategyAbstract {
    */
   public Optional<Move> bestMove() {
     return allConsideredMoves().stream()
-                               .reduce(BinaryOperator
-                                 .maxBy(Comparator.comparingInt(this::effectiveness)));
+            .reduce(BinaryOperator
+                            .maxBy(Comparator.comparingInt(this::effectiveness)));
   }
 
   protected final List<GridCellReadOnly> modelToCellList(Model model) {
     return Arrays.stream(model.curGrid().readOnlyArray2D()).flatMap(Arrays::stream).collect(
-      Collectors.toList());
+            Collectors.toList());
   }
 
 }

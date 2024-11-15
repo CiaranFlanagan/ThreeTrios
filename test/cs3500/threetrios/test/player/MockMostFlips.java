@@ -1,7 +1,9 @@
 package cs3500.threetrios.test.player;
 
 import cs3500.threetrios.model.ModelBase;
+
 import java.util.List;
+
 /**
  * A mock implementation of the ModelBase class used for testing the MostFlips strategy in the
  * Three Trios game. MockMostFlips logs card placements instead of interacting with an actual game

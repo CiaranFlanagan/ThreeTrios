@@ -24,6 +24,7 @@ public class LineWriter {
 
   /**
    * Adds a line to the LineWriter object.
+   *
    * @param line the line to add
    * @return the LineWriter object
    */
@@ -34,8 +35,9 @@ public class LineWriter {
 
   /**
    * Adds a line to the LineWriter object x times.
+   *
    * @param line the line to add
-   * @param x the number of times to add the line
+   * @param x    the number of times to add the line
    * @return the LineWriter object
    */
   public LineWriter line(String line, int x) {
@@ -47,6 +49,7 @@ public class LineWriter {
 
   /**
    * Ends the LineWriter object with a string.
+   *
    * @param s the string to end with
    * @return the LineWriter object
    */
