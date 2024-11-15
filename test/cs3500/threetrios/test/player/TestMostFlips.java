@@ -135,5 +135,6 @@ public class TestMostFlips {
     MostFlips strategy = new MostFlips(modelSupplier);
     strategy.bestMove();
     System.out.println(log);
+    Assert.assertFalse(log.isEmpty());
   }
 }
