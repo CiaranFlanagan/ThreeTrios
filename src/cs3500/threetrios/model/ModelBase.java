@@ -9,7 +9,7 @@ import java.util.Random;
  * to represent a model of the three trios game.
  * Invariant: getCurrentCoach() is never null.
  */
-public final class ModelBase extends ModelAbstract {
+public class ModelBase extends ModelAbstract {
   private boolean gameStarted;
   private Random random;
 

@@ -5,6 +5,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 /**
@@ -13,21 +14,21 @@ import java.util.function.Predicate;
  * actions when component events occur.
  */
 public class ComponentHandler implements ComponentListener {
-  protected Map<Predicate<ComponentEvent>, Runnable> map;
+  protected Map<Predicate<ComponentEvent>, Consumer<ComponentEvent>> map;
 
   public ComponentHandler() {
     map = new HashMap<>();
   }
   
-  public ComponentHandler handle(Predicate<ComponentEvent> question, Runnable response) {
+  public ComponentHandler handle(Predicate<ComponentEvent> question, Consumer<ComponentEvent> response) {
     this.map.put(question, response);
     return this;
   }
 
   private void handleComponentEvent(ComponentEvent me) {
-    for (Map.Entry<Predicate<ComponentEvent>, Runnable> entry : map.entrySet()) {
+    for (Map.Entry<Predicate<ComponentEvent>, Consumer<ComponentEvent>> entry : map.entrySet()) {
       if (entry.getKey().test(me)) {
-        entry.getValue().run();
+        entry.getValue().accept(me);
       }
     }
   }

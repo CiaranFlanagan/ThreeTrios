@@ -39,19 +39,33 @@ public class TestView<OD> {
 
   @Test
   public void testGridNoHolesView() {
-    model.startGame(ConfigGrid.scannerToGrid(TestFiles.safeFileToScanner(GRID_NO_HOLES)),
-            ConfigCard.scannerToCardList(TestFiles.safeFileToScanner(CC_SMALL)), ref);
+    try {
+      model.startGame(ConfigGrid.scannerToGrid(TestFiles.safeFileToScanner(GRID_NO_HOLES)),
+                      ConfigCard.scannerToCardList(TestFiles.safeFileToScanner(CC_SMALL)), ref);
+    } catch (Exception e) {
+      Assert.fail();
+    }
   }
 
   @Test
   public void testGridConnectedView() {
-    model.startGame(ConfigGrid.scannerToGrid(TestFiles.safeFileToScanner(GRID_CONNECTED_HOLES)),
-            ConfigCard.scannerToCardList(TestFiles.safeFileToScanner(CC_LARGE)), ref);
+    try {
+
+      model.startGame(ConfigGrid.scannerToGrid(TestFiles.safeFileToScanner(GRID_CONNECTED_HOLES)),
+                      ConfigCard.scannerToCardList(TestFiles.safeFileToScanner(CC_LARGE)), ref);
+    } catch (Exception e) {
+      Assert.fail();
+    }
   }
 
   @Test
   public void testGridDisconnectedView() {
-    model.startGame(ConfigGrid.scannerToGrid(TestFiles.safeFileToScanner(GRID_DISC_HOLES)),
-            ConfigCard.scannerToCardList(TestFiles.safeFileToScanner(CC_LARGE)), ref);
+    try {
+
+      model.startGame(ConfigGrid.scannerToGrid(TestFiles.safeFileToScanner(GRID_DISC_HOLES)),
+                      ConfigCard.scannerToCardList(TestFiles.safeFileToScanner(CC_LARGE)), ref);
+    } catch (Exception e) {
+      Assert.fail();
+    }
   }
 }

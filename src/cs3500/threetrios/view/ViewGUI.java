@@ -16,6 +16,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ComponentEvent;
 import java.util.List;
 
 /**
@@ -67,7 +68,7 @@ public class ViewGUI implements View<JFrame>  {
             new ComponentHandler().handle(WasComponent.RESIZED, this::handleResize));
   }
 
-  private void handleResize() {
+  private void handleResize(ComponentEvent e) {
     leftHand.handleResize();
     gridGUI.handleResize();
     rightHand.handleResize();

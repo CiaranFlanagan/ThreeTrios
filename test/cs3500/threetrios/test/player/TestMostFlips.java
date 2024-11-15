@@ -2,6 +2,7 @@ package cs3500.threetrios.test.player;
 
 import cs3500.threetrios.controller.ConfigCard;
 import cs3500.threetrios.controller.ConfigGrid;
+import cs3500.threetrios.controller.TestFiles;
 import cs3500.threetrios.model.Card;
 import cs3500.threetrios.model.Coach;
 import cs3500.threetrios.model.Grid;
@@ -13,6 +14,8 @@ import cs3500.threetrios.model.player.Move;
 import cs3500.threetrios.utils.LineWriter;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -34,7 +37,7 @@ public class TestMostFlips {
   // and colors at a particular position
 
   @Test
-  public void test() {
+  public void proofTest() {
     Supplier<Grid> gridSupplier =
             () -> ConfigGrid.scannerToGrid(
                     new Scanner(
@@ -109,5 +112,16 @@ public class TestMostFlips {
                         Coach.RED);
     Assert.assertEquals(Utils.cardAt(modelSupplier3.get(), 1, 1).get().toString(),
                         "c 3 3 3 3");
+  }
+
+  @Test
+  public void testLog() {
+    List<List<Integer>> log = new ArrayList<>();
+    Supplier<Model> supplier = () -> {
+      Model mock = new MockMostFlips(log);
+      mock.startGame(ConfigGrid.scannerToGrid(TestFiles.GRID_NO_HOLES));
+      return mock;
+    };
+
   }
 }
