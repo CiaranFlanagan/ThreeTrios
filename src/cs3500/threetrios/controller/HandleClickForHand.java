@@ -13,9 +13,20 @@ import java.awt.event.MouseEvent;
 public class HandleClickForHand extends MouseHandler {
   ViewGUI.HandGUI hand;
 
+  /**
+   * constructor.
+   * @param hand - a hand gui.
+   */
   public HandleClickForHand(ViewGUI.HandGUI hand) {
     this.hand = hand;
     map.put(WasMouse.CLICKED, this::toDoToHand);
+  }
+
+  /**
+   * To add this as a listener to its hand.
+   */
+  public void init() {
+    hand.addMouseListener(this);
   }
 
   /**
@@ -26,8 +37,6 @@ public class HandleClickForHand extends MouseHandler {
    * @param me the MouseEvent triggered by the click
    */
   public void toDoToHand(MouseEvent me) {
-    System.err.println(me.getX());
-    System.err.println(me.getY());
     if (!hand.selected()) {
       hand.select();
       hand.setXSelect(me.getX());

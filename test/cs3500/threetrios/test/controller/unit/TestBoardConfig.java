@@ -1,10 +1,9 @@
 package cs3500.threetrios.test.controller.unit;
 
-import cs3500.threetrios.controller.TestFiles;
 import cs3500.threetrios.controller.ConfigGrid;
+import cs3500.threetrios.controller.TestFiles;
 import cs3500.threetrios.model.Grid;
 import cs3500.threetrios.model.GridCellReadOnly;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,6 +11,7 @@ import org.junit.Test;
  * Tests for the BoardConfig class.
  */
 public class TestBoardConfig {
+  
   @Test
   public void testFullVaried() {
     Grid grid = ConfigGrid.scannerToGrid(TestFiles.GRID_DISC_HOLES);

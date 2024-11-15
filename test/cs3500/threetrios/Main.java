@@ -26,6 +26,7 @@ public class Main {
     model.startGame(ConfigGrid.scannerToGrid(TestFiles.GRID_ASSN_HARD),
                     ConfigCard.scannerToCardList(TestFiles.CC_LARGE),
                     new RefereeDefault());
+
     View<JFrame> view = new ViewGUI(model);
     JFrame frame = new JFrame("three trios hwk 6");
     view.renderTo(frame);

@@ -1,5 +1,6 @@
 package cs3500.threetrios.view;
 
+import cs3500.threetrios.controller.HandleClickForGrid;
 import cs3500.threetrios.controller.HandleClickForHand;
 import cs3500.threetrios.model.Card;
 import cs3500.threetrios.model.CardinalDirection;
@@ -13,7 +14,6 @@ import cs3500.threetrios.utils.extensions.WasComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -64,19 +64,22 @@ public class ViewGUI implements View<JFrame> {
   public void renderTo(JFrame outputFrame) {
     this.frame = outputFrame;
     // Implementation to render the game state in a GUI will be added here.
-    outputFrame.setVisible(true);
+
     outputFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     outputFrame.setLayout(null);
-    outputFrame.setSize(new Dimension(dims.width * cwidth(), dims.height * cheight()));
-    leftHand.addMouseListener(new HandleClickForHand(leftHand));
-    rightHand.addMouseListener(new HandleClickForHand(rightHand));
+    outputFrame.setSize(new Dimension(500, 300));
+    new HandleClickForHand(leftHand).init();
+    new HandleClickForHand(rightHand).init();
+    new HandleClickForGrid(gridGUI).init();
 
     outputFrame.add(leftHand);
     outputFrame.add(gridGUI);
     outputFrame.add(rightHand);
 
-    outputFrame.addComponentListener(
-            new ComponentHandler().handle(WasComponent.RESIZED, this::handleResize));
+    outputFrame.addComponentListener(new ComponentHandler().handle(WasComponent.RESIZED,
+                                                                   this :: handleResize));
+    outputFrame.setVisible(true);
+    outputFrame.repaint();
   }
 
   private void handleResize(ComponentEvent e) {
@@ -150,20 +153,17 @@ public class ViewGUI implements View<JFrame> {
     @Override
     protected void paintComponent(Graphics g) {
       super.paintComponent(g);
-      System.out.println("we paint");
       int handCardHeight = dims.height * cheight() / hand.size();
       int[] y = new int[1];
       hand.forEach((c) -> renderCard(g, 0, y[0]++ * handCardHeight, c, handCardHeight));
       if (selected) {
-        System.out.println("dispatches");
         renderSelected(g, xSelect, ySelect, handCardHeight);
       }
     }
 
     private void handleResize() {
       int x = coach == Coach.RED ? 0 : (dims.width - 1) * cwidth();
-      this.setBounds(x, 0, cwidth(),
-                     cheight() * dims.height);
+      this.setBounds(x, 0, cwidth(), cheight() * dims.height);
     }
 
     public void setXSelect(int x) {
@@ -175,12 +175,10 @@ public class ViewGUI implements View<JFrame> {
     }
 
     public void select() {
-      System.out.println("selected");
       selected = true;
     }
 
     public void deselect() {
-      System.out.println("deselected");
       selected = false;
     }
 
@@ -192,22 +190,10 @@ public class ViewGUI implements View<JFrame> {
       g.setColor(Color.WHITE);
       int leftcorner = snapToWidth(xSelect);
       int topCorner = snapToHeight(ySelect, cardHeight);
-      System.out.println("x: " + leftcorner);
-      System.out.println("Y: " + topCorner);
-      System.out.println("modelx: " + (x / cwidth()));
-      System.out.println("modely: " + (y / cardHeight));
       g.drawRect(leftcorner, topCorner, cwidth(), cardHeight);
-      g.drawRect(leftcorner + 1, topCorner + 1,
-                 cwidth() - 2, cardHeight - 2);
+      g.drawRect(leftcorner + 1, topCorner + 1, cwidth() - 2, cardHeight - 2);
     }
 
-    protected int snapToWidth(int x) {
-      return (x / cwidth()) * cwidth();
-    }
-
-    protected int snapToHeight(int y, int cardheight) {
-      return (y / cardheight) * cardheight;
-    }
 
   }
 
@@ -246,10 +232,38 @@ public class ViewGUI implements View<JFrame> {
     }
 
     protected void handleResize() {
-      this.setBounds(cwidth(), 0, cwidth() * (dims.width - 2),
-                     cheight() * dims.height);
+      this.setBounds(cwidth(), 0, cwidth() * (dims.width - 2), cheight() * dims.height);
+    }
+
+    public int modelx(int x) {
+      return x / cwidth();
+    }
+
+    public int modely(int y) {
+      return y / cheight();
     }
 
   }
+
+  /**
+   * to snap the input x-coordinate to the left-most coordinate of the card.
+   *
+   * @param x the x-coordinate on the panel.
+   * @return x coordinate on left of card
+   */
+  protected int snapToWidth(int x) {
+    return (x / cwidth()) * cwidth();
+  }
+
+  /**
+   * to snap the input y-coordinate to the leftmost coordinate of the card.
+   *
+   * @param y the y-coordinate on the panel.
+   * @return y coordinate on left of card
+   */
+  protected int snapToHeight(int y, int cardHeight) {
+    return (y / cardHeight) * cardHeight;
+  }
+
 
 }

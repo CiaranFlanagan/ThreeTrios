@@ -53,7 +53,6 @@ public class TestModel {
     assertTrue(hands.containsKey(Coach.BLUE));
     assertTrue(hands.get(Coach.RED).isEmpty());
     assertTrue(hands.get(Coach.BLUE).isEmpty());
-    //TODO: Finish this!
   }
 
   @Test
