@@ -336,6 +336,23 @@ extension and mutation in a protected manner.
   single avenue, except that which preservers the integrity of a ThreeTrios model.
 
 ### Assignment 2 Extra Credit   
+For the extra credit, we implemented Defense Strategy as Strategy 3. This defensive approach evaluates potential moves based on minimizing a card's exposure to opponents, aiming to reduce vulnerability and maintain control over key positions on the board.
+- Strategy Explanation
+- Defense Strategy prioritizes placing cards where they have the fewest exposed sides, making it 
+  more challenging for the opponent to flip them in subsequent turns. This is calculated by counting the number of adjacent cells that remain unoccupied (exposed) after placing the card.
+Move Effectiveness: 
+  - The effectiveness method assigns higher scores to moves with fewer exposed sides and lower scores to moves with greater exposure. Additionally, it considers the attack values on exposed sides, allowing moves that are not only defensively sound but also better equipped to fend off opponent moves.
+  - Location of Implementations
+    - Class: DefenseStrategy
+    - Package: cs3500.threetrios.model.player
+  - Methods: The key methods implementing this strategy are:
+    - effectiveness: Calculates the defensive value of a move by minimizing exposed sides and 
+    summing attack values on exposed sides.
+    - getExposedSides: Identifies which sides of a cell would be exposed if a card were placed 
+      there, guiding the calculation of the defensive score.
+    - Testing
+      - Location of Tests: Tests for Defense Strategy are located in the cs3500.threetrios.test.
+        player package
 
 ___
 ## Changes for Part 2

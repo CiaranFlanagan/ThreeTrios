@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -18,6 +19,7 @@ import cs3500.threetrios.utils.Utils;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertSame;
 
@@ -25,21 +27,21 @@ import static org.junit.Assert.assertSame;
  * Tests for the ThreeTriosModel class.
  */
 public class TestModel {
+  private Coach coach;
   private Grid gridNoHoles;
   private List<Card> cardsSmall;
   private ModelBase model;
+  private Referee referee;
 
   @Before
   public void setUp() {
     model = new ModelBase();
-    Referee referee = new RefereeDefault();
-    try {
-      gridNoHoles = ConfigGrid.scannerToGrid(new Scanner(TestFiles.GRID_NO_HOLES));
-      cardsSmall = ConfigCard.scannerToCardList(new Scanner(TestFiles.CC_SMALL));
-    } catch (FileNotFoundException ex) {
-      Assert.fail("file not found");
-    }
-    Coach coach = Coach.RED;
+    referee = new RefereeDefault();
+
+    gridNoHoles = ConfigGrid.scannerToGrid(TestFiles.GRID_NO_HOLES);
+    cardsSmall = ConfigCard.scannerToCardList(TestFiles.CC_SMALL);
+
+    coach = Coach.RED;
     model.startGame(gridNoHoles, cardsSmall, referee);
   }
 
@@ -76,7 +78,7 @@ public class TestModel {
     Card testCard = cardsSmall.get(0);
     System.out.println(testCard);
     System.out.println(gridNoHoles);
-    gridNoHoles.placeCardOn(0,0,testCard);
+    gridNoHoles.placeCardOn(0, 0, testCard);
     Optional<Card> card = model.cardAt(0, 0);
     assertTrue(card.isPresent());
     assertEquals(testCard, card.get());
@@ -87,7 +89,7 @@ public class TestModel {
   public void testOwnerAt() {
     Card testCard = cardsSmall.get(0);
     System.out.println(testCard.getCoach());
-    gridNoHoles.placeCardOn(0,0,testCard);
+    gridNoHoles.placeCardOn(0, 0, testCard);
     Optional<Coach> card = model.ownerAt(0, 0);
     assertTrue(card.isPresent());
     assertEquals(testCard.getCoach(), Coach.RED);
@@ -97,7 +99,7 @@ public class TestModel {
   @Test
   public void testCanPlayAt() {
     Card testCard = cardsSmall.get(0);
-    gridNoHoles.placeCardOn(0,0,testCard);
+    gridNoHoles.placeCardOn(0, 0, testCard);
     assertTrue(model.canPlayAt(0, 1));
     assertFalse(model.canPlayAt(0, 0));
     assertEquals(testCard.getCoach(), Coach.RED);
@@ -123,6 +125,14 @@ public class TestModel {
     Assert.assertEquals(model.numFlippedIfPlaced(testCard, 0, 0), 1);
   }
 
+  /**
+   * bob    1 1 1 1
+   * kc     5 5 5 5
+   * zeke   A A A A
+   * ciaran 1 1 1 1
+   */
+
+
   @Test
   public void testScore() {
     Card testCard = Utils.makeCard("Ciaran 1 2 3 4");
@@ -131,7 +141,7 @@ public class TestModel {
     testCard.setCoach(Coach.RED);
     testCard2.setCoach(Coach.BLUE);
     testCard3.setCoach(Coach.BLUE);
-    gridNoHoles.placeCardOn(0,0,testCard);
+    gridNoHoles.placeCardOn(0, 0, testCard);
     int score = model.score(Coach.RED);
     assertEquals(1, score);
     gridNoHoles.placeCardOn(0, 1, testCard2);
@@ -206,8 +216,10 @@ public class TestModel {
   }
 
 
-
-
+  @Test
+  public void testCurCoachesHands() {
+    this.model.curCoachesHands();
+  }
 
 }
 

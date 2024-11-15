@@ -54,7 +54,7 @@ public class Utils {
    * @param model the Model containing the grid
    * @param row the row index of the desired position
    * @param col the column index of the desired position
-   * @return an Optional containing the Card at the specified position, or empty if no card is present
+   * @return an Optional containing the Card at the specified position, or empty if no card exists
    */
   public static Optional<Card> cardAt(Model model, int row, int col) {
     GridCellReadOnly cell = model.curGrid().readOnlyArray2D()[row][col];

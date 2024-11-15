@@ -22,8 +22,8 @@ public class Main {
    */
   public static void main(String[] args) {
     Model model = new ModelBase();
-    model.startGame(ConfigGrid.scannerToGrid(TestFiles.safeFileToScanner(TestFiles.GRID_DISC_HOLES)),
-                    ConfigCard.scannerToCardList(TestFiles.safeFileToScanner(TestFiles.CC_LARGE)),
+    model.startGame(ConfigGrid.scannerToGrid(TestFiles.GRID_ASSN_HARD),
+                    ConfigCard.scannerToCardList(TestFiles.CC_LARGE),
                     new RefereeDefault());
     View<JFrame> view = new ViewGUI(model);
     JFrame frame = new JFrame("three trios hwk 6");

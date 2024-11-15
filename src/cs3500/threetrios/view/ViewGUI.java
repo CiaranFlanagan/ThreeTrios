@@ -38,8 +38,10 @@ public class ViewGUI implements View<JFrame> {
   private static final Color VISIBLE_EMPTY_CARD = new Color(144, 238, 144);
 
   /**
-   * A graphical user interface (GUI) implementation of the View interface for the Three Trios game.
-   * This class is responsible for visually rendering the game's current state in a windowed format.
+   * A graphical user interface (GUI) implementation of the View interface for the Three Trios
+   * game.
+   * This class is responsible for visually rendering the game's current state in a windowed
+   * format.
    * It displays the hands of both players and the game grid.
    */
   public ViewGUI(ModelReadOnly model) {
@@ -74,7 +76,7 @@ public class ViewGUI implements View<JFrame> {
     outputFrame.add(rightHand);
 
     outputFrame.addComponentListener(
-        new ComponentHandler().handle(WasComponent.RESIZED, this::handleResize));
+            new ComponentHandler().handle(WasComponent.RESIZED, this::handleResize));
   }
 
   private void handleResize(ComponentEvent e) {
@@ -83,6 +85,10 @@ public class ViewGUI implements View<JFrame> {
     rightHand.handleResize();
   }
 
+  /**
+   * Inner class representing the graphical display of a player's hand. Manages card selection and
+   * highlights selected cards.
+   */
   public class HandGUI extends JPanel {
     private List<Card> hand;
     private Coach coach;
@@ -114,7 +120,7 @@ public class ViewGUI implements View<JFrame> {
     private void handleResize() {
       int x = coach == Coach.RED ? 0 : (dims.width - 1) * cwidth();
       this.setBounds(x, 0, cwidth(),
-          cheight() * dims.height);
+                     cheight() * dims.height);
     }
 
     public void setXSelect(int x) {
@@ -129,6 +135,7 @@ public class ViewGUI implements View<JFrame> {
       System.out.println("selected");
       selected = true;
     }
+
     public void deselect() {
       System.out.println("deselected");
       selected = false;
@@ -144,8 +151,8 @@ public class ViewGUI implements View<JFrame> {
       int topCorner = snapToHeight(ySelect, cardHeight);
       System.out.println("x: " + leftcorner);
       System.out.println("Y: " + topCorner);
-      System.out.println("modelx: " + (x/cwidth()));
-      System.out.println("modely: " + (y/cardHeight));
+      System.out.println("modelx: " + (x / cwidth()));
+      System.out.println("modely: " + (y / cardHeight));
       g.drawRect(leftcorner, topCorner, cwidth(), cardHeight);
       g.drawRect(leftcorner + 1, topCorner + 1,
                  cwidth() - 2, cardHeight - 2);
@@ -161,6 +168,10 @@ public class ViewGUI implements View<JFrame> {
 
   }
 
+  /**
+   * Inner class representing the graphical display of the game grid, rendering cells and cards
+   * based on the current game state.
+   */
   public class GridGUI extends JPanel {
     protected Grid grid;
 
@@ -193,7 +204,7 @@ public class ViewGUI implements View<JFrame> {
 
     protected void handleResize() {
       this.setBounds(cwidth(), 0, cwidth() * (dims.width - 2),
-          cheight() * dims.height);
+                     cheight() * dims.height);
     }
 
   }
@@ -213,7 +224,6 @@ public class ViewGUI implements View<JFrame> {
     g.drawString(e, x + 3 * cwidth() / 4, y + cardHeight / 2);
     g.drawString(w, x + cwidth() / 8, y + cardHeight / 2);
   }
-
 
 
   protected Color coachToColor(Coach coach) {

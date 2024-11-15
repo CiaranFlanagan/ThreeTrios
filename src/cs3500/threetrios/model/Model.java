@@ -28,5 +28,6 @@ public interface Model extends ModelReadOnly {
    */
   void placeCard(int idx, int row, int col) throws IllegalStateException, IllegalArgumentException;
 
+
 }
 

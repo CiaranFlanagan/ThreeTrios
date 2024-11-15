@@ -35,9 +35,10 @@ public class TestView<OD> {
   @Test
   public void testGridNoHolesView() {
     try {
-      model.startGame(ConfigGrid.scannerToGrid(TestFiles.safeFileToScanner(GRID_NO_HOLES)),
-                      ConfigCard.scannerToCardList(TestFiles.safeFileToScanner(CC_SMALL)), ref);
+      model.startGame(ConfigGrid.scannerToGrid(GRID_NO_HOLES),
+                      ConfigCard.scannerToCardList(CC_SMALL), ref);
     } catch (Exception e) {
+      e.printStackTrace();
       Assert.fail();
     }
   }
@@ -46,8 +47,8 @@ public class TestView<OD> {
   public void testGridConnectedView() {
     try {
 
-      model.startGame(ConfigGrid.scannerToGrid(TestFiles.safeFileToScanner(GRID_CONNECTED_HOLES)),
-                      ConfigCard.scannerToCardList(TestFiles.safeFileToScanner(CC_LARGE)), ref);
+      model.startGame(ConfigGrid.scannerToGrid(GRID_CONNECTED_HOLES),
+                      ConfigCard.scannerToCardList(CC_LARGE), ref);
     } catch (Exception e) {
       Assert.fail();
     }
@@ -57,8 +58,8 @@ public class TestView<OD> {
   public void testGridDisconnectedView() {
     try {
 
-      model.startGame(ConfigGrid.scannerToGrid(TestFiles.safeFileToScanner(GRID_DISC_HOLES)),
-                      ConfigCard.scannerToCardList(TestFiles.safeFileToScanner(CC_LARGE)), ref);
+      model.startGame(ConfigGrid.scannerToGrid(GRID_DISC_HOLES),
+                      ConfigCard.scannerToCardList(CC_LARGE), ref);
     } catch (Exception e) {
       Assert.fail();
     }

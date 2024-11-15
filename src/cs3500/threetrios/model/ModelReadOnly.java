@@ -2,6 +2,7 @@ package cs3500.threetrios.model;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * <p>a read only interface for a three trios model. the objects that inheritors return to fulfill
@@ -60,6 +61,16 @@ public interface ModelReadOnly {
    * @return the grid
    */
   Grid curGrid();
+
+  int numRows();
+
+  int numCols();
+
+  Optional<Card> cardAt(int row, int col);
+
+  Optional<Coach> ownerAt(int row, int col);
+
+  boolean canPlayAt(int row, int col);
 
   int numFlippedIfPlaced(Card card, int row, int col);
 

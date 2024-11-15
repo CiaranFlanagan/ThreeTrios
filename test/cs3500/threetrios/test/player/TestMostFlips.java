@@ -126,9 +126,9 @@ public class TestMostFlips {
     Supplier<Model> modelSupplier = () -> {
       Model mock = new MockMostFlips(log);
       Grid grid =
-              ConfigGrid.scannerToGrid(TestFiles.safeFileToScanner(TestFiles.GRID_NO_HOLES_3by3));
+              ConfigGrid.scannerToGrid(TestFiles.GRID_NO_HOLES_THREE_BY_THREE);
       List<Card> cards =
-              ConfigCard.scannerToCardList(TestFiles.safeFileToScanner(TestFiles.CC_LARGE));
+              ConfigCard.scannerToCardList(TestFiles.CC_LARGE);
       mock.startGame(grid, cards, new RefereeDefault());
       return mock;
     };

@@ -12,11 +12,19 @@ import java.awt.event.MouseEvent;
  */
 public class HandleClickForHand extends MouseHandler {
   ViewGUI.HandGUI hand;
+
   public HandleClickForHand(ViewGUI.HandGUI hand) {
     this.hand = hand;
     map.put(WasMouse.CLICKED, this::toDoToHand);
   }
 
+  /**
+   * Handles the click event on a hand component. If no card is currently selected, selects
+   * the card at the clicked position and records the selection coordinates. If a card is
+   * already selected, deselects it. The view is repainted to show the selection state.
+   *
+   * @param me the MouseEvent triggered by the click
+   */
   public void toDoToHand(MouseEvent me) {
     System.err.println(me.getX());
     System.err.println(me.getY());

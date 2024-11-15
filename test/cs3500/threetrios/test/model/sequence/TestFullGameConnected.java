@@ -33,7 +33,7 @@ public class TestFullGameConnected {
   @Test
   public void P1Start() {
     model.startGame(
-            ConfigGrid.scannerToGrid(TestFiles.safeFileToScanner(GRID_CONNECTED_HOLES)),
+            ConfigGrid.scannerToGrid(GRID_CONNECTED_HOLES),
             ConfigCard.scannerToCardList(new Scanner(
                     LineWriter.create()
                             .line("z 1 1 1 1")

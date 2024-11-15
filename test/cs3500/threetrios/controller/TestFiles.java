@@ -2,43 +2,33 @@ package cs3500.threetrios.controller;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Scanner;
 
 /**
  * A class to hold the paths to the files needed for test.
  */
 public class TestFiles {
-  public static File GRID_ASSN_HARD = new File("./test/cs3500/threetrios/controller/" +
-          "grid_assn_hard.txt");
-  public static File GRID_NO_HOLES = new File("./test/cs3500/threetrios/controller/" +
-          "grid_no_holes.txt");
-  public static File GRID_CONNECTED_HOLES = new File(
-          "./test/cs3500/threetrios/controller/" +
-          "grid_connected.txt");
-  public static File GRID_DISC_HOLES = new File(
-          "./test/cs3500/threetrios/controller/" +
-                  "grid_disconnected.txt");
-  public static File GRID_NO_HOLES_3by3 = new File(
-          "./test/cs3500/threetrios/controller/" +
-                  "grid_no_holes_3by3.txt");
-  public static File CC_SMALL = new File("./test/cs3" +
-                                                 "500/threetrios/controller/" +
-          "cards_small.txt");
-  public static File CC_LARGE = new File(
-          "./test/cs3500/threetrios/controller/cards_large.txt");
+  public static Scanner GRID_ASSN_HARD = fromPath("grid_assn_hard");
+  public static Scanner GRID_NO_HOLES = fromPath("grid_no_holes");
+  public static Scanner GRID_CONNECTED_HOLES = fromPath("grid_connected");
+  public static Scanner GRID_DISC_HOLES = fromPath("grid_disconnected");
+  public static Scanner GRID_NO_HOLES_THREE_BY_THREE = fromPath("grid_no_holes_3by3");
+  public static Scanner CC_SMALL = fromPath("cards_small");
+  public static Scanner CC_LARGE = fromPath("cards_large");
 
-
-  /**
-   * Converts a file to a scanner.
-   *
-   * @param f the file
-   * @return the scanner
-   */
-  public static Scanner safeFileToScanner(File f) {
+  private static Scanner fromPath(String fileNameOnly) {
+    String prepend = "./resources/";
+    String resourceDirPath = "cs3500/threetrios/controller/";
+    String path = resourceDirPath + fileNameOnly + ".txt";
+    URL url = ClassLoader.getSystemResource(path);
     try {
-      return new Scanner(f);
-    } catch (FileNotFoundException ex) {
-      throw new RuntimeException("file not found, check TestFiles");
+      return new Scanner(url.openStream());
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
+
   }
+
 }

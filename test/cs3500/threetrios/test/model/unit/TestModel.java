@@ -34,16 +34,14 @@ public class TestModel {
   public void setUp() {
     model = new ModelBase();
     referee = new RefereeDefault();
-    try {
-      gridNoHoles = ConfigGrid.scannerToGrid(new Scanner(TestFiles.GRID_NO_HOLES));
-      //gridConnectedHoles = GridConfig.scannerToGrid(null);
-      // gridDisconnectedHoles = GridConfig.scannerToGrid(fillInHere));
 
-      cardsSmall = ConfigCard.scannerToCardList(new Scanner(TestFiles.CC_SMALL));
-      List<Card> cardsLarge = ConfigCard.scannerToCardList(new Scanner(TestFiles.CC_LARGE));
-    } catch (FileNotFoundException ex) {
-      Assert.fail("file not found");
-    }
+    gridNoHoles = ConfigGrid.scannerToGrid(TestFiles.GRID_NO_HOLES);
+    //gridConnectedHoles = GridConfig.scannerToGrid(null);
+    // gridDisconnectedHoles = GridConfig.scannerToGrid(fillInHere));
+
+    cardsSmall = ConfigCard.scannerToCardList(TestFiles.CC_SMALL);
+    List<Card> cardsLarge = ConfigCard.scannerToCardList(TestFiles.CC_LARGE);
+
   }
 
   // test startgame
