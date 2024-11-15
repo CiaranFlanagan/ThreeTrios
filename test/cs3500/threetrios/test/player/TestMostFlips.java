@@ -80,9 +80,11 @@ public class TestMostFlips {
       return m;
     };
     Assert.assertTrue(cs3500.threetrios.utils.Utils.cardAt(modelSupplier1.get(), 0, 0).isPresent());
-    Assert.assertEquals(cs3500.threetrios.utils.Utils.cardAt(modelSupplier1.get(), 0, 0).get().getCoach(),
+    Assert.assertEquals(cs3500.threetrios.utils.Utils.cardAt(modelSupplier1.get(), 0, 0).get()
+                            .getCoach(),
                         Coach.RED);
-    Assert.assertEquals(cs3500.threetrios.utils.Utils.cardAt(modelSupplier1.get(), 0, 0).get().toString(),
+    Assert.assertEquals(cs3500.threetrios.utils.Utils.cardAt(modelSupplier1.get(), 0, 0).get()
+                            .toString(),
                         "a 1 1 1 1");
 
     // move 2
@@ -94,11 +96,14 @@ public class TestMostFlips {
       return m;
     };
     Assert.assertTrue(cs3500.threetrios.utils.Utils.cardAt(modelSupplier2.get(), 0, 1).isPresent());
-    Assert.assertEquals(cs3500.threetrios.utils.Utils.cardAt(modelSupplier2.get(), 0, 0).get().getCoach(),
+    Assert.assertEquals(cs3500.threetrios.utils.Utils.cardAt(modelSupplier2.get(), 0, 0).get()
+                            .getCoach(),
                         Coach.BLUE);
-    Assert.assertEquals(cs3500.threetrios.utils.Utils.cardAt(modelSupplier2.get(), 0, 1).get().getCoach(),
+    Assert.assertEquals(cs3500.threetrios.utils.Utils.cardAt(modelSupplier2.get(), 0, 1).get()
+                            .getCoach(),
                         Coach.BLUE);
-    Assert.assertEquals(cs3500.threetrios.utils.Utils.cardAt(modelSupplier2.get(), 0, 1).get().toString(),
+    Assert.assertEquals(cs3500.threetrios.utils.Utils.cardAt(modelSupplier2.get(), 0, 1).get()
+                            .toString(),
                         "b 2 2 2 2");
 
     // move 3
@@ -110,11 +115,14 @@ public class TestMostFlips {
       return m;
     };
     Assert.assertTrue(cs3500.threetrios.utils.Utils.cardAt(modelSupplier3.get(), 1, 1).isPresent());
-    Assert.assertEquals(cs3500.threetrios.utils.Utils.cardAt(modelSupplier3.get(), 0, 0).get().getCoach(),
+    Assert.assertEquals(cs3500.threetrios.utils.Utils.cardAt(modelSupplier3.get(), 0, 0).get()
+                            .getCoach(),
                         Coach.RED);
-    Assert.assertEquals(cs3500.threetrios.utils.Utils.cardAt(modelSupplier3.get(), 0, 1).get().getCoach(),
+    Assert.assertEquals(cs3500.threetrios.utils.Utils.cardAt(modelSupplier3.get(), 0, 1).get()
+                            .getCoach(),
                         Coach.RED);
-    Assert.assertEquals(cs3500.threetrios.utils.Utils.cardAt(modelSupplier3.get(), 1, 1).get().getCoach(),
+    Assert.assertEquals(cs3500.threetrios.utils.Utils.cardAt(modelSupplier3.get(), 1, 1).get()
+                            .getCoach(),
                         Coach.RED);
     Assert.assertEquals(Utils.cardAt(modelSupplier3.get(), 1, 1).get().toString(),
                         "c 3 3 3 3");
@@ -124,7 +132,7 @@ public class TestMostFlips {
   public void testLog() {
     List<List<Integer>> log = new ArrayList<>();
     Supplier<Model> modelSupplier = () -> {
-      Model mock = new MockMostFlips(log);
+      Model mock = new MockStrategyLogMoves(log);
       Grid grid =
           ConfigGrid.scannerToGrid(TestFiles.GRID_NO_HOLES_THREE_BY_THREE);
       List<Card> cards =
@@ -137,4 +145,5 @@ public class TestMostFlips {
     System.out.println(log);
     Assert.assertFalse(log.isEmpty());
   }
+
 }

@@ -77,4 +77,20 @@ public final class Move implements Consumer<Model> {
   public void accept(Model model) {
     model.placeCard(row, col, handIdx);
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj instanceof Move) {
+      Move that = (Move) obj;
+      return this.row == that.row && this.col == that.col && this.handIdx == that.handIdx;
+    } else {
+      return false;
+    }
+  }
+
+  @Override
+  public String toString() {
+    return "r: " + row + " c: " + col + " id: " + handIdx;
+  }
+
 }

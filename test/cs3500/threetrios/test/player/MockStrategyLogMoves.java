@@ -5,11 +5,11 @@ import cs3500.threetrios.model.ModelBase;
 import java.util.List;
 
 /**
- * A mock implementation of the ModelBase class used for testing the MostFlips strategy in the
- * Three Trios game. MockMostFlips logs card placements instead of interacting with an actual game
+ * A mock implementation of the ModelBase class used for testing strategies in the
+ * Three Trios game. MockStrategyLogMoves logs card placements instead of interacting with an actual game
  * grid, allowing verification of method calls and parameters during testing.
  */
-public class MockMostFlips extends ModelBase {
+public class MockStrategyLogMoves extends ModelBase {
 
   List<List<Integer>> log;
 
@@ -19,7 +19,7 @@ public class MockMostFlips extends ModelBase {
    *
    * @param log a list of lists used to record each placement's row and column values
    */
-  public MockMostFlips(List<List<Integer>> log) {
+  public MockStrategyLogMoves(List<List<Integer>> log) {
     this.log = log;
   }
 

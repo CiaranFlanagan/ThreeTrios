@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.function.Supplier;
 
 /**
  * To convert a file to a list of cards.
@@ -23,11 +24,18 @@ public class ConfigCard {
    * @param sc - the scanner
    * @return a list of cards
    */
+  public static List<Card> scannerToCardList(Supplier<Scanner> scannerSupplier) {
+    if (scannerSupplier == null) {
+      throw new IllegalArgumentException("null supplier");
+    }
+    Scanner sc = scannerSupplier.get();
+    return scannerToCardList(sc);
+  }
+
   public static List<Card> scannerToCardList(Scanner sc) {
     if (sc == null) {
       throw new IllegalArgumentException("null scanner");
     }
-    FileReader fr;
     List<Card> cards = new ArrayList<>();
     try {
       while (sc.hasNext()) {

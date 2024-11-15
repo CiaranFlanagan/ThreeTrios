@@ -270,7 +270,7 @@ public class ViewGUI implements View<JFrame> {
   /**
    * to snap the input x-coordinate to the left-most coordinate of the card.
    *
-   * @param x the x-coordinate on the panel.
+   * @param x the x-coordinate on the panel
    * @return x coordinate on left of card
    */
   protected int snapToWidth(int x) {

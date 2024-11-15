@@ -5,17 +5,26 @@ import cs3500.threetrios.model.Grid;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.function.Supplier;
 
 /**
- * To convert a file to a GridBoard.
+ * To convert a txt file to a GridBoard, representing the board of a Three Trios Game
  */
 public class ConfigGrid {
   /**
-   * take a scanner and make a grid.
+   * Take a scanner and make a grid.
    *
    * @param sc - the scanner
    * @return - a grid
    */
+  public static Grid scannerToGrid(Supplier<Scanner> scannerSupplier) {
+    if (scannerSupplier == null) {
+      throw new IllegalArgumentException("null supplier");
+    }
+    Scanner sc = scannerSupplier.get();
+    return scannerToGrid(sc);
+  }
+
   public static Grid scannerToGrid(Scanner sc) {
     if (sc == null) {
       throw new IllegalArgumentException("null scanner");
@@ -34,18 +43,13 @@ public class ConfigGrid {
           }
         }
       }
+      sc.close();
       return new Grid(arr);
     } catch (NoSuchElementException ex) {
       throw new IllegalArgumentException("scanner error");
     }
   }
 
-  /**
-   * to convert a string to a board cell.
-   *
-   * @param s - the string
-   * @return - a board cell
-   */
   private static CellType stringToBoardCell(String s) {
     if (s.equals("C")) {
       return CellType.CARD;

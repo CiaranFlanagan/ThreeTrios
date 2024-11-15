@@ -21,6 +21,7 @@ public class CornerStrategy extends DefenseStrategy {
   }
 
   // for each corner, play each card from hand
+  @Override
   protected List<Move> allConsideredMoves() {
     Model model = modelSupplier.get();
     List<Move> acc = new ArrayList<>();

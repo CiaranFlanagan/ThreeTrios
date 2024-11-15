@@ -1,7 +1,6 @@
 # Table Of Contents
 
 <!-- TOC -->
-
 * [Table Of Contents](#table-of-contents)
 * [Introduction](#introduction)
     * [Info](#info)
@@ -14,11 +13,15 @@
     * [Controller](#controller)
     * [Player](#player)
 * [Diving Into Components](#diving-into-components)
-    * [In the model...](#in-the-model)
-        * [In the view...](#in-the-view)
+  * [In the model...](#in-the-model)
+  * [In the view...](#in-the-view)
+  * [In the player ...](#in-the-player-)
+  * [In the utils ...](#in-the-utils-)
 * [Notes on Extension](#notes-on-extension)
     * [Extension without exposed mutation](#extension-without-exposed-mutation)
-
+* [Part 2](#part-2)
+    * [Assignment 6 Extra Credit](#assignment-6-extra-credit)
+  * [Changes for Part 2](#changes-for-part-2)
 <!-- TOC -->
 
 Introduction
@@ -357,7 +360,8 @@ complex implementation
 - TLDR: The model component is made specifically to close off extension and mutation in every
   single avenue, except that which preservers the integrity of a ThreeTrios model.
 
-### Assignment 2 Extra Credit
+# Part 2
+### Assignment 6 Extra Credit
 
 For the extra credit, we implemented Defense Strategy as Strategy 3. This defensive approach
 evaluates potential moves based on minimizing a card's exposure to opponents, aiming to reduce
@@ -384,8 +388,6 @@ vulnerability and maintain control over key positions on the board.
             - Location of Tests: Tests for Defense Strategy are located in the
               cs3500.threetrios.test.
               player package
-
-___
 
 ## Changes for Part 2
 

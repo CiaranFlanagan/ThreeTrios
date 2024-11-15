@@ -1,5 +1,6 @@
 package cs3500.threetrios.controller;
 
+import cs3500.threetrios.utils.IntPoint2D;
 import cs3500.threetrios.utils.extensions.MouseHandler;
 import cs3500.threetrios.utils.extensions.WasMouse;
 import cs3500.threetrios.view.ViewGUI;
@@ -10,12 +11,14 @@ public class HandleClickForGrid extends MouseHandler {
   ViewGUI.GridGUI gridGUI;
 
   /**
-   * constructor.
-   * @param gridGUI - a grid gui
+   /**
+   * Constructor for HandleClickForGrid.
+   *
+   * @param gridGUI the GridGUI instance this handler interacts with
    */
   public HandleClickForGrid(ViewGUI.GridGUI gridGUI) {
     this.gridGUI = gridGUI;
-    map.put(WasMouse.CLICKED, this::handleClick);
+    map.put(WasMouse.CLICKED, this :: handleClick);
 
   }
 
@@ -27,8 +30,10 @@ public class HandleClickForGrid extends MouseHandler {
   }
 
   private void handleClick(MouseEvent me) {
-    System.out.print("x: " + gridGUI.modelx(me.getX()));
-    System.out.println(" y: " + gridGUI.modely(me.getY()));
+    System.out.println(
+        new IntPoint2D(
+            gridGUI.modelx(me.getX()),
+            gridGUI.modely(me.getY())));
   }
 
 }

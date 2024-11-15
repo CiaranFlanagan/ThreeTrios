@@ -43,15 +43,17 @@ public abstract class StrategyAbstract {
     int sizeOfHand = model.curCoachesHands().get(model.curCoach()).size();
     List<Move> acc0 = new ArrayList<>();
     IntStream.range(0, numRows).forEach(
-            (row) -> IntStream.range(0, numColumns).forEach(
-                    (col) -> IntStream.range(0, sizeOfHand).forEach(
-                            (id) -> acc0.add(Move.create(row, col, id)))));
+        (row) -> IntStream.range(0, numColumns).forEach(
+            (col) -> IntStream.range(0, sizeOfHand).forEach(
+                (id) -> acc0.add(Move.create(row, col, id)))));
     return filterOutIllegalMoves(acc0);
   }
 
   protected List<Move> filterOutIllegalMoves(List<Move> moves) {
+    System.err.println(moves.size());
     return moves.stream().filter((m) -> {
       try {
+        System.out.println(m);
         m.accept(modelSupplier.get());
         return true;
       } catch (IllegalStateException | IllegalArgumentException e) {
@@ -64,8 +66,8 @@ public abstract class StrategyAbstract {
    * find effectiveness by comparing the model's state from this.modelSupplier
    * and the state after applying the move
    *
-   * @param move - a consumer of the model
-   * @return - an int rating of the effectiveness
+   * @param move a consumer of the model
+   * @return an int rating of the effectiveness
    */
   protected abstract int effectiveness(Move move);
 
@@ -76,14 +78,26 @@ public abstract class StrategyAbstract {
    * @return - the best move, if it exists
    */
   public Optional<Move> bestMove() {
-    return allConsideredMoves().stream()
-            .reduce(BinaryOperator
-                            .maxBy(Comparator.comparingInt(this::effectiveness)));
+    return this.allConsideredMoves().stream()
+        .reduce(BinaryOperator
+                    .maxBy(Comparator.comparingInt(this :: effectiveness)));
+  }
+
+  /**
+   * To be used in the case that bestMove() returns empty. Assumes a model supplier is passed in
+   * where the game is started but not over, i.e. there's at least one playable cell left. This
+   * cannot be overridden because every strategy must default the same way, the 0th card in hand at
+   * the up-most, left-most (in that order) position.
+   *
+   * @return the default move standard for all strategies
+   */
+  public final Move defaultMove() {
+    return ((StrategyAbstract) this).bestMove().get();
   }
 
   protected final List<GridCellReadOnly> modelToCellList(Model model) {
-    return Arrays.stream(model.curGrid().readOnlyArray2D()).flatMap(Arrays::stream).collect(
-            Collectors.toList());
+    return Arrays.stream(model.curGrid().readOnlyArray2D()).flatMap(Arrays :: stream).collect(
+        Collectors.toList());
   }
 
 }

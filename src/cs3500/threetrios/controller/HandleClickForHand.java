@@ -43,15 +43,15 @@ public class HandleClickForHand extends MouseHandler {
    */
   public void toDoToHand(MouseEvent me) {
     if (modelReadOnly.curCoach() != hand.getCoach()) {
-      System.err.println("not your turn");
+      System.err.println("Player  " + modelReadOnly.curCoach().opponent()
+                             + " it is not your turn");
       return;
     }
 
     IntPoint2D modelCoordinates = new IntPoint2D(hand.modelx(me.getX()), hand.modely(me.getY()));
-    System.out.println(modelCoordinates);
     // if they click when nothing is selected
     if (hand.getSelected().isEmpty()) {
-      hand.select(modelCoordinates);
+      handleSelect(modelCoordinates);
     } else if (hand.getSelected().isPresent()) {
       // if there is a selected card
       if (hand.getSelected().get().equals(modelCoordinates)) {
@@ -59,10 +59,19 @@ public class HandleClickForHand extends MouseHandler {
         hand.deselect();
       } else {
         // if they click on a different card
-        hand.select(modelCoordinates);
+        handleSelect(modelCoordinates);
       }
     }
 
     hand.repaint();
+  }
+
+  private void handleSelect(IntPoint2D modelCoordinates) {
+    int idx = modelCoordinates.y;
+    if (idx >= modelReadOnly.curCoachesHands().get(modelReadOnly.curCoach()).size()) {
+      return;
+    }
+    hand.select(modelCoordinates);
+    System.out.println("Player: " + hand.getCoach() + ", Card: " + modelCoordinates.y);
   }
 }
