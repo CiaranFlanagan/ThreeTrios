@@ -7,6 +7,12 @@ import cs3500.threetrios.view.ViewGUI;
 
 import java.awt.event.MouseEvent;
 
+/**
+ * A handler for mouse clicks on a grid in the game's GUI.
+ * Extends the MouseHandler class and adds functionality for
+ * logging the position of mouse clicks relative to the game's
+ * coordinate system.
+ */
 public class HandleClickForGrid extends MouseHandler {
   ViewGUI.GridGUI gridGUI;
 
@@ -23,7 +29,7 @@ public class HandleClickForGrid extends MouseHandler {
   }
 
   /**
-   * To add this as a listener to its grid.
+   * Initializes the mouse handler by adding it as a listener to the grid GUI.
    */
   public void init() {
     gridGUI.addMouseListener(this);

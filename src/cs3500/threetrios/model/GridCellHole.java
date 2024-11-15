@@ -6,7 +6,8 @@ package cs3500.threetrios.model;
 public final class GridCellHole extends GridCellAbstract {
 
   /**
-   * constructor.
+   * Represents a hole in the grid of the Three Trios game.
+   * A GridCellHole cannot hold any cards.
    */
   public GridCellHole() {
     super();

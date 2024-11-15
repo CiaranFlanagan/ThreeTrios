@@ -18,7 +18,7 @@ public enum AttackValue {
   /**
    * to produce an attack value from a string, useful for IO.
    *
-   * @param s - the string.
+   * @param s - the string representing an attack value
    * @return - an attack value corresponding to the string.
    * @throws IllegalArgumentException - when input does not correspond to an AttackValue
    */

@@ -11,27 +11,26 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
- * A defensive strategy for the Three Trios game. The DefenseStrategy class evaluates moves based
- * on their defensive effectiveness, favoring moves that minimize the card's exposed sides to
- * increase its defensive strength.
+ * A defensive strategy for the Three Trios game.
+ * Focuses on minimizing the number of exposed sides when placing a card.
  */
 public class DefenseStrategy extends StrategyAbstract {
 
   /**
-   * A defensive strategy for the Three Trios game. The DefenseStrategy class evaluates moves based
-   * on their defensive effectiveness, favoring moves that minimize the card's exposed sides.
+   * Constructor.
+   *
+   * @param modelSupplier supplies the current game model
    */
   public DefenseStrategy(Supplier<Model> modelSupplier) {
     super(modelSupplier);
   }
 
   /**
-   * Calculates the effectiveness of a move based on the number of exposed sides after placing a
-   * card. The greater the sum of the Attack Values on exposed sides, plus the value of the
-   * unexposed sides, the greater defense a card has.
+   * Evaluates how effective a move is defensively.
+   * Considers the number of exposed sides and the attack values of those sides.
    *
-   * @param move the Move being evaluated for its defensive effectiveness
-   * @return an integer score representing the effectiveness of the move
+   * @param move the move being evaluated
+   * @return the effectiveness score of the move
    */
   public int effectiveness(Move move) {
     // alg is all neighbors that aren't there get an A in the algorithm for free

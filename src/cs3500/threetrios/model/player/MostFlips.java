@@ -7,24 +7,20 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
- * The MostFlips strategy aims to maximize the number of opponent's cards flipped
- * by placing a card in the most advantageous position on the grid.
- * This strategy calculates the effectiveness of a move based on the difference in opponent's cards
- * before and after a move is made, selecting moves that yield the highest number of flips.
+ * Strategy that maximizes the number of opponent's cards flipped.
+ * Evaluates moves by comparing the number of opponent-controlled cards before and after the move.
  */
 public class MostFlips extends StrategyAbstract {
 
+  /**
+   * Constructor.
+   *
+   * @param modelSupplier supplies the current game model
+   */
   public MostFlips(Supplier<Model> modelSupplier) {
     super(modelSupplier);
   }
 
-  /**
-   * Find effectiveness by comparing the model's state from this.modelSupplier
-   * and the state after applying the move
-   *
-   * @param move - a consumer of the model
-   * @return - an int rating of the effectiveness
-   */
   @Override
   protected int effectiveness(Move move) {
     Model model = modelSupplier.get();

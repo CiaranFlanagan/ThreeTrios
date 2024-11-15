@@ -12,10 +12,9 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
- * ControllerBase serves as the base implementation of the Controller interface for the Three Trios
+ * ControllerBase is the base implementation of the Controller interface for the Three Trios
  * game. This class is responsible for managing the game state, initializing the model with
- * specific
- * configurations, and tracking moves to maintain consistency across models.
+ * specific configurations, and tracking moves to maintain consistency across models.
  */
 public class ControllerBase implements Controller {
   private final List<Consumer<Model>> moves;
@@ -28,6 +27,14 @@ public class ControllerBase implements Controller {
     this.moves = new ArrayList<>();
   }
 
+  /**
+   *
+   * @param gridSupplier supplies a grid using the Supplier java class.
+   * @param cardsSupplier supplies a list of cards using the Supplier java class.
+   * @param modelSupplier supplies a model using the java supplier class
+   * @param refereeSupplier supplies a referee using the java Supplier class
+   * @param view
+   */
   @Override
   public void createUsing(Supplier<Grid> gridSupplier,
                           Supplier<List<Card>> cardsSupplier,
@@ -42,11 +49,11 @@ public class ControllerBase implements Controller {
   }
 
   /**
-   * Provides a supplier that returns a new instance of a Model configured with the initial game
-   * state. This includes setting up the grid, cards, and referee, and applying any moves that
+   * Provides a supplier that returns a new instance of a Model with the initial game state.
+   * This includes setting up the grid, cards, and referee, and applying any moves that
    * were previously recorded.
    *
-   * @return a {@code Supplier<Model> }that, when invoked, creates and initializes a new Model.
+   * @return a {@code Supplier<Model>} that creates and initializes a new Model.
    */
   public Supplier<Model> supplyModel() {
     return () -> {

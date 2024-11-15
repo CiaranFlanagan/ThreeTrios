@@ -2,7 +2,6 @@ package cs3500.threetrios.test.view.unit;
 
 import cs3500.threetrios.view.ViewGUI;
 import org.junit.Before;
-
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 

@@ -2,7 +2,6 @@ package cs3500.threetrios.test.model.sequence;
 
 import cs3500.threetrios.controller.ConfigCard;
 import cs3500.threetrios.controller.ConfigGrid;
-import cs3500.threetrios.controller.TestFiles;
 import cs3500.threetrios.model.Coach;
 import cs3500.threetrios.model.Referee;
 import cs3500.threetrios.model.Card;

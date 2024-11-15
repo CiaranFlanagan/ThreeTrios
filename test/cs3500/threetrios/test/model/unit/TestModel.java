@@ -9,14 +9,9 @@ import cs3500.threetrios.model.Card;
 import cs3500.threetrios.model.RefereeDefault;
 import cs3500.threetrios.model.Grid;
 import cs3500.threetrios.model.ModelBase;
-
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.FileNotFoundException;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Tests for the game play and flow of the model.

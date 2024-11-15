@@ -5,22 +5,15 @@ import cs3500.threetrios.model.Model;
 import java.util.function.Consumer;
 
 /**
- * Represents a move in the Three Trios game, defined by a row and column position on the grid
- * and an index representing a card from the player's hand. A Move can be applied to a Model
- * to place a card at the specified location.
+ * Represents a move in the Three Trios game.
+ * Defined by a grid position (row and column) and a card index from the player's hand.
+ * Can be applied to a Model to place a card at the specified location.
  */
 public final class Move implements Consumer<Model> {
   private final int row;
   private final int col;
   private final int handIdx;
 
-  /**
-   * Constructs a Move with the specified row, column, and hand index.
-   *
-   * @param row     the row index on the grid
-   * @param col     the column index on the grid
-   * @param handIdx the index of the card in the player's hand
-   */
   private Move(int row, int col, int handIdx) {
     this.row = row;
     this.col = col;

@@ -1,6 +1,5 @@
 package cs3500.threetrios.test.model.sequence;
 
-import cs3500.threetrios.controller.TestFiles;
 import cs3500.threetrios.model.Coach;
 import cs3500.threetrios.model.GridCellReadOnly;
 import cs3500.threetrios.utils.LineWriter;

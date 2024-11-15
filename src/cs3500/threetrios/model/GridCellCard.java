@@ -1,13 +1,14 @@
 package cs3500.threetrios.model;
 
 /**
- * To represent a cell that can hold a card on a grid in three trios.
+ * Represents a cell on the grid that can hold a card in the Three Trios game.
+ * A GridCellCard can accept and hold one card at a time.
  */
 public final class GridCellCard extends GridCellAbstract {
   private Card card;
 
   /**
-   * constructor.
+   * Constructor.
    */
   public GridCellCard() {
     super();
