@@ -8,13 +8,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
+/**
+ * A handler for mouse events that allows custom actions to be performed based on specified
+ * conditions. The MouseHandler uses a map of predicates and runnables to determine and execute
+ * actions when mouse events occur.
+ */
 public class MouseHandler extends MouseAdapter {
   protected Map<Predicate<MouseEvent>, Runnable> map;
-
-
-  
-  
-
   private MouseHandler() {
     map = new HashMap<>();
   }
@@ -36,6 +36,11 @@ public class MouseHandler extends MouseAdapter {
     }
   }
 
+  /**
+   * Registers this handler to listen to all types of mouse events on the specified component.
+   *
+   * @param c the component to which this handler is attached
+   */
   public final void register(Component c) {
     c.addMouseListener(this);
     c.addMouseMotionListener(this);

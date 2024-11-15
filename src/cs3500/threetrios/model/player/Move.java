@@ -35,7 +35,7 @@ public final class Move implements Consumer<Model> {
    * @param handIdx the index of the card in the player's hand
    * @return a new Move instance representing the specified move
    */
-  public static Move of(int row, int col, int handIdx) {
+  public static Move create(int row, int col, int handIdx) {
     return new Move(row, col, handIdx);
   }
 

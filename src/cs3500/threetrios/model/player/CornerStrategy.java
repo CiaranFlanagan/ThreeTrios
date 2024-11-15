@@ -10,7 +10,8 @@ import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
 /**
- * The CornerStrategy class is a defensive strategy that attempts to place cards in the corners of the game grid.
+ * The CornerStrategy class is a defensive strategy that attempts to place cards in the corners of
+ * the game grid.
  * It generates all possible moves by playing each card in the hand to each corner of the grid.
  */
 public class CornerStrategy extends DefenseStrategy {
@@ -28,10 +29,10 @@ public class CornerStrategy extends DefenseStrategy {
     Consumer<Function<Integer, Move>> func = (f) ->
             IntStream.range(0, model.curCoachesHands().get(model.curCoach()).size())
                     .forEach((handId) -> acc.add(f.apply(handId)));
-    func.accept((handId) -> Move.of(0, 0, handId));
-    func.accept((handId) -> Move.of(lastRow, 0, handId));
-    func.accept((handId) -> Move.of(lastRow, lastCol, handId));
-    func.accept((handId) -> Move.of(lastRow, lastCol, handId));
+    func.accept((handId) -> Move.create(0, 0, handId));
+    func.accept((handId) -> Move.create(lastRow, 0, handId));
+    func.accept((handId) -> Move.create(lastRow, lastCol, handId));
+    func.accept((handId) -> Move.create(lastRow, lastCol, handId));
     return filterOutIllegalMoves(acc);
   }
 

@@ -2,7 +2,6 @@ package cs3500.threetrios.controller;
 
 import cs3500.threetrios.model.CellType;
 import cs3500.threetrios.model.Grid;
-import cs3500.threetrios.model.GridCellVisitable;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;

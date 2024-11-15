@@ -7,6 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
+/**
+ * A handler for component events that allows custom actions to be performed based on specified
+ * conditions. The ComponentHandler uses a map of predicates and runnables to determine and execute
+ * actions when component events occur.
+ */
 public class ComponentHandler implements ComponentListener {
   protected Map<Predicate<ComponentEvent>, Runnable> map;
 

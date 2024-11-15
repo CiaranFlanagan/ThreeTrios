@@ -64,7 +64,12 @@ Getting Around the Project
             - _contains test files and a helper class_
         - **model/**
             - _contains tests for ONLY package private_
-        - **test**
+            - **player/**
+              - _contains interfaces and classes that define the player strategies for three trios_
+            - **playerstats/**
+              - _contains a concrete class with an implementation of possible stats a player 
+                might have_
+        - **test/**
             - _contains tests for ONLY public behavior_
                 - _contains unit and sequenced tests_
             - _tests integration between components_
@@ -141,26 +146,127 @@ Dependencies will be italicized.
       power is given so they can enforce rules how future implementors see fit.
 
 ## In the view...
+Below are the following classes and interfaces that we have implemented
 
-- The concrete interface just promises to render a view of the game.
-- So far we just have a simple text view implemented. It shows in the following format:
+- #### View Interface
+  - This generic interface defines a rendering contract for different types of views, allowing them to output to various destinations. The primary method, renderTo(OD outputDestination), abstracts rendering details across multiple formats, setting the foundation for both text and graphical representations.
+  
+- #### ViewTextBase Class
+    - It shows in the following format:
+     Player: (RED/BLUE)
 
-Player: (RED/BLUE)
+    BB   _
 
-BB   _
+    _B   _
 
-_B   _
+    _ R  _
 
-_ R  _
+    Hand:
 
-Hand:
+    cardName1 1 2 3 4
 
-cardName1 1 2 3 4
+    cardName2 5 6 7 8
 
-cardName2 5 6 7 8
+- #### ViewGUI class
+  
+  - ViewGUI provides a graphical interface (GUI) implementation of the View interface for the Three Trios game. It visually renders the game state in a window using Java Swing components. 
+  - Key components and methods:
+    - Constructors: Accepts a ModelReadOnly instance and initializes GUI components, such as player hands and the grid, using dimensions derived from the model.
+    - renderTo(JFrame outputFrame): Configures and displays a JFrame with all components, 
+      including a listener to handle window resizing.
+    - HandGUI Class: A JPanel subclass that visually represents a player's hand. It adjusts the 
+      layout and renders each card based on the current coach, resizing dynamically.
+     - GridGUI Class: A JPanel subclass responsible for rendering the game grid, with cells 
+      displayed according to their state (e.g., holes, empty cells, or cards). It dynamically resizes to fit the window and visually distinguishes player cards and empty cells using color coding.
+
+
 
 ## In the player ...
-- The 
+To support various computer player strategies and difficulty levels for the Three Trios game, we introduced several new classes and an enum in the cs3500.threetrios.model.player package. These additions enable flexible AI behaviors and difficulty customization, enhancing the game’s strategic depth. Key components include:
+
+- #### Player Interface
+  - Defines the structure for a player in the game and includes methods to:
+  - Retrieve the player’s name (getName()).
+  - Assess player skill level through the Difficulty enumeration (difficulty()).
+  - Generate the player’s next move as a Consumer<Model> (nextMove()), allowing integration with 
+    different strategies.
+  
+- #### Difficulty Enum
+  - Represents the difficulty level of a player, offering five distinct values: 
+  - EASY, MEDIUM, HARD, 
+    IMPOSSIBLE, and UNKNOWN.
+  - This enum enables the game to adjust strategies or player skill levels based on selected 
+    difficulty, allowing for varied gameplay experiences.
+- #### Move Class
+  - Represents a single move, defined by a row and column position on the grid and an index 
+    pointing to a card in the player’s hand.
+  - Implements Consumer<Model>, enabling moves to be directly applied to the game model.
+  - ##### Key methods:
+    - of(int row, int col, int handIdx): Static factory method to create a new move.
+    - accept(Model model): Executes the move on the model by placing a card at the specified cell,
+      facilitating dynamic strategy implementation.
+  - StrategyAbstract Class
+    - Abstract base class for strategies, providing core functionality to evaluate and determine the 
+        effectiveness of moves based on the model state:
+    - allConsideredMoves(): Generates a list of all possible valid moves by placing each card in 
+      the player’s hand at various grid positions.
+    - effectiveness(Move move): Abstract method allowing subclasses to define specific criteria 
+      for evaluating move effectiveness.
+    - bestMove(): Returns the most effective move based on the strategy’s criteria, using 
+      effectiveness as the evaluation metric.
+- This base class is designed for extension, enabling subclasses to implement specific strategies 
+      while reusing common move evaluation functions.
+- #### CornerStrategy Class
+  - A defensive strategy focusing on placing cards in the corners of the grid to minimize exposure 
+    to opponent moves.
+  - Implements allConsideredMoves() by generating moves for each card in the player’s hand, 
+    positioning them in the four corners of the grid.
+- #### MostFlips Class
+  - A strategy focused on maximizing the number of opponent’s cards flipped with each move.
+  - Implements effectiveness(Move move) by calculating the change in opponent card count before 
+    and after a move, selecting moves that yield the highest flips.
+- These classes, strategies, and difficulty levels provide a flexible framework for AI players in 
+    the Three Trios game. By incorporating the Difficulty enum and various strategies, the game can feature AI players with diverse skill levels and strategic behaviors, creating more challenging and varied gameplay experiences.
+
+## In the utils ...
+
+To support flexible event handling in the GUI, we introduced utility classes and enums in the 
+cs3500.threetrios.utils.extensions package:
+
+- #### ComponentHandler Class
+  - ComponentHandler is a general-purpose event handler for ComponentEvent events, allowing dynamic 
+    response mapping:
+    - The handle(Predicate<ComponentEvent> question, Runnable response) method enables the 
+    registration of custom responses to specific component events, such as resize or visibility changes.
+    - The register(Component c) method attaches the ComponentHandler to a specified component, 
+      allowing it to listen for component-related events.
+  - This handler is used to manage layout adjustments in the GUI, such as resizing elements when 
+      the main window size changes.
+- #### MouseHandler Class
+  - MouseHandler provides customizable event handling for MouseEvent and MouseWheelEvent events, 
+  allowing flexible response mappings for mouse interactions:
+    - The handle(Predicate<MouseEvent> question, Runnable response) method registers custom 
+      responses to various mouse events.
+    - The register(Component c) method attaches MouseHandler to a component, enabling it to 
+      handle clicks, drags, scrolls, and other mouse interactions.
+  - This handler is essential for handling user interactions with the game, such as 
+      selecting and placing cards on the grid.
+    
+- #### WasComponent Enum
+
+  - The WasComponent enum provides predicates for different ComponentEvent types, such as MOVED, 
+  RESIZED, SHOWN, and HIDDEN.
+  - Each enum constant implements Predicate<ComponentEvent>, enabling easy and readable event 
+    handling checks within the ComponentHandler.
+- #### WasMouse Enum
+  - WasMouse offers a similar approach for MouseEvent types, such as CLICKED, PRESSED, RELEASED, 
+      MOVED, and DRAGGED.
+  - Each constant implements Predicate<MouseEvent>, allowing MouseHandler to efficiently 
+    determine the event type and trigger the appropriate response.
+  
+
+- These utility classes and enums simplify event handling within the ViewGUI class, making it 
+    more modular and allowing for precise responses to user interactions and component changes. By centralizing event handling logic, they enhance the GUI's flexibility, maintainability, and responsiveness.
 
 # Notes on Extension
 
@@ -229,10 +335,73 @@ extension and mutation in a protected manner.
 - TLDR: The model component is made specifically to close off extension and mutation in every 
   single avenue, except that which preservers the integrity of a ThreeTrios model.
 
-___
-Changes for Part 2
-=
-***TO DO!!!!***
+### Assignment 2 Extra Credit   
 
-### Assignment 2 Extra Credit
+___
+## Changes for Part 2
+In this iteration, we refined the model design to strengthen immutability and protect key elements from unauthorized modifications:
+
+- Read-Only Model Interface
+
+  - Introduced a ReadonlyThreeTriosModel interface to separate mutator and observer methods. This 
+  ensures that any observation via a read-only model cannot alter the model state, even if accessed by an unauthorized component.
+  Visibility of Both Players' Hands
+
+- Enhanced the model to allow observation of both players’ hands at any time. 
+  - This adjustment 
+  supports visibility needs for the game’s visual representation without exposing mutable references.
+  Controlled Card Access
+
+- Identified a potential vulnerability where cards could be accessed and potentially modified 
+outside the package through read-only methods.
+  - To address this, only referees within the model have access to original card references, while any external observer receives a copy.
+  
+- Grid and Cell Protection Enhancements
+  - Redesigned the Grid and GridCell classes to further protect against external mutation:
+    - GridCell was made an abstract, package-protected class, with CardCell and HoleCell as final 
+      subclasses.
+    - Implemented a visitable interface for GridCell that restricts mutation access only within 
+      the visitor pattern’s boundaries.
+    - Read-only grid observations return cells that cannot be altered, maintaining immutability 
+      for external components.
+  
+- Removal of Coach Class
+  - Simplified the Coach class, reducing it to a mapping of color to a list of cards, as it had no 
+   additional behaviors. This eliminated the need for a standalone Coach class.
+
+- Rationale for Mutation Control
+  - The model exposes minimal points of mutation, focusing specifically on necessary extensions:
+    - ModelAbstract includes setGridCardAt, which allows cards to be set on the grid; however, only 
+      copies of the grid are exposed externally.
+    - RefereeAbstract provides methods like setCardAttackValue and setCardCoach for internal 
+      mutation of card properties. Any public-facing read-only methods ensure these references are copies, maintaining the original’s integrity.
+    - To support immutability, maps and lists returned by the model are wrapped in immutable 
+      decorators, and structural classes like Grid and Cell are exposed only as copies, avoiding unintended side effects in external contexts.
+    
+- New Observation Methods
+  - Added observation methods to ReadonlyThreeTriosModel to meet assignment requirements:
+
+    - Grid Size
+      - numRows() and numCols() provide the dimensions of the grid, helping the view align with the 
+      grid’s layout.
+    - Cell Content
+      - cardAt(int row, int col) returns the card in a specific cell, if present, using Optional<Card> 
+      to safely indicate absence.
+      - ownerAt(int row, int col) returns the owner (coach) of the card in a cell, if any, using 
+          Optional<Coach> to handle null cases safely.
+    - Player Hands
+      - curCoachesHands() returns each coach’s hand as an unmodifiable map. Each card is provided as a 
+            copy to prevent modification, allowing the view to safely display players’ hands.
+    - Move Legality
+      - canPlayAt(int row, int col) determines whether the current player can place a card at a 
+            specific cell, based on cell occupancy and whether it can hold a card.
+    - Card Flip Potential
+      - numFlippedIfPlaced(Card card, int row, int col) calculates the number of opponent cards that 
+            would be flipped if the player places a specified card at given coordinates, supporting decision-making without altering the actual grid.
+      - Player Score
+        - score(Coach coach) calculates the score for a given coach, based on the number of cards 
+            controlled on the grid.
+
+These adjustments maintain model integrity against external modification, refining the MVC structure by clearly defining responsibilities and protecting the model from unintended state changes.
+
 

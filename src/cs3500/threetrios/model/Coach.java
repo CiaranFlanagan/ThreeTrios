@@ -20,6 +20,12 @@ public enum Coach {
     }
   }
 
+  /**
+   * Returns the opposing coach.
+   *
+   * @return the opponent Coach of the current coach (RED's opponent is BLUE and vice versa)
+   * @throws IllegalStateException if the current state is invalid
+   */
   public Coach opponent() {
     switch (this) {
       case RED: return BLUE;

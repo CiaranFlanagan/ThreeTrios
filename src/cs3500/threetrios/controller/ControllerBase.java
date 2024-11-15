@@ -23,9 +23,7 @@ public class ControllerBase implements Controller {
   private Supplier<Referee> refereeSupplier;
   private final List<Consumer<Model>> moves;
 
-  //TODO:  A class that has private constructors and does not have any static methods, fields or
-  // inner classes cannot be used.
-  private ControllerBase() {
+  public ControllerBase() {
     this.moves = new ArrayList<>();
   }
 
@@ -43,7 +41,12 @@ public class ControllerBase implements Controller {
   }
 
   /**
-   * @return - a model that has the same initial conditions as this controller's model
+   * Provides a supplier that returns a new instance of a Model configured with the initial game
+   * state. This includes setting up the grid, cards, and referee, and applying any moves that
+   * were previously recorded.
+   *
+   * @return a Supplier<Model> that, when invoked, creates and initializes a new Model instance
+   *         with the specified grid, cards, referee, and a replay of recorded moves.
    */
   public Supplier<Model> supplyModel() {
     return () -> {

@@ -1,20 +1,25 @@
 package cs3500.threetrios.model;
 
-import java.util.Arrays;
-import java.util.Optional;
-
 /**
- * to represent the grid-shaped board of the game three-trios.
+ * Represents the grid-shaped board of the Three Trios game. The Grid class is responsible for
+ * managing the layout of cells on the game board, linking cells in rows and columns, tracking
+ * holes, and providing methods to manipulate and query the state of the grid.
  */
 public final class Grid {
   private final GridCellAbstract[][] internalArray;
-          // first index is rows, second is columns, obvious
   private CellType[][] shape;
   private final int NUM_ROWS;
   private final int NUM_COLS;
-  // index at 0
   private final int numHoles;
 
+  /**
+   * Constructs a Grid with a specified shape. Initializes each cell based on the shape's
+   * cell type, where holes are represented by empty cells and other cells are initialized
+   * to contain cards.
+   *
+   * @param shape the initial configuration of the grid, represented by an array of CellType values
+   * @throws IllegalArgumentException if shape is null, has fewer than one row, or fewer than one column
+   */
   public Grid(CellType[][] shape) {
     this.shape = shape;
     if (shape == null) {

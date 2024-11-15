@@ -11,7 +11,9 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
- * To abstract and bundle grid and coach mutation from models.
+ * An abstract class representing the shared functionality of models in the Three Trios game.
+ * ModelAbstract provides a foundation for managing the game state, including the grid, player hands,
+ * current coach, and moves.
  */
 public abstract class ModelAbstract implements Model {
   protected Grid grid;
@@ -29,6 +31,11 @@ public abstract class ModelAbstract implements Model {
     currentCoach = Coach.RED;
   }
 
+  /**
+   * Returns a copy of the current coaches' hands with cards copied to prevent modification.
+   *
+   * @return an unmodifiable map of coaches and their respective hands
+   */
   @Override
   public Map<Coach, List<Card>> curCoachesHands() {
     Map<Coach, List<Card>> temp = new EnumMap<>(coachesHands);
@@ -39,19 +46,41 @@ public abstract class ModelAbstract implements Model {
     return temp;
   }
 
+  /**
+   * Returns the current state of the grid.
+   *
+   * @return the current grid object
+   */
   @Override
   public Grid curGrid() {
     return grid;
   }
 
+  /**
+   * Returns the number of rows in the grid.
+   *
+   * @return the number of rows
+   */
   public int numRows() {
     return this.grid.readOnlyArray2D().length;
   }
 
+  /**
+   * Returns the number of columns in the grid.
+   *
+   * @return the number of columns
+   */
   public int numCols() {
     return this.grid.readOnlyArray2D()[0].length;
   }
 
+  /**
+   * Returns the card at the specified row and column if one exists.
+   *
+   * @param row the row index of the cell
+   * @param col the column index of the cell
+   * @return an Optional containing the card at the specified position, or empty if no card exists
+   */
   public Optional<Card> cardAt(int row, int col) {
     checkRowCol(row, col);
     GridCellReadOnly cell = this.grid.readOnlyArray2D()[row][col];
@@ -61,6 +90,13 @@ public abstract class ModelAbstract implements Model {
     return Optional.empty();
   }
 
+  /**
+   * Returns the coach who owns the card at the specified row and column, if a card is present.
+   *
+   * @param row the row index of the cell
+   * @param col the column index of the cell
+   * @return an Optional containing the coach at the specified position, or empty if no card exists
+   */
   public Optional<Coach> ownerAt(int row, int col) {
     checkRowCol(row, col);
     GridCellReadOnly cell = this.grid.readOnlyArray2D()[row][col];
@@ -70,6 +106,13 @@ public abstract class ModelAbstract implements Model {
     return Optional.empty();
   }
 
+  /**
+   * Determines if a card can be placed at the specified position.
+   *
+   * @param row the row index of the cell
+   * @param col the column index of the cell
+   * @return true if a card can be placed at the specified position, false otherwise
+   */
   public boolean canPlayAt(int row, int col) {
     checkRowCol(row, col);
     GridCellReadOnly cell = this.grid.readOnlyArray2D()[row][col];

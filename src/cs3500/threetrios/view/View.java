@@ -5,7 +5,7 @@ package cs3500.threetrios.view;
  */
 public interface View<OD> {
   /**
-   * to render to some outputDestination destination
+   * To create a render and display at some outputDestination destination.
    * @param outputDestination - Somewhere that shows
    */
   void renderTo(OD outputDestination);

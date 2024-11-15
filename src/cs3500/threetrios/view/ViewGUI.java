@@ -1,4 +1,5 @@
 package cs3500.threetrios.view;
+
 import cs3500.threetrios.model.Card;
 import cs3500.threetrios.model.CardinalDirection;
 import cs3500.threetrios.model.Coach;

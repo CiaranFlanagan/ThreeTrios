@@ -4,8 +4,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * A read-only view of the game model, designed for use by the view component in the Three Trios game.
+ * ModelForView acts as a wrapper around another model to provide limited access to game data
+ * without allowing modifications.
+ */
 public class ModelForView implements ModelReadOnly {
   ModelForView delegate;
+
+  /**
+   * Constructs a ModelForView that delegates calls to another ModelForView instance.
+   *
+   * @param delegate the ModelForView instance to which this class delegates method calls
+   */
   public ModelForView(ModelForView delegate) {
     this.delegate = delegate;
   }

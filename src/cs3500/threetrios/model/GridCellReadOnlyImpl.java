@@ -2,6 +2,7 @@ package cs3500.threetrios.model;
 
 class GridCellReadOnlyImpl implements GridCellReadOnly {
   GridCellAbstract delegate;
+
   GridCellReadOnlyImpl(GridCellAbstract gridCellAbstract) {
     delegate = gridCellAbstract;
   }

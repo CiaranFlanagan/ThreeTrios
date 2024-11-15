@@ -12,6 +12,10 @@ import java.util.stream.Collectors;
 
 public class DefenseStrategy extends StrategyAbstract {
 
+  /**
+   * A defensive strategy for the Three Trios game. The DefenseStrategy class evaluates moves based
+   * on their defensive effectiveness, favoring moves that minimize the card's exposed sides.
+   */
   public DefenseStrategy(Supplier<Model> modelSupplier) {
     super(modelSupplier);
   }
