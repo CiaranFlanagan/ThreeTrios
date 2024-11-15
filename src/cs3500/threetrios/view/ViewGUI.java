@@ -8,6 +8,7 @@ import cs3500.threetrios.model.Coach;
 import cs3500.threetrios.model.Grid;
 import cs3500.threetrios.model.GridCellReadOnly;
 import cs3500.threetrios.model.ModelReadOnly;
+import cs3500.threetrios.utils.IntPoint2D;
 import cs3500.threetrios.utils.extensions.ComponentHandler;
 import cs3500.threetrios.utils.extensions.WasComponent;
 
@@ -18,8 +19,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.ComponentEvent;
+import java.awt.geom.Point2D;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * A graphical user interface (GUI) implementation of the View interface for the Three Trios game.
@@ -68,8 +72,8 @@ public class ViewGUI implements View<JFrame> {
     outputFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     outputFrame.setLayout(null);
     outputFrame.setSize(new Dimension(500, 300));
-    new HandleClickForHand(leftHand).init();
-    new HandleClickForHand(rightHand).init();
+    new HandleClickForHand(leftHand, model).init();
+    new HandleClickForHand(rightHand, model).init();
     new HandleClickForGrid(gridGUI).init();
 
     outputFrame.add(leftHand);
@@ -94,14 +98,14 @@ public class ViewGUI implements View<JFrame> {
     String e = card.getAttackValue(CardinalDirection.EAST).toString();
     String w = card.getAttackValue(CardinalDirection.WEST).toString();
     g.setColor(coachToColor(card.getCoach()));
-    g.fillRect(x, y, cwidth(), cardHeight);
+    g.fillRect(x, y, gcwidth(), cardHeight);
     g.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 15));
     g.setColor(Color.BLACK);
-    g.drawRect(x, y, cwidth(), cardHeight);
-    g.drawString(n, x + 7 * cwidth() / 16, y + cardHeight / 4);
-    g.drawString(s, x + 7 * cwidth() / 16, y + 7 * cardHeight / 8);
-    g.drawString(e, x + 3 * cwidth() / 4, y + cardHeight / 2);
-    g.drawString(w, x + cwidth() / 8, y + cardHeight / 2);
+    g.drawRect(x, y, gcwidth(), cardHeight);
+    g.drawString(n, x + 7 * gcwidth() / 16, y + cardHeight / 4);
+    g.drawString(s, x + 7 * gcwidth() / 16, y + 7 * cardHeight / 8);
+    g.drawString(e, x + 3 * gcwidth() / 4, y + cardHeight / 2);
+    g.drawString(w, x + gcwidth() / 8, y + cardHeight / 2);
   }
 
   protected Color coachToColor(Coach coach) {
@@ -124,11 +128,19 @@ public class ViewGUI implements View<JFrame> {
     return Color.WHITE;
   }
 
-  protected int cwidth() {
+  /**
+   *
+   * @return width of a card in grid in frame's coordinate system
+   */
+  protected int gcwidth() {
     return frame.getWidth() / dims.width;
   }
 
-  protected int cheight() {
+  /**
+   *
+   * @return height of a card in grid in frame's coordinate system
+   */
+  protected int gcheight() {
     return frame.getContentPane().getHeight() / dims.height;
   }
 
@@ -139,61 +151,70 @@ public class ViewGUI implements View<JFrame> {
   public class HandGUI extends JPanel {
     protected int xSelect;
     protected int ySelect;
-    protected boolean selected;
     private List<Card> hand;
     private Coach coach;
+    private Optional<IntPoint2D> selected;
 
     HandGUI(Coach coach) {
       this.coach = coach;
       this.hand = model.curCoachesHands().get(coach);
+      this.selected = Optional.empty();
       this.setVisible(true);
-      this.setBackground(Color.YELLOW);
+      Color fillBlankSpaceColor = coach == Coach.RED ? VISIBLE_RED : VISIBLE_BLUE;
+      this.setBackground(fillBlankSpaceColor);
+
+    }
+
+    public Coach getCoach() {
+      return coach;
+    }
+
+    public Optional<IntPoint2D> getSelected() {
+      return selected;
+    }
+
+    public void select(IntPoint2D modelCoordinates) {
+      this.selected = Optional.of(modelCoordinates);
+    }
+
+    public void deselect() {
+      this.selected = Optional.empty();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
       super.paintComponent(g);
-      int handCardHeight = dims.height * cheight() / hand.size();
       int[] y = new int[1];
-      hand.forEach((c) -> renderCard(g, 0, y[0]++ * handCardHeight, c, handCardHeight));
-      if (selected) {
-        renderSelected(g, xSelect, ySelect, handCardHeight);
+      hand.forEach((c) -> renderCard(g, 0, y[0]++ *  cardHeight(), c,  cardHeight()));
+      if (selected.isPresent()) {
+        renderSelected(g, xSelect, ySelect,  cardHeight());
       }
     }
 
+    protected int cardHeight() {
+      return dims.height * gcheight() / hand.size();
+    }
+
     private void handleResize() {
-      int x = coach == Coach.RED ? 0 : (dims.width - 1) * cwidth();
-      this.setBounds(x, 0, cwidth(), cheight() * dims.height);
+      int x = coach == Coach.RED ? 0 : (dims.width - 1) * gcwidth();
+      this.setBounds(x, 0, gcwidth(), gcheight() * dims.height);
     }
 
-    public void setXSelect(int x) {
-      xSelect = x;
-    }
-
-    public void setYSelect(int y) {
-      ySelect = y;
-    }
-
-    public void select() {
-      selected = true;
-    }
-
-    public void deselect() {
-      selected = false;
-    }
-
-    public boolean selected() {
-      return selected;
-    }
 
     protected void renderSelected(Graphics g, int x, int y, int cardHeight) {
       g.setColor(Color.WHITE);
-      int leftcorner = snapToWidth(xSelect);
-      int topCorner = snapToHeight(ySelect, cardHeight);
-      g.drawRect(leftcorner, topCorner, cwidth(), cardHeight);
-      g.drawRect(leftcorner + 1, topCorner + 1, cwidth() - 2, cardHeight - 2);
+      int topCorner = selected.get().y * cardHeight;
+      g.drawRect(0, topCorner, gcwidth(), cardHeight);
+      g.drawRect(1, topCorner + 1, gcwidth() - 2, cardHeight - 2);
     }
 
+    public int modelx(int x) {
+      return x / gcwidth();
+    }
+
+    public int modely(int y) {
+      return y / cardHeight();
+    }
 
   }
 
@@ -216,34 +237,35 @@ public class ViewGUI implements View<JFrame> {
       GridCellReadOnly[][] readOnlyArray2D = grid.readOnlyArray2D();
       for (int row = 0; row < model.numRows(); row++) {
         for (int col = 0; col < model.numCols(); col++) {
-          renderCell(g, col * cwidth(), row * cheight(), readOnlyArray2D[row][col]);
+          renderCell(g, col * gcwidth(), row * gcheight(), readOnlyArray2D[row][col]);
         }
       }
     }
 
     protected void renderCell(Graphics g, int x, int y, GridCellReadOnly cell) {
       g.setColor(cellToColor(cell));
-      g.fillRect(x, y, cwidth(), cheight());
+      g.fillRect(x, y, gcwidth(), gcheight());
       if (cell.hasCard()) {
-        renderCard(g, x, y, cell.getCard(), cheight());
+        renderCard(g, x, y, cell.getCard(), gcheight());
       }
       g.setColor(Color.BLACK);
-      g.drawRect(x, y, cwidth(), cheight());
+      g.drawRect(x, y, gcwidth(), gcheight());
     }
 
     protected void handleResize() {
-      this.setBounds(cwidth(), 0, cwidth() * (dims.width - 2), cheight() * dims.height);
+      this.setBounds(gcwidth(), 0, gcwidth() * (dims.width - 2), gcheight() * dims.height);
     }
 
     public int modelx(int x) {
-      return x / cwidth();
+      return x / gcwidth();
     }
 
     public int modely(int y) {
-      return y / cheight();
+      return y / gcheight();
     }
 
   }
+
 
   /**
    * to snap the input x-coordinate to the left-most coordinate of the card.
@@ -252,7 +274,7 @@ public class ViewGUI implements View<JFrame> {
    * @return x coordinate on left of card
    */
   protected int snapToWidth(int x) {
-    return (x / cwidth()) * cwidth();
+    return (x / gcwidth()) * gcwidth();
   }
 
   /**

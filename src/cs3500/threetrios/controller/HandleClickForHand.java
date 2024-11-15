@@ -1,5 +1,7 @@
 package cs3500.threetrios.controller;
 
+import cs3500.threetrios.model.ModelReadOnly;
+import cs3500.threetrios.utils.IntPoint2D;
 import cs3500.threetrios.utils.extensions.MouseHandler;
 import cs3500.threetrios.utils.extensions.WasMouse;
 import cs3500.threetrios.view.ViewGUI;
@@ -12,14 +14,17 @@ import java.awt.event.MouseEvent;
  */
 public class HandleClickForHand extends MouseHandler {
   ViewGUI.HandGUI hand;
+  ModelReadOnly modelReadOnly;
 
   /**
    * constructor.
+   *
    * @param hand - a hand gui.
    */
-  public HandleClickForHand(ViewGUI.HandGUI hand) {
+  public HandleClickForHand(ViewGUI.HandGUI hand, ModelReadOnly modelReadOnly) {
     this.hand = hand;
-    map.put(WasMouse.CLICKED, this::toDoToHand);
+    this.modelReadOnly = modelReadOnly;
+    map.put(WasMouse.CLICKED, this :: toDoToHand);
   }
 
   /**
@@ -37,13 +42,27 @@ public class HandleClickForHand extends MouseHandler {
    * @param me the MouseEvent triggered by the click
    */
   public void toDoToHand(MouseEvent me) {
-    if (!hand.selected()) {
-      hand.select();
-      hand.setXSelect(me.getX());
-      hand.setYSelect(me.getY());
-    } else {
-      hand.deselect();
+    if (modelReadOnly.curCoach() != hand.getCoach()) {
+      System.err.println("not your turn");
+      return;
     }
+
+    IntPoint2D modelCoordinates = new IntPoint2D(hand.modelx(me.getX()), hand.modely(me.getY()));
+    System.out.println(modelCoordinates);
+    // if they click when nothing is selected
+    if (hand.getSelected().isEmpty()) {
+      hand.select(modelCoordinates);
+    } else if (hand.getSelected().isPresent()) {
+      // if there is a selected card
+      if (hand.getSelected().get().equals(modelCoordinates)) {
+        // if they click on the same card
+        hand.deselect();
+      } else {
+        // if they click on a different card
+        hand.select(modelCoordinates);
+      }
+    }
+
     hand.repaint();
   }
 }
