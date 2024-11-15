@@ -4,19 +4,12 @@ import cs3500.threetrios.controller.ConfigCard;
 import cs3500.threetrios.controller.ConfigGrid;
 import cs3500.threetrios.controller.TestFiles;
 import cs3500.threetrios.model.Model;
-import cs3500.threetrios.model.ModelReadOnly;
 import cs3500.threetrios.model.Referee;
 import cs3500.threetrios.model.RefereeDefault;
 import cs3500.threetrios.model.ModelBase;
-import cs3500.threetrios.utils.LineWriter;
-import cs3500.threetrios.view.ViewTextBase;
 import cs3500.threetrios.view.View;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import javax.swing.JFrame;
-
 import static cs3500.threetrios.controller.TestFiles.CC_LARGE;
 import static cs3500.threetrios.controller.TestFiles.CC_SMALL;
 import static cs3500.threetrios.controller.TestFiles.GRID_CONNECTED_HOLES;

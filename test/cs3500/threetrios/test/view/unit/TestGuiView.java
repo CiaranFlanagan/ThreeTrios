@@ -2,14 +2,21 @@ package cs3500.threetrios.test.view.unit;
 
 import cs3500.threetrios.view.ViewGUI;
 import org.junit.Before;
-import org.junit.Test;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+/**
+ * A test class for the graphical user interface (GUI) view of the Three Trios game, using a
+ * JFrame for rendering. This class extends TestView and provides additional setup and methods
+ * to visually display the game state for testing purposes.
+ */
 public class TestGuiView extends TestView<JFrame> {
   JFrame frame;
 
+  /**
+   * Sets up the test environment by initializing the JFrame used for rendering the GUI view.
+   */
   @Before
   public void setup() {
     super.setup();
@@ -31,15 +38,7 @@ public class TestGuiView extends TestView<JFrame> {
   @Override
   public void testGridDisconnectedView() {
     super.testGridDisconnectedView();
-    showGui();
-  }
-
-  @Test
-  public void testGridDisconnectedViewMidGame() {
-    super.testGridDisconnectedView();
     model.placeCard(0, 0, 0);
-    model.placeCard(0, 0, 1);
-    model.placeCard(2, 0, 2);
     showGui();
   }
 

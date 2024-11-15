@@ -12,6 +12,7 @@ import cs3500.threetrios.utils.extensions.WasComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -23,7 +24,7 @@ import java.util.List;
  * A graphical user interface (GUI) implementation of the View interface for the Three Trios game.
  * This class is responsible for visually rendering the game's current state in a windowed format.
  */
-public class ViewGUI implements View<JFrame>  {
+public class ViewGUI implements View<JFrame> {
   private ModelReadOnly model;
   private JFrame frame;
   private HandGUI leftHand;
@@ -35,6 +36,11 @@ public class ViewGUI implements View<JFrame>  {
   private static final Color VISIBLE_HOLE = Color.GRAY;
   private static final Color VISIBLE_EMPTY_CARD = new Color(144, 238, 144);
 
+  /**
+   * A graphical user interface (GUI) implementation of the View interface for the Three Trios game.
+   * This class is responsible for visually rendering the game's current state in a windowed format.
+   * It displays the hands of both players and the game grid.
+   */
   public ViewGUI(ModelReadOnly model) {
     this.model = model;
 
@@ -65,7 +71,7 @@ public class ViewGUI implements View<JFrame>  {
     outputFrame.add(rightHand);
 
     outputFrame.addComponentListener(
-            new ComponentHandler().handle(WasComponent.RESIZED, this::handleResize));
+      new ComponentHandler().handle(WasComponent.RESIZED, this::handleResize));
   }
 
   private void handleResize(ComponentEvent e) {
@@ -96,7 +102,7 @@ public class ViewGUI implements View<JFrame>  {
     private void handleResize() {
       int x = coach == Coach.RED ? 0 : (dims.width - 1) * cwidth();
       this.setBounds(x, 0, cwidth(),
-                     cheight() * dims.height);
+        cheight() * dims.height);
     }
 
   }
@@ -114,7 +120,7 @@ public class ViewGUI implements View<JFrame>  {
     protected void paintComponent(Graphics g) {
       super.paintComponent(g);
       GridCellReadOnly[][] readOnlyArray2D = grid.readOnlyArray2D();
-      for(int row = 0; row < model.numRows(); row++) {
+      for (int row = 0; row < model.numRows(); row++) {
         for (int col = 0; col < model.numCols(); col++) {
           renderCell(g, col * cwidth(), row * cheight(), readOnlyArray2D[row][col]);
         }
@@ -133,7 +139,7 @@ public class ViewGUI implements View<JFrame>  {
 
     public void handleResize() {
       this.setBounds(cwidth(), 0, cwidth() * (dims.width - 2),
-                     cheight() * dims.height);
+        cheight() * dims.height);
     }
   }
 
@@ -154,7 +160,7 @@ public class ViewGUI implements View<JFrame>  {
   }
 
   protected Color coachToColor(Coach coach) {
-    switch (coach)  {
+    switch (coach) {
       case RED:
         return VISIBLE_RED;
       case BLUE:

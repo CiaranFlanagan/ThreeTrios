@@ -2,7 +2,6 @@ package cs3500.threetrios.test.player;
 
 import cs3500.threetrios.controller.ConfigCard;
 import cs3500.threetrios.controller.ConfigGrid;
-import cs3500.threetrios.controller.TestFiles;
 import cs3500.threetrios.model.Card;
 import cs3500.threetrios.model.Coach;
 import cs3500.threetrios.model.Grid;
@@ -12,15 +11,20 @@ import cs3500.threetrios.model.RefereeDefault;
 import cs3500.threetrios.model.player.MostFlips;
 import cs3500.threetrios.model.player.Move;
 import cs3500.threetrios.utils.LineWriter;
+
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.function.Supplier;
 
+/**
+ * A test class for the MostFlips strategy in the Three Trios game. It verifies that the
+ * strategy selects moves that flip the maximum number of opponent's cards.
+ * The test case is structured to check different grid configurations and move scenarios.
+ */
 public class TestMostFlips {
   // cases we want to test:
   // 1. empty grid
@@ -37,31 +41,31 @@ public class TestMostFlips {
   // and colors at a particular position
 
   @Test
-  public void proofTest() {
+  public void test() {
     Supplier<Grid> gridSupplier =
-            () -> ConfigGrid.scannerToGrid(
-                    new Scanner(
-                            LineWriter.create()
-                                    .line("2 3")
-                                    .line("CCX")
-                                    .endWith("CCC")
-                                    .toString()));
+      () -> ConfigGrid.scannerToGrid(
+        new Scanner(
+          LineWriter.create()
+                    .line("2 3")
+                    .line("CCX")
+                    .endWith("CCC")
+                    .toString()));
     Supplier<List<Card>> cardSupplier =
-            () -> ConfigCard.scannerToCardList(
-                    new Scanner(
-                            LineWriter.create()
-                                    .line("a 1 1 1 1")
-                                    .line("b 2 2 2 2")
-                                    .line("c 3 3 3 3")
-                                    .line("d 4 4 4 4")
-                                    .line("e 5 5 5 5")
-                                    .endWith("f 5 5 5 5")
-                                    .toString()));
+      () -> ConfigCard.scannerToCardList(
+        new Scanner(
+          LineWriter.create()
+                    .line("a 1 1 1 1")
+                    .line("b 2 2 2 2")
+                    .line("c 3 3 3 3")
+                    .line("d 4 4 4 4")
+                    .line("e 5 5 5 5")
+                    .endWith("f 5 5 5 5")
+                    .toString()));
     Supplier<Model> modelSupplier = () -> {
       Model m = new ModelBase();
       m.startGame(gridSupplier.get(),
-                  cardSupplier.get(),
-                  new RefereeDefault());
+        cardSupplier.get(),
+        new RefereeDefault());
       return m;
     };
 
@@ -75,9 +79,9 @@ public class TestMostFlips {
     };
     Assert.assertTrue(Utils.cardAt(modelSupplier1.get(), 0, 0).isPresent());
     Assert.assertEquals(Utils.cardAt(modelSupplier1.get(), 0, 0).get().getCoach(),
-                        Coach.RED);
+      Coach.RED);
     Assert.assertEquals(Utils.cardAt(modelSupplier1.get(), 0, 0).get().toString(),
-                        "a 1 1 1 1");
+      "a 1 1 1 1");
 
     // move 2
     mostFlips = new MostFlips(modelSupplier1);
@@ -89,11 +93,11 @@ public class TestMostFlips {
     };
     Assert.assertTrue(Utils.cardAt(modelSupplier2.get(), 0, 1).isPresent());
     Assert.assertEquals(Utils.cardAt(modelSupplier2.get(), 0, 0).get().getCoach(),
-                        Coach.BLUE);
+      Coach.BLUE);
     Assert.assertEquals(Utils.cardAt(modelSupplier2.get(), 0, 1).get().getCoach(),
-                        Coach.BLUE);
+      Coach.BLUE);
     Assert.assertEquals(Utils.cardAt(modelSupplier2.get(), 0, 1).get().toString(),
-                        "b 2 2 2 2");
+      "b 2 2 2 2");
 
     // move 3
     mostFlips = new MostFlips(modelSupplier2);
@@ -105,23 +109,12 @@ public class TestMostFlips {
     };
     Assert.assertTrue(Utils.cardAt(modelSupplier3.get(), 1, 1).isPresent());
     Assert.assertEquals(Utils.cardAt(modelSupplier3.get(), 0, 0).get().getCoach(),
-                        Coach.RED);
+      Coach.RED);
     Assert.assertEquals(Utils.cardAt(modelSupplier3.get(), 0, 1).get().getCoach(),
-                        Coach.RED);
+      Coach.RED);
     Assert.assertEquals(Utils.cardAt(modelSupplier3.get(), 1, 1).get().getCoach(),
-                        Coach.RED);
+      Coach.RED);
     Assert.assertEquals(Utils.cardAt(modelSupplier3.get(), 1, 1).get().toString(),
-                        "c 3 3 3 3");
-  }
-
-  @Test
-  public void testLog() {
-    List<List<Integer>> log = new ArrayList<>();
-    Supplier<Model> supplier = () -> {
-      Model mock = new MockMostFlips(log);
-      mock.startGame(ConfigGrid.scannerToGrid(TestFiles.GRID_NO_HOLES));
-      return mock;
-    };
-
+      "c 3 3 3 3");
   }
 }
