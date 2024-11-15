@@ -5,7 +5,8 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * A read-only view of the game model, designed for use by the view component in the Three Trios game.
+ * A read-only view of the game model, designed for use by the view component in the Three Trios
+ * game.
  * ModelForView acts as a wrapper around another model to provide limited access to game data
  * without allowing modifications.
  */

@@ -45,8 +45,8 @@ public class ControllerBase implements Controller {
    * state. This includes setting up the grid, cards, and referee, and applying any moves that
    * were previously recorded.
    *
-   * @return a Supplier<Model> that, when invoked, creates and initializes a new Model instance
-   *         with the specified grid, cards, referee, and a replay of recorded moves.
+   * @return a {@code Supplier<Model> }that, when invoked, creates and initializes a new Model
+   * instance with the specified grid, cards, referee, and a replay of recorded moves.
    */
   public Supplier<Model> supplyModel() {
     return () -> {

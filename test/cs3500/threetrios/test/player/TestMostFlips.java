@@ -43,7 +43,7 @@ public class TestMostFlips {
   @Test
   public void test() {
     Supplier<Grid> gridSupplier =
-      () -> ConfigGrid.scannerToGrid(
+        () -> ConfigGrid.scannerToGrid(
         new Scanner(
           LineWriter.create()
                     .line("2 3")
@@ -51,7 +51,7 @@ public class TestMostFlips {
                     .endWith("CCC")
                     .toString()));
     Supplier<List<Card>> cardSupplier =
-      () -> ConfigCard.scannerToCardList(
+        () -> ConfigCard.scannerToCardList(
         new Scanner(
           LineWriter.create()
                     .line("a 1 1 1 1")
@@ -64,8 +64,8 @@ public class TestMostFlips {
     Supplier<Model> modelSupplier = () -> {
       Model m = new ModelBase();
       m.startGame(gridSupplier.get(),
-        cardSupplier.get(),
-        new RefereeDefault());
+          cardSupplier.get(),
+          new RefereeDefault());
       return m;
     };
 
@@ -79,9 +79,9 @@ public class TestMostFlips {
     };
     Assert.assertTrue(Utils.cardAt(modelSupplier1.get(), 0, 0).isPresent());
     Assert.assertEquals(Utils.cardAt(modelSupplier1.get(), 0, 0).get().getCoach(),
-      Coach.RED);
+        Coach.RED);
     Assert.assertEquals(Utils.cardAt(modelSupplier1.get(), 0, 0).get().toString(),
-      "a 1 1 1 1");
+        "a 1 1 1 1");
 
     // move 2
     mostFlips = new MostFlips(modelSupplier1);
@@ -93,11 +93,11 @@ public class TestMostFlips {
     };
     Assert.assertTrue(Utils.cardAt(modelSupplier2.get(), 0, 1).isPresent());
     Assert.assertEquals(Utils.cardAt(modelSupplier2.get(), 0, 0).get().getCoach(),
-      Coach.BLUE);
+        Coach.BLUE);
     Assert.assertEquals(Utils.cardAt(modelSupplier2.get(), 0, 1).get().getCoach(),
-      Coach.BLUE);
+        Coach.BLUE);
     Assert.assertEquals(Utils.cardAt(modelSupplier2.get(), 0, 1).get().toString(),
-      "b 2 2 2 2");
+        "b 2 2 2 2");
 
     // move 3
     mostFlips = new MostFlips(modelSupplier2);
@@ -109,12 +109,12 @@ public class TestMostFlips {
     };
     Assert.assertTrue(Utils.cardAt(modelSupplier3.get(), 1, 1).isPresent());
     Assert.assertEquals(Utils.cardAt(modelSupplier3.get(), 0, 0).get().getCoach(),
-      Coach.RED);
+        Coach.RED);
     Assert.assertEquals(Utils.cardAt(modelSupplier3.get(), 0, 1).get().getCoach(),
-      Coach.RED);
+        Coach.RED);
     Assert.assertEquals(Utils.cardAt(modelSupplier3.get(), 1, 1).get().getCoach(),
-      Coach.RED);
+        Coach.RED);
     Assert.assertEquals(Utils.cardAt(modelSupplier3.get(), 1, 1).get().toString(),
-      "c 3 3 3 3");
+        "c 3 3 3 3");
   }
 }

@@ -18,7 +18,7 @@ public final class Grid {
    * to contain cards.
    *
    * @param shape the initial configuration of the grid, represented by an array of CellType values
-   * @throws IllegalArgumentException if shape is null, has fewer than one row, or fewer than one column
+   * @throws IllegalArgumentException if shape is null, has fewer than 1 row, or fewer than 1 column
    */
   public Grid(CellType[][] shape) {
     this.shape = shape;

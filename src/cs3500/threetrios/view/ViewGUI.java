@@ -71,7 +71,7 @@ public class ViewGUI implements View<JFrame> {
     outputFrame.add(rightHand);
 
     outputFrame.addComponentListener(
-      new ComponentHandler().handle(WasComponent.RESIZED, this::handleResize));
+        new ComponentHandler().handle(WasComponent.RESIZED, this::handleResize));
   }
 
   private void handleResize(ComponentEvent e) {
@@ -102,7 +102,7 @@ public class ViewGUI implements View<JFrame> {
     private void handleResize() {
       int x = coach == Coach.RED ? 0 : (dims.width - 1) * cwidth();
       this.setBounds(x, 0, cwidth(),
-        cheight() * dims.height);
+          cheight() * dims.height);
     }
 
   }
@@ -139,7 +139,7 @@ public class ViewGUI implements View<JFrame> {
 
     public void handleResize() {
       this.setBounds(cwidth(), 0, cwidth() * (dims.width - 2),
-        cheight() * dims.height);
+          cheight() * dims.height);
     }
   }
 

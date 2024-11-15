@@ -15,6 +15,7 @@ import java.util.function.Predicate;
  */
 public class MouseHandler extends MouseAdapter {
   protected Map<Predicate<MouseEvent>, Runnable> map;
+
   private MouseHandler() {
     map = new HashMap<>();
   }

@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 
 /**
  * An abstract class representing the shared functionality of models in the Three Trios game.
- * ModelAbstract provides a foundation for managing the game state, including the grid, player hands,
- * current coach, and moves.
+ * ModelAbstract provides a foundation for managing the game state, including the grid, player
+ * hands, current coach, and moves.
  */
 public abstract class ModelAbstract implements Model {
   protected Grid grid;

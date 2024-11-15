@@ -1,19 +1,22 @@
 package cs3500.threetrios.test.player;
 
-import cs3500.threetrios.model.Card;
-import cs3500.threetrios.model.Coach;
-import cs3500.threetrios.model.Grid;
-import cs3500.threetrios.model.Model;
 import cs3500.threetrios.model.ModelBase;
-import cs3500.threetrios.model.Referee;
-
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
+/**
+ * A mock implementation of the ModelBase class used for testing the MostFlips strategy in the
+ * Three Trios game. MockMostFlips logs card placements instead of interacting with an actual game
+ * grid, allowing verification of method calls and parameters during testing.
+ */
 public class MockMostFlips extends ModelBase {
+
   List<List<Integer>> log;
 
+  /**
+   * Constructs a MockMostFlips with a specified log to track the row and column coordinates
+   * of placed cards.
+   *
+   * @param log a list of lists used to record each placement's row and column values
+   */
   public MockMostFlips(List<List<Integer>> log) {
     this.log = log;
   }

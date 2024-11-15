@@ -30,7 +30,7 @@ public class TestTextView extends TestView<PrintStream> {
     LineWriter lw = new LineWriter();
     Assert.assertEquals(lw.create().line("Player: RED").line("___").line("Hand:")
                           .line("bob 1 1 1 1").endWith("zeke A A A A").toString(),
-      log.toString());
+        log.toString());
   }
 
 
@@ -46,7 +46,7 @@ public class TestTextView extends TestView<PrintStream> {
                           .line("Card5 5 5 5 5").line("Card7 7 7 7 7").line("Card9 9 9 9 9")
                           .line("Card11 1 1 1 1").line("Card13 3 3 3 3").line("Card15 5 5 5 5")
                           .line("Card17 7 7 7 7").endWith("Card19 9 9 9 9").toString(),
-      log.toString());
+        log.toString());
   }
 
   @Override
@@ -60,7 +60,7 @@ public class TestTextView extends TestView<PrintStream> {
                           .line("Card5 5 5 5 5").line("Card7 7 7 7 7").line("Card9 9 9 9 9")
                           .line("Card11 1 1 1 1").line("Card13 3 3 3 3").line("Card15 5 5 5 5")
                           .line("Card17 7 7 7 7").endWith("Card19 9 9 9 9").toString(),
-      log.toString());
+        log.toString());
   }
 
 
