@@ -18,7 +18,7 @@ public class Stats {
   }
 
   /**
-   * number of wins of a player.
+   * Number of wins of a player.
    *
    * @return - number of wins of a player
    */
@@ -27,7 +27,7 @@ public class Stats {
   }
 
   /**
-   * number of losses of a player.
+   * Number of losses of a player.
    *
    * @return - number of losses of a player
    */
@@ -36,14 +36,14 @@ public class Stats {
   }
 
   /**
-   * to increment the number of wins of a player.
+   * To increment the number of wins of a player.
    */
   public void incWins() {
     this.wins++;
   }
 
   /**
-   * to increment the number of losses of a player.
+   * To increment the number of losses of a player.
    */
   public void incLosses() {
     this.losses++;

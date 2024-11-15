@@ -9,7 +9,7 @@ import cs3500.threetrios.view.ViewGUI;
 import java.awt.event.MouseEvent;
 
 /**
- * to handle a click for a hand component. right now, it just selects/deselects a card from hand
+ * To handle a click for a hand component. right now, it just selects/deselects a card from hand
  * and tells the view to render.
  */
 public class HandleClickForHand extends MouseHandler {
@@ -17,9 +17,10 @@ public class HandleClickForHand extends MouseHandler {
   ModelReadOnly modelReadOnly;
 
   /**
-   * constructor.
+   * Constructs a HandleClickForHand instance.
    *
-   * @param hand - a hand gui.
+   * @param hand         the HandGUI instance representing the player's hand
+   * @param modelReadOnly a read-only model instance for accessing game state
    */
   public HandleClickForHand(ViewGUI.HandGUI hand, ModelReadOnly modelReadOnly) {
     this.hand = hand;
@@ -28,7 +29,7 @@ public class HandleClickForHand extends MouseHandler {
   }
 
   /**
-   * To add this as a listener to its hand.
+   * Initializes the mouse handler by adding it as a listener to the hand GUI.
    */
   public void init() {
     hand.addMouseListener(this);

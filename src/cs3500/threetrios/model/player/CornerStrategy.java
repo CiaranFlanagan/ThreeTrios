@@ -10,12 +10,16 @@ import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
 /**
- * The CornerStrategy class is a defensive strategy that attempts to place cards in the corners of
- * the game grid.
- * It generates all possible moves by playing each card in the hand to each corner of the grid.
+ * Strategy to generate moves focused on grid corners.
+ * Plays each card from the hand in every corner position.
  */
 public class CornerStrategy extends DefenseStrategy {
 
+  /**
+   * Constructor.
+   *
+   * @param modelSupplier supplies the current game model
+   */
   public CornerStrategy(Supplier<Model> modelSupplier) {
     super(modelSupplier);
   }

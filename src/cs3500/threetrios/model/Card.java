@@ -34,8 +34,6 @@ public final class Card {
   }
 
 
-  // info needed to render the card
-
   /**
    * to return the name of the card.
    *

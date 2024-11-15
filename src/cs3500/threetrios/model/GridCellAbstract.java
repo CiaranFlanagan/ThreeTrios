@@ -29,6 +29,11 @@ abstract class GridCellAbstract implements GridCellVisitable {
   }
 
 
+  /**
+   * To indicate whether a neighbor exists in a given cardinal direction.
+   * @param direction - the direction to consider
+   * @return
+   */
   public boolean hasNeighborToThe(CardinalDirection direction) {
     return this.neighbors.get(direction) != null;
   }

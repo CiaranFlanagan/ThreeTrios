@@ -16,11 +16,6 @@ public interface Player {
    */
   String getName();
 
-  /**
-   * gives an integer measurement that describes skill, more is better.
-   *
-   * @return - an integer measure of skill.
-   */
   Difficulty difficulty();
 
   Consumer<Model> nextMove();

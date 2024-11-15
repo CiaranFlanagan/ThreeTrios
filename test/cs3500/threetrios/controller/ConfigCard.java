@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 public class ConfigCard {
 
   /**
-   * to take a scanner and create a list of cards in the order they came in the file.
+   * To take a scanner and create a list of cards in the order they came in the file.
    *
    * @param sc - the scanner
    * @return a list of cards

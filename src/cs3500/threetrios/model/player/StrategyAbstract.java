@@ -15,26 +15,22 @@ import java.util.stream.IntStream;
 
 /**
  * Abstract base class for game strategies in the Three Trios game.
- * Provides methods to evaluate possible moves and determine the most effective move based on
- * specific criteria defined in subclasses.
+ * Defines methods for evaluating moves and finding the most effective one.
  */
 public abstract class StrategyAbstract {
   protected Supplier<Model> modelSupplier;
 
   /**
-   * Constructs a StrategyAbstract with a supplier for the game model.
+   * Constructor.
    *
-   * @param modelSupplier a Supplier for the game Model, providing access to the current game state
+   * @param modelSupplier a supplier for the current game model
    */
   public StrategyAbstract(Supplier<Model> modelSupplier) {
     this.modelSupplier = modelSupplier;
   }
 
   /**
-   * Generates all possible moves for the current player that do not result in errors.
-   * Each move places a card from the player's hand at a specific row and column on the grid.
-   *
-   * @return a list of valid Move objects that the current player can make
+   * @return
    */
   protected List<Move> allConsideredMoves() {
     Model model = modelSupplier.get();
@@ -72,7 +68,7 @@ public abstract class StrategyAbstract {
   protected abstract int effectiveness(Move move);
 
   /**
-   * to find the best move by reducing all possible moves, choosing the most effective
+   * To find the best move by reducing all possible moves, choosing the most effective
    * via this.effectiveness. works directly with effectiveness
    *
    * @return - the best move, if it exists

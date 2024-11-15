@@ -3,9 +3,6 @@ package cs3500.threetrios.model;
 import org.junit.Assert;
 import org.junit.Test;
 
-import cs3500.threetrios.model.CardinalDirection;
-import cs3500.threetrios.model.GridCellMock;
-
 /**
  * Tests for the BoardCell class.
  */

@@ -1,9 +1,8 @@
 package cs3500.threetrios.model;
 
 /**
- * Represents the grid-shaped board of the Three Trios game. The Grid class is responsible for
- * managing the layout of cells on the game board, linking cells in rows and columns, tracking
- * holes, and providing methods to manipulate and query the state of the grid.
+ * Represents the grid-shaped board of the Three Trios game.
+ * Manages cells, tracks holes, and provides methods to query and modify the grid.
  */
 public final class Grid {
   private final GridCellAbstract[][] internalArray;
@@ -13,13 +12,11 @@ public final class Grid {
   private CellType[][] shape;
 
   /**
-   * Constructs a Grid with a specified shape. Initializes each cell based on the shape's
-   * cell type, where holes are represented by empty cells and other cells are initialized
-   * to contain cards.
+   * Constructs a Grid with a specified shape.
+   * Initializes each cell based on the provided shape's cell type.
    *
-   * @param shape the initial configuration of the grid, represented by an array of CellType values
-   * @throws IllegalArgumentException if shape is null, has fewer than 1 row, or fewer than 1
-   * column
+   * @param shape the grid configuration as a 2D array of CellType
+   * @throws IllegalArgumentException if shape is null or has invalid dimensions
    */
   public Grid(CellType[][] shape) {
     this.shape = shape;
@@ -63,9 +60,9 @@ public final class Grid {
   }
 
   /**
-   * Whether all cells in this grid are filled with cards.
+   * Checks if all cells in the grid are filled with cards.
    *
-   * @return - whether all card cells in this grid are filled with cards
+   * @return true if the grid is fully occupied, false otherwise
    */
   public boolean isFull() {
     for (GridCellReadOnly[] row : internalArray) {
@@ -79,19 +76,18 @@ public final class Grid {
   }
 
   /**
-   * The number of holes in this.
+   * Gets the number of holes in the grid.
    *
-   * @return - the number of holes in this
+   * @return the number of holes
    */
   public int getNumHoles() {
     return this.numHoles;
   }
 
   /**
-   * The grid of cards with no cards represented as null.
+   * Provides a read-only view of the grid as a 2D array.
    *
-   * @return - the grid of this.
-   * @implNote - possible effect can still occur to cells if casting is used, hack with caution.
+   * @return a 2D array of GridCellReadOnly
    */
   public GridCellReadOnly[][] readOnlyArray2D() {
     GridCellReadOnly[][] readOnlyGrid = new GridCellReadOnly[NUM_ROWS][NUM_COLS];

@@ -1,7 +1,7 @@
 package cs3500.threetrios.model.player;
 
 /**
- * to represent the difficulty of a player playing threetrios.
+ * To represent the difficulty of a player playing Three Trios.
  */
 public enum Difficulty {
   EASY,

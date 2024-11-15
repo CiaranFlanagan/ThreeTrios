@@ -14,7 +14,7 @@ public class ModelBase extends ModelAbstract {
   private Random random;
 
   /**
-   * constructor.
+   * Constructor.
    */
   public ModelBase() {
     super();
@@ -22,7 +22,7 @@ public class ModelBase extends ModelAbstract {
   }
 
   /**
-   * constructor.
+   * Constructor.
    *
    * @param r - a random to help randomize dealing cards.
    */
@@ -32,7 +32,7 @@ public class ModelBase extends ModelAbstract {
   }
 
   /**
-   * constructor.
+   * Constructor.
    *
    * @return - new TTM
    */

@@ -386,7 +386,7 @@ vulnerability and maintain control over key positions on the board.
           there, guiding the calculation of the defensive score.
         - Testing
             - Location of Tests: Tests for Defense Strategy are located in the
-              cs3500.threetrios.test.
+              cs3500.threetrios.test.cs3500.test.player.testDefenseStrategy
               player package
 
 ## Changes for Part 2
