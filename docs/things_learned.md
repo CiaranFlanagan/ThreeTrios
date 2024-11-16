@@ -28,6 +28,6 @@ to yap.
 > project structure. However, it's cumbersome. I wish we could bookmark exact lines in code,
 > name them descriptively, and then go back to them. <br>
 > **Enter bookmarks** <br>
-> Just press f3 or right click and add bookmark on a line of code. You can add a description 
+> Just press f3 or right click and add bookmark on a line of code. You can add a description
 > right-clicking the icon. It takes you to the exact line!
 
