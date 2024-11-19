@@ -1,4 +1,4 @@
-package model.player;
+package player;
 
 /**
  * To represent the difficulty of a player playing Three Trios.

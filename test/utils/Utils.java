@@ -39,6 +39,22 @@ public class Utils {
     }
   }
 
+  public static void inspect(ModelReadOnly model) {
+    try {
+      View<JFrame> view = new ViewGUI(model);
+      JFrame frame = new JFrame("three trios hwk 6");
+      view.renderTo(frame);
+      Thread.sleep(1000000);
+    } catch (InterruptedException e) {
+      System.err.println("interrupted");
+    }
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testMakeBadCard() {
+    makeCard("kc 1 2 3 Z");
+  }
+
   /**
    * Makes a card from a string.
    *
@@ -56,29 +72,10 @@ public class Utils {
     return new Card(name, map);
   }
 
-  public static void inspect(ModelReadOnly model)  {
-    try {
-      View<JFrame> view = new ViewGUI(model);
-      JFrame frame = new JFrame("three trios hwk 6");
-      view.renderTo(frame);
-      Thread.sleep(1000000);
-    } catch (InterruptedException e) {
-      System.err.println("interrupted");
-    }
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void testMakeBadCard() {
-    makeCard("kc 1 2 3 Z");
-  }
-
   @Test
   public void testMakeCard() {
-    Assert.assertEquals(makeCard("kc 1 2 3 4").toString(),
-                        "kc 1 2 3 4");
+    Assert.assertEquals(makeCard("kc 1 2 3 4").toString(), "kc 1 2 3 4");
   }
-
-
 
 
 }

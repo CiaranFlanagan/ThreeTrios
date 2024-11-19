@@ -3,8 +3,8 @@ Overview
 
 When spending this much time coding, you learn some things. This section is just for us to write it
 down, so we can share with each other and look back at what we learned at the end of everything. It
-could be java related, IntelliJ related, or design related, or anything really. Welcome to our space
-to yap.
+could be java related, IntelliJ related, or design related, or anything really. Welcome to our
+space to yap.
 
 > ### Java Docs!
 > Don't hyphenate after java docs, it automatically does that for you when you render it.

@@ -1,4 +1,4 @@
-package model.player;
+package player;
 
 import model.Coach;
 import model.Model;
@@ -27,7 +27,8 @@ public class MostFlips extends StrategyAbstract {
     Coach color = model.curCoach();
     Function<Model, Integer> numBadGuys = (m) -> modelToCellList(model)
         // if card is same color as curCoach then add 0 to acc else add 1 to acc
-        .stream().map((c) -> c.hasCard() && c.getCard().getCoach() != color ? 1 : 0)
+        .stream()
+        .map((c) -> c.hasCard() && c.getCard().getCoach() != color ? 1 : 0)
         .reduce(0, Integer :: sum);
     int before = numBadGuys.apply(model);
     move.accept(model);

@@ -1,4 +1,4 @@
-package model.player;
+package player;
 
 import model.GridCellReadOnly;
 import model.Model;
@@ -37,9 +37,9 @@ public abstract class StrategyAbstract {
    * @return - the best move, if it exists
    */
   public Optional<Move> bestMove() {
-    return this.allConsideredMoves().stream()
-               .reduce(BinaryOperator
-                           .maxBy(Comparator.comparingInt(this :: effectiveness)));
+    return this.allConsideredMoves()
+               .stream()
+               .reduce(BinaryOperator.maxBy(Comparator.comparingInt(this :: effectiveness)));
   }
 
   /**
@@ -67,10 +67,13 @@ public abstract class StrategyAbstract {
     int numColumns = model.curGrid().readOnlyArray2D()[0].length;
     int sizeOfHand = model.curCoachesHands().get(model.curCoach()).size();
     List<Move> acc0 = new ArrayList<>();
-    IntStream.range(0, numRows).forEach(
-        (row) -> IntStream.range(0, numColumns).forEach(
-            (col) -> IntStream.range(0, sizeOfHand).forEach(
-                (id) -> acc0.add(Move.create(id, row, col)))));
+    IntStream.range(0, numRows)
+             .forEach((row) -> IntStream.range(0, numColumns)
+                                        .forEach((col) -> IntStream.range(0, sizeOfHand)
+                                                                   .forEach((id) -> acc0.add(Move.create(
+                                                                       id,
+                                                                       row,
+                                                                       col)))));
     return filterOutIllegalMoves(acc0);
   }
 
@@ -101,13 +104,14 @@ public abstract class StrategyAbstract {
    */
   public final Move defaultMove() {
     return allPossibleMovesOnBoard().stream()
-                                    .reduce(BinaryOperator
-                                                .maxBy(Comparator.comparingInt(((m) -> 0)))).get();
+                                    .reduce(BinaryOperator.maxBy(Comparator.comparingInt(((m) -> 0))))
+                                    .get();
   }
 
   protected final List<GridCellReadOnly> modelToCellList(Model model) {
-    return Arrays.stream(model.curGrid().readOnlyArray2D()).flatMap(Arrays :: stream).collect(
-        Collectors.toList());
+    return Arrays.stream(model.curGrid().readOnlyArray2D())
+                 .flatMap(Arrays :: stream)
+                 .collect(Collectors.toList());
   }
 
 }

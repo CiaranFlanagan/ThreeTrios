@@ -1,5 +1,6 @@
 package controller;
 
+import model.Model;
 import utils.IntPoint2D;
 import utils.MouseHandler;
 import utils.WasMouse;
@@ -16,6 +17,7 @@ import java.awt.event.MouseEvent;
 public class HandleClickForGrid extends MouseHandler {
 
   ViewGUI.GridGUI gridGUI;
+  Model model;
 
   /**
    * /**
@@ -23,17 +25,14 @@ public class HandleClickForGrid extends MouseHandler {
    *
    * @param gridGUI the GridGUI instance this handler interacts with
    */
-  public HandleClickForGrid(ViewGUI.GridGUI gridGUI) {
+  public HandleClickForGrid(ViewGUI.GridGUI gridGUI, Model model) {
     this.gridGUI = gridGUI;
     map.put(WasMouse.CLICKED, this :: handleClick);
-
+    this.model = model;
   }
 
   private void handleClick(MouseEvent me) {
-    System.out.println(
-        new IntPoint2D(
-            gridGUI.modely(me.getY()),
-            gridGUI.modelx(me.getX())));
+    System.out.println(new IntPoint2D(gridGUI.modely(me.getY()), gridGUI.modelx(me.getX())));
   }
 
   /**

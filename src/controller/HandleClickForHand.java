@@ -38,8 +38,7 @@ public class HandleClickForHand extends MouseHandler {
    */
   public void toDoToHand(MouseEvent me) {
     if (modelReadOnly.curCoach() != hand.getCoach()) {
-      System.err.println("Player  " + modelReadOnly.curCoach().opponent()
-                             + " it is not your turn");
+      System.err.println("Player  " + modelReadOnly.curCoach().opponent() + " it is not your turn");
       return;
     }
 

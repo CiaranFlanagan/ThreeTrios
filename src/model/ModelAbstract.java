@@ -36,8 +36,11 @@ public abstract class ModelAbstract implements Model {
   public Map<Coach, List<Card>> curCoachesHands() {
     Map<Coach, List<Card>> temp = new EnumMap<>(coachesHands);
     for (Coach coach : temp.keySet()) {
-      temp.put(coach, Collections.unmodifiableList(
-          coachesHands.get(coach).stream().map(Card :: copy).collect(Collectors.toList())));
+      temp.put(coach,
+               Collections.unmodifiableList(coachesHands.get(coach)
+                                                        .stream()
+                                                        .map(Card :: copy)
+                                                        .collect(Collectors.toList())));
     }
     return temp;
   }
@@ -109,10 +112,10 @@ public abstract class ModelAbstract implements Model {
   }
 
   private void checkRowCol(int row, int col) {
-    if (row < 0 || col < 0 || row >= this.grid.readOnlyArray2D().length ||
-        col >= this.grid.readOnlyArray2D()[0].length) {
-      throw new IllegalArgumentException("Row and col must be Natural Number and within the " +
-                                             "range of the grid");
+    if (row < 0 || col < 0 || row >= this.grid.readOnlyArray2D().length
+        || col >= this.grid.readOnlyArray2D()[0].length) {
+      throw new IllegalArgumentException(
+          "Row and col must be Natural Number and within the " + "range of the grid");
     }
 
   }

@@ -50,13 +50,11 @@ public class ModelBase extends ModelAbstract {
       throw new IllegalArgumentException("Arguments cannot be null");
     }
     int totalCardCells =
-        grid.readOnlyArray2D().length * grid.readOnlyArray2D()[0].length
-            - grid.getNumHoles();
+        grid.readOnlyArray2D().length * grid.readOnlyArray2D()[0].length - grid.getNumHoles();
     int requiredCards = totalCardCells + 1;
     if (cards.size() < requiredCards) {
-      throw new IllegalArgumentException(
-          "Number of cards must be at least N + 1, where N is the " +
-              "number of card cells on the grid");
+      throw new IllegalArgumentException("Number of cards must be at least N + 1, where N is the "
+                                             + "number of card cells on the grid");
     }
     this.grid = grid;
     this.ref = ref;

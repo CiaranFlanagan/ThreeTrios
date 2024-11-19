@@ -1,10 +1,5 @@
 package test;
 
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
-import utils.ConfigCard;
-import utils.ConfigGrid;
-import utils.TestFiles;
 import model.AttackValue;
 import model.Card;
 import model.CardinalDirection;
@@ -21,16 +16,21 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import utils.ConfigCard;
+import utils.ConfigGrid;
+import utils.TestFiles;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static utils.TestFiles.CC_SMALL;
-import static utils.TestFiles.GRID_NO_HOLES;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static utils.TestFiles.CC_SMALL;
+import static utils.TestFiles.GRID_NO_HOLES;
 
 /**
  * Tests for the game play and flow of the model.
@@ -143,26 +143,16 @@ public class TestModel {
      */
     @Test
     public void TestFromString_ValidInputs() {
-      Assert.assertEquals("1 => ONE",
-                          AttackValue.ONE, AttackValue.fromString("1"));
-      Assert.assertEquals("2 => TWO",
-                          AttackValue.TWO, AttackValue.fromString("2"));
-      Assert.assertEquals("3 => THREE",
-                          AttackValue.THREE, AttackValue.fromString("3"));
-      Assert.assertEquals("4 => FOUR",
-                          AttackValue.FOUR, AttackValue.fromString("4"));
-      Assert.assertEquals("5 => FIVE",
-                          AttackValue.FIVE, AttackValue.fromString("5"));
-      Assert.assertEquals("6 => SIX",
-                          AttackValue.SIX, AttackValue.fromString("6"));
-      Assert.assertEquals("7 => SEVEN",
-                          AttackValue.SEVEN, AttackValue.fromString("7"));
-      Assert.assertEquals("8 => EIGHT",
-                          AttackValue.EIGHT, AttackValue.fromString("8"));
-      Assert.assertEquals("9 => NINE",
-                          AttackValue.NINE, AttackValue.fromString("9"));
-      Assert.assertEquals("10 => A",
-                          AttackValue.A, AttackValue.fromString("A"));
+      Assert.assertEquals("1 => ONE", AttackValue.ONE, AttackValue.fromString("1"));
+      Assert.assertEquals("2 => TWO", AttackValue.TWO, AttackValue.fromString("2"));
+      Assert.assertEquals("3 => THREE", AttackValue.THREE, AttackValue.fromString("3"));
+      Assert.assertEquals("4 => FOUR", AttackValue.FOUR, AttackValue.fromString("4"));
+      Assert.assertEquals("5 => FIVE", AttackValue.FIVE, AttackValue.fromString("5"));
+      Assert.assertEquals("6 => SIX", AttackValue.SIX, AttackValue.fromString("6"));
+      Assert.assertEquals("7 => SEVEN", AttackValue.SEVEN, AttackValue.fromString("7"));
+      Assert.assertEquals("8 => EIGHT", AttackValue.EIGHT, AttackValue.fromString("8"));
+      Assert.assertEquals("9 => NINE", AttackValue.NINE, AttackValue.fromString("9"));
+      Assert.assertEquals("10 => A", AttackValue.A, AttackValue.fromString("A"));
     }
 
     /**
@@ -370,7 +360,8 @@ public class TestModel {
     @Test
     public void P1Start() {
       model.startGame(ConfigGrid.scannerToGrid(GRID_NO_HOLES),
-                      ConfigCard.scannerToCardList(CC_SMALL), referee);
+                      ConfigCard.scannerToCardList(CC_SMALL),
+                      referee);
       // check coach red is actually a red coach
       red = model.curCoach();
       assertEquals(red, Coach.RED);

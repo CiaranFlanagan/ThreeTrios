@@ -8,8 +8,8 @@ import model.Coach;
 import model.Grid;
 import model.GridCellReadOnly;
 import model.ModelReadOnly;
-import utils.IntPoint2D;
 import utils.ComponentHandler;
+import utils.IntPoint2D;
 import utils.WasComponent;
 
 import javax.swing.JFrame;
@@ -79,8 +79,8 @@ public class ViewGUI implements View<JFrame> {
     outputFrame.add(gridGUI);
     outputFrame.add(rightHand);
 
-    outputFrame.addComponentListener(new ComponentHandler().handle(WasComponent.RESIZED,
-                                                                   this :: handleResize));
+    outputFrame.addComponentListener(
+        new ComponentHandler().handle(WasComponent.RESIZED, this :: handleResize));
     outputFrame.setVisible(true);
     outputFrame.repaint();
   }
@@ -283,6 +283,5 @@ public class ViewGUI implements View<JFrame> {
     }
 
   }
-
 
 }

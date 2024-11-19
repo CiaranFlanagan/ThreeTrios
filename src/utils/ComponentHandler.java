@@ -21,6 +21,10 @@ public class ComponentHandler implements ComponentListener {
     map = new HashMap<>();
   }
 
+  public static ComponentHandler create() {
+    return new ComponentHandler();
+  }
+
   public ComponentHandler handle(Predicate<ComponentEvent> question,
                                  Consumer<ComponentEvent> response) {
     this.map.put(question, response);

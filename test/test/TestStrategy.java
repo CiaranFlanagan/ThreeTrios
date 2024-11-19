@@ -6,11 +6,11 @@ import model.Grid;
 import model.Model;
 import model.ModelBase;
 import model.RefereeDefault;
-import model.player.CornerStrategy;
-import model.player.DefenseStrategy;
-import model.player.MostFlips;
-import model.player.Move;
-import model.player.StrategyAbstract;
+import player.CornerStrategy;
+import player.DefenseStrategy;
+import player.MostFlips;
+import player.Move;
+import player.StrategyAbstract;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -28,13 +28,8 @@ import java.util.Scanner;
 import java.util.function.Supplier;
 
 /**
- * To test requirements for every player strategy.
- * <p>
- * What requirements?
- * <p>
- * 1. Bias top left.
- * <p>
- * 2. Default move to up-most, left-most, with leftmost card.
+ * To test requirements for every player strategy, like whether they bias the top left, have a
+ * default move, can produce no result, and that they check the correct cells.
  */
 
 @RunWith(Enclosed.class)
@@ -147,9 +142,7 @@ public class TestStrategy {
 
   /**
    * To test the corner strategy via properties and mocks to make sure that we handle common errors.
-   * <p>
    * What are some common errors/easy requirements specifically for corners?
-   * <p>
    * 1. You consider some cell other than a corner.
    * <p>
    * 2.

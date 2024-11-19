@@ -58,8 +58,10 @@ This is the ThreeTrios project. ThreeTrios is a two player card game played on a
    Losers of battle flip colors when the current player is associated with a different color.
 5. The winner is the one who is associated with the most cards of their color, including the cards
    in their hand.
-  - Ties are possible if the second player has one less card on the grid, because their hand has one
-    more card.
+
+
+- Ties are possible if the second player has one less card on the grid, because their hand has one
+  more card.
 
 
 Quick Start
@@ -134,8 +136,8 @@ Dependencies will be italicized.
 
 
 - ### Concrete Model
-  - The concrete interface provides enough methods to play the start the game, play the game, finish
-    the game, and render the game through a view.
+  - The concrete interface provides enough methods to play the start the game, play the game,
+    finish the game, and render the game through a view.
     - This has strong dependencies on the following classes and interfaces. Most classes are just
       value classes, and the interesting subcomponent, game rules, is built to be extensible.
     - The concrete class of the model does not itself enforce the game rules, and instead delegates
@@ -178,9 +180,9 @@ Below are the following classes and interfaces that we have implemented
 
 - #### View Interface
   - This generic interface defines a rendering contract for different types of views, allowing them
-    to output to various destinations. The primary method, renderTo(OD outputDestination), abstracts
-    rendering details across multiple formats, setting the foundation for both text and graphical
-    representations.
+    to output to various destinations. The primary method, renderTo(OD outputDestination),
+    abstracts rendering details across multiple formats, setting the foundation for both text and
+    graphical representations.
 
 - #### ViewTextBase Class
   - It shows in the following format:
@@ -209,18 +211,19 @@ Below are the following classes and interfaces that we have implemented
       a listener to handle window resizing.
     - HandGUI Class: A JPanel subclass that visually represents a player's hand. It adjusts the
       layout and renders each card based on the current coach, resizing dynamically.
-    - GridGUI Class: A JPanel subclass responsible for rendering the game grid, with cells displayed
-      according to their state (e.g., holes, empty cells, or cards). It dynamically resizes to fit
-      the window and visually distinguishes player cards and empty cells using color coding.
+    - GridGUI Class: A JPanel subclass responsible for rendering the game grid, with cells
+      displayed according to their state (e.g., holes, empty cells, or cards). It dynamically
+      resizes to fit the window and visually distinguishes player cards and empty cells using color
+      coding.
 
 
 ## In the player ...
 
 
 To support various computer player strategies and difficulty levels for the Three Trios game, we
-introduced several new classes and an enum in the model.player package. These
-additions enable flexible AI behaviors and difficulty customization, enhancing the game’s strategic
-depth. Key components include:
+introduced several new classes and an enum in the model.player package. These additions enable
+flexible AI behaviors and difficulty customization, enhancing the game’s strategic depth. Key
+components include:
 
 
 - #### Player Interface
@@ -236,18 +239,18 @@ depth. Key components include:
   - This enum enables the game to adjust strategies or player skill levels based on selected
     difficulty, allowing for varied gameplay experiences.
 - #### Move Class
-  - Represents a single move, defined by a row and column position on the grid and an index pointing
-    to a card in the player’s hand.
+  - Represents a single move, defined by a row and column position on the grid and an index
+    pointing to a card in the player’s hand.
   - Implements Consumer<Model>, enabling moves to be directly applied to the game model.
   - ##### Key methods:
     - of(int row, int col, int handIdx): Static factory method to create a new move.
     - accept(Model model): Executes the move on the model by placing a card at the specified cell,
       facilitating dynamic strategy implementation.
   - StrategyAbstract Class
-    - Abstract base class for strategies, providing core functionality to evaluate and determine the
-      effectiveness of moves based on the model state:
-    - allConsideredMoves(): Generates a list of all possible valid moves by placing each card in the
-      player’s hand at various grid positions.
+    - Abstract base class for strategies, providing core functionality to evaluate and determine
+      the effectiveness of moves based on the model state:
+    - allConsideredMoves(): Generates a list of all possible valid moves by placing each card in
+      the player’s hand at various grid positions.
     - effectiveness(Move move): Abstract method allowing subclasses to define specific criteria for
       evaluating move effectiveness.
     - bestMove(): Returns the most effective move based on the strategy’s criteria, using
@@ -284,8 +287,8 @@ utils.extensions package:
       changes.
     - The register(Component c) method attaches the ComponentHandler to a specified component,
       allowing it to listen for component-related events.
-  - This handler is used to manage layout adjustments in the GUI, such as resizing elements when the
-    main window size changes.
+  - This handler is used to manage layout adjustments in the GUI, such as resizing elements when
+    the main window size changes.
 - #### MouseHandler Class
   - MouseHandler provides customizable event handling for MouseEvent and MouseWheelEvent events,
     allowing flexible response mappings for mouse interactions:
@@ -356,18 +359,19 @@ implementation
   - We will depend on these as a base to build our model on.
 - Wrapper classes (Grid)
   - All Grid represents is a 2d array that we can read and write from.
-    - There is a caveat, which is that there grid sets up its cells' adjacency maps on construction.
-      However, because this class is only unique on construction, there is nothing else to extend.
+    - There is a caveat, which is that there grid sets up its cells' adjacency maps on
+      construction. However, because this class is only unique on construction, there is nothing
+      else to extend.
 - Complex Implementations (Model, Referee)
   - Consider the model. It exposes two dependencies, Grid and Coach. These are in the abstract
     class. Any inheritor has the freedom to work with these classes. A reason for wanting a flat
     structure instead of a tree is that we don't need to up-cast, and instead just use super. Also,
     we don't really want to pollute the project with variations of tiny little rules. This version
     of the game is strict on these rules, like the odd-number of card cells, red goes first, etc...
-    If a game extended ModelBase and changed it to allow even numbers of cards, we don't consider it
-    a ModelBase anymore. Compose, so the is-a relationship is not compromised of its integrity.
-  - Similarly, referees impose a strict set of rules, and are visitors. They are made to have a flat
-    structure versus a tree, and especially with only three methods to implement, two that you
+    If a game extended ModelBase and changed it to allow even numbers of cards, we don't consider
+    it a ModelBase anymore. Compose, so the is-a relationship is not compromised of its integrity.
+  - Similarly, referees impose a strict set of rules, and are visitors. They are made to have a
+    flat structure versus a tree, and especially with only three methods to implement, two that you
     basically get for free, it is quite easy to just make new children of RefereeAbstract than go
     and pollute the RefereeDefault semantics.
 
@@ -375,18 +379,18 @@ implementation
 ### Extension without exposed mutation
 
 
-- Above, the restrictions are focused on access modifiers. However, extensibility is about more than
-  that. What does a model outside the package or a referee outside the package get to know about
-  some of its dependencies, like Coach or AGridCell respectively. Doesn't it need to be able to
-  mutate?
+- Above, the restrictions are focused on access modifiers. However, extensibility is about more
+  than that. What does a model outside the package or a referee outside the package get to know
+  about some of its dependencies, like Coach or AGridCell respectively. Doesn't it need to be able
+  to mutate?
 - The table above suggests that they are effectively immutable outside the package. However that's
   not the entire story, as the abstract classes solve these issues with specific protected methods
   that export important side effect on the respective dependencies.
 - That way, only models or referees can mutate their dependencies, and nothing can be done in main,
   by the controller, or by the view. The model has dependencies that it exposes only for other
   components to see. It handles extension and mutation in a protected manner.
-- TLDR: The model component is made specifically to close off extension and mutation in every single
-  avenue, except that which preservers the integrity of a ThreeTrios model.
+- TLDR: The model component is made specifically to close off extension and mutation in every
+  single avenue, except that which preservers the integrity of a ThreeTrios model.
 
 
 # Part 2
@@ -402,9 +406,9 @@ vulnerability and maintain control over key positions on the board.
 
 - Strategy Explanation
 - Defense Strategy prioritizes placing cards where they have the fewest exposed sides, making it
-  more challenging for the opponent to flip them in subsequent turns. This is calculated by counting
-  the number of adjacent cells that remain unoccupied (exposed) after placing the card. Move
-  Effectiveness:
+  more challenging for the opponent to flip them in subsequent turns. This is calculated by
+  counting the number of adjacent cells that remain unoccupied (exposed) after placing the card.
+  Move Effectiveness:
   - The effectiveness method assigns higher scores to moves with fewer exposed sides and lower
     scores to moves with greater exposure. Additionally, it considers the attack values on exposed
     sides, allowing moves that are not only defensively sound but also better equipped to fend off
@@ -481,21 +485,22 @@ from unauthorized modifications:
       - ownerAt(int row, int col) returns the owner (coach) of the card in a cell, if any, using
         Optional<Coach> to handle null cases safely.
     - Player Hands
-      - curCoachesHands() returns each coach’s hand as an unmodifiable map. Each card is provided as
-        a copy to prevent modification, allowing the view to safely display players’ hands.
+      - curCoachesHands() returns each coach’s hand as an unmodifiable map. Each card is provided
+        as a copy to prevent modification, allowing the view to safely display players’ hands.
     - Move Legality
       - canPlayAt(int row, int col) determines whether the current player can place a card at a
         specific cell, based on cell occupancy and whether it can hold a card.
     - Card Flip Potential
-      - numFlippedIfPlaced(Card card, int row, int col) calculates the number of opponent cards that
-        would be flipped if the player places a specified card at given coordinates, supporting
-        decision-making without altering the actual grid.
+      - numFlippedIfPlaced(Card card, int row, int col) calculates the number of opponent cards
+        that would be flipped if the player places a specified card at given coordinates,
+        supporting decision-making without altering the actual grid.
       - Player Score
         - score(Coach coach) calculates the score for a given coach, based on the number of cards
           controlled on the grid.
 
 
-These adjustments maintain model integrity against external modification, refining the MVC structure
-by clearly defining responsibilities and protecting the model from unintended state changes.
+These adjustments maintain model integrity against external modification, refining the MVC
+structure by clearly defining responsibilities and protecting the model from unintended state
+changes.
 
 

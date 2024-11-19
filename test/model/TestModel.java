@@ -1,17 +1,14 @@
 package model;
 
 
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import utils.ConfigCard;
 import utils.ConfigGrid;
 import utils.TestFiles;
 import utils.Utils;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import view.View;
-import view.ViewGUI;
 
-import javax.swing.JFrame;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,10 +24,10 @@ import static org.junit.Assert.assertTrue;
  */
 public class TestModel {
 
+  Coach coach;
   private Grid gridNoHoles;
   private List<Card> cardsSmall;
   private ModelBase model;
-  Coach coach;
 
   @Before
   public void setUp() {
@@ -107,7 +104,7 @@ public class TestModel {
   }
 
   @Test
-  public void testNumFlippedIfPlaced2()  {
+  public void testNumFlippedIfPlaced2() {
     Card testCard = Utils.makeCard("WINNER A A A A");
     model.placeCard(0, 0, 1);
     Assert.assertEquals(model.numFlippedIfPlaced(testCard, 0, 0), 1);

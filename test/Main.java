@@ -1,9 +1,9 @@
-import utils.ConfigCard;
-import utils.ConfigGrid;
-import utils.TestFiles;
 import model.Model;
 import model.ModelBase;
 import model.RefereeDefault;
+import utils.ConfigCard;
+import utils.ConfigGrid;
+import utils.TestFiles;
 import view.View;
 import view.ViewGUI;
 

@@ -1,8 +1,4 @@
-package model.player;
-
-import model.Model;
-
-import java.util.function.Consumer;
+package player;
 
 /**
  * Represents a player in the game.
@@ -19,7 +15,6 @@ public interface Player {
 
   Difficulty difficulty();
 
-  Consumer<Model> nextMove();
+  Move nextMove();
 
 }
-

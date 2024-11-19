@@ -1,4 +1,4 @@
-package model.player;
+package player;
 
 import model.Card;
 import model.CardinalDirection;
@@ -39,20 +39,19 @@ public class DefenseStrategy extends StrategyAbstract {
     Model model = modelSupplier.get();
     List<Card> curCoachHand = model.curCoachesHands().get(model.curCoach());
     Card card = curCoachHand.get(move.getHandIdx());
-    List<CardinalDirection> exposedSides = getExposedSides(move.getRow(), move.getCol(),
-                                                           cell);
-    return ((4 - exposedSides.size()) * 10) +
-        exposedSides.stream().map((cd) -> card.getAttackValue(cd).ordinal())
-                    .reduce(0, Integer :: sum);
+    List<CardinalDirection> exposedSides = getExposedSides(move.getRow(), move.getCol(), cell);
+    return ((4 - exposedSides.size()) * 10) + exposedSides.stream()
+                                                          .map((cd) -> card.getAttackValue(cd)
+                                                                           .ordinal())
+                                                          .reduce(0, Integer :: sum);
   }
 
   // card cell and is empty
   protected List<CardinalDirection> getExposedSides(int row, int col, GridCellReadOnly cell) {
     return Arrays.stream(CardinalDirection.values())
-                 .filter((cd) -> cell.hasNeighborToThe(cd) &&
-                     cell.getNeighborToThe(cd).canHaveCard() &&
-                     !cell.getNeighborToThe(cd).hasCard()
-                 ).collect(Collectors.toList());
+                 .filter((cd) -> cell.hasNeighborToThe(cd) && cell.getNeighborToThe(cd).canHaveCard()
+                     && !cell.getNeighborToThe(cd).hasCard())
+                 .collect(Collectors.toList());
   }
 
 }

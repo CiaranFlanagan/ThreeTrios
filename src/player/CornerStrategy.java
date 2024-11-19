@@ -1,4 +1,4 @@
-package model.player;
+package player;
 
 import model.Model;
 
@@ -31,9 +31,9 @@ public class CornerStrategy extends DefenseStrategy {
     List<Move> acc = new ArrayList<>();
     int lastRow = model.curGrid().readOnlyArray2D().length - 1;
     int lastCol = model.curGrid().readOnlyArray2D()[0].length - 1;
-    Consumer<Function<Integer, Move>> func = (f) ->
-        IntStream.range(0, model.curCoachesHands().get(model.curCoach()).size())
-                 .forEach((handId) -> acc.add(f.apply(handId)));
+    Consumer<Function<Integer, Move>> func =
+        (f) -> IntStream.range(0, model.curCoachesHands().get(model.curCoach()).size())
+                        .forEach((handId) -> acc.add(f.apply(handId)));
     func.accept((handId) -> Move.create(handId, 0, 0));
     func.accept((handId) -> Move.create(handId, 0, lastCol));
     func.accept((handId) -> Move.create(handId, lastRow, 0));

@@ -7,16 +7,21 @@ import java.util.Optional;
 /**
  * <p>A Read only interface for a three trios model. the objects that inheritors return to fulfill
  * these requirements need not be the exact reference. they only need to have the same
- * observations as the inheritor's private objects make at that point in the game timeline.</p>
- * <p>
- * Example:
- * State 1 : Model is started<br>
- * Grid g1 = model.getGrid();<br>
- * State 2: Model has 5 moves played on it<br>
- * Grid g2 = model.getGrid();<br>
- * g1 != g2;<br>
- * g1.(some observation) =? g2.(some observation)   -- indeterminate<br>
- * </p>
+ * observations as the inheritor's private objects make at that point in the game timeline.
+ *`
+ * <p>Example:
+ *
+ * <p>State 1 : Model is started
+ *
+ * <p>Grid g1 = model.getGrid()
+ *
+ * <p>State 2: Model has 5 moves played on it
+ *
+ * <p>Grid g2 = model.getGrid()
+ *
+ * <p>g1 != g2
+ *
+ * <p>g1.(some observation) =? g2.(some observation)   -- indeterminate
  */
 public interface ModelReadOnly {
 

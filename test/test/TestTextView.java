@@ -1,7 +1,5 @@
 package test;
 
-import utils.ConfigCard;
-import utils.ConfigGrid;
 import model.Model;
 import model.ModelBase;
 import model.Referee;
@@ -9,6 +7,8 @@ import model.RefereeDefault;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import utils.ConfigCard;
+import utils.ConfigGrid;
 import utils.LineWriter;
 import view.View;
 import view.ViewTextBase;
@@ -31,11 +31,11 @@ import static utils.TestFiles.GRID_NO_HOLES;
 public class TestTextView {
 
   private final Referee ref = new RefereeDefault();
+  private final OutputStream internalOut = new ByteArrayOutputStream();
+  private final PrintStream out = new PrintStream(internalOut);
   protected View<PrintStream> view;
   protected Model model;
   protected Appendable log;
-  private final OutputStream internalOut = new ByteArrayOutputStream();
-  private final PrintStream out = new PrintStream(internalOut);
 
   @Before
   public void setup() {
