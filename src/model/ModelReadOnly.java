@@ -30,14 +30,14 @@ public interface ModelReadOnly {
    *
    * @return the current coach
    */
-  Coach curCoach();
+  CoachColor curCoach();
 
   /**
    * Gets the hands of all coaches in the game.
    *
    * @return a map of coaches to their respective hands
    */
-  Map<Coach, List<Card>> curCoachesHands();
+  Map<CoachColor, List<Card>> curCoachesHands();
 
   /**
    * Checks if the game has started.
@@ -58,7 +58,7 @@ public interface ModelReadOnly {
    *
    * @return the winning coach, or null if it's a tie
    */
-  Coach winner();
+  CoachColor winner();
 
   /**
    * Returns the current grid state.
@@ -97,7 +97,7 @@ public interface ModelReadOnly {
    * @param col the column index
    * @return an Optional containing the coach, or empty if no card is present
    */
-  Optional<Coach> ownerAt(int row, int col);
+  Optional<CoachColor> ownerAt(int row, int col);
 
   /**
    * Determines if a card can be placed at the specified position on the grid.
@@ -125,6 +125,6 @@ public interface ModelReadOnly {
    * @param coach the coach whose score is to be calculated
    * @return the score of the coach
    */
-  int score(Coach coach);
+  int score(CoachColor coach);
 
 }

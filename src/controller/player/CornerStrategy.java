@@ -1,4 +1,4 @@
-package player;
+package controller.player;
 
 import model.Model;
 
@@ -15,18 +15,9 @@ import java.util.stream.IntStream;
  */
 public class CornerStrategy extends DefenseStrategy {
 
-  /**
-   * Constructor.
-   *
-   * @param modelSupplier supplies the current game model
-   */
-  public CornerStrategy(Supplier<Model> modelSupplier) {
-    super(modelSupplier);
-  }
-
   // for each corner, play each card from hand
   @Override
-  protected List<Move> allConsideredMoves() {
+  protected List<Move> allConsideredMoves(Supplier<Model> modelSupplier) {
     Model model = modelSupplier.get();
     List<Move> acc = new ArrayList<>();
     int lastRow = model.curGrid().readOnlyArray2D().length - 1;
@@ -38,7 +29,7 @@ public class CornerStrategy extends DefenseStrategy {
     func.accept((handId) -> Move.create(handId, 0, lastCol));
     func.accept((handId) -> Move.create(handId, lastRow, 0));
     func.accept((handId) -> Move.create(handId, lastRow, lastCol));
-    return filterOutIllegalMoves(acc);
+    return filterOutIllegalMoves(acc, modelSupplier);
   }
 
 }

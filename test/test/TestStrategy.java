@@ -1,16 +1,16 @@
 package test;
 
 import model.Card;
-import model.Coach;
+import model.CoachColor;
 import model.Grid;
 import model.Model;
 import model.ModelBase;
 import model.RefereeDefault;
-import player.CornerStrategy;
-import player.DefenseStrategy;
-import player.MostFlips;
-import player.Move;
-import player.StrategyAbstract;
+import controller.player.CornerStrategy;
+import controller.player.DefenseStrategy;
+import controller.player.MostFlips;
+import controller.player.Move;
+import controller.player.StrategyAbstract;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -80,21 +80,21 @@ public class TestStrategy {
       };
 
       // move 1
-      MostFlips mostFlips = new MostFlips(modelSupplier);
-      Optional<Move> move1 = mostFlips.bestMove();
+      MostFlips mostFlips = new MostFlips();
+      Optional<Move> move1 = mostFlips.bestMove(modelSupplier);
       Supplier<Model> modelSupplier1 = () -> {
         Model m = modelSupplier.get();
         move1.get().accept(m);
         return m;
       };
       Assert.assertTrue(utils.Utils.cardAt(modelSupplier1.get(), 0, 0).isPresent());
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier1.get(), 0, 0).get().getCoach(), Coach.RED);
+      Assert.assertEquals(utils.Utils.cardAt(modelSupplier1.get(), 0, 0).get().getCoach(), CoachColor.RED);
       Assert.assertEquals(utils.Utils.cardAt(modelSupplier1.get(), 0, 0).get().toString(),
                           "a 1 1 1 1");
 
       // move 2
-      mostFlips = new MostFlips(modelSupplier1);
-      Optional<Move> move2 = mostFlips.bestMove();
+      mostFlips = new MostFlips();
+      Optional<Move> move2 = mostFlips.bestMove(modelSupplier1);
       Supplier<Model> modelSupplier2 = () -> {
         Model m = modelSupplier1.get();
         move2.get().accept(m);
@@ -102,24 +102,24 @@ public class TestStrategy {
       };
       Assert.assertTrue(utils.Utils.cardAt(modelSupplier2.get(), 0, 1).isPresent());
       Assert.assertEquals(utils.Utils.cardAt(modelSupplier2.get(), 0, 0).get().getCoach(),
-                          Coach.BLUE);
+                          CoachColor.BLUE);
       Assert.assertEquals(utils.Utils.cardAt(modelSupplier2.get(), 0, 1).get().getCoach(),
-                          Coach.BLUE);
+                          CoachColor.BLUE);
       Assert.assertEquals(utils.Utils.cardAt(modelSupplier2.get(), 0, 1).get().toString(),
                           "b 2 2 2 2");
 
       // move 3
-      mostFlips = new MostFlips(modelSupplier2);
-      Optional<Move> move3 = mostFlips.bestMove();
+      mostFlips = new MostFlips();
+      Optional<Move> move3 = mostFlips.bestMove(modelSupplier2);
       Supplier<Model> modelSupplier3 = () -> {
         Model m = modelSupplier2.get();
         move3.get().accept(m);
         return m;
       };
       Assert.assertTrue(utils.Utils.cardAt(modelSupplier3.get(), 1, 1).isPresent());
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier3.get(), 0, 0).get().getCoach(), Coach.RED);
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier3.get(), 0, 1).get().getCoach(), Coach.RED);
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier3.get(), 1, 1).get().getCoach(), Coach.RED);
+      Assert.assertEquals(utils.Utils.cardAt(modelSupplier3.get(), 0, 0).get().getCoach(), CoachColor.RED);
+      Assert.assertEquals(utils.Utils.cardAt(modelSupplier3.get(), 0, 1).get().getCoach(), CoachColor.RED);
+      Assert.assertEquals(utils.Utils.cardAt(modelSupplier3.get(), 1, 1).get().getCoach(), CoachColor.RED);
       Assert.assertEquals(Utils.cardAt(modelSupplier3.get(), 1, 1).get().toString(), "c 3 3 3 3");
     }
 
@@ -133,8 +133,8 @@ public class TestStrategy {
         mock.startGame(grid, cards, new RefereeDefault());
         return mock;
       };
-      MostFlips strategy = new MostFlips(modelSupplier);
-      strategy.bestMove();
+      MostFlips strategy = new MostFlips();
+      strategy.bestMove(modelSupplier);
       Assert.assertFalse(log.isEmpty());
     }
 
@@ -155,27 +155,27 @@ public class TestStrategy {
     private Optional<Move> move;
     private Supplier<Model> modelSupplier;
 
+    @Test
     public void testTopLeftBias() {
-      if (move.isEmpty()) {
-        Assert.fail("strategy should probably produce a move on the first move.");
-      }
       // What does our model need to do? It just has to be freshly started.
       modelSupplier = new NewGameModelSupplier();
-      strategy = new CornerStrategy(modelSupplier);
-      Assert.assertEquals(move.get().getRow(), 0);
-      Assert.assertEquals(move.get().getCol(), 0);
+      strategy = new CornerStrategy();
+      move = Optional.of(strategy.defaultMove(modelSupplier));
+      Assert.assertEquals(move.get().row, 0);
+      Assert.assertEquals(move.get().col, 0);
     }
 
 
+    @Test
     public void testMoveOnFail() {
       // it's public final so we can just test this for a known implementation
       // if we know a corner strategy needs corners, let's just fill the corners...
       modelSupplier = new AllCornersFilledModelSupplier();
-      strategy = new CornerStrategy(modelSupplier);
-      Assert.assertTrue(strategy.bestMove().isEmpty());
+      strategy = new CornerStrategy();
+      Assert.assertTrue(strategy.bestMove(modelSupplier).isEmpty());
       //Assert.assertTrue(strategy.bestMove().isEmpty());
       // 0, 1 because up-most then left-most
-      Assert.assertEquals(strategy.defaultMove(), Move.create(0, 0, 1));
+      Assert.assertEquals(strategy.defaultMove(modelSupplier), Move.create(0, 0, 1));
     }
 
     @Test
@@ -186,8 +186,8 @@ public class TestStrategy {
                       ConfigCard.scannerToCardList(TestFiles.CC_LARGE),
                       new RefereeDefault());
       modelSupplier = () -> model;
-      strategy = new CornerStrategy(modelSupplier);
-      strategy.bestMove();
+      strategy = new CornerStrategy();
+      strategy.bestMove(modelSupplier);
       for (List<Integer> rowColPair : log) {
         int row = rowColPair.get(0);
         int col = rowColPair.get(1);
@@ -215,9 +215,9 @@ public class TestStrategy {
       }
       // What does our model need to do? It just has to be freshly started.
       modelSupplier = new NewGameModelSupplier();
-      strategy = new DefenseStrategy(modelSupplier);
-      Assert.assertEquals(move.get().getRow(), 0);
-      Assert.assertEquals(move.get().getCol(), 0);
+      strategy = new DefenseStrategy();
+      Assert.assertEquals(move.get().row, 0);
+      Assert.assertEquals(move.get().col, 0);
     }
 
     @Test
@@ -230,8 +230,8 @@ public class TestStrategy {
         mock.startGame(grid, cards, new RefereeDefault());
         return mock;
       };
-      DefenseStrategy strategy = new DefenseStrategy(() -> modelSupplier.get());
-      strategy.bestMove();
+      DefenseStrategy strategy = new DefenseStrategy();
+      strategy.bestMove(modelSupplier);
       Assert.assertFalse(log.isEmpty());
     }
 
@@ -244,8 +244,8 @@ public class TestStrategy {
                       ConfigCard.scannerToCardList(TestFiles.CC_LARGE),
                       new RefereeDefault());
       modelSupplier = () -> model;
-      strategy = new DefenseStrategy(modelSupplier);
-      strategy.bestMove();
+      strategy = new DefenseStrategy();
+      strategy.bestMove(modelSupplier);
       List<List<Integer>> seen = new ArrayList<>();
       for (List<Integer> rowColPair : log) {
         if (!seen.contains(rowColPair)) {

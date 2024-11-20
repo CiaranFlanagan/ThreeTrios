@@ -23,7 +23,7 @@ public abstract class RefereeAbstract implements Referee {
    * @param card - the card to mutate
    * @param newCoach - the value to pass as the new coach
    */
-  protected void setCardCoach(Card card, Coach newCoach) {
+  protected void setCardCoach(Card card, CoachColor newCoach) {
     card.setCoach(newCoach);
   }
 

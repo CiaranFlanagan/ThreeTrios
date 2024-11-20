@@ -4,7 +4,7 @@ import model.AttackValue;
 import model.Card;
 import model.CardinalDirection;
 import model.CellType;
-import model.Coach;
+import model.CoachColor;
 import model.Grid;
 import model.GridCellCard;
 import model.GridCellHole;
@@ -335,8 +335,8 @@ public class TestModel {
 
     @Test
     public void testOpp() {
-      assertEquals(Coach.RED.opponent(), Coach.BLUE);
-      assertEquals(Coach.BLUE.opponent(), Coach.RED);
+      assertEquals(CoachColor.RED.opponent(), CoachColor.BLUE);
+      assertEquals(CoachColor.BLUE.opponent(), CoachColor.RED);
     }
 
   }
@@ -350,8 +350,8 @@ public class TestModel {
     // test public beahvior
     private static ModelBase model = new ModelBase();
     private static Referee referee = new RefereeDefault();
-    private static Coach red;
-    private static Coach blue;
+    private static CoachColor red;
+    private static CoachColor blue;
     private static GridCellReadOnly[][] state;
     private static Card left;
     // using alphabetical ordering to sequence
@@ -364,7 +364,7 @@ public class TestModel {
                       referee);
       // check coach red is actually a red coach
       red = model.curCoach();
-      assertEquals(red, Coach.RED);
+      assertEquals(red, CoachColor.RED);
     }
 
     @Test
@@ -373,7 +373,7 @@ public class TestModel {
       state = model.curGrid().readOnlyArray2D();
       left = state[0][0].getCard(); // this is actual pointer not a copy
       // left has av's of 1
-      assertEquals(left.getCoach(), Coach.RED);
+      assertEquals(left.getCoach(), CoachColor.RED);
       // makes sure that if a card is placed with no battle, it stays same color
 
     }
@@ -381,7 +381,7 @@ public class TestModel {
     @Test
     public void P3SecondPlacedCard() {
       blue = model.curCoach();
-      assertEquals(blue, Coach.BLUE);
+      assertEquals(blue, CoachColor.BLUE);
       // make sure that we switch coaches properly
       model.placeCard(0, 0, 1); // blue plays so now board is ? B _
       state = model.curGrid().readOnlyArray2D();

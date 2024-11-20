@@ -1,4 +1,4 @@
-package player;
+package controller.player;
 
 import model.Card;
 import model.CardinalDirection;
@@ -16,14 +16,7 @@ import java.util.stream.Collectors;
  */
 public class DefenseStrategy extends StrategyAbstract {
 
-  /**
-   * Constructor.
-   *
-   * @param modelSupplier supplies the current game model
-   */
-  public DefenseStrategy(Supplier<Model> modelSupplier) {
-    super(modelSupplier);
-  }
+
 
   /**
    * Evaluates how effective a move is defensively.
@@ -32,14 +25,15 @@ public class DefenseStrategy extends StrategyAbstract {
    * @param move the move being evaluated
    * @return the effectiveness score of the move
    */
-  public int effectiveness(Move move) {
+  public int effectiveness(Move move, Supplier<Model> modelSupplier) {
     // alg is all neighbors that aren't there get an A in the algorithm for free
     GridCellReadOnly cell =
-        modelSupplier.get().curGrid().readOnlyArray2D()[move.getRow()][move.getCol()];
+        modelSupplier.get().curGrid().readOnlyArray2D()[move.row][move.col];
     Model model = modelSupplier.get();
     List<Card> curCoachHand = model.curCoachesHands().get(model.curCoach());
-    Card card = curCoachHand.get(move.getHandIdx());
-    List<CardinalDirection> exposedSides = getExposedSides(move.getRow(), move.getCol(), cell);
+    Card card = curCoachHand.get(move.handIdx);
+    List<CardinalDirection> exposedSides = getExposedSides(move.row, move.col,
+                                                           cell);
     return ((4 - exposedSides.size()) * 10) + exposedSides.stream()
                                                           .map((cd) -> card.getAttackValue(cd)
                                                                            .ordinal())

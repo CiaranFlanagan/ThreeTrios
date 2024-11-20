@@ -23,7 +23,7 @@ public final class RefereeDefault implements Referee {
       }
 
       Card ourCard = us.getCard();
-      Coach ourCoach = ourCard.getCoach();
+      CoachColor ourCoach = ourCard.getCoach();
       GridCellAbstract them = us.getNeighborToThe(direction); // we know this isn't null
       Card theirCard;
 
@@ -33,7 +33,7 @@ public final class RefereeDefault implements Referee {
         continue;
       }
 
-      Coach theirCoach = theirCard.getCoach();
+      CoachColor theirCoach = theirCard.getCoach();
       if (ourCoach != theirCoach && ourCard.beats(theirCard, direction)) {
         theirCard.setCoach(ourCoach);
         refereeBattlePhase(them);
@@ -47,7 +47,3 @@ public final class RefereeDefault implements Referee {
   }
 
 }
-
-
-
-

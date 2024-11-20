@@ -70,7 +70,7 @@ public final class Grid {
   @Override
   public String toString() {
     String out = internalArray.length + " " + internalArray[0].length + "\n";
-    for (GridCellAbstract[] row : (GridCellAbstract[][]) internalArray) {
+    for (GridCellAbstract[] row : internalArray) {
       for (GridCellAbstract cell : row) {
         out += cell.renderTextConstructor();
       }
@@ -141,6 +141,14 @@ public final class Grid {
     GridCellAbstract relevantCell = internalArray[row][col];
     relevantCell.placeCard(card);
     return relevantCell;
+  }
+
+  public int numRows() {
+    return NUM_ROWS;
+  }
+
+  public int numCols() {
+    return NUM_COLS;
   }
 
 

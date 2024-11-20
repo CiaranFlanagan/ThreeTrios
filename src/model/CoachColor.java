@@ -3,7 +3,7 @@ package model;
 /**
  * Represents the color of a player.
  */
-public enum Coach {
+public enum CoachColor {
   RED,
   BLUE;
 
@@ -26,7 +26,7 @@ public enum Coach {
    * @return the opponent Coach of the current coach (RED's opponent is BLUE and vice versa)
    * @throws IllegalStateException if the current state is invalid
    */
-  public Coach opponent() {
+  public CoachColor opponent() {
     switch (this) {
       case RED:
         return BLUE;
