@@ -41,7 +41,6 @@ public class GUIHandInteractive extends GUIHandBase implements
     if (!hand.isEmpty()) {
       this.coachColor = hand.get(0).getCoach();
       this.clickPos = Optional.empty();
-
     }
     super.updateHand(hand);
   }
@@ -49,8 +48,10 @@ public class GUIHandInteractive extends GUIHandBase implements
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
-    renderHover(g);
-    renderSelected(g);
+    if (!hand.isEmpty()) {
+      renderHover(g);
+      renderSelected(g);
+    }
   }
 
   private void renderSelected(Graphics g) {
@@ -84,13 +85,11 @@ public class GUIHandInteractive extends GUIHandBase implements
 
     private OnMouse() {
       this.handle(WasMouse.CLICKED, this :: handleClick)
-          .handle(WasMouse.MOVED, this :: handleHover);
+          .handle(WasMouse.MOVED, this :: handleHover)
+          .handle(m -> hand.isEmpty(), m -> this.unregister(GUIHandInteractive.this));
     }
 
     private void handleClick(MouseEvent me) {
-      if (hand.isEmpty()) {
-        this.unregister(GUIHandInteractive.this);
-      }
       int selectedIdx = view.idxOfHandAt(me.getPoint(), hand, currentImage);
       if (clickPos.isPresent() && clickPos.get() == selectedIdx) {
         clickPos = Optional.empty();
@@ -104,7 +103,9 @@ public class GUIHandInteractive extends GUIHandBase implements
 
         // forward callback
         forwardCallBack.accept(move, callback);
+
       }
+
       GUIHandInteractive.this.repaint();
 
     }

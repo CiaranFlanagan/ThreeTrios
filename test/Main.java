@@ -1,3 +1,4 @@
+import controller.player.CornerStrategy;
 import controller.player.GameController;
 import controller.player.Player;
 import model.Card;
@@ -33,12 +34,18 @@ public class Main {
                            makeHumanPlayer(CoachColor.BLUE));
   }
 
+  public static void main2(String[] args) {
+    GameController gc =
+        new GameController(Main :: makeModel, makeHumanPlayer(CoachColor.RED),
+                           new Player(CoachColor.BLUE, new CornerStrategy()));
+  }
+
   private static List<Card> makeCards() {
-    return ConfigCard.scannerToCardList(TestFiles.CC_LARGE);
+    return ConfigCard.scannerToCardList(TestFiles.CC_SMALL);
   }
 
   private static Grid makeGrid() {
-    return ConfigGrid.scannerToGrid(TestFiles.GRID_ASSN_HARD);
+    return ConfigGrid.scannerToGrid(TestFiles.GRID_NO_HOLES);
   }
 
   private static Model makeModel() {

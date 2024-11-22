@@ -29,13 +29,15 @@ public class DrawHand {
   public void render(List<Card> hand, BufferedImage handImage) {
     if (hand.isEmpty()) {
       return;
+    } else {
+      Graphics artist = handImage.createGraphics();
+      artist.setColor(Color.WHITE);
+      for (Card card : hand) {
+        renderCard(card, artist, cardWidth(handImage), cardHeight(hand, handImage));
+        artist.translate(0, cardHeight(hand, handImage));
+      }
     }
-    Graphics artist = handImage.createGraphics();
-    artist.setColor(Color.WHITE);
-    for (Card card : hand) {
-      renderCard(card, artist, cardWidth(handImage), cardHeight(hand, handImage));
-      artist.translate(0, cardHeight(hand, handImage));
-    }
+
   }
 
   // TODO

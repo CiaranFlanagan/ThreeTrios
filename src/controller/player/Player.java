@@ -25,4 +25,9 @@ public final class Player implements BiConsumer<Consumer<Move>, Supplier<Model>>
     delegate.accept(moveConsumer, modelSupplier);
   }
 
+  @Override
+  public String toString() {
+    return coachColor.toString();
+  }
+
 }

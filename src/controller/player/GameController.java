@@ -3,25 +3,25 @@ package controller.player;
 import model.CoachColor;
 import model.Model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.function.Supplier;
 
 public class GameController {
 
   Supplier<Model> modelSupplier;
   Model model;
-  List<Move> moves;
+  Deque<Move> moves;
   Player red;
   Player blue;
 
   public GameController(Supplier<Model> modelSupplier, Player red, Player blue) {
     this.modelSupplier = modelSupplier;
     model = modelSupplier.get();
-    moves = new ArrayList<>();
+    moves = new ArrayDeque<>();
     this.red = red;
     this.blue = blue;
-    red.accept(this :: onMove, modelSupplier);
+    curPlayer().accept(this :: onMove, modelSupplier);
     prevPlayer().accept(m -> {}, this :: remakeGame);
   }
 
@@ -33,27 +33,20 @@ public class GameController {
       move.accept(model);
     } catch (Exception e) {
       System.err.println(e.getMessage());
-      moves.remove(moves.size() - 1);
+      moves.removeLast();
       model = remakeGame();
+      curPlayer().accept(this :: onMove, () -> {throw e;});
+      curPlayer().accept(this :: onMove, this :: remakeGame);
     }
 
     if (model.isGameOver()) {
-      onGameOver();
-      prevPlayer().accept(m -> {}, this :: remakeGame);
-      nextPlayer().accept(m -> {}, this :: remakeGame);
-    } else {
-      // TODO
-      prevPlayer().accept(m -> {}, this :: remakeGame);
-      nextPlayer().accept(this :: onMove, this :: remakeGame);
+      RuntimeException onGameOver =
+          new RuntimeException("\ngame over\nwinner: " + model.winner());
+      prevPlayer().accept(m -> {}, () -> {throw onGameOver;});
+      curPlayer().accept(m -> {}, () -> {throw onGameOver;});
     }
-
-
-
-  }
-
-  private void onGameOver() {
-    System.err.println("game over");
-    System.err.println("winner: " + model.winner());
+    prevPlayer().accept(m -> {}, this :: remakeGame);
+    curPlayer().accept(this :: onMove, this :: remakeGame);
 
   }
 
@@ -63,11 +56,12 @@ public class GameController {
     return copy;
   }
 
+
   private Player prevPlayer() {
     return coachColorToPlayer(model.curCoach().opponent());
   }
 
-  private Player nextPlayer() {
+  private Player curPlayer() {
     return coachColorToPlayer(model.curCoach());
   }
 

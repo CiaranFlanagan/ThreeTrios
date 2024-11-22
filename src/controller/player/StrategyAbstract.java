@@ -116,7 +116,13 @@ public abstract class StrategyAbstract implements
 
   @Override
   public final void accept(Consumer<Move> moveConsumer, Supplier<Model> modelSupplier) {
-    moveConsumer.accept(bestMove(modelSupplier).orElse(defaultMove(modelSupplier)));
+    try {
+      modelSupplier.get();
+      moveConsumer.accept(bestMove(modelSupplier).orElse(defaultMove(modelSupplier)));
+    } catch (Exception ignored) {
+
+    }
+
   }
 
 }
