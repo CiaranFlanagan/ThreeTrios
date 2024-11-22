@@ -5,6 +5,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -40,6 +41,12 @@ public class MouseHandler extends MouseAdapter {
     c.addMouseListener(this);
     c.addMouseMotionListener(this);
     c.addMouseWheelListener(this);
+  }
+
+  public final void unregister(Component c) {
+    c.removeMouseListener(this);
+    c.removeMouseMotionListener(this);
+    c.removeMouseWheelListener(this);
   }
 
   @Override

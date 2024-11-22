@@ -12,24 +12,24 @@ import java.util.Optional;
  */
 public class ModelForView implements ModelReadOnly {
 
-  ModelForView delegate;
+  ModelReadOnly delegate;
 
   /**
    * Constructs a ModelForView that delegates calls to another ModelForView instance.
    *
    * @param delegate the ModelForView instance to which this class delegates method calls
    */
-  public ModelForView(ModelForView delegate) {
+  public ModelForView(ModelReadOnly delegate) {
     this.delegate = delegate;
   }
 
   @Override
-  public Coach curCoach() {
+  public CoachColor curCoach() {
     return delegate.curCoach();
   }
 
   @Override
-  public Map<Coach, List<Card>> curCoachesHands() {
+  public Map<CoachColor, List<Card>> curCoachesHands() {
     return delegate.curCoachesHands();
   }
 
@@ -44,7 +44,7 @@ public class ModelForView implements ModelReadOnly {
   }
 
   @Override
-  public Coach winner() {
+  public CoachColor winner() {
     return delegate.winner();
   }
 
@@ -65,7 +65,7 @@ public class ModelForView implements ModelReadOnly {
     return delegate.cardAt(row, col);
   }
 
-  public Optional<Coach> ownerAt(int row, int col) {
+  public Optional<CoachColor> ownerAt(int row, int col) {
     return delegate.ownerAt(row, col);
   }
 
@@ -79,7 +79,7 @@ public class ModelForView implements ModelReadOnly {
   }
 
   @Override
-  public int score(Coach coach) {
+  public int score(CoachColor coach) {
     return delegate.score(coach);
   }
 

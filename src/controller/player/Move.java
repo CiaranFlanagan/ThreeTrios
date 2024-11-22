@@ -1,4 +1,4 @@
-package player;
+package controller.player;
 
 import model.Model;
 
@@ -11,9 +11,9 @@ import java.util.function.Consumer;
  */
 public final class Move implements Consumer<Model> {
 
-  private final int row;
-  private final int col;
-  private final int handIdx;
+  public int handIdx;
+  public int row;
+  public int col;
 
   private Move(int handIdx, int row, int col) {
     this.row = row;
@@ -33,33 +33,9 @@ public final class Move implements Consumer<Model> {
     return new Move(handIdx, row, col);
   }
 
-  /**
-   * Gets the row index for this move.
-   *
-   * @return the row index
-   */
-  public int getRow() {
-    return this.row;
+  public static Move create() {
+    return new Move(-1, -1,-1);
   }
-
-  /**
-   * Gets the column index for this move.
-   *
-   * @return the column index
-   */
-  public int getCol() {
-    return this.col;
-  }
-
-  /**
-   * Gets the hand index for this move.
-   *
-   * @return the hand index
-   */
-  public int getHandIdx() {
-    return this.handIdx;
-  }
-
 
   /**
    * Executes this move on the given model by placing the specified card from the player's hand

@@ -7,7 +7,6 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
@@ -18,24 +17,23 @@ import java.util.stream.Collectors;
 public abstract class ModelAbstract implements Model {
 
   protected Grid grid;
-  protected Map<Coach, List<Card>> coachesHands;
-  protected Coach currentCoach;
-  protected List<Consumer<ModelAbstract>> moves;
+  protected Map<CoachColor, List<Card>> coachesHands;
+  protected CoachColor currentCoach;
   protected Referee ref;
 
   protected ModelAbstract() {
-    Map<Coach, List<Card>> temp = new EnumMap<>(Coach.class);
-    temp.put(Coach.RED, new ArrayList<>());
-    temp.put(Coach.BLUE, new ArrayList<>());
+    Map<CoachColor, List<Card>> temp = new EnumMap<>(CoachColor.class);
+    temp.put(CoachColor.RED, new ArrayList<>());
+    temp.put(CoachColor.BLUE, new ArrayList<>());
     // only red and blue, so just get and then update the hand accordingly
     coachesHands = Collections.unmodifiableMap(temp);
-    currentCoach = Coach.RED;
+    currentCoach = CoachColor.RED;
   }
 
   @Override
-  public Map<Coach, List<Card>> curCoachesHands() {
-    Map<Coach, List<Card>> temp = new EnumMap<>(coachesHands);
-    for (Coach coach : temp.keySet()) {
+  public Map<CoachColor, List<Card>> curCoachesHands() {
+    Map<CoachColor, List<Card>> temp = new EnumMap<>(coachesHands);
+    for (CoachColor coach : temp.keySet()) {
       temp.put(coach,
                Collections.unmodifiableList(coachesHands.get(coach)
                                                         .stream()
@@ -71,7 +69,7 @@ public abstract class ModelAbstract implements Model {
   }
 
   @Override
-  public Optional<Coach> ownerAt(int row, int col) {
+  public Optional<CoachColor> ownerAt(int row, int col) {
     checkRowCol(row, col);
     GridCellReadOnly cell = this.grid.readOnlyArray2D()[row][col];
     if (cell.hasCard()) {
@@ -100,11 +98,11 @@ public abstract class ModelAbstract implements Model {
   }
 
   @Override
-  public int score(Coach coach) {
+  public int score(CoachColor coach) {
     return score(coach, grid);
   }
 
-  private int score(Coach coach, Grid grid) {
+  private int score(CoachColor coach, Grid grid) {
     return (int) Arrays.stream(grid.readOnlyArray2D())
                        .flatMap(Arrays :: stream)
                        .filter(gc -> gc.hasCard() && gc.getCard().getCoach() == coach)

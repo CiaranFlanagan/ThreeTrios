@@ -5,13 +5,9 @@ import model.Card;
 import model.CardinalDirection;
 import model.GridCellReadOnly;
 import model.Model;
-import model.ModelReadOnly;
 import org.junit.Assert;
 import org.junit.Test;
-import view.View;
-import view.ViewGUI;
 
-import javax.swing.JFrame;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Optional;
@@ -39,16 +35,6 @@ public class Utils {
     }
   }
 
-  public static void inspect(ModelReadOnly model) {
-    try {
-      View<JFrame> view = new ViewGUI(model);
-      JFrame frame = new JFrame("three trios hwk 6");
-      view.renderTo(frame);
-      Thread.sleep(1000000);
-    } catch (InterruptedException e) {
-      System.err.println("interrupted");
-    }
-  }
 
   @Test(expected = IllegalArgumentException.class)
   public void testMakeBadCard() {

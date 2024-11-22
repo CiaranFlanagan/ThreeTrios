@@ -152,9 +152,9 @@ Dependencies will be italicized.
   - Represents North, South, East, and West
   - Each direction has its opposite, N<->S, W<->E
 - #### Coaches
-  - Coaches represent the Red and Blue in the game. A coach is the model's perception of a player.
+  - Coaches represent the Red and Blue in the game. A coachColor is the model's perception of a player.
   - They each have a hand of _cards_ that changes as cards are played, and a color that will not
-    change. A coach is the winner of the game in the model's eyes.
+    change. A coachColor is the winner of the game in the model's eyes.
 - #### Grids
   - Grids represent a collection of _Cells_. They are responsible for linking _Cells_ to their
     neighbors in respective _Cardinal Directions_. They are also the model's medium between
@@ -210,7 +210,7 @@ Below are the following classes and interfaces that we have implemented
     - renderTo(JFrame outputFrame): Configures and displays a JFrame with all components, including
       a listener to handle window resizing.
     - HandGUI Class: A JPanel subclass that visually represents a player's hand. It adjusts the
-      layout and renders each card based on the current coach, resizing dynamically.
+      layout and renders each card based on the current coachColor, resizing dynamically.
     - GridGUI Class: A JPanel subclass responsible for rendering the game grid, with cells
       displayed according to their state (e.g., holes, empty cells, or cards). It dynamically
       resizes to fit the window and visually distinguishes player cards and empty cells using color
@@ -482,10 +482,10 @@ from unauthorized modifications:
       - cardAt(int row, int col) returns the card in a specific cell, if present, using
         Optional<Card>
         to safely indicate absence.
-      - ownerAt(int row, int col) returns the owner (coach) of the card in a cell, if any, using
+      - ownerAt(int row, int col) returns the owner (coachColor) of the card in a cell, if any, using
         Optional<Coach> to handle null cases safely.
     - Player Hands
-      - curCoachesHands() returns each coach’s hand as an unmodifiable map. Each card is provided
+      - curCoachesHands() returns each coachColor’s hand as an unmodifiable map. Each card is provided
         as a copy to prevent modification, allowing the view to safely display players’ hands.
     - Move Legality
       - canPlayAt(int row, int col) determines whether the current player can place a card at a
@@ -495,12 +495,10 @@ from unauthorized modifications:
         that would be flipped if the player places a specified card at given coordinates,
         supporting decision-making without altering the actual grid.
       - Player Score
-        - score(Coach coach) calculates the score for a given coach, based on the number of cards
+        - score(Coach coachColor) calculates the score for a given coachColor, based on the number of cards
           controlled on the grid.
 
 
 These adjustments maintain model integrity against external modification, refining the MVC
 structure by clearly defining responsibilities and protecting the model from unintended state
 changes.
-
-

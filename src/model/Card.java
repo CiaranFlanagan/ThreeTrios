@@ -11,7 +11,7 @@ public final class Card {
 
   private final String name;
   private final Map<CardinalDirection, AttackValue> attackValues;
-  private Coach coachColor;
+  private CoachColor coachColor;
 
   /**
    * to construct a card with [name] and [attackValues].
@@ -48,7 +48,7 @@ public final class Card {
    *
    * @return - the current coach of this card.
    */
-  public Coach getCoach() {
+  public CoachColor getCoach() {
     return this.coachColor;
   }
 
@@ -57,7 +57,7 @@ public final class Card {
    *
    * @param newCoach - the new coach of this
    */
-  void setCoach(Coach newCoach) {
+  void setCoach(CoachColor newCoach) {
     this.coachColor = newCoach;
   }
 

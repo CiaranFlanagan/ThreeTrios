@@ -24,7 +24,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class TestModel {
 
-  Coach coach;
+  CoachColor coach;
   private Grid gridNoHoles;
   private List<Card> cardsSmall;
   private ModelBase model;
@@ -37,18 +37,18 @@ public class TestModel {
     gridNoHoles = ConfigGrid.scannerToGrid(TestFiles.GRID_NO_HOLES);
     cardsSmall = ConfigCard.scannerToCardList(TestFiles.CC_SMALL);
 
-    Coach coach = Coach.RED;
+    CoachColor coach = CoachColor.RED;
     model.startGame(gridNoHoles, cardsSmall, referee);
   }
 
   @Test
   public void testCurCoachesHand() {
-    Map<Coach, List<Card>> hands = model.curCoachesHands();
+    Map<CoachColor, List<Card>> hands = model.curCoachesHands();
     assertEquals(2, hands.size());
-    assertTrue(hands.containsKey(Coach.RED));
-    assertTrue(hands.containsKey(Coach.BLUE));
-    assertFalse(hands.get(Coach.RED).isEmpty());
-    assertFalse(hands.get(Coach.BLUE).isEmpty());
+    assertTrue(hands.containsKey(CoachColor.RED));
+    assertTrue(hands.containsKey(CoachColor.BLUE));
+    assertFalse(hands.get(CoachColor.RED).isEmpty());
+    assertFalse(hands.get(CoachColor.BLUE).isEmpty());
   }
 
   @Test
@@ -82,9 +82,9 @@ public class TestModel {
   public void testOwnerAt() {
     Card testCard = cardsSmall.get(0);
     gridNoHoles.placeCardOn(0, 0, testCard);
-    Optional<Coach> card = model.ownerAt(0, 0);
+    Optional<CoachColor> card = model.ownerAt(0, 0);
     assertTrue(card.isPresent());
-    assertEquals(testCard.getCoach(), Coach.RED);
+    assertEquals(testCard.getCoach(), CoachColor.RED);
     assertTrue(model.ownerAt(0, 1).isEmpty());
   }
 
@@ -94,7 +94,7 @@ public class TestModel {
     gridNoHoles.placeCardOn(0, 0, testCard);
     assertTrue(model.canPlayAt(0, 1));
     assertFalse(model.canPlayAt(0, 0));
-    assertEquals(testCard.getCoach(), Coach.RED);
+    assertEquals(testCard.getCoach(), CoachColor.RED);
   }
 
   @Test
@@ -123,17 +123,17 @@ public class TestModel {
     Card testCard = Utils.makeCard("Ciaran 1 2 3 4");
     Card testCard2 = Utils.makeCard("KC 1 2 3 4");
     Card testCard3 = Utils.makeCard("John 1 2 3 4");
-    testCard.setCoach(Coach.RED);
-    testCard2.setCoach(Coach.BLUE);
-    testCard3.setCoach(Coach.BLUE);
+    testCard.setCoach(CoachColor.RED);
+    testCard2.setCoach(CoachColor.BLUE);
+    testCard3.setCoach(CoachColor.BLUE);
     gridNoHoles.placeCardOn(0, 0, testCard);
-    int score = model.score(Coach.RED);
+    int score = model.score(CoachColor.RED);
     assertEquals(1, score);
     gridNoHoles.placeCardOn(0, 1, testCard2);
-    score = model.score(Coach.BLUE);
+    score = model.score(CoachColor.BLUE);
     assertEquals(1, score);
     gridNoHoles.placeCardOn(0, 2, testCard3);
-    score = model.score(Coach.BLUE);
+    score = model.score(CoachColor.BLUE);
     assertEquals(2, score);
   }
 
@@ -505,9 +505,9 @@ public class TestModel {
 
     @Test
     public void testGetCoach() {
-      Coach coach = Coach.RED;
-      card.setCoach(coach);
-      assertEquals(Coach.RED, card.getCoach());
+      CoachColor coachColor = CoachColor.RED;
+      card.setCoach(coachColor);
+      assertEquals(CoachColor.RED, card.getCoach());
     }
 
     @Test
@@ -518,9 +518,9 @@ public class TestModel {
 
     @Test
     public void testSetCoach() {
-      Coach coach = Coach.RED;
-      card.setCoach(coach);
-      assertEquals(Coach.RED, card.getCoach());
+      CoachColor coachColor = CoachColor.RED;
+      card.setCoach(coachColor);
+      assertEquals(CoachColor.RED, card.getCoach());
     }
 
   }
@@ -535,8 +535,8 @@ public class TestModel {
     private GridCellAbstract cardCell1;
     private GridCellAbstract cardCell2;
     private GridCellAbstract cardCell3;
-    private Coach kc;
-    private Coach ciaran;
+    private CoachColor kc;
+    private CoachColor ciaran;
     private Card card1;
     private Card card2;
     private Card card3;
@@ -549,8 +549,8 @@ public class TestModel {
       cardCell1 = new GridCellCard();
       cardCell2 = new GridCellCard();
       cardCell3 = new GridCellCard();
-      kc = Coach.RED;
-      ciaran = Coach.BLUE;
+      kc = CoachColor.RED;
+      ciaran = CoachColor.BLUE;
       card1 = Utils.makeCard("c1 1 2 3 4");
       card2 = Utils.makeCard("c2 5 6 7 8");
       card3 = Utils.makeCard("c3 A A A A");
@@ -631,4 +631,3 @@ public class TestModel {
   }
 
 }
-
