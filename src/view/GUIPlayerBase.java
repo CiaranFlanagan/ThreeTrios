@@ -4,7 +4,6 @@ import model.CoachColor;
 import model.ModelReadOnly;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -34,7 +33,7 @@ public class GUIPlayerBase extends JFrame {
   }
 
   // assumes model got set
-  protected void update(ModelReadOnly model) {
+  protected void updateModel(ModelReadOnly model) {
     this.model = model;
     updateLayout();
     updateDelegateControllers();

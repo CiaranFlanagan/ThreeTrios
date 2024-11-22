@@ -1,20 +1,24 @@
-import controller.player.CornerStrategy;
-import controller.player.GameController;
 import controller.player.Player;
+import controller.strategy.CornerStrategy;
+import controller.strategy.MostFlips;
+import controller.strategy.StrategyAbstract;
 import model.Card;
 import model.CoachColor;
 import model.Grid;
 import model.Model;
 import model.ModelBase;
+import model.PlayableModel;
 import model.RefereeDefault;
 import utils.ConfigCard;
 import utils.ConfigGrid;
 import utils.TestFiles;
 import view.DrawGrid;
 import view.DrawHand;
+import view.GUIGridBase;
 import view.GUIGridInteractive;
 import view.GUIHandBase;
 import view.GUIHandInteractive;
+import view.GUIPlayerDelegate;
 import view.GUIPlayerInteractive;
 
 import java.util.List;
@@ -28,24 +32,32 @@ public class Main {
    * To run the program by just starting a game.
    * @param args - command line args, which don't get processed currently.
    */
-  public static void main(String[] args) {
-    GameController gc =
-        new GameController(Main :: makeModel, makeHumanPlayer(CoachColor.RED),
-                           makeHumanPlayer(CoachColor.BLUE));
+  public static void main3(String[] args) {
+    PlayableModel gc =
+        new PlayableModel(Main :: makeModel, makeHumanPlayer(CoachColor.RED),
+                          makeHumanPlayer(CoachColor.BLUE));
   }
 
-  public static void main2(String[] args) {
-    GameController gc =
-        new GameController(Main :: makeModel, makeHumanPlayer(CoachColor.RED),
-                           new Player(CoachColor.BLUE, new CornerStrategy()));
+  public static void main4(String[] args) {
+    PlayableModel gc =
+        new PlayableModel(Main :: makeModel, makeHumanPlayer(CoachColor.RED),
+                          new Player(CoachColor.BLUE, new MostFlips()));
+  }
+
+  public static void main(String[] args) {
+    PlayableModel gc = new PlayableModel(Main :: makeModel,
+                                         makeDelegatePlayer(CoachColor.RED,
+                                                            new MostFlips()),
+                                         makeAIPlayer(CoachColor.BLUE,
+                                                      new CornerStrategy()));
   }
 
   private static List<Card> makeCards() {
-    return ConfigCard.scannerToCardList(TestFiles.CC_SMALL);
+    return ConfigCard.scannerToCardList(TestFiles.CC_LARGE);
   }
 
   private static Grid makeGrid() {
-    return ConfigGrid.scannerToGrid(TestFiles.GRID_NO_HOLES);
+    return ConfigGrid.scannerToGrid(TestFiles.GRID_ASSN_HARD);
   }
 
   private static Model makeModel() {
@@ -67,5 +79,16 @@ public class Main {
     }
   }
 
+  private static Player makeDelegatePlayer(CoachColor color, StrategyAbstract strategy) {
+    return new Player(color, new GUIPlayerDelegate(new GUIHandBase(new DrawHand()),
+                                                   new GUIHandBase(new DrawHand()),
+                                                   new GUIGridBase(new DrawGrid()),
+                                                   color,
+                                                   strategy));
+  }
+
+  private static Player makeAIPlayer(CoachColor color, StrategyAbstract strategy) {
+    return new Player(color, strategy);
+  }
 
 }

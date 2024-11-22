@@ -1,27 +1,26 @@
-package controller.player;
+package model;
 
-import model.CoachColor;
-import model.Model;
+import controller.player.Player;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.function.Supplier;
 
-public class GameController {
+public class PlayableModel {
 
-  Supplier<Model> modelSupplier;
-  Model model;
-  Deque<Move> moves;
-  Player red;
-  Player blue;
+  private Supplier<Model> modelSupplier;
+  private Model model;
+  private Deque<Move> moves;
+  private Player red;
+  private Player blue;
 
-  public GameController(Supplier<Model> modelSupplier, Player red, Player blue) {
+  public PlayableModel(Supplier<Model> modelSupplier, Player red, Player blue) {
     this.modelSupplier = modelSupplier;
     model = modelSupplier.get();
     moves = new ArrayDeque<>();
     this.red = red;
     this.blue = blue;
-    curPlayer().accept(this :: onMove, modelSupplier);
+    curPlayer().accept(this :: onMove, this :: remakeGame);
     prevPlayer().accept(m -> {}, this :: remakeGame);
   }
 
@@ -50,7 +49,7 @@ public class GameController {
 
   }
 
-  public Model remakeGame() {
+  public Model remakeGame()  {
     Model copy = modelSupplier.get();
     moves.forEach(m -> m.accept(copy));
     return copy;
@@ -68,6 +67,5 @@ public class GameController {
   private Player coachColorToPlayer(CoachColor coach) {
     return coach == CoachColor.RED ? red : blue;
   }
-
 
 }

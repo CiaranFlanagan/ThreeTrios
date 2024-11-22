@@ -1,5 +1,6 @@
-package controller.player;
+package controller.strategy;
 
+import model.Move;
 import model.Card;
 import model.CardinalDirection;
 import model.GridCellReadOnly;

@@ -1,5 +1,6 @@
-package controller.player;
+package controller.strategy;
 
+import model.Move;
 import model.Model;
 
 import java.util.ArrayList;
