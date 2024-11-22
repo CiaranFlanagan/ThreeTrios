@@ -2,26 +2,28 @@ package controller.player;
 
 import model.CoachColor;
 import model.Model;
+import model.Move;
 
+import java.util.concurrent.Callable;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 /**
- * Represents a player in the game of Three Trios.
+ * Represents a player in the game of Three Trios. A player is an observer of
+ * Callable<Model> and it also
  */
-public final class Player implements BiConsumer<Consumer<Move>, Supplier<Model>> {
+public final class Player implements BiConsumer<Consumer<Move>, Callable<Model>> {
   CoachColor coachColor;
-  BiConsumer<Consumer<Move>, Supplier<Model>> delegate;
+  BiConsumer<Consumer<Move>, Callable<Model>> delegate;
 
   public Player (CoachColor coachColor,
-                 BiConsumer<Consumer<Move>, Supplier<Model>> delegate) {
+                 BiConsumer<Consumer<Move>, Callable<Model>> delegate) {
     this.coachColor = coachColor;
     this.delegate = delegate;
   }
 
   @Override
-  public void accept(Consumer<Move> moveConsumer, Supplier<Model> modelSupplier) {
+  public void accept(Consumer<Move> moveConsumer, Callable<Model> modelSupplier) {
     delegate.accept(moveConsumer, modelSupplier);
   }
 

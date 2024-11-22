@@ -1,13 +1,16 @@
-package controller.player;
+package controller.strategy;
 
 import model.GridCellReadOnly;
 import model.Model;
+import model.Move;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.Callable;
 import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
@@ -15,16 +18,15 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
- * Abstract base class for game strategies in the Three Trios game.
- * Defines methods for evaluating moves and finding the most effective one.
+ * Abstract base class for game strategies in the Three Trios game. Defines methods for
+ * evaluating moves and finding the most effective one.
  */
 public abstract class StrategyAbstract implements
-    BiConsumer<Consumer<Move>, Supplier<Model>> {
+    BiConsumer<Consumer<Move>, Callable<Model>> {
 
   /**
-   * To find the best move by reducing all possible moves, choosing the most effective
-   * via this.effectiveness. works directly with effectiveness
-   *
+   * To find the best move by reducing all possible moves, choosing the most effective via
+   * this.effectiveness. works directly with effectiveness
    * @return - the best move, if it exists
    */
   public Optional<Move> bestMove(Supplier<Model> modelSupplier) {
@@ -37,9 +39,7 @@ public abstract class StrategyAbstract implements
 
   /**
    * To produce a list of all moves that meet this strategy's specifications and don't
-   * cause the
-   * model to error. All possible moves on board by default.
-   *
+   * cause the model to error. All possible moves on board by default.
    * @return a list of all considered moves by this strategy.
    */
   protected List<Move> allConsideredMoves(Supplier<Model> modelSupplier) {
@@ -47,9 +47,8 @@ public abstract class StrategyAbstract implements
   }
 
   /**
-   * find effectiveness by comparing the model's state from this.modelSupplier
-   * and the state after applying the move
-   *
+   * find effectiveness by comparing the model's state from this.modelSupplier and the
+   * state after applying the move
    * @param move a consumer of the model
    * @return an int rating of the effectiveness
    */
@@ -73,7 +72,6 @@ public abstract class StrategyAbstract implements
 
   /**
    * To filter out any move that causes the model to error.
-   *
    * @param moves the list of moves to filter
    * @return a list of moves that will not cause the model to error.
    */
@@ -91,15 +89,11 @@ public abstract class StrategyAbstract implements
 
   /**
    * To be used in the case that bestMove() returns empty. Assumes a model supplier is
-   * passed in
-   * where the game is started but not over, i.e. there's at least one playable cell
-   * left. This
-   * cannot be overridden because every strategy must default the same way, the 0th
-   * card in hand at
-   * the up-most, left-most (in that order) position.
-   *
-   * @return the default move standard for all strategies. returns null if game is over
-   * so that it can be called but not used when a model's game is over.
+   * passed in where the game is started but not over, i.e. there's at least one playable
+   * cell left. This cannot be overridden because every strategy must default the same
+   * way, the 0th card in hand at the up-most, left-most (in that order) position.
+   * @return the default move standard for all strategies. returns null if game is over so
+   *     that it can be called but not used when a model's game is over.
    */
   public final Move defaultMove(Supplier<Model> modelSupplier) {
     return allPossibleMovesOnBoard(modelSupplier).stream()
@@ -115,14 +109,24 @@ public abstract class StrategyAbstract implements
   }
 
   @Override
-  public final void accept(Consumer<Move> moveConsumer, Supplier<Model> modelSupplier) {
-    try {
-      modelSupplier.get();
-      moveConsumer.accept(bestMove(modelSupplier).orElse(defaultMove(modelSupplier)));
-    } catch (Exception ignored) {
-
+  public final void accept(Consumer<Move> moveConsumer, Callable<Model> modelCallable) {
+    Supplier<Model> modelSupplier = callableToSupplier(modelCallable);
+    if (Objects.nonNull(modelSupplier.get())) {
+      Move move = bestMove(modelSupplier).orElse(defaultMove(modelSupplier));
+      if (Objects.nonNull(move)) {
+        moveConsumer.accept(move);
+      }
     }
+  }
 
+  private Supplier<Model> callableToSupplier(Callable<Model> modelCallable) {
+    return () -> {
+      try {
+        return modelCallable.call();
+      } catch (Exception e) {
+        return null;
+      }
+    };
   }
 
 }

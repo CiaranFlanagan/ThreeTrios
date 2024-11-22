@@ -1,6 +1,6 @@
 package view;
 
-import controller.player.Move;
+import model.Move;
 import utils.MouseHandler;
 import utils.WasMouse;
 

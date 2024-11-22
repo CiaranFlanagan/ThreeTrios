@@ -1,6 +1,4 @@
-package controller.player;
-
-import model.Model;
+package model;
 
 import java.util.function.Consumer;
 
@@ -9,7 +7,8 @@ import java.util.function.Consumer;
  * Defined by a grid position (row and column) and a card index from the player's hand.
  * Can be applied to a Model to place a card at the specified location.
  */
-public final class Move implements Consumer<Model> {
+public final class
+Move implements Consumer<Model> {
 
   public int handIdx;
   public int row;
