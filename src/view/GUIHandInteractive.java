@@ -16,7 +16,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class GUIHandInteractive extends GUIHandBase implements
-   TriConsumer<Move, Consumer<Move>, BiConsumer<Move, Consumer<Move>>> {
+    TriConsumer<Move, Consumer<Move>, BiConsumer<Move, Consumer<Move>>> {
 
   // association
   CoachColor coachColor;
@@ -24,7 +24,6 @@ public class GUIHandInteractive extends GUIHandBase implements
   // clicks
   protected Optional<Integer> clickPos;
   protected Optional<Integer> hoverPos;
-  private OnMouse handler;
 
   // flow
   private Move move;
@@ -35,12 +34,15 @@ public class GUIHandInteractive extends GUIHandBase implements
     super(view);
     this.clickPos = Optional.empty();
     this.hoverPos = Optional.empty();
-    handler = new OnMouse();
+    new OnMouse().register(this);
   }
 
   public void updateHand(List<Card> hand) {
-    this.coachColor = hand.get(0).getCoach();
-    this.clickPos = Optional.empty();
+    if (!hand.isEmpty()) {
+      this.coachColor = hand.get(0).getCoach();
+      this.clickPos = Optional.empty();
+
+    }
     super.updateHand(hand);
   }
 
@@ -82,11 +84,13 @@ public class GUIHandInteractive extends GUIHandBase implements
 
     private OnMouse() {
       this.handle(WasMouse.CLICKED, this :: handleClick)
-          .handle(WasMouse.MOVED, this :: handleHover)
-          .register(GUIHandInteractive.this);
+          .handle(WasMouse.MOVED, this :: handleHover);
     }
 
     private void handleClick(MouseEvent me) {
+      if (hand.isEmpty()) {
+        this.unregister(GUIHandInteractive.this);
+      }
       int selectedIdx = view.idxOfHandAt(me.getPoint(), hand, currentImage);
       if (clickPos.isPresent() && clickPos.get() == selectedIdx) {
         clickPos = Optional.empty();
@@ -100,7 +104,8 @@ public class GUIHandInteractive extends GUIHandBase implements
 
         // forward callback
         forwardCallBack.accept(move, callback);
-      } GUIHandInteractive.this.repaint();
+      }
+      GUIHandInteractive.this.repaint();
 
     }
 

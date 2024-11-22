@@ -98,13 +98,14 @@ public abstract class StrategyAbstract implements
    * card in hand at
    * the up-most, left-most (in that order) position.
    *
-   * @return the default move standard for all strategies
+   * @return the default move standard for all strategies. returns null if game is over
+   * so that it can be called but not used when a model's game is over.
    */
   public final Move defaultMove(Supplier<Model> modelSupplier) {
     return allPossibleMovesOnBoard(modelSupplier).stream()
                                                  .reduce(BinaryOperator.maxBy(
                                                      Comparator.comparingInt(((m) -> 0))))
-                                                 .get();
+                                                 .orElse(null);
   }
 
   protected final List<GridCellReadOnly> modelToCellList(Model model) {
@@ -114,7 +115,7 @@ public abstract class StrategyAbstract implements
   }
 
   @Override
-  public void accept(Consumer<Move> moveConsumer, Supplier<Model> modelSupplier) {
+  public final void accept(Consumer<Move> moveConsumer, Supplier<Model> modelSupplier) {
     moveConsumer.accept(bestMove(modelSupplier).orElse(defaultMove(modelSupplier)));
   }
 

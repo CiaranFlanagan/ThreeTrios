@@ -1,5 +1,4 @@
 import controller.player.GameController;
-import controller.player.MostFlips;
 import controller.player.Player;
 import model.Card;
 import model.CoachColor;
@@ -17,8 +16,6 @@ import view.GUIHandBase;
 import view.GUIHandInteractive;
 import view.GUIPlayerInteractive;
 
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
 import java.util.List;
 
 /**
@@ -28,13 +25,12 @@ public class Main {
 
   /**
    * To run the program by just starting a game.
-   *
    * @param args - command line args, which don't get processed currently.
    */
   public static void main(String[] args) {
     GameController gc =
         new GameController(Main :: makeModel, makeHumanPlayer(CoachColor.RED),
-                           new Player(CoachColor.BLUE, new MostFlips()));
+                           makeHumanPlayer(CoachColor.BLUE));
   }
 
   private static List<Card> makeCards() {

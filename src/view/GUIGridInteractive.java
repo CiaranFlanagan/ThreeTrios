@@ -9,8 +9,8 @@ import java.awt.event.MouseEvent;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-public class GUIGridInteractive extends GUIGridBase implements BiConsumer<Move,
-    Consumer<Move>> {
+public class GUIGridInteractive extends GUIGridBase implements
+    BiConsumer<Move, Consumer<Move>> {
 
   private Move move;
   private Consumer<Move> callback;
@@ -27,17 +27,17 @@ public class GUIGridInteractive extends GUIGridBase implements BiConsumer<Move,
     this.callback = callback;
   }
 
-  private class OnMouse {
+  private class OnMouse extends MouseHandler {
 
     public void init() {
-      MouseHandler.create()
-                  .handle(WasMouse.CLICKED, this :: handleClick)
-                  .register(GUIGridInteractive.this);
+      this.handle(WasMouse.CLICKED, this :: handleClick)
+          .register(GUIGridInteractive.this);
     }
 
     private void handleClick(MouseEvent me) {
-      Point cell = view.cellAt(me.getPoint(), curGrid, curImage);
-
+      if (curGrid.isFull()) {
+        this.unregister(GUIGridInteractive.this);
+      } Point cell = view.cellAt(me.getPoint(), curGrid, curImage);
       // update the move
       move.row = cell.y;
       move.col = cell.x;

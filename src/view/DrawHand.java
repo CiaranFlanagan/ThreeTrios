@@ -27,6 +27,9 @@ public class DrawHand {
    * @param handImage the render context
    */
   public void render(List<Card> hand, BufferedImage handImage) {
+    if (hand.isEmpty()) {
+      return;
+    }
     Graphics artist = handImage.createGraphics();
     artist.setColor(Color.WHITE);
     for (Card card : hand) {

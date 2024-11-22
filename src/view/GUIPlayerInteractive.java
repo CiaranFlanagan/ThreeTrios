@@ -21,20 +21,18 @@ public class GUIPlayerInteractive extends GUIPlayerBase implements
     super(viewRedHand, viewBlueHand, viewGrid, CoachColor.RED);
     hand = viewRedHand;
     grid = viewGrid;
-
   }
 
   public GUIPlayerInteractive(GUIHandBase viewRedHand,
                               GUIHandInteractive viewBlueHand,
-                              GUIGridInteractive controlGrid) {
-    super(viewRedHand, viewBlueHand, controlGrid, CoachColor.BLUE);
+                              GUIGridInteractive viewGrid) {
+    super(viewRedHand, viewBlueHand, viewGrid, CoachColor.BLUE);
     hand = viewBlueHand;
-
+    grid = viewGrid;
   }
 
   @Override
   public void accept(Consumer<Move> callback, Supplier<Model> modelSupplier) {
-    System.err.println("callback sent");
     model = modelSupplier.get();
     update(model);
     Move newMove = Move.create();

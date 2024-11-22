@@ -87,7 +87,7 @@ public final class Grid {
   public boolean isFull() {
     for (GridCellReadOnly[] row : internalArray) {
       for (GridCellReadOnly cell : row) {
-        if (!cell.hasCard()) {
+        if (cell.canHaveCard() && !cell.hasCard()) {
           return false;
         }
       }
