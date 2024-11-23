@@ -14,6 +14,9 @@ import utils.TestFiles;
 
 import java.util.List;
 
+/**
+ * Tests for the ThreeTrios controller
+ */
 @RunWith(Enclosed.class)
 public class TestController {
 

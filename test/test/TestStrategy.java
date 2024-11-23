@@ -28,8 +28,8 @@ import java.util.Scanner;
 import java.util.function.Supplier;
 
 /**
- * To test requirements for every player strategy, like whether they bias the top left, have a
- * default move, can produce no result, and that they check the correct cells.
+ * To test requirements for every player strategy, like whether they bias the top left,
+ * have a default move, can produce no result, and that they check the correct cells.
  */
 
 @RunWith(Enclosed.class)
@@ -38,8 +38,8 @@ public class TestStrategy {
 
   /**
    * A test class for the MostFlips strategy in the Three Trios game. It verifies that the
-   * strategy selects moves that flip the maximum number of opponent's cards.
-   * The test case is structured to check different grid configurations and move scenarios.
+   * strategy selects moves that flip the maximum number of opponent's cards. The test
+   * case is structured to check different grid configurations and move scenarios.
    */
   public static class TestMostFlips {
     // cases we want to test:
@@ -53,26 +53,22 @@ public class TestStrategy {
     // place blue 2 2 2 2 at 0, 1
     // place red  3 3 3 3 at 1, 0
 
-    // what observations do we care about. we want to take a model a see what a card's attack values
-    // and colors at a particular position
+    // what observations do we care about. we want to take a model a see what a card's
+    // attack values and colors at a particular position
 
     @Test
     public void bigTestFullGame() {
-      Supplier<Grid> gridSupplier = () -> ConfigGrid.scannerToGrid(new Scanner(LineWriter.create()
-                                                                                         .line("2 3")
-                                                                                         .line("CCX")
-                                                                                         .endWith(
-                                                                                             "CCC")
-                                                                                         .toString()));
-      Supplier<List<Card>> cardSupplier =
-          () -> ConfigCard.scannerToCardList(new Scanner(LineWriter.create()
-                                                                   .line("a 1 1 1 1")
-                                                                   .line("b 2 2 2 2")
-                                                                   .line("c 3 3 3 3")
-                                                                   .line("d 4 4 4 4")
-                                                                   .line("e 5 5 5 5")
-                                                                   .endWith("f 5 5 5 5")
-                                                                   .toString()));
+      Supplier<Grid> gridSupplier = () -> ConfigGrid.scannerToGrid(new Scanner(
+          LineWriter.create().line("2 3").line("CCX").endWith("CCC").toString()));
+      Supplier<List<Card>> cardSupplier = () -> ConfigCard.scannerToCardList(new Scanner(
+          LineWriter.create()
+                    .line("a 1 1 1 1")
+                    .line("b 2 2 2 2")
+                    .line("c 3 3 3 3")
+                    .line("d 4 4 4 4")
+                    .line("e 5 5 5 5")
+                    .endWith("f 5 5 5 5")
+                    .toString()));
       Supplier<Model> modelSupplier = () -> {
         Model m = new ModelBase();
         m.startGame(gridSupplier.get(), cardSupplier.get(), new RefereeDefault());
@@ -201,7 +197,7 @@ public class TestStrategy {
 
 
   /**
-   * Tests the extra credit defense start
+   * Tests the extra credit defense start.
    */
   public static class TestDefenseStrategy {
 
@@ -209,6 +205,8 @@ public class TestStrategy {
     private Optional<Move> move;
     private Supplier<Model> modelSupplier;
 
+
+    @Test
     public void testTopLeftBias() {
       if (move.isEmpty()) {
         Assert.fail("strategy should probably produce a move on the first move.");

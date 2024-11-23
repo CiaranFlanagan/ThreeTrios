@@ -102,10 +102,4 @@ public class DrawGrid {
                      (int) pixel.getY() * grid.numRows() / image.getHeight());
   }
 
-  // TODO
-  private int cellHeight(Grid grid, BufferedImage image) {
-    return image.getHeight() / grid.readOnlyArray2D().length;
-  }
-
-
 }

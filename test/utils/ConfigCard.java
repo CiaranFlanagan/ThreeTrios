@@ -19,9 +19,8 @@ public class ConfigCard {
 
   /**
    * To take a scanner and create a list of cards in the order they came in the file.
-   *
-   * @param sc - the scanner
-   * @return a list of cards
+   * @param scannerSupplier - the scanner
+   * @return - a list of cards
    */
   public static List<Card> scannerToCardList(Supplier<Scanner> scannerSupplier) {
     if (scannerSupplier == null) {

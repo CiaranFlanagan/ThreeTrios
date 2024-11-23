@@ -56,6 +56,11 @@ public final class Move implements Consumer<Model> {
   }
 
   @Override
+  public int hashCode() {
+    return Objects.hash(handIdx, row, col);
+  }
+
+  @Override
   public String toString() {
     return "id: " + handIdx + " r: " + row + " c: " + col;
   }

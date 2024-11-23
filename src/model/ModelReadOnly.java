@@ -14,17 +14,23 @@ import java.util.Optional;
  * <p>
  * Example:
  *
- * <p>State 1 : Model is started
+ * <p>
+ * State 1 : Model is started
  *
- * <p>Grid g1 = model.getGrid()
+ * <p>
+ * Grid g1 = model.getGrid()
  *
- * <p>State 2: Model has 5 moves played on it
+ * <p>
+ * State 2: Model has 5 moves played on it
  *
- * <p>Grid g2 = model.getGrid()
+ * <p>
+ * Grid g2 = model.getGrid()
  *
- * <p>g1 != g2
+ * <p>
+ * g1 != g2
  *
- * <p>g1.(some observation) =? g2.(some observation)   -- indeterminate
+ * <p>
+ * g1.(some observation) =? g2.(some observation)   -- indeterminate
  */
 public interface ModelReadOnly {
 
