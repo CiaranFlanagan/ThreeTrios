@@ -3,6 +3,7 @@ package test;
 import model.Card;
 import model.Grid;
 import model.GridCellReadOnly;
+import model.Move;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -67,5 +68,19 @@ public class TestController {
       Assert.assertEquals(expected, cards.toString());
     }
   }
+
+
+  public static class TestPlayer {
+    public static class TestControlPlayer {
+      @Test
+      public void test1() {
+       Move playerMove = Move.create(0,0,0);
+
+      }
+    }
+
+  }
+
+
 
 }
