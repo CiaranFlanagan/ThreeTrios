@@ -7,6 +7,7 @@ import model.Move;
 import model.PlayableGameListener;
 import utils.Utils;
 
+import javax.swing.JFrame;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 
@@ -32,7 +33,7 @@ public class GUIPlayerDelegate extends GUIPlayerBase implements PlayableGameList
                            CoachColor color,
                            PlayableGameListener delegate) {
     super(viewRedHand, viewBlueHand, viewGrid, color);
-    setName(color.toString());
+    setTitle(color.toString());
     this.delegate = delegate;
   }
 
