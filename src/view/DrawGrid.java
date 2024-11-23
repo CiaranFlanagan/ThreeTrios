@@ -56,7 +56,7 @@ public class DrawGrid {
    * @return the width each cell should be
    */
   private int cellWidth(Grid grid, BufferedImage image) {
-    return image.getWidth() / grid.numRows();
+    return image.getWidth() / grid.numCols();
   }
 
   /**
@@ -69,7 +69,7 @@ public class DrawGrid {
    * @return the height each cell should be
    */
   private int cellHeight(Grid grid, BufferedImage image) {
-    return image.getHeight() / grid.numCols();
+    return image.getHeight() / grid.numRows();
   }
 
   /**

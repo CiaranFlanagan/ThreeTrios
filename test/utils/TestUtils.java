@@ -16,7 +16,7 @@ import java.util.Scanner;
 /**
  * Utility class for testing.
  */
-public class Utils {
+public class TestUtils {
 
   /**
    * Retrieves the card at a specific position in the grid if a card is present.

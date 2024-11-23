@@ -31,7 +31,6 @@ public class PlayableGame {
     try {
       move.accept(model);
     } catch (Exception e) {
-      System.err.println(e.getMessage());
       moves.removeLast();
       model = remakeGame();
       curPlayer().accept(this :: onMove, () -> {throw e;});

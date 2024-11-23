@@ -99,12 +99,15 @@ public class GUIHandInteractive extends GUIHandBase implements
       int selectedIdx = view.idxOfHandAt(me.getPoint(), hand, currentImage);
       if (clickPos.isPresent() && clickPos.get() == selectedIdx) {
         clickPos = Optional.empty();
+        move = null;
+        forwardCallBack.accept(null, callback);
       } else {
         clickPos = Optional.of(selectedIdx);
 
         // TODO
 
         // update move
+        move = Move.create();
         move.handIdx = selectedIdx;
 
         // forward callback
