@@ -1,8 +1,10 @@
 package model;
 
+import java.util.Arrays;
+
 /**
- * Represents the grid-shaped board of the Three Trios game.
- * Manages cells, tracks holes, and provides methods to query and modify the grid.
+ * Represents the grid-shaped board of the Three Trios game. Manages cells, tracks holes,
+ * and provides methods to query and modify the grid.
  */
 public final class Grid {
 
@@ -13,9 +15,8 @@ public final class Grid {
   private CellType[][] shape;
 
   /**
-   * Constructs a Grid with a specified shape.
-   * Initializes each cell based on the provided shape's cell type.
-   *
+   * Constructs a Grid with a specified shape. Initializes each cell based on the provided
+   * shape's cell type.
    * @param shape the grid configuration as a 2D array of CellType
    * @throws IllegalArgumentException if shape is null or has invalid dimensions
    */
@@ -81,7 +82,6 @@ public final class Grid {
 
   /**
    * Checks if all cells in the grid are filled with cards.
-   *
    * @return true if the grid is fully occupied, false otherwise
    */
   public boolean isFull() {
@@ -97,7 +97,6 @@ public final class Grid {
 
   /**
    * Gets the number of holes in the grid.
-   *
    * @return the number of holes
    */
   public int getNumHoles() {
@@ -106,7 +105,6 @@ public final class Grid {
 
   /**
    * Provides a read-only view of the grid as a 2D array.
-   *
    * @return a 2D array of GridCellReadOnly
    */
   public GridCellReadOnly[][] readOnlyArray2D() {
@@ -135,7 +133,8 @@ public final class Grid {
   // to place [card] at [row], [col] on this
   // index at 0
   GridCellAbstract placeCardOn(int row, int col, Card card) {
-    if (row < 0 || col < 0 || row >= internalArray.length || col >= internalArray[0].length) {
+    if (row < 0 || col < 0 || row >= internalArray.length
+        || col >= internalArray[0].length) {
       throw new IllegalArgumentException("Rows and Cols must be positive integers");
     }
     GridCellAbstract relevantCell = internalArray[row][col];

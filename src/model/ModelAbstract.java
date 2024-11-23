@@ -10,9 +10,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * Abstract base class for models in the Three Trios game.
- * Provides functionality for managing game state, including grid, player hands,
- * current coach, and gameplay mechanisms.
+ * Abstract base class for models in the Three Trios game. Provides functionality for
+ * managing game state, including grid, player hands, current coach, and gameplay
+ * mechanisms.
  */
 public abstract class ModelAbstract implements Model {
 
@@ -34,11 +34,11 @@ public abstract class ModelAbstract implements Model {
   public Map<CoachColor, List<Card>> curCoachesHands() {
     Map<CoachColor, List<Card>> temp = new EnumMap<>(coachesHands);
     for (CoachColor coach : temp.keySet()) {
-      temp.put(coach,
-               Collections.unmodifiableList(coachesHands.get(coach)
-                                                        .stream()
-                                                        .map(Card :: copy)
-                                                        .collect(Collectors.toList())));
+      temp.put(coach, Collections.unmodifiableList(coachesHands.get(coach)
+                                                               .stream()
+                                                               .map(Card :: copy)
+                                                               .collect(
+                                                                   Collectors.toList())));
     }
     return temp;
   }

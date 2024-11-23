@@ -15,8 +15,7 @@ public final class Card {
 
   /**
    * to construct a card with [name] and [attackValues].
-   *
-   * @param name - name of this card
+   * @param name         - name of this card
    * @param attackValues - attack value in each direction
    */
   public Card(String name, Map<CardinalDirection, AttackValue> attackValues) {
@@ -36,7 +35,6 @@ public final class Card {
 
   /**
    * to return the name of the card.
-   *
    * @return - the name of the card.
    */
   public String getName() {
@@ -45,7 +43,6 @@ public final class Card {
 
   /**
    * to return the coach of this card.
-   *
    * @return - the current coach of this card.
    */
   public CoachColor getCoach() {
@@ -54,7 +51,6 @@ public final class Card {
 
   /**
    * to update the coach to [newCoach].
-   *
    * @param newCoach - the new coach of this
    */
   void setCoach(CoachColor newCoach) {
@@ -63,8 +59,7 @@ public final class Card {
 
   /**
    * to evaluate if this card beats [other] in [direction].
-   *
-   * @param other - the card to compare with
+   * @param other     - the card to compare with
    * @param direction - the direction where this battles other
    * @return the result of the battle.
    */
@@ -74,7 +69,6 @@ public final class Card {
 
   /**
    * to return the attack value of this card in [direction].
-   *
    * @param direction - the direction to check
    * @return - the attack value in [direction]
    */
@@ -91,7 +85,8 @@ public final class Card {
   public boolean equals(Object obj) {
     if (obj instanceof Card) {
       Card other = (Card) obj;
-      return this.toString().equals(other.toString()) && this.coachColor == other.coachColor;
+      return this.toString().equals(other.toString())
+          && this.coachColor == other.coachColor;
     } else {
       return false;
     }
@@ -110,8 +105,7 @@ public final class Card {
 
   /**
    * to set the attack value in [direction] to [av].
-   *
-   * @param av - the attack value to add
+   * @param av        - the attack value to add
    * @param direction - the direction to update
    */
   void setAttackValueInDirection(AttackValue av, CardinalDirection direction) {

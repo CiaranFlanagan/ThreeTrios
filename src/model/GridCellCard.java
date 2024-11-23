@@ -1,8 +1,8 @@
 package model;
 
 /**
- * Represents a cell on the grid that can hold a card in the Three Trios game.
- * A GridCellCard can accept and hold one card at a time.
+ * Represents a cell on the grid that can hold a card in the Three Trios game. A
+ * GridCellCard can accept and hold one card at a time.
  */
 public final class GridCellCard extends GridCellAbstract {
 

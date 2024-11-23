@@ -169,49 +169,73 @@ public class TestModel {
      */
     @Test
     public void TestFromAttackValue() {
-      Assert.assertEquals("ONE should convert to 1", 1, AttackValue.ONE.fromAttackValue());
-      Assert.assertEquals("TWO should convert to 2", 2, AttackValue.TWO.fromAttackValue());
-      Assert.assertEquals("THREE should convert to 3", 3, AttackValue.THREE.fromAttackValue());
-      Assert.assertEquals("FOUR should convert to 4", 4, AttackValue.FOUR.fromAttackValue());
-      Assert.assertEquals("FIVE should convert to 5", 5, AttackValue.FIVE.fromAttackValue());
-      Assert.assertEquals("SIX should convert to 6", 6, AttackValue.SIX.fromAttackValue());
-      Assert.assertEquals("SEVEN should convert to 7", 7, AttackValue.SEVEN.fromAttackValue());
-      Assert.assertEquals("EIGHT should convert to 8", 8, AttackValue.EIGHT.fromAttackValue());
-      Assert.assertEquals("NINE should convert to 9", 9, AttackValue.NINE.fromAttackValue());
+      Assert.assertEquals("ONE should convert to 1", 1,
+                          AttackValue.ONE.fromAttackValue());
+      Assert.assertEquals("TWO should convert to 2", 2,
+                          AttackValue.TWO.fromAttackValue());
+      Assert.assertEquals("THREE should convert to 3", 3,
+                          AttackValue.THREE.fromAttackValue());
+      Assert.assertEquals("FOUR should convert to 4", 4,
+                          AttackValue.FOUR.fromAttackValue());
+      Assert.assertEquals("FIVE should convert to 5", 5,
+                          AttackValue.FIVE.fromAttackValue());
+      Assert.assertEquals("SIX should convert to 6", 6,
+                          AttackValue.SIX.fromAttackValue());
+      Assert.assertEquals("SEVEN should convert to 7", 7,
+                          AttackValue.SEVEN.fromAttackValue());
+      Assert.assertEquals("EIGHT should convert to 8", 8,
+                          AttackValue.EIGHT.fromAttackValue());
+      Assert.assertEquals("NINE should convert to 9", 9,
+                          AttackValue.NINE.fromAttackValue());
       Assert.assertEquals("A should convert to 10", 10, AttackValue.A.fromAttackValue());
     }
 
     @Test
     public void TestBeats() {
       // ONE beats nothing
-      Assert.assertFalse("ONE should not beat ONE", AttackValue.ONE.beats(AttackValue.ONE));
-      Assert.assertFalse("ONE should not beat TWO", AttackValue.ONE.beats(AttackValue.TWO));
+      Assert.assertFalse("ONE should not beat ONE",
+                         AttackValue.ONE.beats(AttackValue.ONE));
+      Assert.assertFalse("ONE should not beat TWO",
+                         AttackValue.ONE.beats(AttackValue.TWO));
 
       // TWO beats ONE but not THREE
       Assert.assertTrue("TWO should beat ONE", AttackValue.TWO.beats(AttackValue.ONE));
-      Assert.assertFalse("TWO should not beat THREE", AttackValue.TWO.beats(AttackValue.THREE));
+      Assert.assertFalse("TWO should not beat THREE",
+                         AttackValue.TWO.beats(AttackValue.THREE));
 
       // THREE beats TWO but not FOUR
-      Assert.assertTrue("THREE should beat TWO", AttackValue.THREE.beats(AttackValue.TWO));
-      Assert.assertFalse("THREE should not beat FOUR", AttackValue.THREE.beats(AttackValue.FOUR));
+      Assert.assertTrue("THREE should beat TWO",
+                        AttackValue.THREE.beats(AttackValue.TWO));
+      Assert.assertFalse("THREE should not beat FOUR",
+                         AttackValue.THREE.beats(AttackValue.FOUR));
 
       // Continue similarly up to A
-      Assert.assertTrue("FOUR should beat THREE", AttackValue.FOUR.beats(AttackValue.THREE));
-      Assert.assertFalse("FOUR should not beat FIVE", AttackValue.FOUR.beats(AttackValue.FIVE));
+      Assert.assertTrue("FOUR should beat THREE",
+                        AttackValue.FOUR.beats(AttackValue.THREE));
+      Assert.assertFalse("FOUR should not beat FIVE",
+                         AttackValue.FOUR.beats(AttackValue.FIVE));
 
-      Assert.assertTrue("FIVE should beat FOUR", AttackValue.FIVE.beats(AttackValue.FOUR));
-      Assert.assertFalse("FIVE should not beat SIX", AttackValue.FIVE.beats(AttackValue.SIX));
+      Assert.assertTrue("FIVE should beat FOUR",
+                        AttackValue.FIVE.beats(AttackValue.FOUR));
+      Assert.assertFalse("FIVE should not beat SIX",
+                         AttackValue.FIVE.beats(AttackValue.SIX));
 
       Assert.assertTrue("SIX should beat FIVE", AttackValue.SIX.beats(AttackValue.FIVE));
-      Assert.assertFalse("SIX should not beat SEVEN", AttackValue.SIX.beats(AttackValue.SEVEN));
+      Assert.assertFalse("SIX should not beat SEVEN",
+                         AttackValue.SIX.beats(AttackValue.SEVEN));
 
-      Assert.assertTrue("SEVEN should beat SIX", AttackValue.SEVEN.beats(AttackValue.SIX));
-      Assert.assertFalse("SEVEN should not beat EIGHT", AttackValue.SEVEN.beats(AttackValue.EIGHT));
+      Assert.assertTrue("SEVEN should beat SIX",
+                        AttackValue.SEVEN.beats(AttackValue.SIX));
+      Assert.assertFalse("SEVEN should not beat EIGHT",
+                         AttackValue.SEVEN.beats(AttackValue.EIGHT));
 
-      Assert.assertTrue("EIGHT should beat SEVEN", AttackValue.EIGHT.beats(AttackValue.SEVEN));
-      Assert.assertFalse("EIGHT should not beat NINE", AttackValue.EIGHT.beats(AttackValue.NINE));
+      Assert.assertTrue("EIGHT should beat SEVEN",
+                        AttackValue.EIGHT.beats(AttackValue.SEVEN));
+      Assert.assertFalse("EIGHT should not beat NINE",
+                         AttackValue.EIGHT.beats(AttackValue.NINE));
 
-      Assert.assertTrue("NINE should beat EIGHT", AttackValue.NINE.beats(AttackValue.EIGHT));
+      Assert.assertTrue("NINE should beat EIGHT",
+                        AttackValue.NINE.beats(AttackValue.EIGHT));
       Assert.assertFalse("NINE should not beat A", AttackValue.NINE.beats(AttackValue.A));
 
       Assert.assertTrue("A should beat NINE", AttackValue.A.beats(AttackValue.NINE));
@@ -360,8 +384,7 @@ public class TestModel {
     @Test
     public void P1Start() {
       model.startGame(ConfigGrid.scannerToGrid(GRID_NO_HOLES),
-                      ConfigCard.scannerToCardList(CC_SMALL),
-                      referee);
+                      ConfigCard.scannerToCardList(CC_SMALL), referee);
       // check coach red is actually a red coach
       red = model.curCoach();
       assertEquals(red, CoachColor.RED);

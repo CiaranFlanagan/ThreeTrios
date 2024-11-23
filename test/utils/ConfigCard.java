@@ -19,9 +19,8 @@ public class ConfigCard {
 
   /**
    * To take a scanner and create a list of cards in the order they came in the file.
-   *
-   * @param sc - the scanner
-   * @return a list of cards
+   * @param scannerSupplier - the scanner
+   * @return - a list of cards
    */
   public static List<Card> scannerToCardList(Supplier<Scanner> scannerSupplier) {
     if (scannerSupplier == null) {
@@ -40,10 +39,14 @@ public class ConfigCard {
       while (sc.hasNext()) {
         String name = sc.next();
         Map<CardinalDirection, AttackValue> directionToAttackValues = new HashMap<>();
-        directionToAttackValues.put(CardinalDirection.NORTH, AttackValue.fromString(sc.next()));
-        directionToAttackValues.put(CardinalDirection.SOUTH, AttackValue.fromString(sc.next()));
-        directionToAttackValues.put(CardinalDirection.EAST, AttackValue.fromString(sc.next()));
-        directionToAttackValues.put(CardinalDirection.WEST, AttackValue.fromString(sc.next()));
+        directionToAttackValues.put(CardinalDirection.NORTH,
+                                    AttackValue.fromString(sc.next()));
+        directionToAttackValues.put(CardinalDirection.SOUTH,
+                                    AttackValue.fromString(sc.next()));
+        directionToAttackValues.put(CardinalDirection.EAST,
+                                    AttackValue.fromString(sc.next()));
+        directionToAttackValues.put(CardinalDirection.WEST,
+                                    AttackValue.fromString(sc.next()));
         cards.add(new Card(name, directionToAttackValues));
       }
     } catch (NoSuchElementException ex) {

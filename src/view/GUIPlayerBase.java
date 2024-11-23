@@ -8,6 +8,9 @@ import javax.swing.WindowConstants;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+/**
+ * To represent a base view of a player in the game of three trios.
+ */
 public class GUIPlayerBase extends JFrame {
 
   protected ModelReadOnly model;
@@ -17,6 +20,13 @@ public class GUIPlayerBase extends JFrame {
   protected GUIHandBase viewBlueHand;
   protected GUIGridBase viewGrid;
 
+  /**
+   * Constructor.
+   * @param viewRedHand the gui of the red hand
+   * @param viewBlueHand the gui of the blue hand
+   * @param viewGrid the gui of the grid
+   * @param coachColor the color of the coach of the player this represents
+   */
   public GUIPlayerBase(GUIHandBase viewRedHand,
                        GUIHandBase viewBlueHand,
                        GUIGridBase viewGrid,
@@ -36,7 +46,7 @@ public class GUIPlayerBase extends JFrame {
   protected void updateModel(ModelReadOnly model) {
     this.model = model;
     updateLayout();
-    updateDelegateControllers();
+    updateDelegateViews();
     repaint();
     setVisible(true);
   }
@@ -57,7 +67,7 @@ public class GUIPlayerBase extends JFrame {
     this.add(viewBlueHand, gbc);
   }
 
-  private void updateDelegateControllers() {
+  private void updateDelegateViews() {
     viewRedHand.updateHand(model.curCoachesHands().get(CoachColor.RED));
     viewBlueHand.updateHand(model.curCoachesHands().get(CoachColor.BLUE));
     viewGrid.updateGrid(model.curGrid());

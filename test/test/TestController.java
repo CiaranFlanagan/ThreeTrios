@@ -14,6 +14,9 @@ import utils.TestFiles;
 
 import java.util.List;
 
+/**
+ * Tests for the ThreeTrios controller
+ */
 @RunWith(Enclosed.class)
 public class TestController {
 
@@ -57,8 +60,9 @@ public class TestController {
       List<Card> cards = ConfigCard.scannerToCardList(TestFiles.CC_SMALL);
       //<TTCard: bob 1 2 3 A>, <TTCard: kc A 4 7 9>, <TTCard: ciaran 1 2 3 4>
       String expected = LineWriter.create()
-                                  .endWith("[bob 1 1 1 1, " + "kc 5 5 5 5, " + "zeke A A A A, "
-                                               + "ciaran 1 1 1 1]")
+                                  .endWith(
+                                      "[bob 1 1 1 1, " + "kc 5 5 5 5, " + "zeke A A A A, "
+                                          + "ciaran 1 1 1 1]")
                                   .toString();
       Assert.assertEquals(expected, cards.toString());
     }

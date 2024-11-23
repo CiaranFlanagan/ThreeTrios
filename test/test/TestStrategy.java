@@ -1,16 +1,16 @@
 package test;
 
+import controller.strategy.CornerStrategy;
+import controller.strategy.DefenseStrategy;
+import controller.strategy.MostFlips;
+import controller.strategy.StrategyAbstract;
 import model.Card;
 import model.CoachColor;
 import model.Grid;
 import model.Model;
 import model.ModelBase;
-import model.RefereeDefault;
-import controller.strategy.CornerStrategy;
-import controller.strategy.DefenseStrategy;
-import controller.strategy.MostFlips;
 import model.Move;
-import controller.strategy.StrategyAbstract;
+import model.RefereeDefault;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -19,7 +19,7 @@ import utils.ConfigCard;
 import utils.ConfigGrid;
 import utils.LineWriter;
 import utils.TestFiles;
-import utils.Utils;
+import utils.TestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +28,8 @@ import java.util.Scanner;
 import java.util.function.Supplier;
 
 /**
- * To test requirements for every player strategy, like whether they bias the top left, have a
- * default move, can produce no result, and that they check the correct cells.
+ * To test requirements for every player strategy, like whether they bias the top left,
+ * have a default move, can produce no result, and that they check the correct cells.
  */
 
 @RunWith(Enclosed.class)
@@ -38,8 +38,8 @@ public class TestStrategy {
 
   /**
    * A test class for the MostFlips strategy in the Three Trios game. It verifies that the
-   * strategy selects moves that flip the maximum number of opponent's cards.
-   * The test case is structured to check different grid configurations and move scenarios.
+   * strategy selects moves that flip the maximum number of opponent's cards. The test
+   * case is structured to check different grid configurations and move scenarios.
    */
   public static class TestMostFlips {
     // cases we want to test:
@@ -53,26 +53,22 @@ public class TestStrategy {
     // place blue 2 2 2 2 at 0, 1
     // place red  3 3 3 3 at 1, 0
 
-    // what observations do we care about. we want to take a model a see what a card's attack values
-    // and colors at a particular position
+    // what observations do we care about. we want to take a model a see what a card's
+    // attack values and colors at a particular position
 
     @Test
     public void bigTestFullGame() {
-      Supplier<Grid> gridSupplier = () -> ConfigGrid.scannerToGrid(new Scanner(LineWriter.create()
-                                                                                         .line("2 3")
-                                                                                         .line("CCX")
-                                                                                         .endWith(
-                                                                                             "CCC")
-                                                                                         .toString()));
-      Supplier<List<Card>> cardSupplier =
-          () -> ConfigCard.scannerToCardList(new Scanner(LineWriter.create()
-                                                                   .line("a 1 1 1 1")
-                                                                   .line("b 2 2 2 2")
-                                                                   .line("c 3 3 3 3")
-                                                                   .line("d 4 4 4 4")
-                                                                   .line("e 5 5 5 5")
-                                                                   .endWith("f 5 5 5 5")
-                                                                   .toString()));
+      Supplier<Grid> gridSupplier = () -> ConfigGrid.scannerToGrid(new Scanner(
+          LineWriter.create().line("2 3").line("CCX").endWith("CCC").toString()));
+      Supplier<List<Card>> cardSupplier = () -> ConfigCard.scannerToCardList(new Scanner(
+          LineWriter.create()
+                    .line("a 1 1 1 1")
+                    .line("b 2 2 2 2")
+                    .line("c 3 3 3 3")
+                    .line("d 4 4 4 4")
+                    .line("e 5 5 5 5")
+                    .endWith("f 5 5 5 5")
+                    .toString()));
       Supplier<Model> modelSupplier = () -> {
         Model m = new ModelBase();
         m.startGame(gridSupplier.get(), cardSupplier.get(), new RefereeDefault());
@@ -87,9 +83,10 @@ public class TestStrategy {
         move1.get().accept(m);
         return m;
       };
-      Assert.assertTrue(utils.Utils.cardAt(modelSupplier1.get(), 0, 0).isPresent());
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier1.get(), 0, 0).get().getCoach(), CoachColor.RED);
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier1.get(), 0, 0).get().toString(),
+      Assert.assertTrue(TestUtils.cardAt(modelSupplier1.get(), 0, 0).isPresent());
+      Assert.assertEquals(TestUtils.cardAt(modelSupplier1.get(), 0, 0).get().getCoach(),
+                          CoachColor.RED);
+      Assert.assertEquals(TestUtils.cardAt(modelSupplier1.get(), 0, 0).get().toString(),
                           "a 1 1 1 1");
 
       // move 2
@@ -100,12 +97,12 @@ public class TestStrategy {
         move2.get().accept(m);
         return m;
       };
-      Assert.assertTrue(utils.Utils.cardAt(modelSupplier2.get(), 0, 1).isPresent());
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier2.get(), 0, 0).get().getCoach(),
+      Assert.assertTrue(TestUtils.cardAt(modelSupplier2.get(), 0, 1).isPresent());
+      Assert.assertEquals(TestUtils.cardAt(modelSupplier2.get(), 0, 0).get().getCoach(),
                           CoachColor.BLUE);
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier2.get(), 0, 1).get().getCoach(),
+      Assert.assertEquals(TestUtils.cardAt(modelSupplier2.get(), 0, 1).get().getCoach(),
                           CoachColor.BLUE);
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier2.get(), 0, 1).get().toString(),
+      Assert.assertEquals(TestUtils.cardAt(modelSupplier2.get(), 0, 1).get().toString(),
                           "b 2 2 2 2");
 
       // move 3
@@ -116,11 +113,15 @@ public class TestStrategy {
         move3.get().accept(m);
         return m;
       };
-      Assert.assertTrue(utils.Utils.cardAt(modelSupplier3.get(), 1, 1).isPresent());
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier3.get(), 0, 0).get().getCoach(), CoachColor.RED);
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier3.get(), 0, 1).get().getCoach(), CoachColor.RED);
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier3.get(), 1, 1).get().getCoach(), CoachColor.RED);
-      Assert.assertEquals(Utils.cardAt(modelSupplier3.get(), 1, 1).get().toString(), "c 3 3 3 3");
+      Assert.assertTrue(TestUtils.cardAt(modelSupplier3.get(), 1, 1).isPresent());
+      Assert.assertEquals(TestUtils.cardAt(modelSupplier3.get(), 0, 0).get().getCoach(),
+                          CoachColor.RED);
+      Assert.assertEquals(TestUtils.cardAt(modelSupplier3.get(), 0, 1).get().getCoach(),
+                          CoachColor.RED);
+      Assert.assertEquals(TestUtils.cardAt(modelSupplier3.get(), 1, 1).get().getCoach(),
+                          CoachColor.RED);
+      Assert.assertEquals(TestUtils.cardAt(modelSupplier3.get(), 1, 1).get().toString(),
+                          "c 3 3 3 3");
     }
 
     @Test
@@ -141,13 +142,8 @@ public class TestStrategy {
   }
 
   /**
-   * To test the corner strategy via properties and mocks to make sure that we handle common errors.
-   * What are some common errors/easy requirements specifically for corners?
-   * 1. You consider some cell other than a corner.
-   * <p>
-   * 2.
-   * <p>
-   * 3. c
+   * To test the corner strategy via properties and mocks to make sure that we handle
+   * common errors.
    */
   public static class TestCornerStrategy {
 
@@ -201,7 +197,7 @@ public class TestStrategy {
 
 
   /**
-   * Tests the extra credit defense start
+   * Tests the extra credit defense start.
    */
   public static class TestDefenseStrategy {
 
@@ -209,6 +205,8 @@ public class TestStrategy {
     private Optional<Move> move;
     private Supplier<Model> modelSupplier;
 
+
+    @Test
     public void testTopLeftBias() {
       if (move.isEmpty()) {
         Assert.fail("strategy should probably produce a move on the first move.");
@@ -260,19 +258,18 @@ public class TestStrategy {
   }
 
   /**
-   * A mock implementation of the ModelBase class used for testing strategies in the
-   * Three Trios game. MockStrategyLogMoves logs card placements instead of interacting with an
-   * actual game
-   * grid, allowing verification of method calls and parameters during testing.
+   * A mock implementation of the ModelBase class used for testing strategies in the Three
+   * Trios game. MockStrategyLogMoves logs card placements instead of interacting with an
+   * actual game grid, allowing verification of method calls and parameters during
+   * testing.
    */
   private static class MockStrategyLogMoves extends ModelBase {
 
     List<List<Integer>> log;
 
     /**
-     * Constructs a MockMostFlips with a specified log to track the row and column coordinates
-     * of placed cards.
-     *
+     * Constructs a MockMostFlips with a specified log to track the row and column
+     * coordinates of placed cards.
      * @param log a list of lists used to record each placement's row and column values
      */
     public MockStrategyLogMoves(List<List<Integer>> log) {

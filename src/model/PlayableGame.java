@@ -1,20 +1,20 @@
 package model;
 
-import controller.player.Player;
-
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.function.Supplier;
 
-public class PlayableModel {
+public class PlayableGame {
 
   private Supplier<Model> modelSupplier;
   private Model model;
   private Deque<Move> moves;
-  private Player red;
-  private Player blue;
+  private PlayableGameListener red;
+  private PlayableGameListener blue;
 
-  public PlayableModel(Supplier<Model> modelSupplier, Player red, Player blue) {
+  public PlayableGame(Supplier<Model> modelSupplier,
+                      PlayableGameListener red,
+                      PlayableGameListener blue) {
     this.modelSupplier = modelSupplier;
     model = modelSupplier.get();
     moves = new ArrayDeque<>();
@@ -31,7 +31,6 @@ public class PlayableModel {
     try {
       move.accept(model);
     } catch (Exception e) {
-      System.err.println(e.getMessage());
       moves.removeLast();
       model = remakeGame();
       curPlayer().accept(this :: onMove, () -> {throw e;});
@@ -49,22 +48,22 @@ public class PlayableModel {
 
   }
 
-  public Model remakeGame()  {
+  public Model remakeGame() {
     Model copy = modelSupplier.get();
     moves.forEach(m -> m.accept(copy));
     return copy;
   }
 
 
-  private Player prevPlayer() {
+  private PlayableGameListener prevPlayer() {
     return coachColorToPlayer(model.curCoach().opponent());
   }
 
-  private Player curPlayer() {
+  private PlayableGameListener curPlayer() {
     return coachColorToPlayer(model.curCoach());
   }
 
-  private Player coachColorToPlayer(CoachColor coach) {
+  private PlayableGameListener coachColorToPlayer(CoachColor coach) {
     return coach == CoachColor.RED ? red : blue;
   }
 

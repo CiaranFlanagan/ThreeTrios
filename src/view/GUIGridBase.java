@@ -6,17 +6,28 @@ import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+/**
+ * To represent a base view only gui of a grid in Three Trios.
+ */
 public class GUIGridBase extends JPanel {
 
-  protected Grid curGrid;
   protected final DrawGrid view;
+  protected Grid curGrid;
   protected BufferedImage curImage;
 
-  public GUIGridBase(DrawGrid view) {
-    this.view = view;
+  /**
+   * Constructor.
+   * @param gridView the artist of the grid
+   */
+  public GUIGridBase(DrawGrid gridView) {
+    this.view = gridView;
     this.setVisible(true);
   }
 
+  /**
+   * To update the grid of this view only grid gui.
+   * @param grid the grid to update this width
+   */
   public void updateGrid(Grid grid) {
     this.curGrid = grid;
   }

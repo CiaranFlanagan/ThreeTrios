@@ -3,23 +3,18 @@ package utils;
 import model.CellType;
 import model.Grid;
 
-import javax.swing.AbstractAction;
-import javax.swing.ActionMap;
-import javax.swing.InputMap;
-import java.awt.event.KeyEvent;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.function.Supplier;
 
 /**
- * To convert a txt file to a GridBoard, representing the board of a Three Trios Game
+ * To convert a txt file to a GridBoard, representing the board of a Three Trios Game.
  */
 public class ConfigGrid {
 
   /**
    * Take a scanner and make a grid.
-   *
-   * @param sc - the scanner
+   * @param scannerSupplier - the scanner
    * @return - a grid
    */
   public static Grid scannerToGrid(Supplier<Scanner> scannerSupplier) {
@@ -30,6 +25,11 @@ public class ConfigGrid {
     return scannerToGrid(sc);
   }
 
+  /**
+   * Take a scanner and make a grid.
+   * @param sc - the scanner
+   * @return - a grid
+   */
   public static Grid scannerToGrid(Scanner sc) {
     if (sc == null) {
       throw new IllegalArgumentException("null scanner");
@@ -44,7 +44,8 @@ public class ConfigGrid {
         for (int curRow = 0; curRow < numRows; curRow++) {
           String rowString = sc.next();
           for (int curCol = 0; curCol < numCols; curCol++) {
-            arr[curRow][curCol] = stringToBoardCell(String.valueOf(rowString.charAt(curCol)));
+            arr[curRow][curCol] =
+                stringToBoardCell(String.valueOf(rowString.charAt(curCol)));
           }
         }
       }
