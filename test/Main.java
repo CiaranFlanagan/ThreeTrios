@@ -1,5 +1,6 @@
 import controller.player.Player;
 import controller.strategy.CornerStrategy;
+import controller.strategy.DefenseStrategy;
 import controller.strategy.MostFlips;
 import controller.strategy.StrategyAbstract;
 import model.Card;
@@ -7,7 +8,8 @@ import model.CoachColor;
 import model.Grid;
 import model.Model;
 import model.ModelBase;
-import model.PlayableModel;
+import model.PlayableGame;
+import model.PlayableGameListener;
 import model.RefereeDefault;
 import utils.ConfigCard;
 import utils.ConfigGrid;
@@ -32,32 +34,9 @@ public class Main {
    * To run the program by just starting a game.
    * @param args - command line args, which don't get processed currently.
    */
-  public static void main3(String[] args) {
-    PlayableModel gc =
-        new PlayableModel(Main :: makeModel, makeHumanPlayer(CoachColor.RED),
-                          makeHumanPlayer(CoachColor.BLUE));
-  }
-
-  public static void main4(String[] args) {
-    PlayableModel gc =
-        new PlayableModel(Main :: makeModel, makeHumanPlayer(CoachColor.RED),
-                          new Player(CoachColor.BLUE, new MostFlips()));
-  }
-
-  public static void main(String[] args) {
-    PlayableModel gc = new PlayableModel(Main :: makeModel,
-                                         makeDelegatePlayer(CoachColor.RED,
-                                                            new MostFlips()),
-                                         makeAIPlayer(CoachColor.BLUE,
-                                                      new CornerStrategy()));
-  }
-
-  private static List<Card> makeCards() {
-    return ConfigCard.scannerToCardList(TestFiles.CC_LARGE);
-  }
-
-  private static Grid makeGrid() {
-    return ConfigGrid.scannerToGrid(TestFiles.GRID_ASSN_HARD);
+  public static void main1(String[] args) {
+    PlayableGame gc = new PlayableGame(Main :: makeModel, makeHumanPlayer(CoachColor.RED),
+                                       makeHumanPlayer(CoachColor.BLUE));
   }
 
   private static Model makeModel() {
@@ -66,7 +45,7 @@ public class Main {
     return model;
   }
 
-  private static Player makeHumanPlayer(CoachColor color) {
+  private static PlayableGameListener makeHumanPlayer(CoachColor color) {
     GUIGridInteractive grid = new GUIGridInteractive(new DrawGrid());
     if (color == CoachColor.RED) {
       return new Player(color,
@@ -79,15 +58,37 @@ public class Main {
     }
   }
 
-  private static Player makeDelegatePlayer(CoachColor color, StrategyAbstract strategy) {
+  private static Grid makeGrid() {
+    return ConfigGrid.scannerToGrid(TestFiles.GRID_ASSN_HARD);
+  }
+
+  private static List<Card> makeCards() {
+    return ConfigCard.scannerToCardList(TestFiles.CC_LARGE);
+  }
+
+  public static void main(String[] args) {
+    PlayableGame gc = new PlayableGame(Main :: makeModel, makeHumanPlayer(CoachColor.RED),
+                                       new Player(CoachColor.BLUE, new MostFlips()));
+  }
+
+  public static void main2(String[] args) {
+    PlayableGame gc = new PlayableGame(Main :: makeModel,
+                                       makeDelegatePlayer(CoachColor.RED,
+                                                          new CornerStrategy()),
+                                       makeAIPlayer(CoachColor.BLUE,
+                                                    new DefenseStrategy()));
+  }
+
+  private static PlayableGameListener makeDelegatePlayer(CoachColor color,
+                                                         StrategyAbstract strategy) {
     return new Player(color, new GUIPlayerDelegate(new GUIHandBase(new DrawHand()),
                                                    new GUIHandBase(new DrawHand()),
-                                                   new GUIGridBase(new DrawGrid()),
-                                                   color,
+                                                   new GUIGridBase(new DrawGrid()), color,
                                                    strategy));
   }
 
-  private static Player makeAIPlayer(CoachColor color, StrategyAbstract strategy) {
+  private static PlayableGameListener makeAIPlayer(CoachColor color,
+                                                   StrategyAbstract strategy) {
     return new Player(color, strategy);
   }
 

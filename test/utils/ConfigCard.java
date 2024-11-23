@@ -40,10 +40,14 @@ public class ConfigCard {
       while (sc.hasNext()) {
         String name = sc.next();
         Map<CardinalDirection, AttackValue> directionToAttackValues = new HashMap<>();
-        directionToAttackValues.put(CardinalDirection.NORTH, AttackValue.fromString(sc.next()));
-        directionToAttackValues.put(CardinalDirection.SOUTH, AttackValue.fromString(sc.next()));
-        directionToAttackValues.put(CardinalDirection.EAST, AttackValue.fromString(sc.next()));
-        directionToAttackValues.put(CardinalDirection.WEST, AttackValue.fromString(sc.next()));
+        directionToAttackValues.put(CardinalDirection.NORTH,
+                                    AttackValue.fromString(sc.next()));
+        directionToAttackValues.put(CardinalDirection.SOUTH,
+                                    AttackValue.fromString(sc.next()));
+        directionToAttackValues.put(CardinalDirection.EAST,
+                                    AttackValue.fromString(sc.next()));
+        directionToAttackValues.put(CardinalDirection.WEST,
+                                    AttackValue.fromString(sc.next()));
         cards.add(new Card(name, directionToAttackValues));
       }
     } catch (NoSuchElementException ex) {

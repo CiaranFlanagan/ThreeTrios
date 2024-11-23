@@ -8,19 +8,29 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
+/**
+ * To represent a view only gui representation of a hand in Three Trios.
+ */
 public class GUIHandBase extends JPanel {
 
   protected static final Color VISIBLE_SELECTED = Color.GREEN;
   protected static final Color VISIBLE_HOVER = Color.WHITE;
-
-  protected List<Card> hand;
   protected final DrawHand view;
+  protected List<Card> hand;
   protected BufferedImage currentImage;
 
-  public GUIHandBase(DrawHand view) {
-    this.view = view;
+  /**
+   * Constructor.
+   * @param handView the artist of the hand
+   */
+  public GUIHandBase(DrawHand handView) {
+    this.view = handView;
   }
 
+  /**
+   * To update the hand that this gui represents
+   * @param hand the new hand
+   */
   public void updateHand(List<Card> hand) {
     this.hand = hand;
     this.setVisible(true);

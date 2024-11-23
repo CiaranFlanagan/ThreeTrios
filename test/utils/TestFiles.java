@@ -15,7 +15,8 @@ public class TestFiles {
   public static Supplier<Scanner> GRID_NO_HOLES = fromPath("grid_no_holes");
   public static Supplier<Scanner> GRID_CONNECTED_HOLES = fromPath("grid_connected");
   public static Supplier<Scanner> GRID_DISC_HOLES = fromPath("grid_disconnected");
-  public static Supplier<Scanner> GRID_NO_HOLES_THREE_BY_THREE = fromPath("grid_no_holes_3by3");
+  public static Supplier<Scanner> GRID_NO_HOLES_THREE_BY_THREE =
+      fromPath("grid_no_holes_3by3");
   public static Supplier<Scanner> CC_SMALL = fromPath("cards_small");
   public static Supplier<Scanner> CC_LARGE = fromPath("cards_large");
 

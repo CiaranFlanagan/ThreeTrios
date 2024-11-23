@@ -3,8 +3,13 @@ package utils;
 import javax.swing.SwingWorker;
 
 
-public class SwingRunnable extends SwingWorker<Void, Void>{
+public class SwingRunnable extends SwingWorker<Void, Void> {
+
   private Runnable todo;
+
+  private SwingRunnable(Runnable todo) {
+    this.todo = todo;
+  }
 
   public static void execute(Runnable todo) {
     try {
@@ -12,10 +17,6 @@ public class SwingRunnable extends SwingWorker<Void, Void>{
     } catch (Exception ignored) {
       // do nothing
     }
-  }
-
-  private SwingRunnable(Runnable todo) {
-    this.todo = todo;
   }
 
   @Override

@@ -110,14 +110,6 @@ public class TestModel {
     Assert.assertEquals(model.numFlippedIfPlaced(testCard, 0, 0), 1);
   }
 
-  /**
-   * bob    1 1 1 1
-   * kc     5 5 5 5
-   * zeke   A A A A
-   * ciaran 1 1 1 1
-   */
-
-
   @Test
   public void testScore() {
     Card testCard = Utils.makeCard("Ciaran 1 2 3 4");
@@ -623,7 +615,8 @@ public class TestModel {
       card1.setCoach(kc);
       card2.setCoach(ciaran);
       ref.refereeBattlePhase(cardCell2);
-      // card 2 would usually beat card1 but they should be different colors because of hole
+      // card 2 would usually beat card1 but they should be different colors because of
+      // hole
       Assert.assertNotEquals(card1.getCoach(), card2.getCoach());
 
     }

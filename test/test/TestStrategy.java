@@ -1,16 +1,16 @@
 package test;
 
+import controller.strategy.CornerStrategy;
+import controller.strategy.DefenseStrategy;
+import controller.strategy.MostFlips;
+import controller.strategy.StrategyAbstract;
 import model.Card;
 import model.CoachColor;
 import model.Grid;
 import model.Model;
 import model.ModelBase;
-import model.RefereeDefault;
-import controller.strategy.CornerStrategy;
-import controller.strategy.DefenseStrategy;
-import controller.strategy.MostFlips;
 import model.Move;
-import controller.strategy.StrategyAbstract;
+import model.RefereeDefault;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -88,7 +88,8 @@ public class TestStrategy {
         return m;
       };
       Assert.assertTrue(utils.Utils.cardAt(modelSupplier1.get(), 0, 0).isPresent());
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier1.get(), 0, 0).get().getCoach(), CoachColor.RED);
+      Assert.assertEquals(utils.Utils.cardAt(modelSupplier1.get(), 0, 0).get().getCoach(),
+                          CoachColor.RED);
       Assert.assertEquals(utils.Utils.cardAt(modelSupplier1.get(), 0, 0).get().toString(),
                           "a 1 1 1 1");
 
@@ -117,10 +118,14 @@ public class TestStrategy {
         return m;
       };
       Assert.assertTrue(utils.Utils.cardAt(modelSupplier3.get(), 1, 1).isPresent());
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier3.get(), 0, 0).get().getCoach(), CoachColor.RED);
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier3.get(), 0, 1).get().getCoach(), CoachColor.RED);
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier3.get(), 1, 1).get().getCoach(), CoachColor.RED);
-      Assert.assertEquals(Utils.cardAt(modelSupplier3.get(), 1, 1).get().toString(), "c 3 3 3 3");
+      Assert.assertEquals(utils.Utils.cardAt(modelSupplier3.get(), 0, 0).get().getCoach(),
+                          CoachColor.RED);
+      Assert.assertEquals(utils.Utils.cardAt(modelSupplier3.get(), 0, 1).get().getCoach(),
+                          CoachColor.RED);
+      Assert.assertEquals(utils.Utils.cardAt(modelSupplier3.get(), 1, 1).get().getCoach(),
+                          CoachColor.RED);
+      Assert.assertEquals(Utils.cardAt(modelSupplier3.get(), 1, 1).get().toString(),
+                          "c 3 3 3 3");
     }
 
     @Test
@@ -141,13 +146,8 @@ public class TestStrategy {
   }
 
   /**
-   * To test the corner strategy via properties and mocks to make sure that we handle common errors.
-   * What are some common errors/easy requirements specifically for corners?
-   * 1. You consider some cell other than a corner.
-   * <p>
-   * 2.
-   * <p>
-   * 3. c
+   * To test the corner strategy via properties and mocks to make sure that we handle
+   * common errors.
    */
   public static class TestCornerStrategy {
 
@@ -260,19 +260,18 @@ public class TestStrategy {
   }
 
   /**
-   * A mock implementation of the ModelBase class used for testing strategies in the
-   * Three Trios game. MockStrategyLogMoves logs card placements instead of interacting with an
-   * actual game
-   * grid, allowing verification of method calls and parameters during testing.
+   * A mock implementation of the ModelBase class used for testing strategies in the Three
+   * Trios game. MockStrategyLogMoves logs card placements instead of interacting with an
+   * actual game grid, allowing verification of method calls and parameters during
+   * testing.
    */
   private static class MockStrategyLogMoves extends ModelBase {
 
     List<List<Integer>> log;
 
     /**
-     * Constructs a MockMostFlips with a specified log to track the row and column coordinates
-     * of placed cards.
-     *
+     * Constructs a MockMostFlips with a specified log to track the row and column
+     * coordinates of placed cards.
      * @param log a list of lists used to record each placement's row and column values
      */
     public MockStrategyLogMoves(List<List<Integer>> log) {

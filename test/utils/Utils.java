@@ -20,11 +20,11 @@ public class Utils {
 
   /**
    * Retrieves the card at a specific position in the grid if a card is present.
-   *
    * @param model the Model containing the grid
-   * @param row the row index of the desired position
-   * @param col the column index of the desired position
-   * @return an Optional containing the Card at the specified position, or empty if no card exists
+   * @param row   the row index of the desired position
+   * @param col   the column index of the desired position
+   * @return an Optional containing the Card at the specified position, or empty if no
+   *     card exists
    */
   public static Optional<Card> cardAt(Model model, int row, int col) {
     GridCellReadOnly cell = model.curGrid().readOnlyArray2D()[row][col];
@@ -43,7 +43,6 @@ public class Utils {
 
   /**
    * Makes a card from a string.
-   *
    * @param nameAndAttackValuesWithSpaces the string to parse
    * @return the card
    */

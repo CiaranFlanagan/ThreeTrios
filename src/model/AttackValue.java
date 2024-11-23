@@ -17,7 +17,6 @@ public enum AttackValue {
 
   /**
    * to produce an attack value from a string, useful for IO.
-   *
    * @param s - the string representing an attack value
    * @return - an attack value corresponding to the string.
    * @throws IllegalArgumentException - when input does not correspond to an AttackValue
@@ -51,7 +50,6 @@ public enum AttackValue {
 
   /**
    * To evaluate whether this has a greater numeric attack value than other.
-   *
    * @param other - there other attack value to compare to
    * @return - whether this has a greater numeric attack value than other
    */
@@ -61,7 +59,6 @@ public enum AttackValue {
 
   /**
    * To convert an attack value to an integer.
-   *
    * @return - an integer corresponding the magnitude of attack value.
    */
   public int fromAttackValue() {

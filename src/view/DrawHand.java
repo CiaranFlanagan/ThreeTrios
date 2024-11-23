@@ -12,6 +12,11 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
+/**
+ * To draw a hand of cards onto a buffered image and provide information about where
+ * this class would have drawn a specific card or what card specifically does some
+ * pixel point correspond to.
+ */
 public class DrawHand {
 
   private static final Color VISIBLE_RED = new Color(246, 150, 151);
@@ -22,7 +27,6 @@ public class DrawHand {
 
   /**
    * Renders the representation of a hand of cards onto handImage.
-   *
    * @param hand      the hand of cards
    * @param handImage the render context
    */
@@ -40,23 +44,8 @@ public class DrawHand {
 
   }
 
-  // TODO
-  public int idxOfHandAt(Point point, List<Card> hand, BufferedImage handImage) {
-    return point.y / cardHeight(hand, handImage);
-  }
-
-  // TODO
-  public Rectangle idxToBoundingBox(int idx, List<Card> hand, BufferedImage handImage) {
-    int left = 0;
-    int top = idx * cardHeight(hand, handImage);
-    int width = handImage.getWidth();
-    int height = handImage.getHeight() / hand.size();
-    return new Rectangle(left, top, width, height);
-  }
-
   /**
    * To render the card to the artist's context and translate the artist after.
-   *
    * @param card       the card to render
    * @param artist     the artist who manages rendering to correct context
    * @param cardWidth  the width of the rendered card
@@ -84,9 +73,26 @@ public class DrawHand {
   }
 
   /**
+   * To produce the width each card should have in pixels from an image context.
+   * @param handImage the image context
+   * @return the width each card should have in pixels
+   */
+  private int cardWidth(BufferedImage handImage) {
+    return handImage.getWidth();
+  }
+
+  /**
+   * To produce the height each card should have in pixels from an image context.
+   * @param handImage the image context
+   * @return the height each card should have in pixels
+   */
+  private int cardHeight(List<Card> hand, BufferedImage handImage) {
+    return handImage.getHeight() / hand.size();
+  }
+
+  /**
    * To update the color of artist to match the visual representation of the Coach's
    * color.
-   *
    * @param artist the artist to update
    * @param coach  the coach to match
    */
@@ -94,14 +100,30 @@ public class DrawHand {
     artist.setColor(coach == CoachColor.RED ? VISIBLE_RED : VISIBLE_BLUE);
   }
 
-  // TODO
-  private int cardWidth(BufferedImage handImage) {
-    return handImage.getWidth();
+  /**
+   * The index of a hand the card a pixel on an image would refer to.
+   * @param point the point that is considered
+   * @param hand the hand to add to the context of the point
+   * @param handImage the image to add to the context of the point
+   * @return the index in the hand the point corresponds to
+   */
+  public int idxOfHandAt(Point point, List<Card> hand, BufferedImage handImage) {
+    return point.y / cardHeight(hand, handImage);
   }
 
-  // TODO
-  private int cardHeight(List<Card> hand, BufferedImage handImage) {
-    return handImage.getHeight() / hand.size();
+  /**
+   * The bounding box that an index in a given hand would correspond to on an image
+   * @param idx the index of the hand to consider
+   * @param hand the hand to add to context
+   * @param handImage the image to add to context
+   * @return the bounding box on the image the card at idx lies
+   */
+  public Rectangle idxToBoundingBox(int idx, List<Card> hand, BufferedImage handImage) {
+    int left = 0;
+    int top = idx * cardHeight(hand, handImage);
+    int width = handImage.getWidth();
+    int height = handImage.getHeight() / hand.size();
+    return new Rectangle(left, top, width, height);
   }
 
 

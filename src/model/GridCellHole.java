@@ -6,8 +6,8 @@ package model;
 public final class GridCellHole extends GridCellAbstract {
 
   /**
-   * Represents a hole in the grid of the Three Trios game.
-   * A GridCellHole cannot hold any cards.
+   * Represents a hole in the grid of the Three Trios game. A GridCellHole cannot hold any
+   * cards.
    */
   public GridCellHole() {
     super();

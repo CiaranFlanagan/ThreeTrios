@@ -1,7 +1,7 @@
 package controller.strategy;
 
-import model.Move;
 import model.Model;
+import model.Move;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +11,8 @@ import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
 /**
- * Strategy to generate moves focused on grid corners.
- * Plays each card from the hand in every corner position.
+ * Strategy to generate moves focused on grid corners. Plays each card from the hand in
+ * every corner position.
  */
 public class CornerStrategy extends DefenseStrategy {
 

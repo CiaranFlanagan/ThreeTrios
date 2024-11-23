@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * to represent a model of the three trios game.
- * Invariant: getCurrentCoach() is never null.
+ * to represent a model of the three trios game. Invariant: getCurrentCoach() is never
+ * null.
  */
 public class ModelBase extends ModelAbstract {
 
@@ -24,7 +24,6 @@ public class ModelBase extends ModelAbstract {
 
   /**
    * Constructor.
-   *
    * @param r - a random to help randomize dealing cards.
    */
   public ModelBase(Random r) {
@@ -34,7 +33,6 @@ public class ModelBase extends ModelAbstract {
 
   /**
    * Constructor.
-   *
    * @return - new TTM
    */
   public static ModelBase create() {
@@ -49,12 +47,13 @@ public class ModelBase extends ModelAbstract {
     if (grid == null || cards == null || ref == null) {
       throw new IllegalArgumentException("Arguments cannot be null");
     }
-    int totalCardCells =
-        grid.readOnlyArray2D().length * grid.readOnlyArray2D()[0].length - grid.getNumHoles();
+    int totalCardCells = grid.readOnlyArray2D().length * grid.readOnlyArray2D()[0].length
+        - grid.getNumHoles();
     int requiredCards = totalCardCells + 1;
     if (cards.size() < requiredCards) {
-      throw new IllegalArgumentException("Number of cards must be at least N + 1, where N is the "
-                                             + "number of card cells on the grid");
+      throw new IllegalArgumentException(
+          "Number of cards must be at least N + 1, where N is the "
+              + "number of card cells on the grid");
     }
     this.grid = grid;
     this.ref = ref;
@@ -107,7 +106,6 @@ public class ModelBase extends ModelAbstract {
 
   /**
    * Checks if the game is over.
-   *
    * @return true if the game is over, false otherwise
    */
   @Override
@@ -130,7 +128,8 @@ public class ModelBase extends ModelAbstract {
     if (!isGameOver()) {
       throw new IllegalStateException("Game is not over yet");
     }
-    //The winner is determined by counting the number of cards each player owns both on the grid
+    //The winner is determined by counting the number of cards each player owns both on
+    // the grid
     // and
     // in their hands.
     return whoHasMoreTotalCards();
@@ -138,7 +137,6 @@ public class ModelBase extends ModelAbstract {
 
   /**
    * Determines the coach with more total cards.
-   *
    * @return - coach with more total cards
    * @throws IllegalStateException if grid is not full, or if cards coach is null
    */
@@ -153,12 +151,14 @@ public class ModelBase extends ModelAbstract {
           } else if (cell.getCard().getCoach() == CoachColor.BLUE) {
             coachBlueTotal += 1;
           } else {
-            throw new IllegalStateException("card should have a coach if this board is full");
+            throw new IllegalStateException(
+                "card should have a coach if this board is full");
           }
         }
       }
     }
-    return coachRedTotal > coachBlueTotal ? CoachColor.RED : CoachColor.BLUE; // ternary operator
+    return coachRedTotal > coachBlueTotal ? CoachColor.RED :
+        CoachColor.BLUE; // ternary operator
   }
 
 }

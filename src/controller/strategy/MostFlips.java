@@ -1,15 +1,15 @@
 package controller.strategy;
 
-import model.Move;
 import model.CoachColor;
 import model.Model;
+import model.Move;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
- * Strategy that maximizes the number of opponent's cards flipped.
- * Evaluates moves by comparing the number of opponent-controlled cards before and after the move.
+ * Strategy that maximizes the number of opponent's cards flipped. Evaluates moves by
+ * comparing the number of opponent-controlled cards before and after the move.
  */
 public class MostFlips extends StrategyAbstract {
 

@@ -18,11 +18,10 @@ abstract class GridCellAbstract implements GridCellVisitable {
   }
 
   /**
-   * To link [this] board cell to [other] in direction [dir].
-   * EFFECT: also links [other] to [this] in the opposite direction of [dir].
-   *
+   * To link [this] board cell to [other] in direction [dir]. EFFECT: also links [other]
+   * to [this] in the opposite direction of [dir].
    * @param other - the other board cell
-   * @param dir - the direction [this] links to [other]
+   * @param dir   - the direction [this] links to [other]
    */
   protected final void link(GridCellAbstract other, CardinalDirection dir) {
     this.neighbors.put(dir, other);
@@ -31,7 +30,6 @@ abstract class GridCellAbstract implements GridCellVisitable {
 
   /**
    * To evaluate if this cell can have a card.
-   *
    * @return - if this cell can have a card
    */
   public boolean canHaveCard() {
@@ -40,7 +38,6 @@ abstract class GridCellAbstract implements GridCellVisitable {
 
   /**
    * Whether this cell has a card.
-   *
    * @return - whether this cell has a card
    */
   public boolean hasCard() {
@@ -49,7 +46,6 @@ abstract class GridCellAbstract implements GridCellVisitable {
 
   /**
    * To return the card held in this cell.
-   *
    * @return - the card held in this cell.
    */
   public Card getCard() {
@@ -58,7 +54,6 @@ abstract class GridCellAbstract implements GridCellVisitable {
 
   /**
    * To indicate whether a neighbor exists in a given cardinal direction.
-   *
    * @param direction - the direction to consider
    * @return
    */
@@ -68,7 +63,6 @@ abstract class GridCellAbstract implements GridCellVisitable {
 
   /**
    * To get the neighbor to the [N/S/E/W].
-   *
    * @param direction - the cardinal direction to consider
    * @return - the neighbor (if any) in [direction]
    */
@@ -78,7 +72,6 @@ abstract class GridCellAbstract implements GridCellVisitable {
 
   /**
    * To place the card on this cell.
-   *
    * @param card - the card to place
    * @throws IllegalStateException if canHaveCard() is false
    */
@@ -88,8 +81,8 @@ abstract class GridCellAbstract implements GridCellVisitable {
 
   /**
    * To accept a battle phase officiated by [ref].
-   *
-   * @param ref - the ref that controls the rules and what happens during this battle phase
+   * @param ref - the ref that controls the rules and what happens during this battle
+   *            phase
    */
   public abstract void acceptBattlePhase(Referee ref);
 

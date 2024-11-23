@@ -44,7 +44,8 @@ public class ConfigGrid {
         for (int curRow = 0; curRow < numRows; curRow++) {
           String rowString = sc.next();
           for (int curCol = 0; curCol < numCols; curCol++) {
-            arr[curRow][curCol] = stringToBoardCell(String.valueOf(rowString.charAt(curCol)));
+            arr[curRow][curCol] =
+                stringToBoardCell(String.valueOf(rowString.charAt(curCol)));
           }
         }
       }

@@ -22,8 +22,8 @@ public enum CoachColor {
 
   /**
    * Returns the opposing coach.
-   *
-   * @return the opponent Coach of the current coach (RED's opponent is BLUE and vice versa)
+   * @return the opponent Coach of the current coach (RED's opponent is BLUE and vice
+   *     versa)
    * @throws IllegalStateException if the current state is invalid
    */
   public CoachColor opponent() {

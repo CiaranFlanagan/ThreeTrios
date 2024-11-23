@@ -11,7 +11,6 @@ public enum CardinalDirection {
 
   /**
    * to return the opposite direction of this.
-   *
    * @return - the opposite direction of this.
    */
   public CardinalDirection opposite() {

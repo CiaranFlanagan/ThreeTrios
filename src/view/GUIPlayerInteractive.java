@@ -1,14 +1,18 @@
 package view;
 
-import model.Move;
 import model.CoachColor;
 import model.Model;
+import model.Move;
 import utils.TriConsumer;
 
 import java.util.concurrent.Callable;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
+/**
+ * To represent a player in the game of three trios as a gui and also handle
+ * interactions accordingly.
+ */
 public class GUIPlayerInteractive extends GUIPlayerDelegate implements
     BiConsumer<Consumer<Move>, Callable<Model>> {
 
@@ -16,38 +20,40 @@ public class GUIPlayerInteractive extends GUIPlayerDelegate implements
   protected BiConsumer<Move, Consumer<Move>> grid;
   protected Consumer<Move> callback;
 
-  public GUIPlayerInteractive(GUIHandInteractive viewRedHand,
-                              GUIHandBase viewBlueHand,
-                              GUIGridInteractive viewGrid) {
-    super(viewRedHand, viewBlueHand, viewGrid, CoachColor.RED, null);
-    hand = viewRedHand;
-    grid = viewGrid;
-    updateDelegate();
+  /**
+   * Constructor.
+   * @param redHand an interactive red hand
+   * @param blueHand a base blue hand
+   * @param grid an interactive grid
+   */
+  public GUIPlayerInteractive(GUIHandInteractive redHand,
+                              GUIHandBase blueHand,
+                              GUIGridInteractive grid) {
+    super(redHand, blueHand, grid, CoachColor.RED, null);
+    hand = redHand;
+    this.grid = grid;
   }
 
-  private void updateDelegate() {
-    super.delegate = this;
-  }
-
-  public GUIPlayerInteractive(GUIHandBase viewRedHand,
-                              GUIHandInteractive viewBlueHand,
-                              GUIGridInteractive viewGrid) {
-    super(viewRedHand, viewBlueHand, viewGrid, CoachColor.BLUE, null);
-    hand = viewBlueHand;
-    grid = viewGrid;
-    updateDelegate();
+  /**
+   * Constructor.
+   * @param redHand  a base red hand
+   * @param blueHand an interactive blue hand
+   * @param grid     an interactive grid
+   */
+  public GUIPlayerInteractive(GUIHandBase redHand,
+                              GUIHandInteractive blueHand,
+                              GUIGridInteractive grid) {
+    super(redHand, blueHand, grid, CoachColor.BLUE, null);
+    hand = blueHand;
+    this.grid = grid;
   }
 
   @Override
   public void accept(Consumer<Move> callback, Callable<Model> modelCallable) {
-    this.callback = callback;
-    super.accept(this :: onMove, modelCallable);
-
-  }
-
-  private void onMove(Move move) {
-    Move newMove = Move.create();
-    hand.accept(newMove, callback, grid);
+    if (!propagateCallable(modelCallable)) {
+      Move newMove = Move.create();
+      hand.accept(newMove, callback, grid);
+    }
   }
 
 }

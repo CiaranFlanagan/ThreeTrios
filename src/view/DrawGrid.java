@@ -9,12 +9,21 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
+/**
+ * To render a grid onto a buffered image. This is used so that a grid can directly be
+ * rendered to a png to test.
+ */
 public class DrawGrid {
 
   private static final Color VISIBLE_HOLE = Color.GRAY;
   private static final Color VISIBLE_EMPTY_CARD = new Color(144, 238, 144);
   private static final Color VISIBLE_BORDER = Color.BLACK;
 
+  /**
+   * To render a grid onto a buffered image.
+   * @param grid the grid to render
+   * @param image the image to render onto
+   */
   public void renderGrid(Grid grid, BufferedImage image) {
     Graphics artist = image.createGraphics();
     int cellWidth = cellWidth(grid, image);
@@ -38,15 +47,38 @@ public class DrawGrid {
     }
   }
 
-  public Point cellAt(Point pixel, Grid grid, BufferedImage image) {
-    return new Point((int) pixel.getX() * grid.numCols() / image.getWidth(),
-                     (int) pixel.getY() * grid.numRows() / image.getHeight());
+  /**
+   * To produce the cell width each cell should be given the image that the cells need
+   * to be rendered onto. The formula for this is to get the width of the image and
+   * divide by the number of columns in the grid.
+   * @param grid the grid to get the number of rows from
+   * @param image the image to judge width based on
+   * @return the width each cell should be
+   */
+  private int cellWidth(Grid grid, BufferedImage image) {
+    return image.getWidth() / grid.numRows();
   }
 
-  public Rectangle cellToBoundingBox(Point cell, Grid grid, BufferedImage image) {
-    return null;
+  /**
+   * To produce the cell height each cell should be given the image that the cells need to
+   * be rendered onto. The formula for this is to get the height of the image and
+   * divide by
+   * the number of rows in the grid.
+   * @param grid  the grid to get the number of columns from
+   * @param image the image to judge height based on
+   * @return the height each cell should be
+   */
+  private int cellHeight(Grid grid, BufferedImage image) {
+    return image.getHeight() / grid.numCols();
   }
 
+  /**
+   * To draw a cell.
+   * @param artist the graphics object with context
+   * @param cell the cell to draw
+   * @param cellWidth the width of the cell in pixels
+   * @param cellHeight the height of the cell in pixels
+   */
   private void drawCell(Graphics artist,
                         GridCellReadOnly cell,
                         int cellWidth,
@@ -57,9 +89,17 @@ public class DrawGrid {
     artist.drawRect(0, 0, cellWidth, cellHeight);
   }
 
-  // TODO
-  private int cellWidth(Grid grid, BufferedImage image) {
-    return image.getWidth() / grid.readOnlyArray2D()[0].length;
+  /**
+   * To take a grid and an image and analyze what cell the given point would correspond
+   * to.
+   * @param pixel the pixel to analyze
+   * @param grid the grid that was drawn onto image
+   * @param image the image of the grid
+   * @return what cell, a point in (rows, cols), the pixel would be at
+   */
+  public Point cellAt(Point pixel, Grid grid, BufferedImage image) {
+    return new Point((int) pixel.getX() * grid.numCols() / image.getWidth(),
+                     (int) pixel.getY() * grid.numRows() / image.getHeight());
   }
 
   // TODO

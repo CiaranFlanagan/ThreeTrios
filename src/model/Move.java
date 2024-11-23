@@ -1,14 +1,14 @@
 package model;
 
+import java.util.Objects;
 import java.util.function.Consumer;
 
 /**
- * Represents a move in the Three Trios game.
- * Defined by a grid position (row and column) and a card index from the player's hand.
- * Can be applied to a Model to place a card at the specified location.
+ * Represents a move in the Three Trios game. Defined by a grid position (row and column)
+ * and a card index from the player's hand. Can be applied to a Model to place a card at
+ * the specified location.
  */
-public final class
-Move implements Consumer<Model> {
+public final class Move implements Consumer<Model> {
 
   public int handIdx;
   public int row;
@@ -22,9 +22,8 @@ Move implements Consumer<Model> {
 
   /**
    * Creates a new Move instance with the specified row, column, and hand index.
-   *
-   * @param row the row index on the grid
-   * @param col the column index on the grid
+   * @param row     the row index on the grid
+   * @param col     the column index on the grid
    * @param handIdx the index of the card in the player's hand
    * @return a new Move instance representing the specified move
    */
@@ -33,13 +32,12 @@ Move implements Consumer<Model> {
   }
 
   public static Move create() {
-    return new Move(-1, -1,-1);
+    return new Move(-1, -1, -1);
   }
 
   /**
-   * Executes this move on the given model by placing the specified card from the player's hand
-   * at the designated grid cell.
-   *
+   * Executes this move on the given model by placing the specified card from the player's
+   * hand at the designated grid cell.
    * @param model the game Model on which to execute this move
    */
   @Override
