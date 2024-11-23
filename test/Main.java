@@ -21,12 +21,27 @@ import view.GUIHandBase;
 import view.GUIHandInteractive;
 import view.GUIPlayerDelegate;
 import view.GUIPlayerInteractive;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * To represent the entry point into our program.
  */
-  public class Main {
+public class Main {
+
+  protected static Map<String, Function<CoachColor, ControlPlayer>> dispatchMap;
+
+  static {
+    dispatchMap = new HashMap<>();
+    dispatchMap.put("0", Main :: makeHumanPlayer);
+    dispatchMap.put("1", Main :: makeMostFlipsAIPlayer);
+    dispatchMap.put("2", Main :: makeCornerPlayer);
+    dispatchMap.put("3", Main :: makeDefensePlayer);
+  }
 
   /**
    * The main method to launch the game.
@@ -34,58 +49,49 @@ import java.util.List;
    * Parses command-line arguments to configure player types and starts the game. If no
    * arguments or invalid arguments are provided, displays a usage message.
    * </p>
-   *
    * @param args command-line arguments, where the first two numbers specify player types
    */
   public static void main(String[] args) {
-    if (args.length == 0) {
-      System.err.println("run jar again with 'help'");
+    if (args.length != 2) {
+      needsHelp();
       return;
     }
-    if (!needsHelp(args[0])) {
-      int fst = Integer.valueOf(args[0]);
-      int snd = Integer.valueOf(args[1]);
-      ControlPlayer red = makePlayer(fst, CoachColor.RED);
-      ControlPlayer blue = makePlayer(snd, CoachColor.BLUE);
-      new PlayableGame(Main :: makeModel, red, blue);
+
+    String fst = args[0];
+    String snd = args[1];
+
+    if (!dispatchMap.containsKey(fst) || !dispatchMap.containsKey(snd)) {
+      needsHelp();
+      return;
     }
-    
-  }
-  
-  private static boolean needsHelp(String s) {
-    if (s.equals("help")) {
-      System.out.println("enter two numbers with a space in between to select types of "
-                             + "players");
-      System.out.println("0: human player");
-      System.out.println("1: most-flips AI player");
-      System.out.println("2: corner AI player");
-      System.out.println("3: defense AI player");
-      System.out.println("ex: java -jar ThreeTrios.jar 0 0");
-      return true;
-    } else {
-      return false;
-    }
+
+    ControlPlayer red = dispatchMap.get(fst).apply(CoachColor.RED);
+    ControlPlayer blue = dispatchMap.get(fst).apply(CoachColor.BLUE);
+    new PlayableGame(Main :: makeModel, red, blue);
+
+
   }
 
-  private static ControlPlayer makePlayer(int i, CoachColor color) {
-    switch (i) {
-      case 0: return makeHumanPlayer(color);
-      case 1: return makeMostFlipsAIPlayer(color);
-      case 2: return makeCornerPlayer(color);
-      case 3: return makeDefensePlayer(color);
-    }
-    throw new IllegalArgumentException("bad int; restart");
+  private static void needsHelp() {
+    System.out.println(
+        "enter two numbers with a space in between to select types of " + "players");
+    System.out.println("0: human player");
+    System.out.println("1: most-flips AI player");
+    System.out.println("2: corner AI player");
+    System.out.println("3: defense AI player");
+    System.out.println("ex: java -jar ThreeTrios.jar 0 0");
+
   }
 
   private static ControlPlayer makeHumanPlayer(CoachColor color) {
     GUIGridInteractive grid = new GUIGridInteractive(new DrawGrid());
     if (color == CoachColor.RED) {
-      return new ControlPlayer(color,
-                               new GUIPlayerInteractive(new GUIHandInteractive(new DrawHand()),
-                                                 new GUIHandBase(new DrawHand()), grid));
+      return new ControlPlayer(color, new GUIPlayerInteractive(
+          new GUIHandInteractive(new DrawHand()), new GUIHandBase(new DrawHand()), grid));
     } else {
-      return new ControlPlayer(color, new GUIPlayerInteractive(new GUIHandBase(new DrawHand()),
-                                                               new GUIHandInteractive(
+      return new ControlPlayer(color,
+                               new GUIPlayerInteractive(new GUIHandBase(new DrawHand()),
+                                                        new GUIHandInteractive(
                                                             new DrawHand()), grid));
     }
   }
@@ -118,11 +124,11 @@ import java.util.List;
   }
 
   private static ControlPlayer makeDelegatePlayer(CoachColor color,
-                                                         StrategyAbstract strategy) {
+                                                  StrategyAbstract strategy) {
     return new ControlPlayer(color, new GUIPlayerDelegate(new GUIHandBase(new DrawHand()),
                                                           new GUIHandBase(new DrawHand()),
-                                                          new GUIGridBase(new DrawGrid()), color,
-                                                          strategy));
+                                                          new GUIGridBase(new DrawGrid()),
+                                                          color, strategy));
   }
 
 }

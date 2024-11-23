@@ -66,8 +66,6 @@ public class TestController {
                                   .toString();
       Assert.assertEquals(expected, cards.toString());
     }
-
-
   }
 
 }
