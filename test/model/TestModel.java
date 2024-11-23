@@ -7,7 +7,7 @@ import org.junit.Test;
 import utils.ConfigCard;
 import utils.ConfigGrid;
 import utils.TestFiles;
-import utils.Utils;
+import utils.TestUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -99,22 +99,22 @@ public class TestModel {
 
   @Test
   public void testNumFlippedIfPlaced() {
-    Card testCard = Utils.makeCard("WINNER A A A A");
+    Card testCard = TestUtils.makeCard("WINNER A A A A");
     Assert.assertEquals(model.numFlippedIfPlaced(testCard, 0, 0), 0);
   }
 
   @Test
   public void testNumFlippedIfPlaced2() {
-    Card testCard = Utils.makeCard("WINNER A A A A");
+    Card testCard = TestUtils.makeCard("WINNER A A A A");
     model.placeCard(0, 0, 1);
     Assert.assertEquals(model.numFlippedIfPlaced(testCard, 0, 0), 1);
   }
 
   @Test
   public void testScore() {
-    Card testCard = Utils.makeCard("Ciaran 1 2 3 4");
-    Card testCard2 = Utils.makeCard("KC 1 2 3 4");
-    Card testCard3 = Utils.makeCard("John 1 2 3 4");
+    Card testCard = TestUtils.makeCard("Ciaran 1 2 3 4");
+    Card testCard2 = TestUtils.makeCard("KC 1 2 3 4");
+    Card testCard3 = TestUtils.makeCard("John 1 2 3 4");
     testCard.setCoach(CoachColor.RED);
     testCard2.setCoach(CoachColor.BLUE);
     testCard3.setCoach(CoachColor.BLUE);
@@ -164,13 +164,13 @@ public class TestModel {
 
   @Test(expected = IllegalArgumentException.class)
   public void testNumFlippedIfPlaced_InvalidRow() {
-    Card testCard = Utils.makeCard("WINNER A A A A");
+    Card testCard = TestUtils.makeCard("WINNER A A A A");
     model.numFlippedIfPlaced(testCard, -1, 0);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testNumFlippedIfPlaced_InvalidColumn() {
-    Card testCard = Utils.makeCard("WINNER A A A A");
+    Card testCard = TestUtils.makeCard("WINNER A A A A");
     model.numFlippedIfPlaced(testCard, 0, -1);
   }
 
@@ -182,13 +182,13 @@ public class TestModel {
 
   @Test(expected = IllegalArgumentException.class)
   public void testSetGridCardAt_InvalidRow() {
-    Card testCard = Utils.makeCard("WINNER A A A A");
+    Card testCard = TestUtils.makeCard("WINNER A A A A");
     model.setGridCardAt(-1, 0, testCard);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testSetGridCardAt_InvalidColumn() {
-    Card testCard = Utils.makeCard("WINNER A A A A");
+    Card testCard = TestUtils.makeCard("WINNER A A A A");
     model.setGridCardAt(0, -1, testCard);
   }
 
@@ -236,7 +236,7 @@ public class TestModel {
     @Test
     public void testPlaceCardOn() {
       HashMap<Object, Object> hm = new HashMap<>();
-      Card card = Utils.makeCard("a 1 1 1 1");
+      Card card = TestUtils.makeCard("a 1 1 1 1");
       GridCellAbstract cell = grid.placeCardOn(0, 0, card);
       assertTrue(cell.hasCard());
       assertEquals(card.toString(), cell.getCard().toString());
@@ -280,7 +280,7 @@ public class TestModel {
     @Test
     public void testCopy() {
       Grid grid = this.grid;
-      grid.placeCardOn(0, 0, Utils.makeCard("a 2 1 1 1"));
+      grid.placeCardOn(0, 0, TestUtils.makeCard("a 2 1 1 1"));
       Grid gridCopy = grid.copy();
       assertEquals(getCard(grid, 0, 0), getCard(gridCopy, 0, 0));
     }
@@ -397,7 +397,7 @@ public class TestModel {
     //public but must be tested here because it used protected methods
     @Test
     public void testPlaceCard() {
-      Card c = Utils.makeCard("b 1 2 3 4");
+      Card c = TestUtils.makeCard("b 1 2 3 4");
       cell1.placeCard(c);
       assertEquals(c, cell1.getCard());
     }
@@ -543,9 +543,9 @@ public class TestModel {
       cardCell3 = new GridCellCard();
       kc = CoachColor.RED;
       ciaran = CoachColor.BLUE;
-      card1 = Utils.makeCard("c1 1 2 3 4");
-      card2 = Utils.makeCard("c2 5 6 7 8");
-      card3 = Utils.makeCard("c3 A A A A");
+      card1 = TestUtils.makeCard("c1 1 2 3 4");
+      card2 = TestUtils.makeCard("c2 5 6 7 8");
+      card3 = TestUtils.makeCard("c3 A A A A");
       ref = new RefereeDefault();
     }
 

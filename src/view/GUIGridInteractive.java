@@ -1,7 +1,9 @@
 package view;
 
+import model.CoachColor;
 import model.Move;
 import utils.MouseHandler;
+import utils.Utils;
 import utils.WasMouse;
 
 import java.awt.Point;
@@ -17,6 +19,7 @@ public class GUIGridInteractive extends GUIGridBase implements
 
   private Move move;
   private Consumer<Move> callback;
+
 
   /**
    * Constructor
@@ -48,6 +51,10 @@ public class GUIGridInteractive extends GUIGridBase implements
       if (curGrid.isFull()) {
         this.unregister(GUIGridInteractive.this);
       }
+      if (move == null) {
+        Utils.popup("no card selected", GUIGridInteractive.this);
+        return;
+      }
       Point cell = view.cellAt(me.getPoint(), curGrid, curImage);
       // update the move
       move.row = cell.y;
@@ -57,6 +64,7 @@ public class GUIGridInteractive extends GUIGridBase implements
       callback.accept(move);
 
       // reset callback to make sure that you can't spam when it's not your turn
+      move = null;
       callback = (m -> {});
 
       GUIGridInteractive.this.repaint();

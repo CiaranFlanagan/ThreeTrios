@@ -3,6 +3,8 @@ package controller.strategy;
 import model.GridCellReadOnly;
 import model.Model;
 import model.Move;
+import model.PlayableGame;
+import model.PlayableGameListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,8 +23,7 @@ import java.util.stream.Collectors;
  * Abstract base class for game strategies in the Three Trios game. Defines methods for
  * evaluating moves and finding the most effective one.
  */
-public abstract class StrategyAbstract implements
-    BiConsumer<Consumer<Move>, Callable<Model>> {
+public abstract class StrategyAbstract implements PlayableGameListener {
 
   /**
    * To find the best move by reducing all possible moves, choosing the most effective via

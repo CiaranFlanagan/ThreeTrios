@@ -19,7 +19,7 @@ import utils.ConfigCard;
 import utils.ConfigGrid;
 import utils.LineWriter;
 import utils.TestFiles;
-import utils.Utils;
+import utils.TestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,10 +83,10 @@ public class TestStrategy {
         move1.get().accept(m);
         return m;
       };
-      Assert.assertTrue(utils.Utils.cardAt(modelSupplier1.get(), 0, 0).isPresent());
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier1.get(), 0, 0).get().getCoach(),
+      Assert.assertTrue(TestUtils.cardAt(modelSupplier1.get(), 0, 0).isPresent());
+      Assert.assertEquals(TestUtils.cardAt(modelSupplier1.get(), 0, 0).get().getCoach(),
                           CoachColor.RED);
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier1.get(), 0, 0).get().toString(),
+      Assert.assertEquals(TestUtils.cardAt(modelSupplier1.get(), 0, 0).get().toString(),
                           "a 1 1 1 1");
 
       // move 2
@@ -97,12 +97,12 @@ public class TestStrategy {
         move2.get().accept(m);
         return m;
       };
-      Assert.assertTrue(utils.Utils.cardAt(modelSupplier2.get(), 0, 1).isPresent());
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier2.get(), 0, 0).get().getCoach(),
+      Assert.assertTrue(TestUtils.cardAt(modelSupplier2.get(), 0, 1).isPresent());
+      Assert.assertEquals(TestUtils.cardAt(modelSupplier2.get(), 0, 0).get().getCoach(),
                           CoachColor.BLUE);
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier2.get(), 0, 1).get().getCoach(),
+      Assert.assertEquals(TestUtils.cardAt(modelSupplier2.get(), 0, 1).get().getCoach(),
                           CoachColor.BLUE);
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier2.get(), 0, 1).get().toString(),
+      Assert.assertEquals(TestUtils.cardAt(modelSupplier2.get(), 0, 1).get().toString(),
                           "b 2 2 2 2");
 
       // move 3
@@ -113,14 +113,14 @@ public class TestStrategy {
         move3.get().accept(m);
         return m;
       };
-      Assert.assertTrue(utils.Utils.cardAt(modelSupplier3.get(), 1, 1).isPresent());
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier3.get(), 0, 0).get().getCoach(),
+      Assert.assertTrue(TestUtils.cardAt(modelSupplier3.get(), 1, 1).isPresent());
+      Assert.assertEquals(TestUtils.cardAt(modelSupplier3.get(), 0, 0).get().getCoach(),
                           CoachColor.RED);
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier3.get(), 0, 1).get().getCoach(),
+      Assert.assertEquals(TestUtils.cardAt(modelSupplier3.get(), 0, 1).get().getCoach(),
                           CoachColor.RED);
-      Assert.assertEquals(utils.Utils.cardAt(modelSupplier3.get(), 1, 1).get().getCoach(),
+      Assert.assertEquals(TestUtils.cardAt(modelSupplier3.get(), 1, 1).get().getCoach(),
                           CoachColor.RED);
-      Assert.assertEquals(Utils.cardAt(modelSupplier3.get(), 1, 1).get().toString(),
+      Assert.assertEquals(TestUtils.cardAt(modelSupplier3.get(), 1, 1).get().toString(),
                           "c 3 3 3 3");
     }
 
