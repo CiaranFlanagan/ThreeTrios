@@ -6,8 +6,6 @@ import model.Model;
 import model.Move;
 import model.PlayableGameListener;
 import utils.Utils;
-
-import javax.swing.JFrame;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 
@@ -21,6 +19,7 @@ public class GUIPlayerDelegate extends GUIPlayerBase implements PlayableGameList
 
   /**
    * Constructor.
+   *
    * @param viewRedHand  the gui of the red hand
    * @param viewBlueHand the gui of the blue hand
    * @param viewGrid     the gui of the grid
@@ -37,6 +36,12 @@ public class GUIPlayerDelegate extends GUIPlayerBase implements PlayableGameList
     this.delegate = delegate;
   }
 
+  /**
+   * Processes a move or delegates it to another listener if no exceptions occur.
+   *
+   * @param callback      a consumer to handle the move
+   * @param modelCallable a callable providing the current game model
+   */
   @Override
   public void accept(Consumer<Move> callback, Callable<Model> modelCallable) {
     if (!propagateCallable(modelCallable)) {
@@ -45,8 +50,11 @@ public class GUIPlayerDelegate extends GUIPlayerBase implements PlayableGameList
   }
 
   /**
-   * @param modelCallable the callable model which may be an exception
-   * @return true if there was an exception, false otherwise
+   * Attempts to call the provided model and update the view,
+   * propagating exceptions if they occur.
+   *
+   * @param modelCallable a callable that may produce a game model or throw an exception
+   * @return true if an exception was caught, false otherwise
    */
   protected boolean propagateCallable(Callable<Model> modelCallable) {
     try {

@@ -1,8 +1,8 @@
 package controller;
 
-import model.Coach;
+import model.CoachColor;
 
 public interface ModelStatusFeatures {
-  void onTurnChanged(Coach currentCoach);
-  void onGameOver(Coach winner, int redScore, int blueScore);
+  void onTurnChanged(CoachColor currentCoach);
+  void onGameOver(CoachColor winner, int redScore, int blueScore);
 }

@@ -28,7 +28,8 @@ public class GUIHandBase extends JPanel {
   }
 
   /**
-   * To update the hand that this gui represents
+   * To update the hand that this gui represents.
+   *
    * @param hand the new hand
    */
   public void updateHand(List<Card> hand) {

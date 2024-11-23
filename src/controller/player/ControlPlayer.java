@@ -4,9 +4,7 @@ import model.CoachColor;
 import model.Model;
 import model.Move;
 import model.PlayableGameListener;
-
 import java.util.concurrent.Callable;
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 /**
@@ -19,7 +17,8 @@ public class ControlPlayer implements PlayableGameListener {
   private final PlayableGameListener delegate;
 
   /**
-   * Constructor
+   * Constructor.
+   *
    * @param coachColor the coach color of this player
    * @param delegate the delegate to propagate notifications
    */

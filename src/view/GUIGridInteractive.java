@@ -1,6 +1,5 @@
 package view;
 
-import model.CoachColor;
 import model.Move;
 import utils.MouseHandler;
 import utils.Utils;
@@ -22,7 +21,8 @@ public class GUIGridInteractive extends GUIGridBase implements
 
 
   /**
-   * Constructor
+   * Constructor.
+   *
    * @param gridView the artist of the grid
    */
   public GUIGridInteractive(DrawGrid gridView) {
@@ -43,7 +43,7 @@ public class GUIGridInteractive extends GUIGridBase implements
   private class OnMouse extends MouseHandler {
 
     private void init() {
-      this.handle(WasMouse.CLICKED, this :: handleClick)
+      this.handle(WasMouse.CLICKED, this::handleClick)
           .register(GUIGridInteractive.this);
     }
 
@@ -65,7 +65,8 @@ public class GUIGridInteractive extends GUIGridBase implements
 
       // reset callback to make sure that you can't spam when it's not your turn
       move = null;
-      callback = (m -> {});
+      callback = (m -> {
+      });
 
       GUIGridInteractive.this.repaint();
     }

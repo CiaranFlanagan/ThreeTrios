@@ -9,7 +9,6 @@ import model.Grid;
 import model.Model;
 import model.ModelBase;
 import model.PlayableGame;
-import model.PlayableGameListener;
 import model.RefereeDefault;
 import utils.ConfigCard;
 import utils.ConfigGrid;
@@ -22,17 +21,22 @@ import view.GUIHandBase;
 import view.GUIHandInteractive;
 import view.GUIPlayerDelegate;
 import view.GUIPlayerInteractive;
-
-import java.awt.Color;
 import java.util.List;
 
 /**
  * To represent the entry point into our program.
  */
-public class Main {
+  public class Main {
 
-
-
+  /**
+   * The main method to launch the game.
+   * <p>
+   * Parses command-line arguments to configure player types and starts the game. If no
+   * arguments or invalid arguments are provided, displays a usage message.
+   * </p>
+   *
+   * @param args command-line arguments, where the first two numbers specify player types
+   */
   public static void main(String[] args) {
     if (args.length == 0) {
       System.err.println("run jar again with 'help'");

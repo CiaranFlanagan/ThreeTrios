@@ -22,10 +22,22 @@ public class MouseHandler extends MouseAdapter {
     map = new HashMap<>();
   }
 
+  /**
+   * Creates a new instance of the MouseHandler.
+   *
+   * @return a new MouseHandler instance
+   */
   public static MouseHandler create() {
     return new MouseHandler();
   }
 
+  /**
+   * Adds a condition and corresponding action to the handler.
+   *
+   * @param question a predicate to test whether the action should be executed
+   * @param response a consumer defining the action to perform
+   * @return the current MouseHandler instance for method chaining
+   */
   public MouseHandler handle(Predicate<MouseEvent> question,
                              Consumer<MouseEvent> response) {
     this.map.put(question, response);
@@ -43,6 +55,11 @@ public class MouseHandler extends MouseAdapter {
     c.addMouseWheelListener(this);
   }
 
+  /**
+   * Unregisters this handler from listening to mouse events on the specified component.
+   *
+   * @param c the component to detach this handler from
+   */
   public final void unregister(Component c) {
     c.removeMouseListener(this);
     c.removeMouseMotionListener(this);

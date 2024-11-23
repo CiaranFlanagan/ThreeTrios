@@ -112,7 +112,8 @@ public class DrawHand {
   }
 
   /**
-   * The bounding box that an index in a given hand would correspond to on an image
+   * The bounding box that an index in a given hand would correspond to on an image.
+   *
    * @param idx the index of the hand to consider
    * @param hand the hand to add to context
    * @param handImage the image to add to context

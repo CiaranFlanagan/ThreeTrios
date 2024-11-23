@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Arrays;
-
 /**
  * Represents the grid-shaped board of the Three Trios game. Manages cells, tracks holes,
  * and provides methods to query and modify the grid.
