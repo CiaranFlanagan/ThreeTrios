@@ -2,20 +2,30 @@ package view;
 
 
 import model.CoachColor;
-import model.Model;
-import model.Move;
-import model.PlayableGameListener;
+import model.GamePlayer;
+import model.ModelReadOnly;
+import model.GameListener;
 import utils.Utils;
-import java.util.concurrent.Callable;
-import java.util.function.Consumer;
+
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
 /**
  * To represent a player in the game of three trios as a gui. This is also a listener of a
  * playable game and can propagate exceptions.
  */
-public class GUIPlayerDelegate extends GUIPlayerBase implements PlayableGameListener {
+public class GUIPlayerDelegate extends JFrame implements GameView {
 
-  protected PlayableGameListener delegate;
+  protected ModelReadOnly model;
+  protected CoachColor coachColor;
+
+  protected GUIHandBase viewRedHand;
+  protected GUIHandBase viewBlueHand;
+  protected GUIGridBase viewGrid;
+
+  protected boolean updated;
 
   /**
    * Constructor.
@@ -23,47 +33,67 @@ public class GUIPlayerDelegate extends GUIPlayerBase implements PlayableGameList
    * @param viewRedHand  the gui of the red hand
    * @param viewBlueHand the gui of the blue hand
    * @param viewGrid     the gui of the grid
-   * @param color        the color of the player this represents
+   * @param coachColor        the color of the player this represents
    * @param delegate     the delegate to pass move requests onto
    */
   public GUIPlayerDelegate(GUIHandBase viewRedHand,
                            GUIHandBase viewBlueHand,
                            GUIGridBase viewGrid,
-                           CoachColor color,
-                           PlayableGameListener delegate) {
-    super(viewRedHand, viewBlueHand, viewGrid, color);
-    setTitle(color.toString());
-    this.delegate = delegate;
+                           CoachColor coachColor) {
+    // field init
+    this.coachColor = coachColor;
+    this.viewRedHand = viewRedHand;
+    this.viewBlueHand = viewBlueHand;
+    this.viewGrid = viewGrid;
+
+    // frame stuff
+    setTitle(coachColor.toString());
+    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    setSize(500, 500);
+    setVisible(true);
+
   }
 
-  /**
-   * Processes a move or delegates it to another listener if no exceptions occur.
-   *
-   * @param callback      a consumer to handle the move
-   * @param modelCallable a callable providing the current game model
-   */
+  private void updateLayout() {
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.fill = GridBagConstraints.BOTH;
+    gbc.weighty = 1;
+    this.setLayout(new GridBagLayout());
+    gbc.gridx = 0;
+    gbc.weightx = 1;
+    this.add(viewRedHand, gbc);
+    gbc.gridx = 1;
+    gbc.weightx = model.numCols();
+    this.add(viewGrid, gbc);
+    gbc.gridx = 2;
+    gbc.weightx = 1;
+    this.add(viewBlueHand, gbc);
+  }
+
+  private void updateDelegateViews() {
+    viewRedHand.updateHand(model.curCoachesHands().get(CoachColor.RED));
+    viewRedHand.repaint();
+    viewBlueHand.updateHand(model.curCoachesHands().get(CoachColor.BLUE));
+    viewBlueHand.repaint();
+    viewGrid.updateGrid(model.curGrid());
+    viewGrid.repaint();
+  }
+
+
   @Override
-  public void accept(Consumer<Move> callback, Callable<Model> modelCallable) {
-    if (!propagateCallable(modelCallable)) {
-      delegate.accept(callback, modelCallable);
-    }
+  public void renderMessage(String message) {
+    Utils.popup(message, this);
   }
 
-  /**
-   * Attempts to call the provided model and update the view,
-   * propagating exceptions if they occur.
-   *
-   * @param modelCallable a callable that may produce a game model or throw an exception
-   * @return true if an exception was caught, false otherwise
-   */
-  protected boolean propagateCallable(Callable<Model> modelCallable) {
-    try {
-      updateModel(modelCallable.call());
-    } catch (Exception e) {
-      Utils.popup(e.getMessage(), this);
-      return true;
+  @Override
+  public void renderModel(ModelReadOnly model) {
+    this.model = model;
+    if (!updated) {
+      updateLayout();
+      updated = true;
     }
-    return false;
+    updateDelegateViews();
+    repaint();
   }
 
 }

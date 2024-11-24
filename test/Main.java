@@ -1,10 +1,12 @@
-import controller.player.ControlPlayer;
+import controller.AbstractControlPlayer;
+import controller.ControlPlayer;
 import controller.strategy.CornerStrategy;
 import controller.strategy.DefenseStrategy;
 import controller.strategy.MostFlips;
 import controller.strategy.StrategyAbstract;
 import model.Card;
 import model.CoachColor;
+import model.GameListener;
 import model.Grid;
 import model.Model;
 import model.ModelBase;
@@ -25,7 +27,7 @@ import view.GUIPlayerInteractive;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
+import java.util.Scanner;
 import java.util.function.Function;
 
 /**
@@ -33,7 +35,7 @@ import java.util.function.Function;
  */
 public class Main {
 
-  protected static Map<String, Function<CoachColor, ControlPlayer>> dispatchMap;
+  protected static Map<String, Function<CoachColor, GameListener>> dispatchMap;
 
   static {
     dispatchMap = new HashMap<>();
@@ -65,10 +67,16 @@ public class Main {
       return;
     }
 
-    ControlPlayer red = dispatchMap.get(fst).apply(CoachColor.RED);
-    ControlPlayer blue = dispatchMap.get(fst).apply(CoachColor.BLUE);
+    GameListener red = dispatchMap.get(fst).apply(CoachColor.RED);
+    GameListener blue = dispatchMap.get(fst).apply(CoachColor.BLUE);
     new PlayableGame(Main :: makeModel, red, blue);
 
+    Scanner input = new Scanner(System.in);
+    while (input.hasNext()) {
+      if (input.nextLine().strip().contains("q")) {
+        System.exit(0);
+      }
+    }
 
   }
 
@@ -83,31 +91,32 @@ public class Main {
 
   }
 
-  private static ControlPlayer makeHumanPlayer(CoachColor color) {
+  private static AbstractControlPlayer makeHumanPlayer(CoachColor color) {
     GUIGridInteractive grid = new GUIGridInteractive(new DrawGrid());
+    GUIPlayerInteractive guiAndPlayer;
     if (color == CoachColor.RED) {
-      return new ControlPlayer(color, new GUIPlayerInteractive(
-          new GUIHandInteractive(new DrawHand()), new GUIHandBase(new DrawHand()), grid));
+      guiAndPlayer = new GUIPlayerInteractive(new GUIHandInteractive(new DrawHand()),
+                                              new GUIHandBase(new DrawHand()), grid);
+      return new ControlPlayer(color, guiAndPlayer, guiAndPlayer);
     } else {
-      return new ControlPlayer(color,
-                               new GUIPlayerInteractive(new GUIHandBase(new DrawHand()),
-                                                        new GUIHandInteractive(
-                                                            new DrawHand()), grid));
+      guiAndPlayer = new GUIPlayerInteractive(new GUIHandBase(new DrawHand()),
+                                              new GUIHandInteractive(new DrawHand()),
+                                              grid);
+      return new ControlPlayer(color,guiAndPlayer, guiAndPlayer);
     }
   }
 
-  private static ControlPlayer makeMostFlipsAIPlayer(CoachColor color) {
+  private static AbstractControlPlayer makeMostFlipsAIPlayer(CoachColor color) {
     return makeDelegatePlayer(color, new MostFlips());
   }
 
-  private static ControlPlayer makeCornerPlayer(CoachColor color) {
+  private static AbstractControlPlayer makeCornerPlayer(CoachColor color) {
     return makeDelegatePlayer(color, new CornerStrategy());
   }
 
-  private static ControlPlayer makeDefensePlayer(CoachColor color) {
+  private static AbstractControlPlayer makeDefensePlayer(CoachColor color) {
     return makeDelegatePlayer(color, new DefenseStrategy());
   }
-
 
   private static Model makeModel() {
     Model model = new ModelBase();
@@ -123,12 +132,12 @@ public class Main {
     return ConfigCard.scannerToCardList(TestFiles.CC_LARGE);
   }
 
-  private static ControlPlayer makeDelegatePlayer(CoachColor color,
-                                                  StrategyAbstract strategy) {
+  private static AbstractControlPlayer makeDelegatePlayer(CoachColor color,
+                                                          StrategyAbstract strategy) {
     return new ControlPlayer(color, new GUIPlayerDelegate(new GUIHandBase(new DrawHand()),
                                                           new GUIHandBase(new DrawHand()),
                                                           new GUIGridBase(new DrawGrid()),
-                                                          color, strategy));
+                                                          color), strategy);
   }
 
 }

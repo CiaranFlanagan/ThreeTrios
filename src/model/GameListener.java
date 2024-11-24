@@ -8,7 +8,7 @@ import java.util.function.Consumer;
  * Represents a listener for a playable game, capable of processing moves
  * and allows accessing the current game state.
  */
-public interface PlayableGameListener extends
+public interface GameListener extends
     BiConsumer<Consumer<Move>, Callable<Model>> {
 
   /**

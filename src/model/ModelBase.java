@@ -120,7 +120,11 @@ public class ModelBase extends ModelAbstract {
     }
     //The game ends when all empty card cells are filled.
     //hands don't have to be empty for the grid to be filled
-    return grid.isFull();
+    return curCoachesHands().values()
+                            .stream()
+                            .map(List :: size)
+                            .reduce(0, Integer :: sum)
+                            .equals(1);
   }
 
   @Override

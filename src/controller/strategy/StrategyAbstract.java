@@ -1,9 +1,10 @@
 package controller.strategy;
 
+import model.GamePlayer;
 import model.GridCellReadOnly;
 import model.Model;
 import model.Move;
-import model.PlayableGameListener;
+import model.GameListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
  * Abstract base class for game strategies in the Three Trios game. Defines methods for
  * evaluating moves and finding the most effective one.
  */
-public abstract class StrategyAbstract implements PlayableGameListener {
+public abstract class StrategyAbstract implements GamePlayer {
 
   /**
    * To find the best move by reducing all possible moves, choosing the most effective via
@@ -107,24 +108,12 @@ public abstract class StrategyAbstract implements PlayableGameListener {
   }
 
   @Override
-  public final void accept(Consumer<Move> moveConsumer, Callable<Model> modelCallable) {
-    Supplier<Model> modelSupplier = callableToSupplier(modelCallable);
-    if (Objects.nonNull(modelSupplier.get())) {
-      Move move = bestMove(modelSupplier).orElse(defaultMove(modelSupplier));
-      if (Objects.nonNull(move)) {
-        moveConsumer.accept(move);
-      }
+  public final void accept(Consumer<Move> moveConsumer, Supplier<Model> modelSupplier) {
+    if (modelSupplier.get() == null) {
+      return;
     }
+    moveConsumer.accept(bestMove(modelSupplier).orElse(defaultMove(modelSupplier)));
   }
 
-  private Supplier<Model> callableToSupplier(Callable<Model> modelCallable) {
-    return () -> {
-      try {
-        return modelCallable.call();
-      } catch (Exception e) {
-        return null;
-      }
-    };
-  }
 
 }

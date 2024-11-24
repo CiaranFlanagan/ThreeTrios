@@ -45,7 +45,6 @@ public final class GridCellCard extends GridCellAbstract {
     battlePhase.refereeBattlePhase(this);
   }
 
-
   @Override
   protected String renderTextConstructor() {
     return "C";
