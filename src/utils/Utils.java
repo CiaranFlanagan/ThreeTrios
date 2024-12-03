@@ -15,8 +15,8 @@ public class Utils {
   /**
    * Displays a pop-up dialog with a message in bold red text.
    * <p>
-   * The dialog appears relative to the specified context component and automatically adjusts its size
-   * to one-third of the context component's dimensions.
+   * The dialog appears relative to the specified context component and automatically
+   * adjusts its size to one-third of the context component's dimensions.
    * </p>
    *
    * @param message the message to display in the dialog

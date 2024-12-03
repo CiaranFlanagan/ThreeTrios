@@ -10,7 +10,6 @@ public final class RefereeDefault implements Referee {
     us.acceptBattlePhase(this);
   }
 
-  @Override
   public void refereeBattlePhase(GridCellCard us) {
     if (!us.canHaveCard()) {
       return;
@@ -41,7 +40,6 @@ public final class RefereeDefault implements Referee {
     }
   }
 
-  @Override
   public void refereeBattlePhase(GridCellHole us) {
     throw new IllegalStateException("should not directly call a hole cell to battle");
   }

@@ -3,7 +3,6 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.Arrays;
 
 /**
  * To test the entry point of this program. The philosophy is that we can give any

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * to represent a model of the three trios game. Invariant: getCurrentCoach() is never
+ * To represent a model of the three trios game. Invariant: getCurrentCoach() is never
  * null.
  */
 public class ModelBase extends ModelAbstract {

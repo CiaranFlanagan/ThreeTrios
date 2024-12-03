@@ -1,14 +1,11 @@
 package view;
 
-
 import model.CoachColor;
-import model.GamePlayer;
 import model.ModelReadOnly;
-import model.GameListener;
 import utils.Utils;
-
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -25,8 +22,6 @@ public class GUIPlayerDelegate extends JFrame implements GameView {
   protected GUIHandBase viewBlueHand;
   protected GUIGridBase viewGrid;
 
-  protected boolean updated;
-
   /**
    * Constructor.
    *
@@ -34,7 +29,6 @@ public class GUIPlayerDelegate extends JFrame implements GameView {
    * @param viewBlueHand the gui of the blue hand
    * @param viewGrid     the gui of the grid
    * @param coachColor        the color of the player this represents
-   * @param delegate     the delegate to pass move requests onto
    */
   public GUIPlayerDelegate(GUIHandBase viewRedHand,
                            GUIHandBase viewBlueHand,
@@ -52,6 +46,11 @@ public class GUIPlayerDelegate extends JFrame implements GameView {
     setSize(500, 500);
     setVisible(true);
 
+  }
+
+  @Override
+  public void paintComponents(Graphics g) {
+    super.paintComponents(g);
   }
 
   private void updateLayout() {
@@ -72,11 +71,8 @@ public class GUIPlayerDelegate extends JFrame implements GameView {
 
   private void updateDelegateViews() {
     viewRedHand.updateHand(model.curCoachesHands().get(CoachColor.RED));
-    viewRedHand.repaint();
     viewBlueHand.updateHand(model.curCoachesHands().get(CoachColor.BLUE));
-    viewBlueHand.repaint();
     viewGrid.updateGrid(model.curGrid());
-    viewGrid.repaint();
   }
 
 
@@ -88,12 +84,11 @@ public class GUIPlayerDelegate extends JFrame implements GameView {
   @Override
   public void renderModel(ModelReadOnly model) {
     this.model = model;
-    if (!updated) {
-      updateLayout();
-      updated = true;
-    }
+    updateLayout();
     updateDelegateViews();
     repaint();
+    setVisible(true);
+    requestFocus();
   }
 
 }

@@ -192,12 +192,6 @@ public class TestModel {
     model.setGridCardAt(0, -1, testCard);
   }
 
-
-  @Test
-  public void testCurCoachesHands() {
-    this.model.curCoachesHands();
-  }
-
   static class GridCellMock extends GridCellAbstract {
 
     @Override

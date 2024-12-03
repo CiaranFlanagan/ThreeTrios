@@ -6,7 +6,7 @@ import java.util.function.Supplier;
 
 /**
  * Represents a player in the game(Human or AI) which interacts with the game model and
- * complete moves based on the current game state
+ * complete moves based on the current game state.
  * <p>
  *   Extends {@link BiConsumer}, where the first param is a {@link Consumer} that
  *   accepts a move chosen by the player, and the second param is a {@link Supplier}

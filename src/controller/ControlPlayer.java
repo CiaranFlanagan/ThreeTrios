@@ -1,5 +1,6 @@
 package controller;
 
+
 import model.CoachColor;
 import model.GamePlayer;
 import model.Model;
@@ -8,6 +9,7 @@ import view.GameView;
 
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  * Represents a player in the game of Three Trios. A player is a listener of a callable
@@ -16,7 +18,7 @@ import java.util.function.Consumer;
 public class ControlPlayer extends AbstractControlPlayer {
 
   /**
-   * Constructor
+   * Constructor.
    * @param color  color of the player
    * @param view   view of the game
    * @param player player of the game
@@ -27,15 +29,21 @@ public class ControlPlayer extends AbstractControlPlayer {
 
   @Override
   public void accept(Consumer<Move> moveConsumer, Callable<Model> modelCallable) {
-    player.accept(moveConsumer, () -> {
+    Supplier<Model> modelSupplier = () -> {
       try {
-        view.renderModel(modelCallable.call());
-        return modelCallable.call().isGameOver() ? null : modelCallable.call();
+        return modelCallable.call();
       } catch (Exception e) {
         view.renderMessage(e.getMessage());
         return null;
       }
-    });
+    };
+
+    if (modelSupplier.get() != null) {
+      view.renderModel(modelSupplier.get());
+      if (!modelSupplier.get().isGameOver()) {
+        player.accept(moveConsumer, modelSupplier);
+      }
+    }
 
   }
 

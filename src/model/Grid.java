@@ -10,7 +10,7 @@ public final class Grid {
   private final int NUM_ROWS;
   private final int NUM_COLS;
   private final int numHoles;
-  private CellType[][] shape;
+  private final CellType[][] shape;
 
   /**
    * Constructs a Grid with a specified shape. Initializes each cell based on the provided

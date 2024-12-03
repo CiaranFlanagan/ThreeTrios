@@ -10,7 +10,7 @@ import model.GameListener;
 import model.Grid;
 import model.Model;
 import model.ModelBase;
-import model.PlayableGame;
+import model.PlayableGameImpl;
 import model.RefereeDefault;
 import utils.ConfigCard;
 import utils.ConfigGrid;
@@ -68,8 +68,8 @@ public class Main {
     }
 
     GameListener red = dispatchMap.get(fst).apply(CoachColor.RED);
-    GameListener blue = dispatchMap.get(fst).apply(CoachColor.BLUE);
-    new PlayableGame(Main :: makeModel, red, blue);
+    GameListener blue = dispatchMap.get(snd).apply(CoachColor.BLUE);
+    new PlayableGameImpl().start(Main :: makeModel, red, blue);
 
     Scanner input = new Scanner(System.in);
     while (input.hasNext()) {
@@ -87,7 +87,7 @@ public class Main {
     System.out.println("1: most-flips AI player");
     System.out.println("2: corner AI player");
     System.out.println("3: defense AI player");
-    System.out.println("ex: java -jar ThreeTrios.jar 0 0");
+    System.out.println("example two player game: 'java -jar ThreeTrios.jar 0 0'");
 
   }
 
@@ -102,7 +102,7 @@ public class Main {
       guiAndPlayer = new GUIPlayerInteractive(new GUIHandBase(new DrawHand()),
                                               new GUIHandInteractive(new DrawHand()),
                                               grid);
-      return new ControlPlayer(color,guiAndPlayer, guiAndPlayer);
+      return new ControlPlayer(color, guiAndPlayer, guiAndPlayer);
     }
   }
 

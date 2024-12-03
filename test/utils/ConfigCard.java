@@ -30,6 +30,14 @@ public class ConfigCard {
     return scannerToCardList(sc);
   }
 
+  /**
+   * Reads card data from a Scanner and creates a list of Card objects.
+   * Each card consists of a name and attack values for four directions.
+   *
+   * @param sc the Scanner for reading card data.
+   * @return a list of Card objects.
+   * @throws IllegalArgumentException if the scanner is null or contains invalid data.
+   */
   public static List<Card> scannerToCardList(Scanner sc) {
     if (sc == null) {
       throw new IllegalArgumentException("null scanner");
