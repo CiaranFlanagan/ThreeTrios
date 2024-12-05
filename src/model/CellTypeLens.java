@@ -1,18 +1,20 @@
 package model;
 
-public class CellTypeLens implements Lens<CellType, provider.game.Cell.CellType> {
+import provider.Cell;
+
+public class CellTypeLens implements Lens<CellType, Cell.CellType> {
 
   @Override
-  public provider.game.Cell.CellType forward(model.CellType cellType) {
+  public Cell.CellType forward(model.CellType cellType) {
     switch (cellType) {
-      case CARD: return provider.game.Cell.CellType.CARD_CELL;
-      case HOLE: return provider.game.Cell.CellType.HOLE;
+      case CARD: return Cell.CellType.CARD_CELL;
+      case HOLE: return Cell.CellType.HOLE;
       default: return null;
     }
   }
 
   @Override
-  public model.CellType backward(provider.game.Cell.CellType cellType) {
+  public model.CellType backward(Cell.CellType cellType) {
     switch (cellType) {
       case CARD_CELL:
         return model.CellType.CARD;

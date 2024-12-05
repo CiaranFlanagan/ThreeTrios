@@ -1,17 +1,22 @@
 package model;
 
+import provider.Card;
+import provider.Grid;
+import provider.Player;
+import provider.ReadOnlyGameModel;
+
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ModelAdapter implements
-    Function<ModelReadOnly, provider.game.ReadOnlyGameModel>,
-    provider.game.ReadOnlyGameModel {
+    Function<ModelReadOnly, ReadOnlyGameModel>,
+    ReadOnlyGameModel {
 
   protected ModelReadOnly model;
 
   @Override
-  public provider.game.ReadOnlyGameModel apply(ModelReadOnly modelReadOnly) {
+  public ReadOnlyGameModel apply(ModelReadOnly modelReadOnly) {
     model = modelReadOnly;
     return this;
   }
@@ -22,7 +27,7 @@ public class ModelAdapter implements
   }
 
   @Override
-  public provider.card.Card getCardAt(int row, int col) {
+  public Card getCardAt(int row, int col) {
     return model.cardAt(row, col).map(new CardAdapter() :: forward).orElse(null);
   }
 
@@ -44,11 +49,11 @@ public class ModelAdapter implements
   }
 
   @Override
-  public provider.player.Player getCurrentPlayer() {
+  public Player getCurrentPlayer() {
     return makePlayer(model.curCoach());
   }
 
-  private provider.player.Player makePlayer(CoachColor color) {
+  private Player makePlayer(CoachColor color) {
     PlayerForProvider player = new PlayerForProvider();
     player.setColor(new CoachLens().forward(color));
     player.setHand(model.curCoachesHands()
@@ -66,16 +71,16 @@ public class ModelAdapter implements
   }
 
   @Override
-  public provider.player.Player[] getPlayers() {
+  public Player[] getPlayers() {
     return Stream.of(CoachColor.RED, CoachColor.BLUE)
                  .map(this :: makePlayer)
                  .collect(
                    Collectors.toList())
-                 .toArray(new provider.player.Player[2]);
+                 .toArray(new Player[2]);
   }
 
   @Override
-  public provider.game.Grid getGrid() {
+  public Grid getGrid() {
     return new model.GridAdapter().forward(model.curGrid());
   }
 

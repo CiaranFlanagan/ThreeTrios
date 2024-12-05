@@ -1,4 +1,4 @@
-package provider.controller;
+package provider;
 
 /**
  * Represents the controller interface for the Three Trios game, responsible for handling

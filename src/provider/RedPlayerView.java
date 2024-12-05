@@ -1,9 +1,6 @@
-package provider.gui;
+package provider;
 
 import java.awt.Color;
-
-import provider.card.COLOR;
-import provider.game.ReadOnlyGameModel;
 
 /**
  * View implementation dedicated to controlling the Red Player.

@@ -34,3 +34,6 @@ detail.
 
 
 Design/Code Limitations and Suggestions (wait for view to be done)
+
+
+//TODO note that we had to change their package structure and condense it

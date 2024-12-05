@@ -1,10 +1,7 @@
-package provider.game;
+package provider;
 
 import java.util.List;
 import java.util.Set;
-
-import provider.card.Card;
-import provider.player.Player;
 
 /**
  * The main game class responsible for managing the game state, rules,

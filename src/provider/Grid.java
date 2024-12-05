@@ -1,6 +1,4 @@
-package provider.game;
-
-import provider.card.Card;
+package provider;
 
 /**
  * interface for grid.

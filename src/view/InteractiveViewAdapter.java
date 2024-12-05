@@ -1,11 +1,14 @@
 package view;
 
 import model.Move;
+import provider.Features;
+import provider.ReadOnlyGameModel;
+import provider.ThreeTriosViewImpl;
 
 public class InteractiveViewAdapter implements
     model.GamePlayer,
     GameView,
-    provider.gui.Features {
+    Features {
 
   // mvc
   private final model.SettableAdaptedModel model = new model.SettableAdaptedModel();
@@ -13,13 +16,13 @@ public class InteractiveViewAdapter implements
   private java.util.function.Consumer<model.Move> callback = m -> {};
 
   // adapt
-  java.util.function.Function<provider.game.ReadOnlyGameModel,
-      provider.gui.ThreeTriosViewImpl>
+  java.util.function.Function<ReadOnlyGameModel,
+      ThreeTriosViewImpl>
       delegateMaker;
 
-  provider.gui.ThreeTriosViewImpl delegate;
+  ThreeTriosViewImpl delegate;
 
-  public InteractiveViewAdapter(java.util.function.Function<provider.game.ReadOnlyGameModel, provider.gui.ThreeTriosViewImpl> delegateMaker) {
+  public InteractiveViewAdapter(java.util.function.Function<ReadOnlyGameModel, ThreeTriosViewImpl> delegateMaker) {
     this.delegateMaker = delegateMaker;
   }
 

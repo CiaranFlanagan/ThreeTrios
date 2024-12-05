@@ -12,6 +12,8 @@ import model.Model;
 import model.ModelBase;
 import model.PlayableGameImpl;
 import model.RefereeDefault;
+import provider.BluePlayerView;
+import provider.RedPlayerView;
 import utils.ConfigCard;
 import utils.ConfigGrid;
 import utils.TestFiles;
@@ -112,8 +114,8 @@ public class Main {
     view.InteractiveViewAdapter view =
         new view.InteractiveViewAdapter(m ->
                                             color == CoachColor.RED ?
-                                                new provider.gui.RedPlayerView(m) :
-                                                new provider.gui.BluePlayerView(m));
+                                                new RedPlayerView(m) :
+                                                new BluePlayerView(m));
     return new controller.ControlPlayer(color, view, view);
   }
 

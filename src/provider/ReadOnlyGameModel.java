@@ -1,7 +1,4 @@
-package provider.game;
-
-import provider.card.Card;
-import provider.player.Player;
+package provider;
 
 /**
  * Represents a read-only view of the GameModel, providing access to methods

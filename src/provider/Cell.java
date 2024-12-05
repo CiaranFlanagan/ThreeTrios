@@ -1,6 +1,4 @@
-package provider.game;
-
-import provider.card.Card;
+package provider;
 
 /**
  * Represents a cell on the game grid, either playable or non-playable.

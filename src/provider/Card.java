@@ -1,4 +1,4 @@
-package provider.card;
+package provider;
 
 /**
  * Represents a general card with a color and number, and

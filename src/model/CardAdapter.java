@@ -1,10 +1,12 @@
 package model;
 
+import provider.COLOR;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class CardAdapter implements Lens<Card, provider.card.Card>,
-    provider.card.Card {
+public class CardAdapter implements Lens<Card, provider.Card>,
+    provider.Card {
 
   private Card card;
 
@@ -17,12 +19,12 @@ public class CardAdapter implements Lens<Card, provider.card.Card>,
   }
 
   @Override
-  public void switchColor(provider.card.COLOR color) {
+  public void switchColor(COLOR color) {
     card.setCoach(new CoachLens().backward(color));
   }
 
   @Override
-  public provider.card.COLOR getColor() {
+  public COLOR getColor() {
     return new CoachLens().forward(card.getCoach());
   }
 
@@ -52,12 +54,12 @@ public class CardAdapter implements Lens<Card, provider.card.Card>,
   }
 
   @Override
-  public provider.card.Card forward(Card card) {
+  public provider.Card forward(Card card) {
     return new CardAdapter(card);
   }
 
   @Override
-  public Card backward(provider.card.Card card) {
+  public Card backward(provider.Card card) {
     Map<CardinalDirection, AttackValue> map = new HashMap<>();
     map.put(CardinalDirection.NORTH, AttackValue.fromString(Integer.toHexString(
         card.getNorth())));

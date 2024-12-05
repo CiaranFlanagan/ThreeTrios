@@ -1,6 +1,4 @@
-package provider.ai;
-
-import provider.game.ReadOnlyGameModel;
+package provider;
 
 /**
  * An interface for strategies that involve specific

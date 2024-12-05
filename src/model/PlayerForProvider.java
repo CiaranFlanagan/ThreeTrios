@@ -1,8 +1,8 @@
 package model;
 
-import provider.card.COLOR;
-import provider.card.Card;
-import provider.player.Player;
+import provider.COLOR;
+import provider.Card;
+import provider.Player;
 
 import java.util.List;
 

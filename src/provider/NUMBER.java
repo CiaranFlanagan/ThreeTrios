@@ -1,4 +1,4 @@
-package provider.card;
+package provider;
 
 /**
  * Enum representing card numbers (1-9 and A).

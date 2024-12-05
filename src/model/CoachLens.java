@@ -1,8 +1,8 @@
 package model;
 
-import provider.card.COLOR;
+import provider.COLOR;
 
-public class CoachLens implements Lens<CoachColor, provider.card.COLOR> {
+public class CoachLens implements Lens<CoachColor, COLOR> {
 
   @Override
   public COLOR forward(CoachColor coachColor) {

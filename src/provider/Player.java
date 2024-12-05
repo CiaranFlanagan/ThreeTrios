@@ -1,9 +1,6 @@
-package provider.player;
+package provider;
 
 import java.util.List;
-
-import provider.card.COLOR;
-import provider.card.Card;
 
 /**
  * Represents a player in the game with methods to manage their hand of cards.

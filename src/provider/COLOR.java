@@ -1,4 +1,4 @@
-package provider.card;
+package provider;
 
 /**
  * Class ENUM to represent each player.

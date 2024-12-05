@@ -1,4 +1,4 @@
-package provider.gui;
+package provider;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -14,11 +14,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import provider.card.COLOR;
-import provider.card.Card;
-import provider.game.ReadOnlyGameModel;
-import provider.player.Player;
 
 /**
  * Implementation of the Three Trios game view using Java Swing.

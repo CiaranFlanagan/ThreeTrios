@@ -1,12 +1,9 @@
-package provider.gui;
+package provider;
 
 
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
-import provider.card.COLOR;
-import provider.card.Card;
-import provider.game.ReadOnlyGameModel;
 
 /**
  * A panel that visually represents the grid of the Three Trios game.
@@ -50,8 +47,8 @@ public class GridPanel extends JPanel {
 
     for (int row = 0; row < gridSize; row++) {
       for (int col = 0; col < gridSize; col++) {
-        provider.game.Cell.CellType cellType = model.getGrid().getCellType(row, col);
-        g.setColor(cellType == provider.game.Cell.CellType.HOLE ? Color.GRAY : Color.YELLOW);
+        Cell.CellType cellType = model.getGrid().getCellType(row, col);
+        g.setColor(cellType == Cell.CellType.HOLE ? Color.GRAY : Color.YELLOW);
         g.fillRect(col * cellWidth, row * cellHeight, cellWidth, cellHeight);
       }
     }

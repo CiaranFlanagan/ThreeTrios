@@ -1,4 +1,4 @@
-package provider.gui;
+package provider;
 
 /**
  * Represents the view interface for the Three Trios game, responsible for displaying
