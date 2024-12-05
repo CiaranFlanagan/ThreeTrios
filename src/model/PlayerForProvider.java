@@ -6,6 +6,9 @@ import provider.Player;
 
 import java.util.List;
 
+/**
+ * Custom player implementation for provider code.
+ */
 public class PlayerForProvider implements Player {
 
   private String name;

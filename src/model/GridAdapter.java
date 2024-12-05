@@ -3,6 +3,9 @@ package model;
 import provider.Card;
 import provider.Cell;
 
+/**
+ * Adapts provider's Grid to a usable grid class through a lens.
+ */
 public class GridAdapter implements provider.Grid, Lens<Grid, provider.Grid> {
 
   private Grid grid;
@@ -12,7 +15,7 @@ public class GridAdapter implements provider.Grid, Lens<Grid, provider.Grid> {
   }
 
   public GridAdapter() {
-
+    // Public default constructor only.
   }
 
   @Override
@@ -44,7 +47,7 @@ public class GridAdapter implements provider.Grid, Lens<Grid, provider.Grid> {
   @Override
   public boolean isEmpty(int row, int col) {
     return gridToCellStream()
-        .noneMatch(model.GridCellReadOnly :: hasCard);
+        .noneMatch(model.GridCellReadOnly::hasCard);
   }
 
   @Override
@@ -71,7 +74,7 @@ public class GridAdapter implements provider.Grid, Lens<Grid, provider.Grid> {
   @Override
   public int getNumCardsCells() {
     return (int) gridToCellStream()
-        .filter(model.GridCellReadOnly :: canHaveCard)
+        .filter(model.GridCellReadOnly::canHaveCard)
         .count();
   }
 
@@ -87,7 +90,7 @@ public class GridAdapter implements provider.Grid, Lens<Grid, provider.Grid> {
 
   private java.util.stream.Stream<GridCellReadOnly> gridToCellStream() {
     return java.util.Arrays.stream(grid.readOnlyArray2D())
-                           .flatMap(java.util.Arrays :: stream);
+                           .flatMap(java.util.Arrays::stream);
   }
 
 }

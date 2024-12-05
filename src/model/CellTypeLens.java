@@ -2,6 +2,9 @@ package model;
 
 import provider.Cell;
 
+/**
+ * To function as a lens from CellType to CellType.
+ */
 public class CellTypeLens implements Lens<CellType, Cell.CellType> {
 
   @Override

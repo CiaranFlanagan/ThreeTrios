@@ -5,6 +5,9 @@ import provider.COLOR;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Adapts provider card into a usable card class through a lens. Composition is used.
+ */
 public class CardAdapter implements Lens<Card, provider.Card>,
     provider.Card {
 
@@ -15,7 +18,7 @@ public class CardAdapter implements Lens<Card, provider.Card>,
   }
 
   public CardAdapter() {
-
+    //Public default constructor only.
   }
 
   @Override

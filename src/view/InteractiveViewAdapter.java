@@ -5,6 +5,9 @@ import provider.Features;
 import provider.ReadOnlyGameModel;
 import provider.ThreeTriosViewImpl;
 
+/**
+ * Adapts our providers view into a view usable by our implementation.
+ */
 public class InteractiveViewAdapter implements
     model.GamePlayer,
     GameView,
@@ -13,7 +16,8 @@ public class InteractiveViewAdapter implements
   // mvc
   private final model.SettableAdaptedModel model = new model.SettableAdaptedModel();
   private final model.Move move = Move.create();
-  private java.util.function.Consumer<model.Move> callback = m -> {};
+  private java.util.function.Consumer<model.Move> callback = m -> {
+  };
 
   // adapt
   java.util.function.Function<ReadOnlyGameModel,
@@ -22,7 +26,8 @@ public class InteractiveViewAdapter implements
 
   ThreeTriosViewImpl delegate;
 
-  public InteractiveViewAdapter(java.util.function.Function<ReadOnlyGameModel, ThreeTriosViewImpl> delegateMaker) {
+  public InteractiveViewAdapter(java.util.function.Function<ReadOnlyGameModel,
+      ThreeTriosViewImpl> delegateMaker) {
     this.delegateMaker = delegateMaker;
   }
 

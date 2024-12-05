@@ -2,6 +2,9 @@ package model;
 
 import provider.COLOR;
 
+/**
+ * To function as a lens from provider's Color class to our CoachColor class.
+ */
 public class CoachLens implements Lens<CoachColor, COLOR> {
 
   @Override

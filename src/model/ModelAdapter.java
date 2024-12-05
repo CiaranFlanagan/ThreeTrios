@@ -9,6 +9,10 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Adapts consumers read only model to usable read only model through a custom functional
+ * interface and an object adapter.
+ */
 public class ModelAdapter implements
     Function<ModelReadOnly, ReadOnlyGameModel>,
     ReadOnlyGameModel {
@@ -28,7 +32,7 @@ public class ModelAdapter implements
 
   @Override
   public Card getCardAt(int row, int col) {
-    return model.cardAt(row, col).map(new CardAdapter() :: forward).orElse(null);
+    return model.cardAt(row, col).map(new CardAdapter()::forward).orElse(null);
   }
 
   @Override
@@ -59,7 +63,7 @@ public class ModelAdapter implements
     player.setHand(model.curCoachesHands()
                         .get(color)
                         .stream()
-                        .map(new CardAdapter() :: forward)
+                        .map(new CardAdapter()::forward)
                         .collect(
                             Collectors.toList()));
     return player;
@@ -73,9 +77,9 @@ public class ModelAdapter implements
   @Override
   public Player[] getPlayers() {
     return Stream.of(CoachColor.RED, CoachColor.BLUE)
-                 .map(this :: makePlayer)
+                 .map(this::makePlayer)
                  .collect(
-                   Collectors.toList())
+                     Collectors.toList())
                  .toArray(new Player[2]);
   }
 

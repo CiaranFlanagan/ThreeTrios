@@ -1,10 +1,16 @@
 package model;
 
 /**
- * to represent the default referee or rules enforcer for the game of three trios.
+ * To represent the default referee or rules enforcer for the game of three trios.
  */
 public final class RefereeDefault implements Referee {
 
+  /**
+   * Takes in a visitable grid cell (by the referee) and accepts a battle phase, which evaluates
+   * the given grid cell based on game rules.
+   *
+   * @param us - a board cell
+   */
   @Override
   public void refereeBattlePhase(GridCellVisitable us) {
     us.acceptBattlePhase(this);
