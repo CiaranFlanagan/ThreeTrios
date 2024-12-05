@@ -43,6 +43,7 @@ public class Main {
     dispatchMap.put("1", Main :: makeMostFlipsAIPlayer);
     dispatchMap.put("2", Main :: makeCornerPlayer);
     dispatchMap.put("3", Main :: makeDefensePlayer);
+    dispatchMap.put("4", Main :: makeAdaptedPlayer);
   }
 
   /**
@@ -87,7 +88,8 @@ public class Main {
     System.out.println("1: most-flips AI player");
     System.out.println("2: corner AI player");
     System.out.println("3: defense AI player");
-    System.out.println("example two player game: 'java -jar ThreeTrios.jar 0 0'");
+    System.out.println("4: adapted human player");
+    System.out.println("example two player game: 'java -jar ThreeTrios.jar 0 4'");
 
   }
 
@@ -104,6 +106,15 @@ public class Main {
                                               grid);
       return new ControlPlayer(color, guiAndPlayer, guiAndPlayer);
     }
+  }
+
+  private static AbstractControlPlayer makeAdaptedPlayer(CoachColor color) {
+    view.InteractiveViewAdapter view =
+        new view.InteractiveViewAdapter(m ->
+                                            color == CoachColor.RED ?
+                                                new provider.gui.RedPlayerView(m) :
+                                                new provider.gui.BluePlayerView(m));
+    return new controller.ControlPlayer(color, view, view);
   }
 
   private static AbstractControlPlayer makeMostFlipsAIPlayer(CoachColor color) {
@@ -125,7 +136,7 @@ public class Main {
   }
 
   private static Grid makeGrid() {
-    return ConfigGrid.scannerToGrid(TestFiles.GRID_ASSN_HARD);
+    return ConfigGrid.scannerToGrid(TestFiles.GRID_NO_HOLES_THREE_BY_THREE);
   }
 
   private static List<Card> makeCards() {

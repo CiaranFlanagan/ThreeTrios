@@ -113,7 +113,8 @@ public abstract class ModelAbstract implements Model {
     if (row < 0 || col < 0 || row >= this.grid.readOnlyArray2D().length
         || col >= this.grid.readOnlyArray2D()[0].length) {
       throw new IllegalArgumentException(
-          "Row and col must be Natural Number and within the " + "range of the grid");
+          "Row and col must be Natural Number and within the " + "range of the grid, "
+              + "given : " + row + ", " + col);
     }
 
   }

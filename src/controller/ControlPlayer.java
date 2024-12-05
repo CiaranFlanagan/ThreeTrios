@@ -17,6 +17,7 @@ import java.util.function.Supplier;
  */
 public class ControlPlayer extends AbstractControlPlayer {
 
+
   /**
    * Constructor.
    * @param color  color of the player

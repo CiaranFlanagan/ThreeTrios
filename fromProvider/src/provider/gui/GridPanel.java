@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 import provider.card.COLOR;
 import provider.card.Card;
-import cs3500.threetrios.game.Cell;
 import provider.game.ReadOnlyGameModel;
 
 /**
@@ -51,8 +50,8 @@ public class GridPanel extends JPanel {
 
     for (int row = 0; row < gridSize; row++) {
       for (int col = 0; col < gridSize; col++) {
-        Cell.CellType cellType = model.getGrid().getCellType(row, col);
-        g.setColor(cellType == Cell.CellType.HOLE ? Color.GRAY : Color.YELLOW);
+        provider.game.Cell.CellType cellType = model.getGrid().getCellType(row, col);
+        g.setColor(cellType == provider.game.Cell.CellType.HOLE ? Color.GRAY : Color.YELLOW);
         g.fillRect(col * cellWidth, row * cellHeight, cellWidth, cellHeight);
       }
     }

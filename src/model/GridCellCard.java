@@ -31,10 +31,12 @@ public final class GridCellCard extends GridCellAbstract {
     return this.card;
   }
 
+
   @Override
   protected void placeCard(Card card) {
     if (this.card != null) {
-      throw new IllegalStateException("can't place card on card cell twice");
+      throw new IllegalStateException("can't place card on card cell twice\ncurrent "
+                                          + "card: " + this.card);
     } else {
       this.card = card;
     }

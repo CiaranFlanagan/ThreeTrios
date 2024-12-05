@@ -1,0 +1,36 @@
+Design Critique
+Our providers’ code, overall, is designed very effectively, being modular throughout and
+designed according to object oriented standards. There is good separation of concerns
+between components like game, controller, player, and card, producing code that is clear,
+logical and organized. Our providers enabled flexibility for extension without altering
+the core functionality of their Three Trios impl through their comprehensive and
+concise interfaces, and additionally their use of enums provided a structured way to
+handle fixed sets of values, both improving readability and reducing possible errors.
+Additionally, our provider's use of encapsulation was excellent, ensuring the code was
+extendable for customers(like us).
+While our providers’ design is modular and separate concerns well, game logic
+(such as determining valid moves or battling cards) is likely intertwined with state
+management in the implementations of the game and grid interfaces. Introducing a Referee
+as we did, or a similar component dedicated solely to evaluating game rules would allow
+for better separation of logic. The Referee would operate independently of the Game or
+Grid classes, taking inputs (such as player actions or the current grid state) and
+returning results (like whether a move is valid or who the winner is). This approach
+ enhances flexibility, as changes to rules can be made without impacting the rest of the
+ game’s implementation.
+Implementation Critique (for the view)
+…
+//TODO
+It seems like their design only supports square grids, and you need to click on the left
+hand for the right hand to activate.
+Documentation Critique
+The documentation in the providers code is helpful, but could benefit from being more
+comprehensive. Class comments are generally good, providing appropriate context.
+The README provided a high level overview of the code’s architecture, which made it
+easy to understand the overarching design of their code before beginning adapting.
+However, the method documentation is inconsistent, leaving much of the functionality
+ambiguous. For example, methods in the game class are weakly documented, many just
+repeating the method names in sentence format, without providing further context or
+detail.
+
+
+Design/Code Limitations and Suggestions (wait for view to be done)

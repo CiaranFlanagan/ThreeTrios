@@ -14,7 +14,7 @@ public class PlayableGameImpl implements PlayableGame {
   private Deque<Move> moves;
   private GameListener red;
   private GameListener blue;
-  private Model cache;
+  private volatile Model cache;
 
 
   @Override
@@ -33,7 +33,7 @@ public class PlayableGameImpl implements PlayableGame {
    * Applies a move and updates the game state, handling any errors that occur.
    * @param move the move to apply
    */
-  private void onMove(Move move) {
+  private synchronized void onMove(Move move) {
     try {
       move.accept(cache);
     } catch (Exception e) {

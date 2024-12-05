@@ -2,7 +2,7 @@ package model;
 
 import provider.card.COLOR;
 
-public class CoachAdapter implements Lens<CoachColor, provider.card.COLOR> {
+public class CoachLens implements Lens<CoachColor, provider.card.COLOR> {
 
   @Override
   public COLOR forward(CoachColor coachColor) {

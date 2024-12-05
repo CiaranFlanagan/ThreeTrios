@@ -1,6 +1,5 @@
 package model;
 
-import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -9,7 +8,7 @@ public class ModelAdapter implements
     Function<ModelReadOnly, provider.game.ReadOnlyGameModel>,
     provider.game.ReadOnlyGameModel {
 
-  private ModelReadOnly model;
+  protected ModelReadOnly model;
 
   @Override
   public provider.game.ReadOnlyGameModel apply(ModelReadOnly modelReadOnly) {
@@ -19,12 +18,12 @@ public class ModelAdapter implements
 
   @Override
   public int getGridSize() {
-    return this.model.numRows() * this.model.numCols();
+    return Math.min(model.numCols(), model.numRows());
   }
 
   @Override
   public provider.card.Card getCardAt(int row, int col) {
-    return model.cardAt(row, col).map(new CardAdapter()).orElse(null);
+    return model.cardAt(row, col).map(new CardAdapter() :: forward).orElse(null);
   }
 
   @Override
@@ -51,11 +50,11 @@ public class ModelAdapter implements
 
   private provider.player.Player makePlayer(CoachColor color) {
     PlayerForProvider player = new PlayerForProvider();
-    player.setColor(new CoachAdapter().forward(color));
+    player.setColor(new CoachLens().forward(color));
     player.setHand(model.curCoachesHands()
                         .get(color)
                         .stream()
-                        .map(new CardAdapter())
+                        .map(new CardAdapter() :: forward)
                         .collect(
                             Collectors.toList()));
     return player;
@@ -77,7 +76,7 @@ public class ModelAdapter implements
 
   @Override
   public provider.game.Grid getGrid() {
-    return null;
+    return new model.GridAdapter().forward(model.curGrid());
   }
 
 }
