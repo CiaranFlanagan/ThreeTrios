@@ -1,4 +1,4 @@
-package controller.strategy;
+package controller;
 
 import model.Model;
 import model.Move;

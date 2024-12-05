@@ -1,9 +1,9 @@
 import controller.AbstractControlPlayer;
 import controller.ControlPlayer;
-import controller.strategy.CornerStrategy;
-import controller.strategy.DefenseStrategy;
-import controller.strategy.MostFlips;
-import controller.strategy.StrategyAbstract;
+import controller.CornerStrategy;
+import controller.DefenseStrategy;
+import controller.MostFlips;
+import controller.StrategyAbstract;
 import model.Card;
 import model.CoachColor;
 import model.GameListener;

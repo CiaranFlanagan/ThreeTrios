@@ -1,7 +1,7 @@
 package test;
 
 import controller.ControlPlayer;
-import controller.strategy.StrategyAbstract;
+import controller.StrategyAbstract;
 import model.Card;
 import model.CoachColor;
 import model.GameListener;
