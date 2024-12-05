@@ -1,6 +1,6 @@
 Design Critique
-Our providers’ code, overall, is designed very effectively, being modular throughout and
-designed according to object oriented standards. There is good separation of concerns
+    Our providers’ code, overall, is designed very effectively, being modular throughout and
+designed according to object-oriented standards. There is good separation of concerns
 between components like game, controller, player, and card, producing code that is clear,
 logical and organized. Our providers enabled flexibility for extension without altering
 the core functionality of their Three Trios impl through their comprehensive and
@@ -8,22 +8,33 @@ concise interfaces, and additionally their use of enums provided a structured wa
 handle fixed sets of values, both improving readability and reducing possible errors.
 Additionally, our provider's use of encapsulation was excellent, ensuring the code was
 extendable for customers(like us).
-While our providers’ design is modular and separate concerns well, game logic
-(such as determining valid moves or battling cards) is likely intertwined with state
+    While our providers’ design is modular and separate concerns well, game logic
+(such as determining valid moves or battling cards) is intertwined with state
 management in the implementations of the game and grid interfaces. Introducing a Referee
 as we did, or a similar component dedicated solely to evaluating game rules would allow
 for better separation of logic. The Referee would operate independently of the Game or
 Grid classes, taking inputs (such as player actions or the current grid state) and
 returning results (like whether a move is valid or who the winner is). This approach
- enhances flexibility, as changes to rules can be made without impacting the rest of the
- game’s implementation.
-Implementation Critique (for the view)
-…
-//TODO
-It seems like their design only supports square grids, and you need to click on the left
-hand for the right hand to activate.
+enhances flexibility, as changes to rules can be made without impacting the rest of the
+game’s implementation.
+    Additionally, in their read only model interface, they had a method which made it difficult to
+adapt their code. This method was getGridSize(). We found this method problematic as it had a return
+type of 'int', and a 2d object, such as a game board, inherently cannot de described by one number.
+The method means we're limited in what game we can adapt, only being able to play square games.
+
+Implementation Critique
+    The implementation of the view provided by our consumers presented several challenges and
+limitations. Firstly, it seemed to make assumptions that we did not, as we encountered stack trace
+errors after 3 interactions when we tried to run it. Additionally, the use of separate classes for
+red and blue players felt unnecessary, as this functionality could be streamlined into a single
+field, which would also make it easier to extend the game to support three players. The board's
+design also lacked flexibility, as it could not be resized, limiting adaptability for future
+requirements. Finally, it was unclear whether the view assumed all boards were square or how it
+handled irregular interactions, such as invalid or unexpected clicks, leaving room for uncertainty
+in its behavior.
+
 Documentation Critique
-The documentation in the providers code is helpful, but could benefit from being more
+    The documentation in the providers code is helpful, but could benefit from being more
 comprehensive. Class comments are generally good, providing appropriate context.
 The README provided a high level overview of the code’s architecture, which made it
 easy to understand the overarching design of their code before beginning adapting.
@@ -33,7 +44,17 @@ repeating the method names in sentence format, without providing further context
 detail.
 
 
-Design/Code Limitations and Suggestions (wait for view to be done)
-
-
-//TODO note that we had to change their package structure and condense it
+Design/Code Limitations and Suggestions
+    Although, overall, there code was easy to work with, we ran into some limitations. For starters,
+the aforementioned getGridSize() made assumptions that made adapting difficult. Instead, it would've
+been better to have one method that got the rows and one method that got the columns. This change
+would allow for greater flexibility, enabling the code to support rectangular boards or other
+non-square configurations, making it more adaptable to different types of games. Also,
+separating player classes for red and blue into a single field or shared abstraction would
+streamline the code and reduce redundancy, particularly if the game were extended to include more
+players or teams. Another limitation was the lack of support for resizing the board, which
+restricted the usability of the game to a fixed size. By dynamic resizing, the game could become
+more versatile and customizable for different user preferences or scenarios. Lastly, improving the
+handling of unexpected or invalid interactions in the view, such as non-square grids or invalid
+clicks, would make the code more robust and user-friendly. Addressing these issues would enhance
+both the flexibility and the overall user experience of the game.

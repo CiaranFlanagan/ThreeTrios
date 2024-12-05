@@ -25,6 +25,15 @@
 * [Part 2](#part-2)
   * [Assignment 6 Extra Credit](#assignment-6-extra-credit)
   * [Changes for Part 2](#changes-for-part-2)
+* [Part 3](#part-3)
+  * [New Classes](#new-classes)
+    * [In the model...](#in-the-model)
+    * [In the controller...](#in-controller)
+    * [In the view ...](#changes-in-the-view)
+* [Part 4 / Adapting to provider's code](#adapting-to-providers-code-)
+  * [Features we were able to get working ...](#features-we-were-able-to-get-working)
+  * [Features we were not able to get working ...](#features-we-were-not-able-to-get-working)
+  * [Why we removed our testing from homework 5-7]
 
 
 <!-- TOC -->
@@ -655,3 +664,38 @@ state changes.
      - Ensures smooth gameplay with interactive hands and grid.
      - Uses a "glass pane" to block actions when it's not the player's turn, with 
        appropriate notifications.
+
+# Adapting to provider's code 
+### Features we were able to get working
+
+- The GUI is displayed when the code is run
+  - player 1 is rendered with our view
+  - player 2 is rendered with our provider's view
+- We can play moves(up three total between players)
+  - player 1 can play a card anywhere after selecting a card
+  - player 2 can play a card anywhere after selecting a card from the opposite players deck and 
+    then selecting a card from their own deck
+  - player 1 can then play a card anywhere after selecting one a card from their own deck
+  - when player 2 tries to play, an error is propagated: "can't place card on card cell twice". 
+    This error does not propagate as a result of playing a card on a single cell twice.
+- Errors are propagated(up to move three)
+  - errors include ...
+    - "cannot place card on cell twice"
+    - "card must be selected"
+    - "not your turn"
+
+
+
+### Features we were not able to get working
+- functionality past move 3
+  - We are unsure as to why this bug exists. From our bug fixing efforts, we have concluded that 
+    the provider's code did one or more of the following that prevented it from being fully 
+    adaptable
+    - made assumptions about the size of the panel in methods such as gridSize()
+    - used different threads
+    - made assumptions about the number of rows of columns in a grid
+### Why we removed our testing from homework 5 to 7
+
+- in order to remain under the file limit, we excluded our test files from our submission. We 
+  see this as an acceptable solution as no new testing was added, and our previous testing had 
+  already evaluated by an instructor.

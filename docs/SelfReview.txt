@@ -1,5 +1,20 @@
 Reflecting on the design and implementation process, one thing I would approach
-differently is balancing the use of functional programming with OOD principles. The functional style at times added extra complexity, particularly in Java, where adapting to streams, lambdas, consumers and suppliers created a steep learning curve. While functional programming made certain tasks, like operating on collections, more efficient and concise, it also made other problems, like debugging or managing side effects, more challenging. The code given to us provided valuable insights, particularly in its use of enums and simple methods within interfaces. While we had enums in our code, they used enums and value classes in ways we didn’t think ok, offering a clear and structured way to manage fixed values, which reduced the likelihood of errors and improved code readability and maintainability. Also, the concise methods in the interfaces provided a straightforward contract for implementation, making the given code easy to extend upon. These specific features of their cofde shows the importance of clarity and simplicity in OOD, especially when integrating with functional programming as we did.
+differently is balancing the use of functional programming with OOD principles.
+The functional style at times added extra complexity, particularly in Java, where adapting to
+streams, lambdas, consumers and suppliers created a steep learning curve. While functional
+programming made certain tasks, like operating on collections, more efficient and concise,
+it also made other problems, like debugging or managing side effects, more challenging.
+
+The code given to us provided valuable insights, particularly in its use of enums and simple
+methods within interfaces. While we had enums in our code, they used enums and value classes
+in ways we did not think ok, offering a clear and structured way to manage fixed values, which
+reduced the likelihood of errors and improved code readability and maintainability. Also, the
+concise methods in the interfaces provided a straightforward contract for implementation, making
+the given code easy to extend upon. These specific features of their code shows the importance of
+clarity and simplicity in OOD, especially when integrating with functional programming as we did.
 
 Our experience with our providers was overall, pretty good. The communication between us was
-pretty decent and they sent us everything we needed eventually. The only negative from this experience is when we realized we needed a value class(The cell class) on Monday, and we had to wait ~24 hrs to get it, which made it difficult to finish the assignment on time with our other end-of-year assignments.
+pretty decent, and they sent us everything we needed eventually. The only negative from this
+experience is when we realized we needed a value class(The cell class) on Monday, and we had to
+ wait ~24 hrs to get it, which made it difficult to finish the assignment on time with our other
+ end-of-year assignments.
