@@ -16,6 +16,10 @@ public final class RefereeDefault implements Referee {
     us.acceptBattlePhase(this);
   }
 
+  /**
+   * Determines the outcome of a battle phase for a card cell.
+   * @param us - the card cell currently being evaluated
+   */
   public void refereeBattlePhase(GridCellCard us) {
     if (!us.canHaveCard()) {
       return;
