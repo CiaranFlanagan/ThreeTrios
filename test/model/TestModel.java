@@ -4,15 +4,16 @@ package model;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import utils.ConfigCard;
-import utils.ConfigGrid;
-import utils.TestFiles;
-import utils.TestUtils;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import utils.ConfigCard;
+import utils.ConfigGrid;
+import utils.TestFiles;
+import utils.TestUtils;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -614,6 +615,100 @@ public class TestModel {
       Assert.assertNotEquals(card1.getCoach(), card2.getCoach());
 
     }
+
+    @Test
+    public void testNegate() {
+      // to completely test:
+      // test that it turns a true into a false
+      // test that it turns a false into a true
+
+      // trivially, test all directions
+      Referee refDefault = new RefereeDefault();
+      Referee negate = new RefereeNegate();
+      Card allones = TestUtils.makeCard("ones 1 1 1 1");
+      Card alltwos = TestUtils.makeCard("twos 2 2 2 2");
+      for (CardinalDirection dir : CardinalDirection.values()) {
+        assertTrue(negate.fightCardsAcc(allones, alltwos, dir, refDefault.fightCardsAcc(allones, alltwos, dir, false)));
+        assertFalse(negate.fightCardsAcc(allones, alltwos, dir, refDefault.fightCardsAcc(alltwos,
+            allones, dir, false)));
+      }
+
+    }
+
+    @Test
+    public void testFallenAce() {
+      Referee fallenAce = new RefereeFallenAce();
+      Card allones = TestUtils.makeCard("ones 1 1 1 1");
+      Card allaces = TestUtils.makeCard("aces A A A A");
+      for (CardinalDirection dir : CardinalDirection.values()) {
+        assertTrue(fallenAce.fightCardsAcc(allones, allaces, dir, false));
+      }
+
+      for (CardinalDirection dir : CardinalDirection.values()) {
+        assertFalse(fallenAce.fightCardsAcc(allaces, allones, dir, false));
+      }
+    }
+
+    @Test
+    public void testCompose() {
+      // interesting compositions
+      // two negates should result in same behavior
+      List<Card> cards = ConfigCard.scannerToCardList(TestFiles.CC_LARGE);
+      // test the compose method
+      Referee negate = new RefereeNegate();
+      Referee rDefault = new RefereeDefault();
+      for (int outerIdx = 0; outerIdx < cards.size(); outerIdx++) {
+        for (int innerIdx = 0; innerIdx < cards.size(); innerIdx++) {
+          for (CardinalDirection dir : CardinalDirection.values()) {
+            Card fst = cards.get(outerIdx);
+            Card snd = cards.get(innerIdx);
+            assertEquals(negate.fightCardsAcc(
+                    fst, snd, dir, negate.fightCardsAcc(fst, snd, dir,
+                        rDefault.fightCardsAcc(fst, snd, dir, false))),
+                rDefault.fightCardsAcc(fst, snd, dir, false));
+          }
+        }
+      }
+
+      // test the compose class
+      Referee rdoubleneg = new RefComposeBeats(List.of(new RefereeDefault(), new RefereeNegate(),
+          new RefereeNegate()));
+
+      for (int outerIdx = 0; outerIdx < cards.size(); outerIdx++) {
+        for (int innerIdx = 0; innerIdx < cards.size(); innerIdx++) {
+          for (CardinalDirection dir : CardinalDirection.values()) {
+            Card fst = cards.get(outerIdx);
+            Card snd = cards.get(innerIdx);
+            assertEquals(rdoubleneg.fightCardsAcc(fst, snd, dir, false),
+                rDefault.fightCardsAcc(fst, snd, dir, false));
+          }
+        }
+      }
+
+      Referee risenAce = new RefComposeBeats(List.of(new RefereeFallenAce(), new RefereeNegate()));
+
+      Card allones = TestUtils.makeCard("ones 1 1 1 1");
+      Card alltwos = TestUtils.makeCard("twos 2 2 2 2");
+      Card allaces = TestUtils.makeCard("aces A A A A");
+
+      //TODO
+      // test that 1 beats 2
+      // test that A beats 1
+      // using the above methods testNegate and testCompose
+      // fill-in classes fightCardsAcc methods
+
+      for (CardinalDirection dir : CardinalDirection.values()) {
+        assertTrue(negate.fightCardsAcc(allones, alltwos, dir, risenAce.fightCardsAcc(allones, alltwos, dir, false)));
+      }
+
+      for (CardinalDirection dir : CardinalDirection.values()) {
+        assertTrue(negate.fightCardsAcc(allones, alltwos, dir, risenAce.fightCardsAcc(allaces,
+            allones, dir, false)));
+      }
+
+      // TO BUILD JAR: preferences -> build -> build project
+    }
+
 
   }
 

@@ -3,6 +3,10 @@ package provider;
 import java.util.List;
 import java.util.Set;
 
+import provider.Grid;
+import provider.Player;
+import provider.Card;
+
 /**
  * The main game class responsible for managing the game state, rules,
  * and overall flow of gameplay.

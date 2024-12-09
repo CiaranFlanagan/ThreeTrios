@@ -1,8 +1,5 @@
 package copy.model;
 
-
-import java.util.Collections;
-
 /**
  * to represent a card in three trios.
  */

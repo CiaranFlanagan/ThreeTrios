@@ -23,5 +23,6 @@ public interface Referee {
    */
   void refereeBattlePhase(GridCellHole h);
 
+  boolean fightCardsAcc(Card us, Card them, CardinalDirection dir, boolean prevBeats);
 
 }

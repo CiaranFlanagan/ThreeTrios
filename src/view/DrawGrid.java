@@ -14,9 +14,9 @@ import java.awt.image.BufferedImage;
  */
 public class DrawGrid {
 
-  private static final Color VISIBLE_HOLE = Color.GRAY;
-  private static final Color VISIBLE_EMPTY_CARD = new Color(144, 238, 144);
-  private static final Color VISIBLE_BORDER = Color.BLACK;
+  protected static final Color VISIBLE_HOLE = Color.GRAY;
+  protected static final Color VISIBLE_EMPTY_CARD = new Color(144, 238, 144);
+  protected static final Color VISIBLE_BORDER = Color.BLACK;
 
   /**
    * To render a grid onto a buffered image.
@@ -37,7 +37,7 @@ public class DrawGrid {
         if (cell.hasCard()) {
           new DrawHand().renderCard(cell.getCard(), artist, cellWidth, cellHeight);
         } else {
-          drawCell(artist, cell, cellWidth, cellHeight);
+          drawCell(artist, cell, row, col, cellWidth, cellHeight);
         }
         artist.translate(cellWidth, 0);
       }
@@ -78,8 +78,10 @@ public class DrawGrid {
    * @param cellWidth the width of the cell in pixels
    * @param cellHeight the height of the cell in pixels
    */
-  private void drawCell(Graphics artist,
+  protected void drawCell(Graphics artist,
                         GridCellReadOnly cell,
+                        int row,
+                        int col,
                         int cellWidth,
                         int cellHeight) {
     artist.setColor(cell.canHaveCard() ? VISIBLE_EMPTY_CARD : VISIBLE_HOLE);

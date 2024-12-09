@@ -2,6 +2,10 @@ package provider;
 
 import java.awt.Color;
 
+import provider.COLOR;
+import provider.ReadOnlyGameModel;
+import provider.ThreeTriosViewImpl;
+
 /**
  * View implementation dedicated to controlling the Blue Player.
  */

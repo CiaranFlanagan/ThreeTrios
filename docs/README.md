@@ -9,6 +9,7 @@
   * [Info](#info)
   * [Rules](#rules)
 * [Quick Start](#quick-start)
+* [Command Line args for Assignment 8](#command-line-args-for-assignment-8)
 * [Getting Around the Project](#getting-around-the-project)
 * [Key Components](#key-components)
   * [Model](#model)
@@ -33,7 +34,7 @@
 * [Part 4 / Adapting to provider's code](#adapting-to-providers-code-)
   * [Features we were able to get working ...](#features-we-were-able-to-get-working)
   * [Features we were not able to get working ...](#features-we-were-not-able-to-get-working)
-  * [Why we removed our testing from homework 5-7]
+  * [Why we removed our testing from homework 5-7](#why-we-removed-our-testing-from-homework-5-to-7)
 
 
 <!-- TOC -->
@@ -77,6 +78,12 @@ This is the ThreeTrios project. ThreeTrios is a two player card game played on a
 Quick Start
 =
 Go to main and press run! Select and deselect cards.
+
+Command Line Args for Assignment 8
+=
+Main 0 4
+or 
+0 4
 
 Getting Around the Project
 =

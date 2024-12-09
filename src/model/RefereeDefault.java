@@ -3,7 +3,7 @@ package model;
 /**
  * To represent the default referee or rules enforcer for the game of three trios.
  */
-public final class RefereeDefault implements Referee {
+public class RefereeDefault implements Referee {
 
   /**
    * Takes in a visitable grid cell (by the referee) and accepts a battle phase, which evaluates
@@ -52,6 +52,10 @@ public final class RefereeDefault implements Referee {
 
   public void refereeBattlePhase(GridCellHole us) {
     throw new IllegalStateException("should not directly call a hole cell to battle");
+  }
+
+  public boolean fightCardsAcc(Card us, Card them, CardinalDirection dir, boolean prevBeats) {
+    return us.beats(them, dir);
   }
 
 }

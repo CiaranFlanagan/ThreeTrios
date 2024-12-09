@@ -11,7 +11,11 @@ import model.Grid;
 import model.Model;
 import model.ModelBase;
 import model.PlayableGameImpl;
+import model.RefComposeBeats;
+import model.Referee;
 import model.RefereeDefault;
+import model.RefereeFallenAce;
+import model.RefereeNegate;
 import provider.BluePlayerView;
 import provider.RedPlayerView;
 import utils.ConfigCard;
@@ -20,12 +24,12 @@ import utils.TestFiles;
 import view.DrawGrid;
 import view.DrawHand;
 import view.GUIGridBase;
-import view.GUIGridInteractive;
 import view.GUIHandBase;
-import view.GUIHandInteractive;
+import view.GUIPlayerAssn9;
 import view.GUIPlayerDelegate;
-import view.GUIPlayerInteractive;
 
+import java.sql.Ref;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,15 +41,20 @@ import java.util.function.Function;
  */
 public class Main {
 
-  protected static Map<String, Function<CoachColor, GameListener>> dispatchMap;
+  protected static Map<String, Function<CoachColor, GameListener>> controlMap;
+  protected static Map<String, Referee> refMap;
 
   static {
-    dispatchMap = new HashMap<>();
-    dispatchMap.put("0", Main :: makeHumanPlayer);
-    dispatchMap.put("1", Main :: makeMostFlipsAIPlayer);
-    dispatchMap.put("2", Main :: makeCornerPlayer);
-    dispatchMap.put("3", Main :: makeDefensePlayer);
-    dispatchMap.put("4", Main :: makeAdaptedPlayer);
+    controlMap = new HashMap<>();
+    controlMap.put("0", Main :: makeHumanPlayer);
+    controlMap.put("1", Main :: makeMostFlipsAIPlayer);
+    controlMap.put("2", Main :: makeCornerPlayer);
+    controlMap.put("3", Main :: makeDefensePlayer);
+    controlMap.put("4", Main :: makeAdaptedPlayer);
+    refMap = new HashMap<>();
+    refMap.put("10", new RefereeDefault());
+    refMap.put("11", new RefereeNegate());
+    refMap.put("12", new RefereeFallenAce());
   }
 
   /**
@@ -57,7 +66,7 @@ public class Main {
    * @param args command-line arguments, where the first two numbers specify player types
    */
   public static void main(String[] args) {
-    if (args.length != 2) {
+    if (args.length < 2) {
       needsHelp();
       return;
     }
@@ -65,14 +74,28 @@ public class Main {
     String fst = args[0];
     String snd = args[1];
 
-    if (!dispatchMap.containsKey(fst) || !dispatchMap.containsKey(snd)) {
+    if (!controlMap.containsKey(fst) || !controlMap.containsKey(snd)) {
+      System.out.println("invalid player options: " + fst + " " + snd);
       needsHelp();
+      System.exit(-1);
       return;
     }
 
-    GameListener red = dispatchMap.get(fst).apply(CoachColor.RED);
-    GameListener blue = dispatchMap.get(snd).apply(CoachColor.BLUE);
-    new PlayableGameImpl().start(Main :: makeModel, red, blue);
+    GameListener red = controlMap.get(fst).apply(CoachColor.RED);
+    GameListener blue = controlMap.get(snd).apply(CoachColor.BLUE);
+    List<Referee> composedBeats = new ArrayList<>();
+    for (int arg = 2; arg < args.length; arg ++) {
+      if (refMap.containsKey(args[arg])) {
+        composedBeats.add(refMap.get(args[arg]));
+      } else {
+        System.out.println("invalid ref arg: " + args[arg]);
+        needsHelp();
+        System.exit(-1);
+        return;
+      }
+    }
+    Referee ref = new RefComposeBeats(composedBeats);
+    new PlayableGameImpl().start(() -> makeModel(ref), red, blue);
 
     Scanner input = new Scanner(System.in);
     while (input.hasNext()) {
@@ -86,28 +109,24 @@ public class Main {
   private static void needsHelp() {
     System.out.println(
         "enter two numbers with a space in between to select types of " + "players");
+    System.out.println("or enter three numbers where the third is the referee");
+    System.out.println("Player selections");
     System.out.println("0: human player");
     System.out.println("1: most-flips AI player");
     System.out.println("2: corner AI player");
     System.out.println("3: defense AI player");
     System.out.println("4: adapted human player");
+    System.out.println("Referee Selections");
+    System.out.println("10: default");
+    System.out.println("11: negate");
+    System.out.println("12: fallen ace");
     System.out.println("example two player game: 'java -jar ThreeTrios.jar 0 4'");
 
   }
 
   private static AbstractControlPlayer makeHumanPlayer(CoachColor color) {
-    GUIGridInteractive grid = new GUIGridInteractive(new DrawGrid());
-    GUIPlayerInteractive guiAndPlayer;
-    if (color == CoachColor.RED) {
-      guiAndPlayer = new GUIPlayerInteractive(new GUIHandInteractive(new DrawHand()),
-                                              new GUIHandBase(new DrawHand()), grid);
-      return new ControlPlayer(color, guiAndPlayer, guiAndPlayer);
-    } else {
-      guiAndPlayer = new GUIPlayerInteractive(new GUIHandBase(new DrawHand()),
-                                              new GUIHandInteractive(new DrawHand()),
-                                              grid);
-      return new ControlPlayer(color, guiAndPlayer, guiAndPlayer);
-    }
+    GUIPlayerAssn9 playerView = new GUIPlayerAssn9(color);
+    return new ControlPlayer(color, playerView, playerView);
   }
 
   private static AbstractControlPlayer makeAdaptedPlayer(CoachColor color) {
@@ -131,9 +150,9 @@ public class Main {
     return makeDelegatePlayer(color, new DefenseStrategy());
   }
 
-  private static Model makeModel() {
+  private static Model makeModel(Referee ref) {
     Model model = new ModelBase();
-    model.startGame(makeGrid(), makeCards(), new RefereeDefault());
+    model.startGame(makeGrid(), makeCards(), ref);
     return model;
   }
 

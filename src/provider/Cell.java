@@ -1,5 +1,7 @@
 package provider;
 
+import provider.Card;
+
 /**
  * Represents a cell on the game grid, either playable or non-playable.
  * Holds the card currently placed on it, if any.
