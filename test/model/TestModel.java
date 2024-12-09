@@ -628,9 +628,10 @@ public class TestModel {
       Card allones = TestUtils.makeCard("ones 1 1 1 1");
       Card alltwos = TestUtils.makeCard("twos 2 2 2 2");
       for (CardinalDirection dir : CardinalDirection.values()) {
-        assertTrue(negate.fightCardsAcc(allones, alltwos, dir, refDefault.fightCardsAcc(allones, alltwos, dir, false)));
-        assertFalse(negate.fightCardsAcc(allones, alltwos, dir, refDefault.fightCardsAcc(alltwos,
-            allones, dir, false)));
+        assertTrue(negate.fightCardsAcc(allones, alltwos, dir,
+            refDefault.fightCardsAcc(allones, alltwos, dir, false)));
+        assertFalse(negate.fightCardsAcc(allones, alltwos, dir,
+            refDefault.fightCardsAcc(alltwos,allones, dir, false)));
       }
 
     }
@@ -698,7 +699,8 @@ public class TestModel {
       // fill-in classes fightCardsAcc methods
 
       for (CardinalDirection dir : CardinalDirection.values()) {
-        assertTrue(negate.fightCardsAcc(allones, alltwos, dir, risenAce.fightCardsAcc(allones, alltwos, dir, false)));
+        assertTrue(negate.fightCardsAcc(allones, alltwos, dir, risenAce.fightCardsAcc(allones,
+            alltwos, dir, false)));
       }
 
       for (CardinalDirection dir : CardinalDirection.values()) {

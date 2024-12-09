@@ -43,7 +43,7 @@ public class RefereeDefault implements Referee {
       }
 
       CoachColor theirCoach = theirCard.getCoach();
-      if (ourCoach != theirCoach && ourCard.beats(theirCard, direction)) {
+      if (ourCoach != theirCoach && fightCardsAcc(ourCard, theirCard, direction, false)) {
         theirCard.setCoach(ourCoach);
         refereeBattlePhase(them);
       }

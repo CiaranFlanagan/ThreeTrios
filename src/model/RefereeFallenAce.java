@@ -1,5 +1,9 @@
 package model;
 
+
+/**
+ * Referee where 1 beats A.
+ */
 public class RefereeFallenAce extends RefereeDefault {
   @Override
   public boolean fightCardsAcc(Card us, Card them, CardinalDirection dir, boolean prevBeats) {
@@ -10,6 +14,6 @@ public class RefereeFallenAce extends RefereeDefault {
       return true;
     }
 
-    return us.beats(them, dir);
+    return prevBeats;
   }
 }

@@ -9,11 +9,18 @@ import model.Model;
 import model.ModelReadOnly;
 import model.Move;
 
+/**
+ * Player for the GUI with hints.
+ */
 public class GUIPlayerAssn9 implements GameView, GamePlayer {
   protected GUIPlayerInteractive delegate;
 
   protected GuiGridShowHints grid;
 
+  /**
+   * Constructs a Player.
+   * @param color represents the color of the constructed player
+   */
   public GUIPlayerAssn9(CoachColor color) {
     grid = new GuiGridShowHints(new DrawGridShowHints());
     if (color == CoachColor.RED) {

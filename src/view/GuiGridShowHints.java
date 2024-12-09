@@ -1,19 +1,16 @@
 package view;
 
-import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.Graphics;
+import javax.swing.JPopupMenu;
+import javax.swing.JMenuItem;
 import java.util.function.Consumer;
-
-import javax.swing.*;
-
-import model.Card;
 import model.ModelReadOnly;
 import model.Move;
 import utils.MouseHandler;
 
+/**
+ * Grid that shows hints.
+ */
 public class GuiGridShowHints extends GUIGridInteractive {
   protected boolean showHints;
   protected DrawGridShowHints hintGrid;
@@ -48,8 +45,7 @@ public class GuiGridShowHints extends GUIGridInteractive {
     }
     if (showHints) {
       hintGrid.toggleHints(true);
-      hintGrid.setNumFlippedIfPlaced((r, c) ->
-      {
+      hintGrid.setNumFlippedIfPlaced((r, c) -> {
         if (model.canPlayAt(r, c)) {
           return model.numFlippedIfPlaced(
               model.curCoachesHands()
